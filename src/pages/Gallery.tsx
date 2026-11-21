@@ -102,7 +102,7 @@ export function Gallery() {
                 aria-pressed={active}
                 className={`mt-4 min-h-11 w-full rounded-full px-4 text-sm font-bold transition ${featured ? "bg-[#e8d39e] text-[#17382e] hover:bg-[#f0dfb6]" : "bg-[#a64257] text-white hover:bg-[#91384b]"}`}
               >
-                {active ? "✓ الباقة المختارة" : hasUnusedInvites ? "الباقة الحالية غير مكتملة" : "اختار الباقة"}
+                {active ? (item.id === "single" ? "✓ الباقة المختارة" : "✓ الباقة المختارة") : hasUnusedInvites ? "الباقة الحالية غير مكتملة" : item.id === "single" ? "اطلب الباقة" : "اختار الباقة"}
               </button>
             </article>
           )
