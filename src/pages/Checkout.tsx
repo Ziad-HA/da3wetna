@@ -6,7 +6,7 @@ import { getPackage, site, walletsArePlaceholders } from "../config"
 import { getTemplate } from "../data"
 import { encodeDraft } from "../lib/codec"
 import { money } from "../lib/format"
-import { activatePackage, consumePackageInvite, draftReady, makeOrderId, readActivePackage, readDraft, readSelectedPackage, writeLast } from "../lib/storage"
+import { consumePackageInvite, draftReady, makeOrderId, readActivePackage, readDraft, readSelectedPackage, writeLast } from "../lib/storage"
 import type { PayMethod } from "../types"
 
 const methods: { id: PayMethod; title: string; text: string; icon: typeof IconWallet }[] = [
@@ -27,6 +27,7 @@ export function Checkout() {
   const [refNo, setRefNo] = useState("")
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
+  const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => { document.title = "تأكيد الطلب — دعوتنا" }, [])
   if (!draft || !draftReady(draft)) return <Navigate to="/templates" replace />
@@ -34,8 +35,16 @@ export function Checkout() {
 
   async function pay() {
     if (!draft) return
-    if (!continuing && method !== "card" && refNo.trim().length < 4) {
+    if (!continuing && method === "card") {
+      setError("الدفع بالبطاقة غير متاح حاليًا. اختار فودافون كاش أو إنستاباي.")
+      return
+    }
+    if (!continuing && refNo.trim().length < 4) {
       setError("اكتب رقم عملية التحويل، وأقله ٤ أرقام.")
+      return
+    }
+    if (!continuing) {
+      setSubmitted(true)
       return
     }
     setBusy(true)
@@ -49,8 +58,6 @@ export function Checkout() {
         setError("الباقة خلصت. اختار باقة جديدة لإضافة دعوات.")
         return
       }
-    } else {
-      activatePackage({ id: orderId, packageId: bundle.id, used: 1, createdAt: Date.now() })
     }
 
     const code = encodeDraft(draft)
@@ -92,7 +99,15 @@ export function Checkout() {
             </p>
           </div>
 
-          {continuing ? (
+          {submitted && !continuing ? (
+            <div className="mt-5 rounded-2xl border border-[#e8c9a4] bg-[#fff9ed] p-5">
+              <h2 className="font-bold text-[#795a2d]">طلبك مستني مراجعة التحويل</h2>
+              <p className="mt-2 text-sm leading-7 text-[#806b70]">سجلنا رقم العملية في الخطوة دي، لكن الباقة مش هتتفعل تلقائيًا. ابعت صورة إيصال التحويل ورقم الطلب لخدمة العملاء، وبعد مراجعة الدفع هنأكد التفعيل.</p>
+              <p className="mt-3 text-sm font-bold text-[#4a2d33]">رقم الطلب: {orderId}</p>
+              <a className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#a64257] px-5 py-3 text-sm font-bold text-white" href={"https://wa.me/" + site.whatsapp + "?text=" + encodeURIComponent("طلب دعوتنا " + orderId + " — رقم العملية " + refNo.trim() + " — أرفقت إيصال التحويل")} target="_blank" rel="noreferrer">ابعت إيصال التحويل على واتساب</a>
+              <p className="mt-3 text-xs leading-6 text-[#9a6a45]">مهم: متعتبرش الطلب مكتمل قبل ما توصلك رسالة تأكيد التفعيل.</p>
+            </div>
+          ) : continuing ? (
             <div className="mt-5 rounded-2xl border border-[#cce4d8] bg-[#f2faf5] p-5">
               <h2 className="font-bold text-[#176447]">الدفع اتسجل للباقة بالفعل</h2>
               <p className="mt-2 text-sm leading-7 text-[#527566]">مش هتدفع تاني. اضغط تأكيد لإضافة الدعوة دي، وهيبقى متاح لك بعدها {remainingAfterThis} دعوة.</p>
@@ -126,7 +141,7 @@ export function Checkout() {
 
               {method === "card" ? (
                 <p className="mt-5 rounded-xl bg-[#fff8e9] p-4 text-sm leading-7 text-[#79603b]">
-                  الدفع بالبطاقة هنا تجربة محلية فقط، ومفيش خصم فعلي من البنك. لازم تربط بوابة دفع قبل استقبال مدفوعات حقيقية.
+                  الدفع بالبطاقة غير متاح حاليًا. استخدم فودافون كاش أو إنستاباي لحين ربط بوابة دفع حقيقية.
                 </p>
               ) : (
                 <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
@@ -141,17 +156,17 @@ export function Checkout() {
                 </div>
               )}
               {walletsArePlaceholders ? <p className="mt-4 text-xs leading-6 text-[#9a6a45]">بيانات المحافظ الحالية تجريبية. حدّثها من src/config.ts قبل استقبال الطلبات.</p> : null}
-              <p className="mt-2 text-xs leading-6 text-[#9a6a45]">تأكيد الطلب هنا محلي وليس تحققًا آليًا من التحويل.</p>
+              <p className="mt-2 text-xs leading-6 text-[#9a6a45]">إرسال الطلب لا يعني تأكيد الدفع. التفعيل بيتم بعد مراجعة الإيصال يدويًا.</p>
             </>
           )}
 
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#f3e6e9] pt-5">
+          {!submitted || continuing ? <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#f3e6e9] pt-5">
             <div><p className="text-xs text-[#806b70]">{continuing ? "المطلوب الآن" : "إجمالي الباقة"}</p><p className="text-xl font-bold text-[#4a2d33]">{continuing ? "بدون دفع إضافي" : money(bundle.price)}</p></div>
             <button type="button" className="btn-gold min-w-44" onClick={pay} disabled={busy}>
-              {busy ? "بنأكد..." : continuing ? "أضف الدعوة للباقة" : method === "card" ? "تأكيد تجريبي" : "تأكيد التحويل"}
+              {busy ? "بنجهّز الدعوة..." : continuing ? "أضف الدعوة للباقة" : "إرسال طلب التفعيل"}
             </button>
-          </div>
+          </div> : null}
         </section>
       </div>
     </main>
