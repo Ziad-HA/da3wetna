@@ -546,3 +546,95 @@ body::after {
   header.sticky > div { gap: 0.5rem; }
   header.sticky button { font-size: 0.78rem; }
 }
+
+
+/* DA3WETNA romantic experience — ambient motion and clearer interactions */
+@keyframes da3-petal-fall {
+  0% { transform: translate3d(0,-8vh,0) rotate(0deg); opacity: 0; }
+  12% { opacity: .72; }
+  82% { opacity: .55; }
+  100% { transform: translate3d(var(--drift, 34px),108vh,0) rotate(330deg); opacity: 0; }
+}
+@keyframes da3-heart-float {
+  0%,100% { transform: translateY(0) rotate(-8deg) scale(.96); }
+  50% { transform: translateY(-13px) rotate(8deg) scale(1.05); }
+}
+@keyframes da3-soft-shine {
+  0%,100% { background-position: 180% 0; }
+  50% { background-position: -80% 0; }
+}
+.da3-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.da3-atmosphere .da3-floating-petal {
+  position: absolute;
+  top: -8vh;
+  color: rgba(190, 111, 129, .34);
+  font-family: Georgia, serif;
+  line-height: 1;
+  will-change: transform, opacity;
+  animation: da3-petal-fall var(--duration, 19s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+.da3-atmosphere .da3-floating-petal:nth-child(2n) { color: rgba(198, 161, 91, .34); }
+.da3-atmosphere .da3-floating-petal:nth-child(3n) { color: rgba(215, 151, 164, .42); }
+.da3-atmosphere .da3-floating-petal:nth-child(1) { left: 8%; --drift: 38px; --duration: 23s; --delay: -8s; font-size: 17px; }
+.da3-atmosphere .da3-floating-petal:nth-child(2) { left: 24%; --drift: -24px; --duration: 27s; --delay: -17s; font-size: 12px; }
+.da3-atmosphere .da3-floating-petal:nth-child(3) { left: 43%; --drift: 30px; --duration: 21s; --delay: -4s; font-size: 15px; }
+.da3-atmosphere .da3-floating-petal:nth-child(4) { left: 61%; --drift: -34px; --duration: 25s; --delay: -13s; font-size: 13px; }
+.da3-atmosphere .da3-floating-petal:nth-child(5) { left: 79%; --drift: 28px; --duration: 22s; --delay: -19s; font-size: 18px; }
+.da3-atmosphere .da3-floating-petal:nth-child(6) { left: 93%; --drift: -20px; --duration: 29s; --delay: -10s; font-size: 12px; }
+@media (max-width: 767px) {
+  .da3-atmosphere .da3-floating-petal:nth-child(2n) { display: none; }
+  .da3-atmosphere .da3-floating-petal { opacity: .65; }
+  .da3-hero .da3-tool-rail {
+    position: absolute !important;
+    top: 50% !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: 42px !important;
+    grid-template-columns: 1fr !important;
+    gap: 2px !important;
+    padding: 5px 3px !important;
+    border-radius: 16px !important;
+    transform: translateY(-50%) !important;
+    box-shadow: 0 5px 18px rgba(91,48,60,.12) !important;
+  }
+  .da3-hero .da3-tool-rail > div { padding: 3px 0 !important; }
+  .da3-hero .da3-tool-rail > div span:first-child { font-size: 12px !important; line-height: 14px !important; }
+  .da3-hero .da3-tool-rail > div span:last-child { font-size: 6px !important; line-height: 9px !important; }
+}
+@media (hover: hover) {
+  .btn-gold:not(:disabled), .btn-dark:not(:disabled), .btn-ghost {
+    position: relative;
+    isolation: isolate;
+  }
+  .btn-gold:not(:disabled):hover { box-shadow: 0 10px 26px rgba(166,66,87,.24); }
+  main article:hover { box-shadow: 0 16px 38px rgba(91,48,60,.095); }
+}
+.btn-gold:active, .btn-dark:active, .btn-ghost:active,
+main button:active, main a[ class*="rounded-"]:active { transform: scale(.985); }
+main a, main button, footer a { transition-timing-function: cubic-bezier(.2,.75,.25,1); }
+main section > .mx-auto,
+main section > div { min-width: 0; }
+@supports (animation-timeline: view()) {
+  main#main > section:not(.da3-hero) {
+    animation: da3-section-enter both linear;
+    animation-timeline: view();
+    animation-range: entry 0% entry 22%;
+  }
+  @keyframes da3-section-enter {
+    from { opacity: .62; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .da3-atmosphere { display: none !important; }
+  main#main > section:not(.da3-hero) { animation: none !important; }
+}
