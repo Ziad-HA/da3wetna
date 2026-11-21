@@ -35,7 +35,7 @@ export function Home() {
           .da3-copy > *:nth-child(2) { animation-delay:.08s }
           .da3-copy > *:nth-child(3) { animation-delay:.16s }
           .da3-copy > *:nth-child(4) { animation-delay:.24s }
-          @media(max-width:640px) { .da3-phone-float { animation:none; transform:scale(.96) rotate(0deg) } .da3-tool-rail { right:0!important; gap:3px!important; padding:7px 5px!important; border-radius:18px!important } .da3-tool-rail > div { width:34px!important; padding:4px 0!important } .da3-tool-rail > div span:first-child { font-size:13px!important; line-height:16px!important } .da3-tool-rail > div span:last-child { font-size:7px!important; line-height:10px!important } }
+          @media(max-width:640px) { .da3-phone-float { animation:none; transform:scale(.96) rotate(0deg) } .da3-tool-rail { top:auto!important; bottom:0!important; left:50%!important; right:auto!important; transform:translateX(-50%)!important; flex-direction:row!important; gap:3px!important; padding:7px 6px!important; border-radius:20px!important; white-space:nowrap } .da3-tool-rail > div { width:34px!important; padding:4px 0!important } .da3-tool-rail > div span:first-child { font-size:13px!important; line-height:16px!important } .da3-tool-rail > div span:last-child { font-size:7px!important; line-height:10px!important } }
           @media(prefers-reduced-motion:reduce) { .da3-phone-float,.da3-petal,.da3-spark,.da3-copy > * { animation:none!important } }
         `}</style>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
