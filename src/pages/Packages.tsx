@@ -18,7 +18,7 @@ export function Packages() {
         <h1 className="mt-2.5 font-display text-[27px] leading-tight text-[#4a2d33] sm:mt-3 sm:text-4xl md:text-6xl">اختار الباقة المناسبة لفرحتك</h1>
         <p className="mx-auto mt-2 max-w-xl text-xs leading-6 text-[#806b70] sm:mt-4 sm:text-base sm:leading-8">كل اللي تحتاجه عشان تبعت دعوتك بشكل مميز وسهل.</p>
       </section>
-      <section className="mx-auto max-w-6xl px-3 py-5 sm:px-4 sm:py-12 md:py-16">
+      <section className="mx-auto max-w-6xl px-3 py-5 sm:px-4 sm:py-12 md:py-16">\n        <div className="mx-auto mb-4 max-w-3xl rounded-2xl border border-[#f0dce1] bg-white/90 px-4 py-3 text-center shadow-[0_6px_20px_rgba(91,48,60,.04)] sm:mb-7 sm:rounded-3xl sm:px-6 sm:py-4">\n          <p className="text-xs font-extrabold text-[#a64257] sm:text-sm">اختيارك بسيط وواضح</p>\n          <p className="mt-1 text-[11px] leading-6 text-[#806b70] sm:text-sm">كل الأسعار دفعة واحدة، ومفيش اشتراك شهري. اختار عدد الدعوات اللي محتاجها، وبعدها كمل تصميمك.</p>\n        </div>
         <div className="mx-auto grid max-w-md items-stretch gap-2.5 sm:max-w-none sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {packages.map((item) => {
             const featured = item.id === "plus"
@@ -68,7 +68,7 @@ export function Packages() {
                   {extras.map((feature) => <p key={feature} className="mt-2 flex gap-2 text-sm leading-6 text-[#665258]"><span className="text-[#b83b50]">✓</span><span>{feature}</span></p>)}
                   <div className="mt-4 border-t border-[#f0dce1] pt-3">{benefits.map((benefit) => <p key={benefit} className="mt-2 text-sm font-semibold text-[#665258]">• {benefit}</p>)}</div>
                 </div>
-                <p className="mt-2 text-center text-[9px] leading-4 text-[#806b70] sm:mt-3 sm:text-xs sm:leading-5">التفعيل بعد مراجعة إيصال التحويل</p>
+                <p className="mt-2 text-center text-[9px] leading-4 text-[#806b70] sm:mt-3 sm:text-xs sm:leading-5">التفعيل بعد مراجعة إيصال التحويل يدويًا</p>
                 <Link to={returnTo} onClick={() => selectPackage(item.id)} className={"mt-2 inline-flex min-h-10 items-center justify-center rounded-full px-4 py-2 text-xs font-bold transition active:scale-[0.98] sm:mt-4 sm:min-h-11 sm:py-3 sm:text-sm " + (featured ? "bg-[#a64257] text-white hover:bg-[#91384b]" : "border border-[#e8c8cf] bg-white text-[#a64257] hover:bg-[#fff0f2]")}>اختار الباقة</Link>
               </article>
             )
