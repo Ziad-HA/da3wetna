@@ -28,6 +28,7 @@ export function Home() {
           @keyframes da3-drift { 0%,100% { transform:translateY(0) rotate(0) } 50% { transform:translateY(-8px) rotate(5deg) } }
           @keyframes da3-glow { 0%,100% { opacity:.42; transform:scale(.96) } 50% { opacity:.9; transform:scale(1.06) } }
           @keyframes da3-rise { from { opacity:0; transform:translateY(16px) } to { opacity:1; transform:translateY(0) } }
+          @keyframes da3-rail { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-7px) } }
           .da3-phone-float { animation:da3-float 7s ease-in-out infinite }
           .da3-petal { animation:da3-drift 6s ease-in-out infinite }
           .da3-spark { animation:da3-glow 3.2s ease-in-out infinite }
@@ -35,7 +36,9 @@ export function Home() {
           .da3-copy > *:nth-child(2) { animation-delay:.08s }
           .da3-copy > *:nth-child(3) { animation-delay:.16s }
           .da3-copy > *:nth-child(4) { animation-delay:.24s }
-          @media(prefers-reduced-motion:reduce) { .da3-phone-float,.da3-petal,.da3-spark,.da3-copy > * { animation:none!important } }
+          .da3-tool-rail { animation:da3-rail 6s ease-in-out infinite }
+          @media(max-width:420px) { .da3-tool-rail { right:0!important; transform:scale(.88); transform-origin:right center } }
+          @media(prefers-reduced-motion:reduce) { .da3-phone-float,.da3-petal,.da3-spark,.da3-copy > *,.da3-tool-rail { animation:none!important } }
         `}</style>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -right-40 -top-44 h-[34rem] w-[34rem] rounded-full bg-[#f3d8df]/70 blur-[90px]" />
@@ -99,6 +102,23 @@ export function Home() {
                 </div>
               </div>
             </div>
+
+            <div aria-hidden="true" className="da3-tool-rail absolute right-[1%] top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-2 rounded-[25px] border border-[#ead7c5] bg-white/85 px-2 py-3 shadow-[0_16px_40px_rgba(91,48,60,.13)] backdrop-blur-md sm:right-[0%] sm:gap-2.5 sm:px-2.5 sm:py-4">
+              {[
+                ["Aa", "الكلام"],
+                ["Tt", "الخط"],
+                ["▧", "الصور"],
+                ["♫", "الموسيقى"],
+                ["◉", "الألوان"],
+                ["◷", "الميعاد"],
+              ].map(([symbol, label]) => (
+                <div key={label} className="flex w-11 flex-col items-center gap-0.5 rounded-xl px-1 py-1 text-center transition-colors hover:bg-[#fff0f2]">
+                  <span className="font-display text-base leading-5 text-[#b64b60]">{symbol}</span>
+                  <span className="text-[8px] font-semibold leading-3 text-[#806b70] sm:text-[9px]">{label}</span>
+                </div>
+              ))}
+            </div>
+
             <div className="absolute left-0 top-[22%] z-20 rounded-2xl border border-[#f0dce1] bg-white/95 px-3 py-2.5 shadow-[0_14px_35px_rgba(91,48,60,.11)] backdrop-blur sm:left-[-1%] sm:px-4 sm:py-3">
               <p className="text-[10px] text-[#9b7a81] sm:text-xs">تفاصيلكم في تصميم واحد</p>
               <p className="mt-1 text-xs font-bold text-[#9e4055] sm:text-sm">حكايتكم، بطريقتكم ♡</p>
@@ -115,6 +135,7 @@ export function Home() {
           </span>
         </div>
       </section>
+
 
       <section className="relative border-y border-[#f0dce1] bg-white shadow-[0_8px_28px_rgba(91,48,60,.035)]">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 py-5 text-center sm:gap-5 sm:py-7 md:grid-cols-4">
