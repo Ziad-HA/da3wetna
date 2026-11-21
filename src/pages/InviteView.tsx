@@ -16,6 +16,11 @@ export function InviteView() {
   const hours = Math.floor((remaining % 86400000) / 3600000)
   const minutes = Math.floor((remaining % 3600000) / 60000)
   const seconds = Math.floor((remaining % 60000) / 1000)
+  const safeUrl = (value: string) => { try { const url = new URL(value); return url.protocol === "https:" || url.protocol === "http:" ? url.href : "" } catch { return "" } }
+  const musicUrl = draft ? safeUrl(draft.musicUrl) : ""
+  const photos = draft ? [draft.photoOne, draft.photoTwo].map(safeUrl).filter(Boolean) : []
+  const rsvpNumber = draft?.rsvpPhone.replace(/\\D/g, "") || ""
+  const rsvpLink = draft && rsvpNumber ? `https://wa.me/${rsvpNumber}?text=${encodeURIComponent(`أهلاً، حابب أأكد حضوري لمناسبة ${draft.groom} و${draft.bride}.`)}` : ""
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
@@ -51,6 +56,9 @@ export function InviteView() {
           <p className="text-xs font-bold tracking-wide opacity-70">الوقت المتبقي على فرحتنا</p>
           {eventDate && !Number.isNaN(eventDate.getTime()) ? <div className="mt-3 grid grid-cols-4 gap-2" dir="rtl">{[[days,"يوم"],[hours,"ساعة"],[minutes,"دقيقة"],[seconds,"ثانية"]].map(([value,label]) => <div key={String(label)} className="rounded-2xl bg-white px-1 py-3 shadow-sm"><strong className="block font-display text-2xl text-[#a64257]">{String(value).padStart(2,"0")}</strong><span className="mt-1 block text-[10px] text-[#806b70]">{label}</span></div>)}</div> : <p className="mt-3 text-sm">ميعاد المناسبة هيتحدد قريبًا</p>}
         </section>
+        {musicUrl ? <section className="w-full rounded-[24px] border border-white/70 bg-white/80 p-4 text-center shadow-lg"><p className="mb-2 text-sm font-bold text-[#4a2d33]">موسيقى الدعوة ♫</p><audio className="w-full" controls preload="none" src={musicUrl}>المتصفح لا يدعم تشغيل الصوت.</audio></section> : null}
+        {photos.length ? <section className="w-full rounded-[24px] border border-white/70 bg-white/80 p-4 shadow-lg"><p className="mb-3 text-center font-bold text-[#4a2d33]">لحظات من حكايتنا ♡</p><div className="grid grid-cols-2 gap-2">{photos.map((photo, index) => <img key={photo} src={photo} alt={`صورة من المناسبة ${index + 1}`} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />)}</div></section> : null}
+        {rsvpLink ? <a href={rsvpLink} target="_blank" rel="noreferrer" className="btn-gold w-full justify-center">أكد حضورك على واتساب ♡</a> : null}
         <div className="w-full"><StoryActions draft={draft} code={code} /></div>
         <section className="w-full rounded-[26px] border border-white/70 bg-white/80 p-4 text-center shadow-lg">
           <p className="font-bold text-[#4a2d33]">احتفظ بالدعوة وشاركها</p>
