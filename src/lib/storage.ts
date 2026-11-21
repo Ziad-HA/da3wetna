@@ -1,8 +1,11 @@
 import { draftFor, getTemplate, isTemplateId } from "../data"
+import { getPackage, type PackageId } from "../config"
 import type { InviteDraft, PayMethod } from "../types"
 
 export const DRAFT_KEY = "zaffa-draft"
 const LAST_KEY = "zaffa-last"
+const SELECTED_PACKAGE_KEY = "da3wetna-selected-package"
+const ACTIVE_PACKAGE_KEY = "da3wetna-active-package"
 
 export type LastOrder = {
   id: string
@@ -10,6 +13,14 @@ export type LastOrder = {
   refNo: string
   at: number
   code: string
+  packageId: PackageId
+}
+
+export type ActivePackage = {
+  id: string
+  packageId: PackageId
+  used: number
+  createdAt: number
 }
 
 export function readDraft(): InviteDraft | null {
@@ -35,6 +46,45 @@ export function initDraft(id: string | undefined): InviteDraft {
   return draftFor(template)
 }
 
+export function readSelectedPackage(): PackageId {
+  try {
+    const value = sessionStorage.getItem(SELECTED_PACKAGE_KEY)
+    return getPackage(value).id
+  } catch {
+    return "single"
+  }
+}
+
+export function selectPackage(id: PackageId) {
+  sessionStorage.setItem(SELECTED_PACKAGE_KEY, id)
+}
+
+export function readActivePackage(): ActivePackage | null {
+  try {
+    const raw = localStorage.getItem(ACTIVE_PACKAGE_KEY)
+    if (!raw) return null
+    const data = JSON.parse(raw) as ActivePackage
+    if (!data?.id || !data.packageId || !Number.isInteger(data.used) || data.used < 1) return null
+    return data
+  } catch {
+    return null
+  }
+}
+
+export function activatePackage(order: ActivePackage) {
+  localStorage.setItem(ACTIVE_PACKAGE_KEY, JSON.stringify(order))
+}
+
+export function consumePackageInvite(): ActivePackage | null {
+  const active = readActivePackage()
+  if (!active) return null
+  const bundle = getPackage(active.packageId)
+  if (active.used >= bundle.quantity) return null
+  const next = { ...active, used: active.used + 1 }
+  activatePackage(next)
+  return next
+}
+
 export function readLast(): LastOrder | null {
   try {
     const raw = localStorage.getItem(LAST_KEY)
@@ -53,7 +103,7 @@ export function writeLast(order: LastOrder) {
 
 export function makeOrderId(): string {
   const number = Math.floor(1000 + Math.random() * 9000)
-  return `ZAF-${number}`
+  return `DA3-${number}`
 }
 
 export function draftReady(draft: InviteDraft): boolean {
