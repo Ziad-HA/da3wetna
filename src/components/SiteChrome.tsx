@@ -93,7 +93,7 @@ function Header() {
 function Footer() {
   return (
     <footer className="border-t border-[#f0dce1] bg-[#fff8f8]">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.3fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5">
             <span className="grid h-10 w-10 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50]">
@@ -111,6 +111,17 @@ function Footer() {
           <Link className="text-[#806b70] hover:text-[#a64257]" to="/how">طريقة الاستخدام</Link>
           <Link className="text-[#806b70] hover:text-[#a64257]" to="/packages">الباقات والأسعار</Link>
           <Link className="text-[#806b70] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/privacy">سياسة الخصوصية</Link>
+        </div>
+        <div className="grid content-start gap-3">
+          <p className="font-bold text-[#4a2d33]">مناسبات ودعوات</p>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوة-فرح">دعوة فرح</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوة-خطوبة">دعوة خطوبة</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوة-كتب-كتاب">دعوة كتب كتاب</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوات-الكترونية">دعوات إلكترونية</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/كروت-افراح">كروت أفراح</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/صيغ-دعوة-زفاف">صيغ دعوة زفاف</Link>
         </div>
         <div className="grid content-start gap-3">
           <p className="font-bold text-[#4a2d33]">طرق الدفع</p>
