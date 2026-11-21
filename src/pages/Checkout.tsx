@@ -23,7 +23,7 @@ export function Checkout() {
   const continuing = Boolean(active && activeBundle && active.used < activeBundle.quantity)
   const bundle = continuing && activeBundle ? activeBundle : getPackage(readSelectedPackage())
   const [method, setMethod] = useState<PayMethod>("vodafone")
-  const [orderId] = useState(() => active?.id ?? makeOrderId())
+  const [orderId] = useState(() => continuing && active ? active.id : makeOrderId())
   const [refNo, setRefNo] = useState("")
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
