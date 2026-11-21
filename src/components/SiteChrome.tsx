@@ -82,8 +82,7 @@ function Header() {
           <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، محتاج مساعدة من دعوتنا")}`} target="_blank" rel="noreferrer" className="hidden h-10 items-center gap-2 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-4 text-sm font-bold text-[#247747] transition hover:-translate-y-0.5 hover:bg-[#e9f7ee] lg:inline-flex">
             <WhatsAppIcon className="h-4 w-4" /> واتساب
           </a>
-          <Link to="/templates" className="btn-gold hidden h-11 px-5 text-sm sm:inline-flex">اختار دعوتك</Link>
-          <Link to="/templates" className="btn-gold inline-flex min-h-10 items-center justify-center rounded-full px-3 text-xs sm:hidden">ابدأ دعوتك</Link>
+          <Link to="/templates" className="btn-gold inline-flex min-h-10 h-11 items-center justify-center rounded-full px-3 text-xs sm:px-5 sm:text-sm">ابدأ دعوتك</Link>
           <button
             type="button"
             className="inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-full border border-[#f0dce1] bg-white px-3 text-xs font-bold text-[#65434b] shadow-sm transition hover:border-[#d9aab5] hover:bg-[#fff8f8] md:hidden"
