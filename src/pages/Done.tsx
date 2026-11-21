@@ -16,29 +16,36 @@ export function Done() {
   if (!draft) {
     return (
       <main id="main" className="mx-auto max-w-lg px-4 py-20 text-center">
-        <h1 className="font-display text-4xl">اللينك ده مش صالح</h1>
+        <h1 className="font-display text-4xl text-[#4a2d33]">اللينك ده مش صالح</h1>
         <Link to="/templates" className="btn-gold mt-6 inline-flex">اختار دعوة جديدة</Link>
       </main>
     )
   }
 
   return (
-    <main id="main" className="mx-auto grid max-w-4xl items-start gap-8 px-4 py-10 md:grid-cols-[minmax(0,380px)_1fr]">
-      <div className="overflow-hidden rounded-[32px] shadow-xl ring-1 ring-black/10">
-        <Invitation draft={draft} />
+    <main id="main" className="mx-auto max-w-5xl px-4 py-10 md:py-16">
+      <div className="mx-auto mb-9 max-w-2xl text-center">
+        <span className="inline-flex rounded-full bg-[#edf7ef] px-4 py-2 text-sm font-bold text-[#38764a]">الدعوة جاهزة للمشاركة</span>
+        <h1 className="mt-4 font-display text-4xl text-[#4a2d33] md:text-5xl">فرحتكم تكمل بوجودهم</h1>
+        <p className="mt-3 leading-8 text-[#806b70]">حمّل صورة الدعوة لستوري واتساب، أو انسخ اللينك وابعته للضيوف.</p>
       </div>
-      <section>
-        <p className="text-sm font-bold text-gold">الدعوة جاهزة</p>
-        <h1 className="mt-2 font-display text-5xl">تمام، تقدر تبعتها</h1>
-        <p className="mt-3 leading-8 text-mute">
-          حمّل الصورة وانشرها ستوري، أو ابعت اللينك. الضيف هيفتح نفس الدعوة من غير ما يعمل حساب.
-        </p>
-        {order && order.code === code ? <p className="mt-3 text-sm text-mute">رقم الطلب {order.id}</p> : null}
-        <div className="mt-6 max-w-sm">
-          <StoryActions draft={draft} code={code} />
+      <div className="grid items-start gap-8 md:grid-cols-[minmax(0,340px)_1fr]">
+        <div className="mx-auto w-full max-w-[340px] overflow-hidden rounded-[28px] bg-white p-2 shadow-[0_14px_40px_rgba(74,45,51,0.10)] ring-1 ring-[#f0dce1]">
+          <Invitation draft={draft} />
         </div>
-        <Link to="/templates" className="mt-6 inline-block font-bold text-gold">دعوة جديدة</Link>
-      </section>
+        <section className="rounded-[28px] border border-[#f0dce1] bg-white p-6 md:p-8">
+          <p className="text-sm font-bold text-[#a64257]">مبروك</p>
+          <h2 className="mt-2 font-display text-3xl text-[#4a2d33]">{draft.groom} و{draft.bride}</h2>
+          <p className="mt-2 leading-7 text-[#806b70]">دعوتكم بقت جاهزة. اختار طريقة المشاركة اللي تريحك.</p>
+          {order && order.code === code ? <p className="mt-4 text-xs text-[#9a8187]">رقم الطلب: {order.id}</p> : null}
+          <div className="mt-6 max-w-sm">
+            <StoryActions draft={draft} code={code} />
+          </div>
+          <div className="mt-7 border-t border-[#f3e6e9] pt-5">
+            <Link to="/templates" className="text-sm font-bold text-[#a64257] hover:underline">اعمل دعوة جديدة ←</Link>
+          </div>
+        </section>
+      </div>
     </main>
   )
 }
