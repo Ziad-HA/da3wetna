@@ -105,7 +105,7 @@ export function Editor() {
           <div>
             <p className="text-xs text-[#806b70]">الباقة المختارة</p>
             <strong className="text-[#4a2d33]">{selectedPackage.name} · {selectedPackage.quantity} {selectedPackage.quantity === 1 ? "دعوة" : "دعوات"}</strong>
-            <Link to="/packages" className="mt-1 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4">تغيير الباقة</Link>
+            <Link to={`/packages?return=/editor/${template.id}`} className="mt-1 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4">تغيير الباقة</Link>
           </div>
           <strong className="text-xl text-[#a64257]">{money(selectedPackage.price)}</strong>
         </div>
