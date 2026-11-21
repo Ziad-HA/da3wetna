@@ -47,14 +47,14 @@ export function Home() {
         </div>
         <div className="pointer-events-none absolute -right-28 -top-36 h-[28rem] w-[28rem] rounded-full border border-white/70" />
         <div className="pointer-events-none absolute -right-16 -top-24 h-[22rem] w-[22rem] rounded-full border border-[#e8c3cb]/45" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-[1.05fr_0.95fr] md:py-24">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-5 px-4 py-10 sm:gap-8 sm:py-14 md:grid-cols-[1.05fr_0.95fr] md:gap-12 md:py-24">
           <div className="relative z-10 text-center md:text-right">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#e9cbd1] bg-white/85 px-4 py-2 text-sm font-semibold text-[#9e4659] shadow-[0_5px_20px_rgba(142,76,91,0.06)]">
               <span className="text-[#c18b4c]">✦</span>
               كل فرحة وليها دعوة حلوة
               <span className="text-[#c18b4c]">✦</span>
             </span>
-            <h1 className="mt-7 font-display text-5xl leading-[1.28] text-[#4a2d33] text-balance md:text-[4.6rem]">
+            <h1 className="mt-5 font-display text-[2.65rem] leading-[1.25] text-[#4a2d33] text-balance sm:text-5xl md:mt-7 md:text-[4.6rem]">
               خلي دعوتك
               <span className="relative mt-1 block text-[#b83b50]">
                 تحكي فرحتك
@@ -63,10 +63,10 @@ export function Home() {
                 </svg>
               </span>
             </h1>
-            <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-[#806b70] md:mx-0 md:text-lg">
+            <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-[#806b70] sm:text-base sm:leading-8 md:mx-0 md:mt-6 md:text-lg">
               اختار تصميم بتحبه، ضيف تفاصيل يومك، وشارك دعوتك مع كل الناس اللي بتحبهم — بصورة أنيقة أو لينك واحد.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+            <div className="mt-6 flex flex-wrap justify-center gap-2.5 sm:gap-3 md:mt-8 md:justify-start">
               <Link to="/templates" className="btn-gold shadow-[0_10px_26px_rgba(184,59,80,0.2)] transition duration-300 hover:-translate-y-1">اختار دعوتك <span className="mr-1">←</span></Link>
               <a href="/how" className="btn-ghost border-[#e5cbd0] bg-white/80 text-[#65434b] transition duration-300 hover:-translate-y-1">اعرف الطريقة</a>
             </div>
@@ -75,34 +75,34 @@ export function Home() {
                 رجّع آخر دعوة اشتغلت عليها
               </Link>
             ) : null}
-            <div className="mt-9 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-[#806b70] md:justify-start">
+            <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-[#806b70] sm:text-sm md:mt-9 md:justify-start">
               <span className="inline-flex items-center gap-2"><span className="text-[#b83b50]">♡</span> تعديل فوري</span>
               <span className="inline-flex items-center gap-2"><span className="text-[#b83b50]">♡</span> صورة ستوري</span>
               <span className="inline-flex items-center gap-2"><span className="text-[#b83b50]">♡</span> لينك للضيوف</span>
             </div>
           </div>
-          <div className="relative mx-auto flex min-h-[440px] w-full max-w-[480px] items-center justify-center md:min-h-[540px]">
-            <div aria-hidden="true" className="absolute h-[310px] w-[310px] rounded-full bg-[radial-gradient(circle,#f1cbd3_0%,rgba(241,203,211,0.35)_52%,transparent_72%)] md:h-[430px] md:w-[430px]" />
-            <div aria-hidden="true" className="absolute h-[340px] w-[340px] rounded-full border border-dashed border-[#d9aab4]/55 md:h-[465px] md:w-[465px]" />
+          <div className="relative mx-auto flex min-h-[350px] w-full max-w-[420px] items-center justify-center sm:min-h-[410px] md:min-h-[540px]">
+            <div aria-hidden="true" className="absolute h-[260px] w-[260px] rounded-full bg-[radial-gradient(circle,#f1cbd3_0%,rgba(241,203,211,0.35)_52%,transparent_72%)] sm:h-[330px] sm:w-[330px] md:h-[430px] md:w-[430px]" />
+            <div aria-hidden="true" className="absolute h-[285px] w-[285px] rounded-full border border-dashed border-[#d9aab4]/55 sm:h-[365px] sm:w-[365px] md:h-[465px] md:w-[465px]" />
             <div className="hero-orbit relative z-10 rotate-[2deg]">
-              <div className="phone !w-[min(280px,70vw)] !rounded-[42px] !border-[7px] !border-white !bg-white !p-2 !shadow-[0_30px_90px_rgba(91,48,60,0.22)]">
-                <div className="phone-screen h-full w-full overflow-hidden rounded-[30px]">
+              <div className="phone !w-[min(230px,62vw)] !rounded-[34px] !border-[6px] !border-white !bg-white !p-1.5 !shadow-[0_24px_65px_rgba(91,48,60,0.2)] sm:!w-[min(260px,68vw)] md:!w-[min(280px,70vw)] md:!rounded-[42px] md:!border-[7px] md:!p-2">
+                <div className="phone-screen h-full w-full overflow-hidden rounded-[25px] md:!rounded-[30px]">
                   <div className="invite-frame">
                     <Invitation draft={draftFor(templates[1])} />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="absolute left-0 top-[18%] z-20 rounded-2xl border border-white/90 bg-white/90 px-4 py-3 shadow-[0_12px_35px_rgba(91,48,60,0.12)] backdrop-blur-sm md:left-[-1%]">
+            <div className="absolute left-0 top-[15%] z-20 rounded-xl border border-white/90 bg-white/95 px-2.5 py-2 shadow-[0_8px_24px_rgba(91,48,60,0.1)] backdrop-blur-sm sm:left-1 sm:top-[18%] sm:rounded-2xl sm:px-4 sm:py-3 md:left-[-1%]">
               <p className="text-xs text-[#9b7a81]">تفاصيل يومكم</p>
               <p className="mt-1 font-bold text-[#9e4055]">في دعوة واحدة ♡</p>
             </div>
-            <div className="absolute bottom-[13%] right-0 z-20 rounded-2xl border border-[#f0dce1] bg-white/95 px-4 py-3 shadow-[0_12px_35px_rgba(91,48,60,0.12)] backdrop-blur-sm md:right-[-2%]">
+            <div className="absolute bottom-[12%] right-0 z-20 rounded-xl border border-[#f0dce1] bg-white/95 px-2.5 py-2 shadow-[0_8px_24px_rgba(91,48,60,0.1)] backdrop-blur-sm sm:right-1 sm:rounded-2xl sm:px-4 sm:py-3 md:right-[-2%]">
               <p className="text-xs text-[#9b7a81]">دعوة معمولة بحب</p>
               <p className="mt-0.5 font-display text-xl text-[#9e4055]">يوم العمر ♡</p>
             </div>
-            <span aria-hidden="true" className="hero-heart absolute right-[7%] top-[10%] z-20 text-5xl text-[#d98b9c] drop-shadow-sm">♥</span>
-            <span aria-hidden="true" className="hero-heart absolute bottom-[10%] left-[9%] z-20 text-3xl text-[#d98b9c]" style={{ animationDelay: "-2.5s" }}>♡</span>
+            <span aria-hidden="true" className="hero-heart absolute right-[8%] top-[7%] z-20 text-3xl text-[#d98b9c] drop-shadow-sm sm:text-5xl">♥</span>
+            <span aria-hidden="true" className="hero-heart absolute bottom-[7%] left-[8%] z-20 text-2xl text-[#d98b9c] sm:text-3xl" style={{ animationDelay: "-2.5s" }}>♡</span>
             <span aria-hidden="true" className="hero-sparkle absolute left-[17%] top-[35%] z-20 text-3xl text-[#c89a55]">✧</span>
           </div>
         </div>
