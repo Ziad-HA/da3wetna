@@ -9,6 +9,8 @@ import { Packages } from "./pages/Packages"
 import { How } from "./pages/How"
 import { FAQ } from "./pages/FAQ"
 import { InviteView } from "./pages/InviteView"
+import { SeoContentPage } from "./pages/SeoContentPage"
+import { Privacy } from "./pages/Privacy"
 
 export function App() {
   return (
@@ -20,6 +22,14 @@ export function App() {
           <Route path="/packages" element={<Packages />} />
           <Route path="/how" element={<How />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/دعوة-زفاف-الإلكترونية" element={<SeoContentPage pageKey="/دعوة-زفاف-الإلكترونية" />} />
+          <Route path="/دعوة-فرح" element={<SeoContentPage pageKey="/دعوة-فرح" />} />
+          <Route path="/دعوة-خطوبة" element={<SeoContentPage pageKey="/دعوة-خطوبة" />} />
+          <Route path="/دعوة-كتب-كتاب" element={<SeoContentPage pageKey="/دعوة-كتب-كتاب" />} />
+          <Route path="/دعوات-الكترونية" element={<SeoContentPage pageKey="/دعوات-الكترونية" />} />
+          <Route path="/كروت-افراح" element={<SeoContentPage pageKey="/كروت-افراح" />} />
+          <Route path="/صيغ-دعوة-زفاف" element={<SeoContentPage pageKey="/صيغ-دعوة-زفاف" />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/editor/:id" element={<Editor />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/done/:code" element={<Done />} />
