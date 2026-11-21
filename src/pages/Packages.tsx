@@ -1,10 +1,14 @@
 import { useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { packages } from "../config"
 import { money } from "../lib/format"
 import { selectPackage } from "../lib/storage"
 
 export function Packages() {
+  const [searchParams] = useSearchParams()
+  const requestedReturn = searchParams.get("return")
+  const returnTo = requestedReturn?.startsWith("/") && !requestedReturn.startsWith("//") ? requestedReturn : "/templates"
+
   useEffect(() => { document.title = "الباقات والأسعار — دعوتنا" }, [])
   return (
     <main id="main" className="min-h-[70vh] bg-[#fffafb]">
@@ -41,7 +45,7 @@ export function Packages() {
                   </div>
                 </div>
                 <p className="mt-3 text-center text-xs leading-5 text-[#806b70]">تحويل يدوي — بنفعّلها بعد مراجعة الإيصال</p>
-                <Link to="/templates" onClick={() => selectPackage(item.id)} className={"mt-4 inline-flex min-h-11 items-center justify-center rounded-full px-4 py-3 text-sm font-bold transition " + (featured ? "bg-[#a64257] text-white hover:bg-[#91384b]" : "border border-[#e8c8cf] bg-white text-[#a64257] hover:bg-[#fff0f2]")}>اختار الباقة</Link>
+                <Link to={returnTo} onClick={() => selectPackage(item.id)} className={"mt-4 inline-flex min-h-11 items-center justify-center rounded-full px-4 py-3 text-sm font-bold transition " + (featured ? "bg-[#a64257] text-white hover:bg-[#91384b]" : "border border-[#e8c8cf] bg-white text-[#a64257] hover:bg-[#fff0f2]")}>اختار الباقة</Link>
               </article>
             )
           })}
