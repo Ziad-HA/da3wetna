@@ -83,14 +83,15 @@ function Header() {
             <WhatsAppIcon className="h-4 w-4" /> واتساب
           </a>
           <Link to="/templates" className="btn-gold hidden h-11 px-5 text-sm sm:inline-flex">اختار دعوتك</Link>
+          <Link to="/templates" className="btn-gold inline-flex min-h-10 items-center justify-center rounded-full px-3 text-xs sm:hidden">ابدأ دعوتك</Link>
           <button
             type="button"
-            className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-full border border-[#f0dce1] bg-white px-4 text-sm font-bold text-[#65434b] shadow-sm transition hover:border-[#d9aab5] hover:bg-[#fff8f8] md:hidden"
+            className="inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-full border border-[#f0dce1] bg-white px-3 text-xs font-bold text-[#65434b] shadow-sm transition hover:border-[#d9aab5] hover:bg-[#fff8f8] md:hidden"
             aria-expanded={open}
             aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? "إغلاق ✕" : "القائمة ☰"}
+            {open ? "إغلاق ✕" : "☰"}
           </button>
         </div>
       </div>
@@ -218,26 +219,29 @@ function BottomNavigation() {
   useEffect(() => setSupportOpen(false), [pathname])
   if (hidden) return null
 
-  const itemClass = "flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 text-[10px] font-bold leading-tight transition"
+  const itemClass = "flex min-w-0 min-h-[52px] flex-1 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-bold leading-tight transition active:scale-95"
   const activeClass = "bg-[#fff0f2] text-[#a64257]"
   const idleClass = "text-[#90777d] hover:bg-[#fff8f8]"
 
   return (
     <>
-      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[#f0dce1] bg-[#fffdfa]/95 px-3 pb-[max(env(safe-area-inset-bottom),5px)] pt-1 shadow-[0_-5px_20px_rgba(74,45,51,0.07)] backdrop-blur-2xl md:hidden" aria-label="التنقل الرئيسي">
+      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[#f0dce1] bg-[#fffdfa]/95 px-2 pb-[max(env(safe-area-inset-bottom),5px)] pt-1.5 shadow-[0_-5px_20px_rgba(74,45,51,0.07)] backdrop-blur-2xl md:hidden" aria-label="التنقل الرئيسي">
         <div className="mx-auto flex max-w-lg items-center gap-1">
+          <NavLink to="/" end className={({ isActive }) => `${itemClass} ${isActive ? activeClass : idleClass}`}>
+            <BottomIcon type="home" /><span>الرئيسية</span>
+          </NavLink>
           <NavLink to="/templates" className={({ isActive }) => `${itemClass} ${isActive ? activeClass : idleClass}`}>
             <BottomIcon type="invite" /><span>الدعوات</span>
           </NavLink>
           <NavLink to="/packages" className={({ isActive }) => `${itemClass} ${isActive ? activeClass : idleClass}`}>
             <BottomIcon type="package" /><span>الباقات</span>
           </NavLink>
-          <button type="button" onClick={() => setSupportOpen(true)} className={`${itemClass} ${supportOpen ? activeClass : idleClass}`}>
-            <BottomIcon type="help" /><span>الدعم</span>
-          </button>
           <NavLink to="/account" className={({ isActive }) => `${itemClass} ${isActive ? activeClass : idleClass}`}>
             <BottomIcon type="account" /><span>حسابي</span>
           </NavLink>
+          <button type="button" onClick={() => setSupportOpen(true)} className={`${itemClass} ${supportOpen ? activeClass : idleClass}`}>
+            <BottomIcon type="help" /><span>مساعدة</span>
+          </button>
         </div>
       </nav>
       {supportOpen ? (
@@ -265,8 +269,9 @@ function BottomNavigation() {
   )
 }
 
-function BottomIcon({ type }: { type: "invite" | "package" | "help" | "account" }) {
-  const common = "h-[18px] w-[18px]"
+function BottomIcon({ type }: { type: "home" | "invite" | "package" | "help" | "account" }) {
+  const common = "h-[19px] w-[19px]"
+  if (type === "home") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v9a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 19v-9Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M9 20.5v-6h6v6" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/></svg>
   if (type === "invite") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2.5" stroke="currentColor" strokeWidth="1.6"/><path d="M8 8h8M8 12h5M8 16h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
   if (type === "package") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8 4.2v9.6L12 21l-8-4.2V7.2L12 3Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="m4.5 7.5 7.5 4 7.5-4M12 11.5V21M8 5.2l8 4.1" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/></svg>
   if (type === "help") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6"/><path d="M9.6 9a2.5 2.5 0 1 1 4.3 1.8c-1.1 1-1.9 1.2-1.9 2.7M12 17.2v.1" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/></svg>
