@@ -1,29 +1,83 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
-import { site } from "../config"
+import { packages, type PackageId } from "../config"
 import { draftFor, templates } from "../data"
 import { money } from "../lib/format"
+import { readSelectedPackage, selectPackage } from "../lib/storage"
 import type { Occasion } from "../types"
 
 const filters = ["الكل", "فرح", "خطوبة", "كتب كتاب", "حنة"] as const
 
 export function Gallery() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("الكل")
+  const [selected, setSelected] = useState<PackageId>(() => readSelectedPackage())
+
   useEffect(() => {
-    document.title = "الدعوات — دعوتنا"
+    document.title = "الباقات والتصاميم — دعوتنا"
   }, [])
+
   const visible = templates.filter((item) => filter === "الكل" || item.category === (filter as Occasion))
+
+  function choosePackage(id: PackageId) {
+    setSelected(id)
+    selectPackage(id)
+  }
 
   return (
     <main id="main" className="mx-auto max-w-6xl px-4 py-10 md:py-14">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="inline-flex rounded-full bg-[#fff0f2] px-4 py-2 text-sm font-bold text-[#a64257]">مجموعة دعوتنا</p>
-        <h1 className="mt-4 font-display text-4xl text-[#4a2d33] md:text-6xl">اختار تصميم دعوتك</h1>
+        <p className="inline-flex rounded-full bg-[#fff0f2] px-4 py-2 text-sm font-bold text-[#a64257]">باقات دعوتنا</p>
+        <h1 className="mt-4 font-display text-4xl text-[#4a2d33] md:text-6xl">اختار الباقة اللي تناسبك</h1>
         <p className="mx-auto mt-4 max-w-2xl leading-8 text-[#806b70]">
-          {templates.length} تصاميم مختلفة، وكل دعوة بـ {money(site.price)}. اختار اللي يعجبك وبعدها ضيف تفاصيل يومك.
+          اختار عدد الدعوات اللي محتاجها، وبعدها اختار تصميمك وابدأ تخصّص كل دعوة لوحدها.
         </p>
       </div>
+
+      <section className="mt-10 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="باقات الدعوات">
+        {packages.map((item) => {
+          const active = selected === item.id
+          const featured = item.id === "plus"
+          return (
+            <article key={item.id} className={`relative flex flex-col rounded-[26px] border p-5 transition duration-200 ${featured ? "border-[#183d32] bg-[#102d25] text-white shadow-[0_16px_36px_rgba(16,45,37,0.18)] lg:-translate-y-2" : "border-[#eadde0] bg-white text-[#4a2d33]"} ${active ? "ring-2 ring-[#b83b50] ring-offset-2" : ""}`}>
+              {item.label ? <span className={`mb-3 self-start rounded-full px-3 py-1 text-xs font-bold ${featured ? "bg-[#d9bd7b]/15 text-[#e8d39e]" : "bg-[#fff0f2] text-[#a64257]"}`}>{item.label}</span> : <span className="mb-3 h-6" />}
+              <h2 className="text-xl font-bold">{item.name}</h2>
+              <p className={`mt-2 min-h-12 text-sm leading-6 ${featured ? "text-white/70" : "text-[#806b70]"}`}>{item.description}</p>
+              <div className="mt-5 flex items-end gap-2">
+                <strong className={`font-display text-4xl ${featured ? "text-[#e8d39e]" : "text-[#08745d]"}`}>{money(item.price)}</strong>
+                <span className={`mb-1 text-sm line-through ${featured ? "text-white/45" : "text-[#a99599]"}`}>{money(item.oldPrice)}</span>
+              </div>
+              <p className={`mt-1 text-xs ${featured ? "text-white/60" : "text-[#806b70]"}`}>دفع مرة واحدة · {item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات"}</p>
+              <div className={`mt-5 flex-1 rounded-2xl p-3 ${featured ? "bg-white/[0.07]" : "bg-[#fbf7f3]"}`}>
+                <p className="text-sm font-bold">الباقة تشمل</p>
+                {item.features.map((feature) => (
+                  <p key={feature} className={`mt-2 text-sm leading-6 ${featured ? "text-white/80" : "text-[#08745d]"}`}>✓ {feature}</p>
+                ))}
+                <p className={`mt-3 border-t pt-3 text-sm font-bold ${featured ? "border-white/10 text-[#e8d39e]" : "border-[#eee3e3] text-[#08745d]"}`}>
+                  ≈ {money(Math.round(item.price / item.quantity))} للدعوة
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => choosePackage(item.id)}
+                aria-pressed={active}
+                className={`mt-4 min-h-11 w-full rounded-full px-4 text-sm font-bold transition ${featured ? "bg-[#e8d39e] text-[#17382e] hover:bg-[#f0dfb6]" : "bg-[#a64257] text-white hover:bg-[#91384b]"}`}
+              >
+                {active ? "✓ الباقة المختارة" : "اختار الباقة"}
+              </button>
+            </article>
+          )
+        })}
+      </section>
+
+      <div className="mx-auto mt-14 max-w-3xl text-center">
+        <p className="text-sm font-bold text-[#b83b50]">الخطوة اللي بعدها</p>
+        <h2 className="mt-2 font-display text-3xl text-[#4a2d33] md:text-4xl">اختار تصميم دعوتك</h2>
+        <p className="mt-3 leading-7 text-[#806b70]">
+          الباقة المختارة: <strong className="text-[#a64257]">{packages.find((item) => item.id === selected)?.name}</strong> — تقدر تعمل {packages.find((item) => item.id === selected)?.quantity} {selected === "single" ? "دعوة" : "دعوات"} مختلفة.
+        </p>
+      </div>
+
       <div className="mt-8 flex justify-center gap-2 overflow-x-auto pb-2" role="tablist" aria-label="تصفية الدعوات">
         {filters.map((item) => (
           <button
@@ -49,10 +103,9 @@ export function Gallery() {
             </Link>
             <div className="flex items-center justify-between gap-3 px-2 pb-2 pt-4">
               <div className="min-w-0">
-                <h2 className="text-lg font-bold text-[#4a2d33]">{template.name}</h2>
+                <h3 className="text-lg font-bold text-[#4a2d33]">{template.name}</h3>
                 <p className="mt-1 text-sm text-[#806b70]">{template.blurb}</p>
               </div>
-              <p className="shrink-0 rounded-full bg-[#fff0f2] px-3 py-1.5 text-sm font-bold text-[#a64257]">{money(site.price)}</p>
             </div>
             <Link to={`/editor/${template.id}`} className="btn-dark mb-1 mt-3 w-full">اختار التصميم</Link>
           </article>
