@@ -7,15 +7,13 @@ const links = [
   { href: "/templates", label: "الدعوات" },
   { href: "/#how", label: "الطريقة" },
   { href: "/#price", label: "السعر" },
-  { href: "/#faq", label: "أسئلة" },
+  { href: "/#faq", label: "أسئلة شائعة" },
 ]
 
 export function SiteChrome() {
   return (
     <>
-      <a className="skip" href="#main">
-        تخطي إلى المحتوى
-      </a>
+      <a className="skip" href="#main">تخطي إلى المحتوى</a>
       <Header />
       <Outlet />
       <Footer />
@@ -30,19 +28,21 @@ function Header() {
   useEffect(() => setOpen(false), [pathname])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-cream/90 backdrop-blur-md">
-      <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-4 px-4">
-        <Link to="/" className="flex items-center gap-2 text-gold" aria-label="دعوتنا، الصفحة الرئيسية">
-          <LogoMark className="h-10 w-10" />
+    <header className="sticky top-0 z-40 border-b border-[#f0dce1]/80 bg-[#fffdfa]/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-[76px] max-w-6xl items-center justify-between gap-4 px-4">
+        <Link to="/" className="flex items-center gap-2.5" aria-label="دعوتنا، الصفحة الرئيسية">
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50]">
+            <LogoMark className="h-8 w-8" />
+          </span>
           <span className="grid leading-none">
-            <span className="font-display text-[1.7rem] text-ink">دعوتنا</span>
-            <span className="font-latin text-[0.7rem] tracking-[0.28em] text-gold">{site.nameEn}</span>
+            <span className="font-display text-[1.8rem] text-[#4a2d33]">دعوتنا</span>
+            <span className="mt-1 font-latin text-[0.62rem] tracking-[0.3em] text-[#a45b69]">{site.nameEn}</span>
           </span>
         </Link>
-        <nav className="hidden items-center gap-1 md:flex" aria-label="التنقل">
+        <nav className="hidden items-center gap-1 rounded-full border border-[#f0dce1] bg-white/80 p-1 md:flex" aria-label="التنقل">
           {links.map((link) =>
             link.href.startsWith("/#") ? (
-              <a key={link.href} href={link.href} className="cursor-pointer rounded-full px-3 py-2 text-sm font-semibold text-ink">
+              <a key={link.href} href={link.href} className="rounded-full px-4 py-2 text-sm font-semibold text-[#806b70] transition hover:bg-[#fff0f2] hover:text-[#a64257]">
                 {link.label}
               </a>
             ) : (
@@ -50,7 +50,7 @@ function Header() {
                 key={link.href}
                 to={link.href}
                 className={({ isActive }) =>
-                  `cursor-pointer rounded-full px-3 py-2 text-sm font-semibold ${isActive ? "bg-white text-gold" : "text-ink"}`
+                  `rounded-full px-4 py-2 text-sm font-semibold transition ${isActive ? "bg-[#fff0f2] text-[#a64257]" : "text-[#806b70] hover:bg-[#fff8f8]"}`
                 }
               >
                 {link.label}
@@ -59,28 +59,27 @@ function Header() {
           )}
         </nav>
         <div className="flex items-center gap-2">
-          <Link to="/templates" className="btn-gold hidden h-11 px-4 text-sm sm:inline-flex">
-            اختار دعوتك
-          </Link>
+          <Link to="/templates" className="btn-gold hidden h-11 px-5 text-sm sm:inline-flex">اختار دعوتك</Link>
           <button
             type="button"
-            className="inline-flex h-11 cursor-pointer items-center rounded-full border border-line bg-card px-4 text-sm font-bold md:hidden"
+            className="inline-flex h-11 cursor-pointer items-center rounded-full border border-[#f0dce1] bg-white px-4 text-sm font-bold text-[#65434b] md:hidden"
             aria-expanded={open}
+            aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}
             onClick={() => setOpen((value) => !value)}
           >
-            القائمة
+            {open ? "إغلاق" : "القائمة"}
           </button>
         </div>
       </div>
       {open ? (
-        <nav className="grid gap-1 border-t border-line px-4 py-3 md:hidden" aria-label="قائمة الموبايل">
+        <nav className="grid gap-1 border-t border-[#f0dce1] bg-white px-4 py-3 md:hidden" aria-label="قائمة الموبايل">
           {links.map((link) =>
             link.href.startsWith("/#") ? (
-              <a key={link.href} href={link.href} className="rounded-xl px-3 py-3 font-semibold" onClick={() => setOpen(false)}>
+              <a key={link.href} href={link.href} className="rounded-xl px-3 py-3 font-semibold text-[#65434b] hover:bg-[#fff5f6]" onClick={() => setOpen(false)}>
                 {link.label}
               </a>
             ) : (
-              <Link key={link.href} to={link.href} className="rounded-xl px-3 py-3 font-semibold">
+              <Link key={link.href} to={link.href} className="rounded-xl px-3 py-3 font-semibold text-[#65434b] hover:bg-[#fff5f6]">
                 {link.label}
               </Link>
             ),
@@ -93,31 +92,33 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="border-t border-line bg-cream">
+    <footer className="border-t border-[#f0dce1] bg-[#fff8f8]">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2 text-gold">
-            <LogoMark className="h-9 w-9" />
-            <span className="font-display text-3xl text-ink">دعوتنا</span>
+          <div className="flex items-center gap-2.5">
+            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50]">
+              <LogoMark className="h-7 w-7" />
+            </span>
+            <span className="font-display text-3xl text-[#4a2d33]">دعوتنا</span>
           </div>
-          <p className="mt-3 max-w-sm leading-7 text-mute">
-            دعوات أفراح جاهزة. أنت تكتب الأسماء والتفاصيل، وتستلم ستوري واتساب ولينك للضيوف.
+          <p className="mt-4 max-w-sm leading-7 text-[#806b70]">
+            كل فرحة وليها دعوة حلوة. صمّم دعوتك وشارك لحظتك مع كل اللي بتحبهم.
           </p>
         </div>
-        <div className="grid content-start gap-2">
-          <p className="font-bold">الموقع</p>
-          <a className="text-mute" href="/templates">الدعوات</a>
-          <a className="text-mute" href="/#how">الطريقة</a>
-          <a className="text-mute" href="/#price">السعر</a>
+        <div className="grid content-start gap-3">
+          <p className="font-bold text-[#4a2d33]">تصفح</p>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/templates">كل الدعوات</Link>
+          <a className="text-[#806b70] hover:text-[#a64257]" href="/#how">طريقة الاستخدام</a>
+          <a className="text-[#806b70] hover:text-[#a64257]" href="/#price">الأسعار</a>
         </div>
-        <div className="grid content-start gap-2">
-          <p className="font-bold">الدفع</p>
-          <p className="text-mute">فودافون كاش</p>
-          <p className="text-mute">إنستاباي</p>
-          <p className="text-mute">بطاقة بنكية</p>
+        <div className="grid content-start gap-3">
+          <p className="font-bold text-[#4a2d33]">طرق الدفع</p>
+          <p className="text-[#806b70]">فودافون كاش</p>
+          <p className="text-[#806b70]">إنستاباي</p>
+          <p className="text-[#806b70]">بطاقة بنكية</p>
         </div>
       </div>
-      <p className="border-t border-line px-4 py-4 text-center text-sm text-mute">© {new Date().getFullYear()} دعوتنا</p>
+      <p className="border-t border-[#f0dce1] px-4 py-4 text-center text-sm text-[#9a8187]">© {new Date().getFullYear()} دعوتنا — كل الحقوق محفوظة</p>
     </footer>
   )
 }
@@ -131,7 +132,7 @@ function HelpButton() {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-4 left-4 z-40 inline-flex h-12 items-center gap-2 rounded-full bg-ink px-4 text-sm font-bold text-cream shadow-lg"
+      className="fixed bottom-4 left-4 z-40 inline-flex h-12 items-center gap-2 rounded-full border border-white/70 bg-white px-4 text-sm font-bold text-[#4a2d33] shadow-[0_8px_28px_rgba(74,45,51,0.16)] transition hover:-translate-y-0.5"
     >
       <span className="grid h-7 w-7 place-items-center rounded-full bg-[#1fa855] text-white">
         <WhatsAppIcon className="h-4 w-4" />
