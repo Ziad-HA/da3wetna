@@ -76,7 +76,7 @@ export function Checkout() {
         <p className="mt-3 leading-7 text-[#806b70]">{continuing ? "دي دعوة جديدة ضمن الباقة اللي دفعت تمنها بالفعل." : "راجع تفاصيل أول دعوة واختار طريقة الدفع المناسبة."}</p>
       </div>
       <div className="grid items-start gap-4 sm:gap-6 lg:grid-cols-[300px_1fr]">
-        <aside className="rounded-[26px] border border-[#f0dce1] bg-white p-4">
+        <aside className="order-2 rounded-[26px] border border-[#f0dce1] bg-white p-4 lg:order-1">
           <div className="overflow-hidden rounded-[18px] bg-[#fff8f8]">
             <Invitation draft={draft} />
           </div>
@@ -87,7 +87,7 @@ export function Checkout() {
           <Link to={`/editor/${draft.templateId}`} className="mt-4 inline-block text-sm font-bold text-[#a64257] hover:underline">تعديل التفاصيل</Link>
         </aside>
 
-        <section className="rounded-[26px] border border-[#f0dce1] bg-white p-4 sm:p-5 md:p-7">
+        <section className="order-1 rounded-[26px] border border-[#f0dce1] bg-white p-4 sm:p-5 md:order-2 md:p-7">
           <div className="rounded-2xl bg-[#fbf7f3] p-4">
             <p className="text-sm text-[#806b70]">الباقة</p>
             <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
