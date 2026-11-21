@@ -735,3 +735,29 @@ main section > div { min-width: 0; }
   .phone-preview-frame { border-width: 3px; padding: 3px; border-radius: 1.7rem; }
   .phone-preview-screen { border-radius: 1.4rem; }
 }
+
+
+/* Template gallery: invitation artwork without device mockups */
+.gallery-design-frame {
+  padding: 5px;
+  border: 1px solid #e7c5cd;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #fffdfb, #f7e8eb);
+  box-shadow: 0 5px 18px rgba(91,48,60,.09), inset 0 0 0 2px rgba(255,255,255,.85);
+}
+.gallery-design-frame > .invite-frame {
+  overflow: hidden;
+  border: 1px solid rgba(166,66,87,.18);
+  border-radius: .7rem;
+  background: #fff;
+}
+.gallery-hero-frame {
+  padding: 3px;
+  border-color: #fff;
+  background: linear-gradient(145deg, #fff, #f3dce2);
+}
+.gallery-hero-frame > .invite-frame { border-radius: 6px; overflow: hidden; }
+@media (max-width: 767px) {
+  .gallery-design-frame { padding: 4px; border-radius: .85rem; }
+  .gallery-design-frame > .invite-frame { border-radius: .55rem; }
+}
