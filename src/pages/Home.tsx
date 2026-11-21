@@ -1,18 +1,11 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
-import { IconLink, IconPen, IconStory, IconWallet } from "../components/Icons"
 import { packages } from "../config"
-import { draftFor, faqs, templates } from "../data"
+import { draftFor, templates } from "../data"
 import { money } from "../lib/format"
 import { clearDraft, readLast } from "../lib/storage"
 
-const features = [
-  { icon: IconPen, title: "تعديل بنفسك", text: "اكتب الأسماء والتاريخ والمكان بنفسك، وشوف شكل الدعوة بيتغير قدامك." },
-  { icon: IconStory, title: "ستوري واتساب", text: "حمّل صورة جاهزة بمقاس الستوري، من غير قص أو تعديل." },
-  { icon: IconLink, title: "لينك للضيوف", text: "شارك لينك واحد يفتح الدعوة عند كل ضيوفك." },
-  { icon: IconWallet, title: "دفع سهل", text: "اختار وسيلة الدفع المناسبة ليك، واستلم دعوتك بعد التأكيد." },
-]
 
 export function Home() {
   const last = readLast()
@@ -145,34 +138,13 @@ export function Home() {
           ].map(([value, label]) => (
             <div key={label}>
               <p className="font-display text-2xl text-[#a64257] md:text-3xl">{value}</p>
-              <p className="mt-1 text-sm text-[#806b70]">{label}</p>
+              <p className="mt-1 text-xs leading-5 text-[#806b70]">{label}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fff5f6_0%,#fffafa_100%)] py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-bold text-[#b83b50]">كل اللي تحتاجه</p>
-            <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">تفاصيل صغيرة تفرق</h2>
-            <p className="mt-3 leading-8 text-[#806b70]">تجربة بسيطة تخليك تركز في فرحتك، مش في تجهيز الدعوة.</p>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature) => (
-              <article key={feature.title} className="group rounded-[26px] border border-[#f0dce1] bg-white p-6 shadow-[0_8px_28px_rgba(91,48,60,.035)] transition duration-300 hover:-translate-y-1 hover:border-[#e2bdc6] hover:shadow-[0_18px_40px_rgba(91,48,60,.09)]">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50] transition duration-300 group-hover:rotate-[-4deg] group-hover:scale-105">
-                  <feature.icon className="h-6 w-6" />
-                </span>
-                <h3 className="mt-5 font-bold text-[#4a2d33]">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-[#806b70]">{feature.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="text-sm font-bold text-[#b83b50]">اختياراتنا ليك</p>
@@ -180,44 +152,20 @@ export function Home() {
           </div>
           <Link to="/templates" className="hidden font-bold text-[#a64257] sm:inline">كل الدعوات ←</Link>
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
           {templates.slice(0, 4).map((template) => (
             <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group block">
-              <div className="overflow-hidden rounded-[26px] border border-[#f0dce1] bg-white p-2 shadow-[0_8px_26px_rgba(91,48,60,.05)] transition duration-300 group-hover:-translate-y-1 group-hover:border-[#e2bdc6] group-hover:shadow-[0_18px_38px_rgba(91,48,60,.12)]">
+              <div className="overflow-hidden rounded-[20px] border border-[#f0dce1] bg-white p-1.5 shadow-[0_8px_26px_rgba(91,48,60,.05)] transition duration-300 group-hover:-translate-y-1 group-hover:border-[#e2bdc6] group-hover:shadow-[0_18px_38px_rgba(91,48,60,.12)]">
                 <div className="overflow-hidden rounded-[19px]">
                   <Invitation draft={draftFor(template)} />
                 </div>
               </div>
-              <h3 className="mt-3 font-bold text-[#4a2d33]">{template.name}</h3>
+              <h3 className="mt-2 text-sm font-bold text-[#4a2d33]">{template.name}</h3>
               <p className="mt-1 text-sm text-[#806b70]">{template.blurb}</p>
             </Link>
           ))}
         </div>
-        <Link to="/templates" className="btn-dark mt-8">شوف كل التصاميم</Link>
-      </section>
-
-      <section className="border-y border-[#f0dce1] bg-[#fff8f8] py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-bold text-[#b83b50]">لكل مناسبة حكاية</p>
-            <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">دعوتك على مزاج فرحتك</h2>
-            <p className="mt-3 leading-8 text-[#806b70]">سواء بتجهّزوا للفرح أو الخطوبة أو كتب الكتاب، هتلاقوا تصميم يناسب مناسبتكم.</p>
-          </div>
-          <div className="mt-9 grid gap-4 sm:grid-cols-3">
-            {[
-              { title: "دعوات أفراح", text: "تصميمات أنيقة ليوم العمر وتفاصيله.", icon: "♡" },
-              { title: "دعوات خطوبة", text: "شاركوا بداية حكايتكم مع القريبين منكم.", icon: "✦" },
-              { title: "دعوات كتب كتاب", text: "دعوة بسيطة وراقية للمناسبة الغالية.", icon: "❋" },
-            ].map((item) => (
-              <Link key={item.title} to="/templates" className="group rounded-[26px] border border-[#f0dce1] bg-white p-6 transition hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(166,66,87,0.08)]">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff0f2] font-display text-2xl text-[#b83b50]">{item.icon}</span>
-                <h3 className="mt-5 text-lg font-extrabold text-[#4a2d33]">{item.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-[#806b70]">{item.text}</p>
-                <span className="mt-5 inline-block text-sm font-bold text-[#a64257]">اكتشف التصميمات ←</span>
-              </Link>
-            ))}
-          </div>
-        </div>
+        <Link to="/templates" className="btn-dark mt-5">شوف كل التصاميم</Link>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
@@ -244,18 +192,6 @@ export function Home() {
         </div>
       </section>
 
-      <section className="bg-[#fff5f6] py-16 md:py-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 md:grid-cols-[1fr_auto]">
-          <div>
-            <p className="text-sm font-bold text-[#b83b50]">باقات واضحة من البداية</p>
-            <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">ابدأ بدعوة واحدة أو اختار باقة أكبر</h2>
-            <p className="mt-3 max-w-2xl leading-8 text-[#806b70]">اختار عدد الدعوات اللي يناسب احتياجك. كل باقة موضّح فيها مميزاتها وسعرها قبل ما تبدأ.</p>
-            <p className="mt-5 text-sm font-semibold text-[#806b70]">الباقات بتبدأ من <strong className="text-2xl text-[#a64257]">{money(packages[0].price)} ج.م</strong></p>
-          </div>
-          <Link to="/packages" className="btn-gold justify-center px-8">قارن الباقات والأسعار</Link>
-        </div>
-      </section>
-
       <section className="mx-auto max-w-4xl px-4 py-16 md:py-20">
         <div className="text-center">
           <p className="text-sm font-bold text-[#b83b50]">عندك سؤال؟</p>
@@ -268,14 +204,7 @@ export function Home() {
                 {faq.q}
                 <span className="text-xl text-[#b83b50] transition group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-3 max-w-3xl text-sm leading-7 text-[#806b70]">{faq.a}</p>
-            </details>
-          ))}
-        </div>
-        <div className="mt-6 text-center">
-          <Link to="/faq" className="font-bold text-[#a64257] hover:underline">شوف كل الأسئلة الشائعة ←</Link>
-        </div>
-      </section>
+              <p className="mt-3 max-w-3xl text-sm leading-7 te
 
     </main>
   )
