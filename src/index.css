@@ -638,3 +638,26 @@ main section > div { min-width: 0; }
   .da3-atmosphere { display: none !important; }
   main#main > section:not(.da3-hero) { animation: none !important; }
 }
+
+
+/* Mobile romantic polish: keep the visual details light and out of the way */
+@media (max-width: 767px) {
+  .da3-atmosphere { z-index: 0; opacity: .72; }
+  .da3-atmosphere .da3-floating-petal:nth-child(4),
+  .da3-atmosphere .da3-floating-petal:nth-child(6) { display: none; }
+  .da3-atmosphere .da3-floating-petal { font-size: 12px !important; }
+  main, footer { position: relative; z-index: 1; }
+  .da3-hero .da3-phone-float { will-change: transform; }
+  .da3-hero .da3-tool-rail { pointer-events: none; }
+  .da3-hero .da3-copy .mt-7.flex > a { min-height: 48px; }
+  main button, main a, footer a { touch-action: manipulation; }
+}
+@media (max-width: 380px) {
+  .da3-hero .relative.order-1 { min-height: 260px; }
+  .da3-hero .da3-tool-rail { right: 1px !important; width: 38px !important; }
+  .da3-hero .da3-copy .mt-7.flex > a { font-size: .84rem; padding-inline: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .da3-atmosphere .da3-floating-petal { animation: none !important; }
+  .da3-hero .da3-phone-float { animation: none !important; }
+}
