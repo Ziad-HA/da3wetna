@@ -148,7 +148,7 @@ function Footer() {
             <p className="mb-1 font-bold text-[#4a2d33]">طرق الدفع</p>
             <p className="text-[#806b70]">فودافون كاش</p>
             <p className="text-[#806b70]">إنستاباي</p>
-            <p className="text-[#806b70]">بطاقة بنكية</p>
+            <p className="text-[#a18a8f]">الدفع بالبطاقة قريبًا</p>
             <p className="mt-2 text-xs leading-6 text-[#a18a8f]">تواصل معانا لو محتاج مساعدة في اختيار دعوتك.</p>
           </div>
         </div>
