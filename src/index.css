@@ -919,3 +919,13 @@ main section > div { min-width: 0; }
   }
   .opening-envelope-flap, .opening-envelope-pocket, .opening-letter, .opening-envelope-seal { transition: none !important; }
 }
+
+.opening-letter-photo {
+  width: 58%;
+  height: 42%;
+  min-height: 0;
+  border: 3px solid #fff;
+  border-radius: 7px;
+  object-fit: cover;
+  box-shadow: 0 3px 12px rgba(85,45,55,.16);
+}
