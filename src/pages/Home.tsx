@@ -161,16 +161,33 @@ export function Home() {
             <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">باقات لكل فرحة</h2>
             <p className="mt-3 leading-8 text-[#806b70]">ابدأ بدعوة واحدة أو وفر أكتر مع باقات الدعوات المتعددة.</p>
           </div>
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {packages.map((item) => (
-              <article key={item.id} className={`rounded-[25px] border p-5 ${item.id === "plus" ? "border-[#17382e] bg-[#17382e] text-white shadow-xl" : "border-[#f0dce1] bg-white"}`}>
-                <p className={`text-sm font-bold ${item.id === "plus" ? "text-[#e8d39e]" : "text-[#a64257]"}`}>{item.label || "باقة مرنة"}</p>
-                <h3 className="mt-2 text-lg font-bold">{item.name}</h3>
-                <p className={`mt-1 text-sm ${item.id === "plus" ? "text-white/70" : "text-[#806b70]"}`}>{item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات مختلفة"}</p>
-                <p className={`mt-4 font-display text-4xl ${item.id === "plus" ? "text-[#e8d39e]" : "text-[#08745d]"}`}>{money(item.price)}</p>
-                <Link to="/templates" onClick={() => selectPackage(item.id)} className={`mt-5 w-full rounded-full px-4 py-3 text-center text-sm font-bold inline-flex justify-center ${item.id === "plus" ? "bg-[#e8d39e] text-[#17382e]" : "bg-[#a64257] text-white"}`}>اختار الباقة</Link>
-              </article>
-            ))}
+          <div className="mt-9 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {packages.map((item) => {
+              const featured = item.id === "plus"
+              return (
+                <article key={item.id} className={`relative flex flex-col rounded-[26px] border bg-white p-5 transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(166,66,87,0.09)] ${featured ? "border-[#d9a3ae] shadow-[0_10px_28px_rgba(166,66,87,0.09)]" : "border-[#f0dce1] shadow-[0_6px_20px_rgba(91,48,60,0.04)]"}`}>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="rounded-full bg-[#fff0f2] px-3 py-1.5 text-xs font-extrabold text-[#a64257]">
+                      {item.id === "single" ? item.discount : item.label || "باقة مرنة"}
+                    </span>
+                    {featured ? <span className="text-[11px] font-bold text-[#a64257]">الأكثر طلبًا</span> : null}
+                  </div>
+                  <h3 className="mt-4 text-lg font-extrabold text-[#4a2d33]">{item.name}</h3>
+                  <p className="mt-1 min-h-10 text-sm leading-6 text-[#806b70]">{item.description}</p>
+                  <div className="mt-5 flex flex-wrap items-end gap-2 border-b border-[#f3e7e9] pb-5">
+                    <strong className="font-display text-4xl text-[#a64257]">{money(item.price)}</strong>
+                    {item.oldPrice ? <span className="mb-1 text-sm text-[#a99599] line-through">{money(item.oldPrice)}</span> : null}
+                    <span className="mb-1 text-xs text-[#806b70]">ج.م · دفعة واحدة</span>
+                  </div>
+                  <div className="mt-4 flex-1 rounded-2xl bg-[#fff8f8] p-4">
+                    <p className="font-bold text-[#4a2d33]">تقدر تنشئ {item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات"}</p>
+                    <p className="mt-1 text-sm font-semibold text-[#a64257]">حوالي {money(Math.round(item.price / item.quantity))} ج.م للدعوة</p>
+                    <p className="mt-3 text-sm leading-6 text-[#806b70]">وتبعتها لعدد لا نهائي من الناس</p>
+                  </div>
+                  <Link to="/templates" onClick={() => selectPackage(item.id)} className={`mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-full px-4 py-3 text-sm font-bold transition ${featured ? "bg-[#a64257] text-white hover:bg-[#91384b]" : "border border-[#e8c8cf] bg-white text-[#a64257] hover:bg-[#fff0f2]"}`}>اختار الباقة</Link>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>
