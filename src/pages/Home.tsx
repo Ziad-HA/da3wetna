@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { IconLink, IconPen, IconStory, IconWallet } from "../components/Icons"
 import { packages } from "../config"
-import { draftFor, templates } from "../data"
+import { draftFor, faqs, templates } from "../data"
 import { money } from "../lib/format"
 import { clearDraft, readLast } from "../lib/storage"
 
@@ -131,6 +131,87 @@ export function Home() {
           ))}
         </div>
         <Link to="/templates" className="btn-dark mt-8">شوف كل التصاميم</Link>
+      </section>
+
+      <section className="border-y border-[#f0dce1] bg-[#fff8f8] py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-bold text-[#b83b50]">لكل مناسبة حكاية</p>
+            <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">دعوتك على مزاج فرحتك</h2>
+            <p className="mt-3 leading-8 text-[#806b70]">سواء بتجهّزوا للفرح أو الخطوبة أو كتب الكتاب، هتلاقوا تصميم يناسب مناسبتكم.</p>
+          </div>
+          <div className="mt-9 grid gap-4 sm:grid-cols-3">
+            {[
+              { title: "دعوات أفراح", text: "تصميمات أنيقة ليوم العمر وتفاصيله.", icon: "♡" },
+              { title: "دعوات خطوبة", text: "شاركوا بداية حكايتكم مع القريبين منكم.", icon: "✦" },
+              { title: "دعوات كتب كتاب", text: "دعوة بسيطة وراقية للمناسبة الغالية.", icon: "❋" },
+            ].map((item) => (
+              <Link key={item.title} to="/templates" className="group rounded-[26px] border border-[#f0dce1] bg-white p-6 transition hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(166,66,87,0.08)]">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff0f2] font-display text-2xl text-[#b83b50]">{item.icon}</span>
+                <h3 className="mt-5 text-lg font-extrabold text-[#4a2d33]">{item.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-[#806b70]">{item.text}</p>
+                <span className="mt-5 inline-block text-sm font-bold text-[#a64257]">اكتشف التصميمات ←</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-sm font-bold text-[#b83b50]">من أول اختيار لحد ما تبعت دعوتك</p>
+          <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">الحكاية أسهل مما تتخيل</h2>
+          <p className="mt-3 leading-8 text-[#806b70]">كل الخطوات واضحة، وتقدر تشوف شكل دعوتك قبل ما تكمل طلبك.</p>
+        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            { n: "١", title: "اختار التصميم", text: "اتفرّج على التصميمات واختار الشكل الأقرب لذوقكم." },
+            { n: "٢", title: "ضيف تفاصيلكم", text: "اكتب الأسماء والميعاد والمكان، وشوف التعديلات مباشرة." },
+            { n: "٣", title: "كمّل طلبك وشارك", text: "اختار الباقة وطريقة الدفع، وبعد التأكيد جهّز دعوتك للمشاركة." },
+          ].map((step) => (
+            <article key={step.n} className="rounded-[26px] border border-[#f0dce1] bg-white p-6">
+              <span className="font-display text-4xl text-[#c78391]">{step.n}</span>
+              <h3 className="mt-4 text-lg font-extrabold text-[#4a2d33]">{step.title}</h3>
+              <p className="mt-2 text-sm leading-7 text-[#806b70]">{step.text}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Link to="/how" className="font-bold text-[#a64257] hover:underline">اعرف تفاصيل طريقة الاستخدام ←</Link>
+        </div>
+      </section>
+
+      <section className="bg-[#fff5f6] py-16 md:py-20">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 md:grid-cols-[1fr_auto]">
+          <div>
+            <p className="text-sm font-bold text-[#b83b50]">باقات واضحة من البداية</p>
+            <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">ابدأ بدعوة واحدة أو اختار باقة أكبر</h2>
+            <p className="mt-3 max-w-2xl leading-8 text-[#806b70]">اختار عدد الدعوات اللي يناسب احتياجك. كل باقة موضّح فيها مميزاتها وسعرها قبل ما تبدأ.</p>
+            <p className="mt-5 text-sm font-semibold text-[#806b70]">الباقات بتبدأ من <strong className="text-2xl text-[#a64257]">{money(packages[0].price)} ج.م</strong></p>
+          </div>
+          <Link to="/packages" className="btn-gold justify-center px-8">قارن الباقات والأسعار</Link>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-4xl px-4 py-16 md:py-20">
+        <div className="text-center">
+          <p className="text-sm font-bold text-[#b83b50]">عندك سؤال؟</p>
+          <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">إجابات تهمك قبل ما تبدأ</h2>
+        </div>
+        <div className="mt-8 divide-y divide-[#f0dce1] rounded-[26px] border border-[#f0dce1] bg-white px-5">
+          {faqs.slice(0, 4).map((faq) => (
+            <details key={faq.q} className="group py-5">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-[#4a2d33] marker:hidden">
+                {faq.q}
+                <span className="text-xl text-[#b83b50] transition group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-[#806b70]">{faq.a}</p>
+            </details>
+          ))}
+        </div>
+        <div className="mt-6 text-center">
+          <Link to="/faq" className="font-bold text-[#a64257] hover:underline">شوف كل الأسئلة الشائعة ←</Link>
+        </div>
       </section>
 
     </main>
