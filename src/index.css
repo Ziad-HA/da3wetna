@@ -318,3 +318,9 @@ article, section { scroll-margin-top: 6rem; }
 @media (prefers-reduced-motion: reduce) {
   main { animation: none !important; }
 }
+
+
+/* Mobile app-like bottom navigation spacing */
+@media (max-width: 767px) {
+  body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+}
