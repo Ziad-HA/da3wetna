@@ -80,8 +80,8 @@ export function Gallery() {
         </div>
 
         <div className="mt-5 grid gap-2 sm:grid-cols-[1fr_auto]">
-          <label className="relative"><span className="sr-only">ابحث عن تصميم</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="دور على تصميم بالاسم أو المناسبة..." className="min-h-11 w-full rounded-2xl border border-[#f0dce1] bg-white px-4 text-sm text-[#4a2d33] outline-none transition focus:border-[#c98c9a] focus:ring-4 focus:ring-[#f8e8ec]" /></label>
-          <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`min-h-11 rounded-2xl border px-4 text-xs font-bold transition ${favoritesOnly ? "border-[#a64257] bg-[#a64257] text-white" : "border-[#f0dce1] bg-white text-[#a64257]"}`}>♡ المفضلة ({favorites.length})</button>
+          <label className="relative block min-w-0"><span className="sr-only">ابحث عن تصميم</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ابحث عن تصميم..." className="min-h-12 w-full rounded-2xl border border-[#f0dce1] bg-white px-4 pl-11 text-sm text-[#4a2d33] outline-none transition focus:border-[#c98c9a] focus:ring-4 focus:ring-[#f8e8ec]" />{query ? <button type="button" onClick={() => setQuery("")} aria-label="مسح البحث" className="absolute left-2 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-[#fff0f2] text-lg text-[#a64257]">×</button> : null}</label>
+          <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`min-h-12 rounded-2xl border px-4 text-xs font-bold transition ${favoritesOnly ? "border-[#a64257] bg-[#a64257] text-white" : "border-[#f0dce1] bg-white text-[#a64257]"}`}>♡ المفضلة ({favorites.length})</button>
         </div>
 
         <div className="mt-3 flex snap-x gap-2 overflow-x-auto pb-2 sm:mt-5 sm:flex-wrap sm:overflow-visible" role="tablist" aria-label="تصفية الدعوات">
@@ -122,7 +122,7 @@ export function Gallery() {
           <div className="mt-6 rounded-3xl border border-dashed border-[#e8c8cf] bg-white/70 px-5 py-12 text-center">
             <span className="text-3xl text-[#c68b98]">♡</span>
             <p className="mt-3 font-bold text-[#4a2d33]">مفيش تصميمات مطابقة للبحث أو الفلتر ده</p>
-            <button type="button" onClick={() => setFilter("الكل")} className="mt-4 text-sm font-bold text-[#a64257] underline underline-offset-4">عرض كل التصميمات</button>
+            <button type="button" onClick={() => { setFilter("الكل"); setQuery(""); setFavoritesOnly(false) }} className="mt-4 rounded-full bg-[#a64257] px-5 py-3 text-sm font-bold text-white shadow-sm">عرض كل التصميمات</button>
           </div>
         ) : null}
       </section>
