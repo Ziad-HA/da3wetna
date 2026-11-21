@@ -34,11 +34,11 @@ function Header() {
       <div className="mx-auto flex h-[70px] max-w-6xl items-center justify-between gap-3 px-4 sm:h-[76px]">
         <Link to="/" className="group flex shrink-0 items-center gap-2.5" aria-label="دعوتنا، الصفحة الرئيسية">
           <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50] ring-1 ring-[#f3dfe3] transition duration-300 group-hover:-rotate-3 group-hover:scale-105">
-            <LogoMark className="h-8 w-8" />
+            <LogoMark className="h-6 w-6 sm:h-8 sm:w-8" />
           </span>
           <span className="grid leading-none">
             <span className="font-display text-[1.8rem] text-[#4a2d33]">دعوتنا</span>
-            <span className="mt-1 font-latin text-[0.62rem] tracking-[0.3em] text-[#a45b69]">{site.nameEn}</span>
+            <span className="mt-0.5 font-latin text-[0.48rem] tracking-[0.2em] sm:mt-1 sm:text-[0.62rem] sm:tracking-[0.3em] text-[#a45b69]">{site.nameEn}</span>
           </span>
         </Link>
         <nav className="hidden items-center gap-1 rounded-full border border-[#f0dce1] bg-white/80 p-1 md:flex" aria-label="التنقل">
@@ -104,35 +104,35 @@ function Footer() {
       <div className="pointer-events-none absolute -left-24 -top-28 h-72 w-72 rounded-full bg-[#f8e4e8]/60 blur-3xl" />
       <div className="pointer-events-none absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-[#f4e8d5]/45 blur-3xl" />
 
-      <div className="relative mx-auto max-w-6xl px-4 pb-7 pt-12 sm:pt-16">
-        <div className="mb-10 flex flex-col gap-6 rounded-[28px] border border-[#f0dce1] bg-white/75 p-6 shadow-[0_12px_40px_rgba(115,65,77,0.05)] sm:flex-row sm:items-center sm:justify-between sm:p-8">
+      <div className="relative mx-auto max-w-6xl px-4 pb-5 pt-7 sm:pb-7 sm:pt-16">
+        <div className="mb-5 flex flex-col gap-3 rounded-[20px] border border-[#f0dce1] bg-white/75 p-4 shadow-[0_8px_24px_rgba(115,65,77,0.045)] sm:mb-10 sm:gap-6 sm:rounded-[28px] sm:p-8">
           <div className="max-w-xl">
-            <p className="mb-2 text-xs font-bold tracking-[0.18em] text-[#b36a78]">YOUR MOMENT, YOUR INVITATION</p>
-            <h2 className="font-display text-3xl leading-tight text-[#4a2d33] sm:text-4xl">خلي دعوتك بداية حكاية حلوة</h2>
-            <p className="mt-2 text-sm leading-7 text-[#806b70]">اختار التصميم اللي يشبه فرحتك وشارك دعوتك مع كل اللي بتحبهم.</p>
+            <p className="mb-1 text-[9px] font-bold tracking-[0.18em] sm:mb-2 sm:text-xs text-[#b36a78]">YOUR MOMENT, YOUR INVITATION</p>
+            <h2 className="font-display text-xl leading-tight text-[#4a2d33] sm:text-4xl">خلي دعوتك بداية حكاية حلوة</h2>
+            <p className="mt-1 text-xs leading-5 text-[#806b70] sm:mt-2 sm:text-sm sm:leading-7">اختار التصميم اللي يشبه فرحتك وشارك دعوتك مع كل اللي بتحبهم.</p>
           </div>
-          <Link to="/templates" className="btn-gold shrink-0 px-7">اكتشف الدعوات <span className="mr-2" aria-hidden="true">←</span></Link>
+          <Link to="/templates" className="btn-gold min-h-10 shrink-0 px-5 text-xs sm:px-7 sm:text-sm">اكتشف الدعوات <span className="mr-2" aria-hidden="true">←</span></Link>
         </div>
 
-        <div className="grid gap-9 border-b border-[#efdde1] pb-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_1.25fr_0.8fr] lg:gap-8">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-5 border-b border-[#efdde1] pb-5 sm:grid-cols-2 sm:gap-9 sm:pb-10 lg:grid-cols-[1.35fr_0.8fr_1.25fr_0.8fr] lg:gap-8">
           <div>
-            <Link to="/" className="inline-flex items-center gap-3" aria-label="دعوتنا، الصفحة الرئيسية">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50] ring-1 ring-[#f2dce1]">
+            <Link to="/" className="inline-flex items-center gap-2 sm:gap-3" aria-label="دعوتنا، الصفحة الرئيسية">
+              <span className="grid h-9 w-9 place-items-center rounded-xl sm:h-12 sm:w-12 sm:rounded-2xl bg-[#fff0f2] text-[#b83b50] ring-1 ring-[#f2dce1]">
                 <LogoMark className="h-8 w-8" />
               </span>
               <span className="grid leading-none">
-                <span className="font-display text-3xl text-[#4a2d33]">دعوتنا</span>
+                <span className="font-display text-xl text-[#4a2d33] sm:text-3xl">دعوتنا</span>
                 <span className="mt-1 font-latin text-[0.62rem] tracking-[0.3em] text-[#a45b69]">{site.nameEn}</span>
               </span>
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-7 text-[#806b70]">
+            <p className="mt-2 max-w-xs text-[10px] leading-5 text-[#806b70] sm:mt-4 sm:text-sm sm:leading-7">
               كل فرحة وليها دعوة حلوة. صمّم دعوتك أونلاين بسهولة وشارك لحظتك مع كل اللي بتحبهم.
             </p>
           </div>
 
-          <div className="grid content-start gap-3 text-sm">
-            <p className="mb-1 font-bold text-[#4a2d33]">روابط سريعة</p>
-            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/templates">كل الدعوات</Link>
+          <div className="grid content-start gap-2 text-[11px] sm:gap-3 sm:text-sm">
+            <p className="mb-0.5 font-bold text-[#4a2d33] sm:mb-1">روابط سريعة</p>
+            <Link className="text-[10px] leading-5 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm" to="/templates">كل الدعوات</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/how">طريقة الاستخدام</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/packages">الباقات والأسعار</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
@@ -141,8 +141,8 @@ function Footer() {
 
           <div className="grid content-start gap-3 text-sm">
             <p className="mb-1 font-bold text-[#4a2d33]">دعوات لكل مناسبة</p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
+            <div className="grid grid-cols-2 gap-x-2 gap-y-2 sm:gap-x-4 sm:gap-y-3">
+              <Link className="text-[10px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-فرح">دعوة فرح</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-خطوبة">دعوة خطوبة</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-كتب-كتاب">دعوة كتب كتاب</Link>
@@ -154,17 +154,17 @@ function Footer() {
 
           <div className="grid content-start gap-3 text-sm">
             <p className="mb-1 font-bold text-[#4a2d33]">طرق الدفع</p>
-            <p className="text-[#806b70]">فودافون كاش</p>
-            <p className="text-[#806b70]">إنستاباي</p>
-            <p className="text-[#a18a8f]">الدفع بالبطاقة قريبًا</p>
-            <p className="mt-2 text-xs leading-6 text-[#a18a8f]">تواصل معانا لو محتاج مساعدة في اختيار دعوتك.</p>
-            <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عندي استفسار عن دعوتنا")}`} target="_blank" rel="noreferrer" dir="ltr" className="mt-1 inline-flex w-fit items-center gap-2 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-3 py-2 font-semibold text-[#247747] transition hover:bg-[#e9f7ee]">
+            <p className="text-[10px] text-[#806b70] sm:text-sm">فودافون كاش</p>
+            <p className="text-[10px] text-[#806b70] sm:text-sm">إنستاباي</p>
+            <p className="text-[10px] text-[#a18a8f] sm:text-sm">الدفع بالبطاقة قريبًا</p>
+            <p className="mt-1 text-[9px] leading-4 text-[#a18a8f] sm:mt-2 sm:text-xs sm:leading-6">تواصل معانا لو محتاج مساعدة في اختيار دعوتك.</p>
+            <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عندي استفسار عن دعوتنا")}`} target="_blank" rel="noreferrer" dir="ltr" className="mt-1 inline-flex min-h-8 w-fit items-center gap-1.5 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-2.5 py-1.5 text-[10px] font-semibold text-[#247747] transition hover:bg-[#e9f7ee] sm:gap-2 sm:px-3 sm:py-2 sm:text-sm">
               <WhatsAppIcon className="h-4 w-4" /> 01276390301
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 pt-5 text-center text-xs text-[#9a8187] sm:flex-row sm:text-right">
+        <div className="flex flex-col items-center justify-between gap-1.5 pt-3 text-center text-[10px] text-[#9a8187] sm:flex-row sm:gap-3 sm:pt-5 sm:text-xs sm:text-right">
           <p>© {new Date().getFullYear()} دعوتنا — كل الحقوق محفوظة</p>
           <p>اتعمل بكل حب عشان لحظاتكم الحلوة <span className="text-[#b83b50]">♥</span></p>
         </div>
