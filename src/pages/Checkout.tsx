@@ -34,6 +34,10 @@ export function Checkout() {
 
   async function pay() {
     if (!draft) return
+    if (!continuing && walletsArePlaceholders) {
+      setError("بيانات التحويل لسه تجريبية. تواصل مع خدمة العملاء أو انتظر تحديث بيانات الدفع قبل التحويل.");
+      return;
+    }
     if (!continuing && refNo.trim().length < 4) {
       setError("اكتب رقم عملية التحويل، وأقله ٤ أرقام.")
       return
@@ -98,7 +102,7 @@ export function Checkout() {
             <div className="mt-5 rounded-2xl border border-[#e8c9a4] bg-[#fff9ed] p-5">
               <h2 className="font-bold text-[#795a2d]">طلبك مستني مراجعة التحويل</h2>
               <p className="mt-2 text-sm leading-7 text-[#806b70]">سجلنا رقم العملية في الخطوة دي، لكن الباقة مش هتتفعل تلقائيًا. ابعت صورة إيصال التحويل ورقم الطلب لخدمة العملاء، وبعد مراجعة الدفع هنأكد التفعيل.</p>
-              <p className="mt-3 text-sm font-bold text-[#4a2d33]">رقم الطلب: {orderId}</p>
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-2"><p className="text-sm font-bold text-[#4a2d33]">رقم الطلب: {orderId}</p><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(orderId); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setError("انسخ رقم الطلب يدويًا بالضغط المطول عليه."); } }} className="min-h-9 rounded-full border border-[#e8c8cf] bg-white px-3 text-xs font-bold text-[#a64257]">{copied ? "تم النسخ ✓" : "نسخ رقم الطلب"}</button></div>
               <a className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#a64257] px-5 py-3 text-sm font-bold text-white" href={"https://wa.me/" + site.whatsapp + "?text=" + encodeURIComponent("طلب دعوتنا " + orderId + " — رقم العملية " + refNo.trim() + " — أرفقت إيصال التحويل")} target="_blank" rel="noreferrer">ابعت إيصال التحويل على واتساب</a>
               <p className="mt-3 text-xs leading-6 text-[#9a6a45]">مهم: متعتبرش الطلب مكتمل قبل ما توصلك رسالة تأكيد التفعيل.</p>
             </div>
@@ -138,13 +142,14 @@ export function Checkout() {
                   <p className="text-sm text-[#806b70]">حوّل {money(bundle.price)} إلى {destination}</p>
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xl font-bold text-[#4a2d33]" dir="ltr">{destination}</p><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(destination); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setError("مش قادرين ننسخ الرقم تلقائيًا؛ اضغط مطولًا على الرقم وانسخه."); } }} className="min-h-9 rounded-full border border-[#e8c8cf] bg-white px-3 text-xs font-bold text-[#a64257]">{copied ? "تم النسخ ✓" : "نسخ الرقم"}</button></div>
                   <p className="mt-4 text-xs text-[#806b70]">رقم الطلب — اكتبه في ملاحظة التحويل</p>
-                  <p className="mt-1 break-all font-mono text-sm text-[#a64257]">{orderId}</p>
+                  <div className="mt-1 flex flex-wrap items-center justify-between gap-2"><p className="break-all font-mono text-sm text-[#a64257]">{orderId}</p><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(orderId); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setError("انسخ رقم الطلب يدويًا بالضغط المطول عليه."); } }} className="text-[11px] font-bold text-[#a64257] underline underline-offset-4">{copied ? "تم النسخ ✓" : "نسخ"}</button></div>
                   <label className="field mt-4">
                     <span>رقم عملية التحويل</span>
                     <input value={refNo} inputMode="numeric" maxLength={30} onChange={(event) => setRefNo(event.target.value)} placeholder="مثال: 4821" />
                   </label>
                 </div>
               {walletsArePlaceholders ? <p className="mt-4 text-xs leading-6 text-[#9a6a45]">بيانات المحافظ الحالية تجريبية. حدّثها من src/config.ts قبل استقبال الطلبات.</p> : null}
+              <div className="mt-4 rounded-2xl border border-[#f0dce1] bg-[#fffafa] p-4"><p className="text-xs font-extrabold text-[#4a2d33]">بعد التحويل اعمل 3 خطوات بسيطة:</p><ol className="mt-2 grid gap-2 text-xs leading-6 text-[#806b70]"><li>١. اكتب رقم عملية التحويل هنا.</li><li>٢. اضغط إرسال طلب التفعيل.</li><li>٣. ابعت صورة الإيصال على واتساب، واكتب رقم الطلب في الرسالة.</li></ol></div>
               <p className="mt-2 text-xs leading-6 text-[#9a6a45]">إرسال الطلب لا يعني تأكيد الدفع. التفعيل بيتم بعد مراجعة الإيصال يدويًا.</p>
             </>
           )}
@@ -152,8 +157,8 @@ export function Checkout() {
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           {!submitted || continuing ? <div className="fixed inset-x-0 bottom-0 z-30 mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#f3e6e9] bg-white/95 px-4 py-3 pb-[max(env(safe-area-inset-bottom),12px)] pt-3 backdrop-blur sm:static sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-5">
             <div><p className="text-xs text-[#806b70]">{continuing ? "المطلوب الآن" : "إجمالي الباقة"}</p><p className="text-xl font-bold text-[#4a2d33]">{continuing ? "بدون دفع إضافي" : money(bundle.price)}</p></div>
-            <button type="button" className="btn-gold min-w-44" onClick={pay} disabled={busy}>
-              {busy ? "بنجهّز الدعوة..." : continuing ? "أضف الدعوة للباقة" : "إرسال طلب التفعيل"}
+            <button type="button" className="btn-gold min-w-44" onClick={pay} disabled={busy || (!continuing && walletsArePlaceholders)}>
+              {busy ? "بنجهّز الدعوة..." : continuing ? "أضف الدعوة للباقة" : walletsArePlaceholders ? "الدفع غير متاح حاليًا" : "إرسال طلب التفعيل"}
             </button>
           </div> : null}
         </section>
