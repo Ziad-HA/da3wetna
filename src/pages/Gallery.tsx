@@ -44,58 +44,54 @@ export function Gallery() {
           const featured = item.id === "plus"
           return (
             <article key={item.id} className={`relative flex flex-col rounded-[26px] border p-5 transition duration-200 ${featured ? "border-[#183d32] bg-[#102d25] text-white shadow-[0_16px_36px_rgba(16,45,37,0.18)] lg:-translate-y-2" : "border-[#eadde0] bg-white text-[#4a2d33]"} ${active ? "ring-2 ring-[#b83b50] ring-offset-2" : ""}`}>
-              {item.id === "single" ? (
-                <>
-                  <span className="mb-3 self-start rounded-full bg-[#fae8eb] px-3 py-1 text-xs font-extrabold text-[#bd4058]">خصم 37%</span>
-                  <h2 className="text-xl font-extrabold">{item.name}</h2>
-                  <p className="mt-2 min-h-12 text-sm leading-6 text-[#806b70]">{item.description}</p>
-                  <div className="mt-5 flex items-end gap-2">
-                    <strong className="font-display text-4xl text-[#08745d]">{money(item.price)}</strong>
-                    <span className="mb-1 text-sm text-[#a99599] line-through">{money(item.oldPrice)}</span>
-                    <span className="mb-1 text-sm text-[#806b70]">ج.م · دفعة واحدة</span>
-                  </div>
-                  <div className="mt-5 flex-1 rounded-2xl bg-[#fbf7f3] p-4">
-                    <p className="font-bold text-[#4a2d33]">تنشئ 1 دعوة مميزة</p>
-                    <p className="mt-1 text-sm text-[#08745d]">≈ {money(item.price)} ج.م للدعوة</p>
-                    <p className="mt-3 text-sm font-semibold leading-6 text-[#08745d]">وتبعتها لعدد لا نهائي من الناس</p>
-                    <div className="mt-4 border-t border-[#eadde0] pt-4">
-                      <p className="font-bold text-[#4a2d33]">اللي هتقدر تعمله</p>
-                      {item.features.map((feature) => (
-                        <p key={feature} className="mt-2 flex gap-2 text-sm leading-6 text-[#08745d]">
-                          <span aria-hidden="true">✓</span><span>{feature}</span>
-                        </p>
-                      ))}
-                    </div>
-                    <div className="mt-4 border-t border-[#eadde0] pt-4">
-                      {item.benefits.map((benefit) => (
-                        <p key={benefit} className="mt-2 text-sm font-semibold text-[#4a2d33]">• {benefit}</p>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="mt-3 text-center text-xs font-semibold leading-5 text-[#806b70]">{item.paymentNote}</p>
-                </>
-              ) : (
-                <>
-                  <span className={`mb-4 self-start rounded-full px-3 py-1.5 text-xs font-extrabold ${featured ? "bg-[#d9bd7b]/15 text-[#e8d39e]" : "bg-[#fae8eb] text-[#bd4058]"}`}>
-                    {item.label}
-                  </span>
-                  <h2 className="text-xl font-extrabold">{item.name}</h2>
-                  <p className={`mt-3 text-sm font-medium ${featured ? "text-white/75" : "text-[#806b70]"}`}>
-                    {item.quantity} دعوات مختلفة
-                  </p>
-                  <div className="mt-8 flex items-baseline gap-2">
-                    <strong className={`font-display text-4xl ${featured ? "text-[#e8d39e]" : "text-[#08745d]"}`}>
-                      {money(item.price)}
-                    </strong>
-                    <span className={`text-sm ${featured ? "text-white/65" : "text-[#806b70]"}`}>جنيه</span>
-                  </div>
-                  <div className={`mt-6 flex-1 rounded-2xl p-4 ${featured ? "bg-white/[0.07]" : "bg-[#fbf7f3]"}`}>
-                    <p className={`text-sm leading-7 ${featured ? "text-white/80" : "text-[#806b70]"}`}>
-                      اختار الباقة وابدأ في تصميم دعواتك المختلفة.
+              <span className="mb-3 self-start rounded-full bg-[#fae8eb] px-3 py-1 text-xs font-extrabold text-[#bd4058]">
+                {item.id === "single" ? "خصم 37%" : item.label}
+              </span>
+              <h2 className="text-xl font-extrabold text-[#4a2d33]">{item.name}</h2>
+              <p className="mt-2 min-h-12 text-sm leading-6 text-[#806b70]">
+                {item.id === "single" ? item.description : `${item.quantity} دعوات مختلفة`}
+              </p>
+              <div className="mt-5 flex flex-wrap items-end gap-2">
+                <strong className="font-display text-4xl text-[#08745d]">{money(item.price)}</strong>
+                {item.oldPrice ? <span className="mb-1 text-sm text-[#a99599] line-through">{money(item.oldPrice)}</span> : null}
+                <span className="mb-1 text-sm text-[#806b70]">ج.م · دفعة واحدة</span>
+              </div>
+              <div className="mt-5 flex-1 rounded-2xl bg-[#fbf7f3] p-4">
+                <p className="font-bold text-[#4a2d33]">
+                  {item.id === "single" ? "تنشئ 1 دعوة مميزة" : `تنشئ ${item.quantity} دعوات مميزة`}
+                </p>
+                <p className="mt-1 text-sm text-[#08745d]">
+                  ≈ {money(Math.round(item.price / item.quantity))} ج.م للدعوة
+                </p>
+                <p className="mt-3 text-sm font-semibold leading-6 text-[#08745d]">
+                  وتبعتها لعدد لا نهائي من الناس
+                </p>
+                <div className="mt-4 border-t border-[#eadde0] pt-4">
+                  <p className="font-bold text-[#4a2d33]">اللي هتقدر تعمله</p>
+                  {item.features.map((feature) => (
+                    <p key={feature} className="mt-2 flex gap-2 text-sm leading-6 text-[#08745d]">
+                      <span aria-hidden="true">✓</span><span>{feature}</span>
                     </p>
-                  </div>
-                </>
-              )}
+                  ))}
+                  {item.id === "single" ? (
+                    <>
+                      <p className="mt-2 flex gap-2 text-sm leading-6 text-[#08745d]"><span aria-hidden="true">✓</span><span>أكتر من 10 خطوط عربي وإنجليزي</span></p>
+                      <p className="mt-2 flex gap-2 text-sm leading-6 text-[#08745d]"><span aria-hidden="true">✓</span><span>تغيير أي صورة في الدعوة</span></p>
+                      <p className="mt-2 flex gap-2 text-sm leading-6 text-[#08745d]"><span aria-hidden="true">✓</span><span>موسيقى من اختيارك</span></p>
+                      <p className="mt-2 flex gap-2 text-sm leading-6 text-[#08745d]"><span aria-hidden="true">✓</span><span>إخفاء أي قسم مش عايزه</span></p>
+                    </>
+                  ) : null}
+                </div>
+                <div className="mt-4 border-t border-[#eadde0] pt-4">
+                  {(item.id === "single" ? ["معاك مدى الحياة", "تعديل 30 يوم من التفعيل"] : ["كل دعوة مستقلة بتفاصيلها", "روابط منفصلة لكل دعوة"]).map((benefit) => (
+                    <p key={benefit} className="mt-2 text-sm font-semibold text-[#4a2d33]">• {benefit}</p>
+                  ))}
+                </div>
+              </div>
+              <p className="mt-3 text-center text-xs font-semibold leading-5 text-[#806b70]">
+                {item.id === "single" ? item.paymentNote : "تحويل يدوي — بنفعّلها أول ما نشوف إيصال"}
+              </p>
+
               <button
                 type="button"
                 onClick={() => choosePackage(item.id)}
