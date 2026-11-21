@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
-import { site } from "../config"
+import { getPackage } from "../config"
 import { getTemplate, occasions, templates } from "../data"
 import { money } from "../lib/format"
-import { draftReady, initDraft, writeDraft } from "../lib/storage"
+import { draftReady, initDraft, readSelectedPackage, writeDraft } from "../lib/storage"
 import type { FieldKey, InviteDraft } from "../types"
 
 const fields: { key: FieldKey; label: string; kind: "text" | "select" | "date" | "time"; max?: number }[] = [
@@ -24,6 +24,7 @@ export function Editor() {
   const { id } = useParams()
   const navigate = useNavigate()
   const template = getTemplate(id)
+  const selectedPackage = getPackage(readSelectedPackage())
   const [draft, setDraft] = useState<InviteDraft>(() => initDraft(id))
   const [active, setActive] = useState<FieldKey | null>("groom")
   const [error, setError] = useState("")
@@ -70,6 +71,16 @@ export function Editor() {
         <span className="rounded-full bg-white px-4 py-2 text-sm font-bold text-[#a64257] ring-1 ring-[#f0dce1]">{template.name}</span>
       </div>
 
+      <div className="mb-6 rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <p className="text-xs text-[#806b70]">الباقة المختارة</p>
+            <strong className="text-[#4a2d33]">{selectedPackage.name} · {selectedPackage.quantity} {selectedPackage.quantity === 1 ? "دعوة" : "دعوات"}</strong>
+          </div>
+          <strong className="text-xl text-[#a64257]">{money(selectedPackage.price)}</strong>
+        </div>
+      </div>
+
       <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,390px)_1fr]">
         <section className="order-1 lg:sticky lg:top-24">
           <div className="mb-3 flex items-center justify-between text-sm">
@@ -80,8 +91,8 @@ export function Editor() {
             <Invitation draft={draft} activeField={active} onSelect={setActive} />
           </div>
           <div className="mx-auto mt-4 flex max-w-[360px] items-center justify-between rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
-            <span className="text-sm text-[#806b70]">سعر الدعوة</span>
-            <strong className="text-lg text-[#4a2d33]">{money(site.price)}</strong>
+            <span className="text-sm text-[#806b70]">متوسط سعر الدعوة</span>
+            <strong className="text-lg text-[#4a2d33]">{money(Math.round(selectedPackage.price / selectedPackage.quantity))}</strong>
           </div>
         </section>
 
@@ -130,15 +141,15 @@ export function Editor() {
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
             <p className="text-sm text-[#806b70]">راجع التفاصيل قبل ما تكمل.</p>
-            <button type="button" className="btn-gold" onClick={goCheckout}>كمل للدفع ←</button>
+            <button type="button" className="btn-gold" onClick={goCheckout}>كمل ←</button>
           </div>
         </section>
       </div>
 
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#f0dce1] bg-white/95 p-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-          <div><p className="text-xs text-[#806b70]">سعر الدعوة</p><p className="font-bold text-[#4a2d33]">{money(site.price)}</p></div>
-          <button type="button" className="btn-gold" onClick={goCheckout}>كمل للدفع ←</button>
+          <div><p className="text-xs text-[#806b70]">{selectedPackage.name}</p><p className="font-bold text-[#4a2d33]">{money(selectedPackage.price)}</p></div>
+          <button type="button" className="btn-gold" onClick={goCheckout}>كمل ←</button>
         </div>
       </div>
     </main>
