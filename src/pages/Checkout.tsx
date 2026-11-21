@@ -26,7 +26,8 @@ export function Checkout() {
   const [refNo, setRefNo] = useState("")
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
-  const [submitted, setSubmitted] = useState(false)\n  const [copied, setCopied] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => { document.title = "تأكيد الطلب — دعوتنا" }, [])
   if (!draft || !draftReady(draft)) return <Navigate to="/templates" replace />
@@ -101,7 +102,7 @@ export function Checkout() {
           {submitted && !continuing ? (
             <div className="mt-5 rounded-2xl border border-[#e8c9a4] bg-[#fff9ed] p-5">
               <h2 className="font-bold text-[#795a2d]">طلبك مستني مراجعة التحويل</h2>
-              <p className="mt-2 text-sm leading-7 text-[#806b70]">سجلنا رقم العملية في الخطوة دي، لكن الباقة مش هتتفعل تلقائيًا. ابعت صورة إيصال التحويل ورقم الطلب لخدمة العملاء، وبعد مراجعة الدفع هنأكد التفعيل.</p>
+              <p className="mt-2 text-sm leading-7 text-[#806b70]">جهّزنا تفاصيل طلبك. ابعت صورة إيصال التحويل ورقم الطلب لخدمة العملاء، وبعد مراجعة الدفع هنأكد التفعيل يدويًا.</p>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2"><p className="text-sm font-bold text-[#4a2d33]">رقم الطلب: {orderId}</p><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(orderId); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setError("انسخ رقم الطلب يدويًا بالضغط المطول عليه."); } }} className="min-h-9 rounded-full border border-[#e8c8cf] bg-white px-3 text-xs font-bold text-[#a64257]">{copied ? "تم النسخ ✓" : "نسخ رقم الطلب"}</button></div>
               <a className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#a64257] px-5 py-3 text-sm font-bold text-white" href={"https://wa.me/" + site.whatsapp + "?text=" + encodeURIComponent("طلب دعوتنا " + orderId + " — رقم العملية " + refNo.trim() + " — أرفقت إيصال التحويل")} target="_blank" rel="noreferrer">ابعت إيصال التحويل على واتساب</a>
               <p className="mt-3 text-xs leading-6 text-[#9a6a45]">مهم: متعتبرش الطلب مكتمل قبل ما توصلك رسالة تأكيد التفعيل.</p>
