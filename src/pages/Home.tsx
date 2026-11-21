@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { PhonePreview } from "../components/PhonePreview"
 import { packages } from "../config"
+import { faqs } from "../data"
 import { draftFor, templates } from "../data"
 import { money } from "../lib/format"
 import { clearDraft, readLast } from "../lib/storage"
@@ -79,6 +80,80 @@ export function Home() {
               <span className="mt-2 inline-flex text-[10px] font-bold text-[#a64257] sm:text-xs">اختار التصميم ←</span>
             </Link>
           ))}
+        </div>
+      </section>
+
+
+      <section className="mx-auto max-w-6xl px-4 py-9 sm:py-14">
+        <div className="relative overflow-hidden rounded-[26px] border border-[#e8c8cf] bg-[linear-gradient(135deg,#fff0f3_0%,#fffaf8_58%,#f8eee5_100%)] p-5 shadow-[0_14px_40px_rgba(91,48,60,.06)] sm:rounded-[34px] sm:p-9 md:p-11">
+          <div className="text-center">
+            <p className="text-xs font-extrabold text-[#b36a78] sm:text-sm">✦ الباقة المميزة ✦</p>
+            <h2 className="mt-2 font-display text-2xl leading-relaxed text-[#4a2d33] sm:text-4xl">دعوتك، بتحكم أكبر في كل تفصيلة</h2>
+            <p className="mx-auto mt-2 max-w-2xl text-xs leading-7 text-[#806b70] sm:text-base sm:leading-8">مع باقة الدعوة الواحدة تقدر تخصص دعوتك بنفسك بسهولة، وتخليها أقرب لذوقكم وتفاصيل فرحتكم.</p>
+          </div>
+          <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              ["♫","موسيقى من اختيارك","اختار الموسيقى اللي تحبها لخلفية دعوتك."],
+              ["Aa","خطوط متنوعة","أكتر من 10 خطوط عربي وإنجليزي تختار منهم."],
+              ["▧","صورك الخاصة","استخدم صور الخطوبة أو جلسة التصوير أو أي صور تناسبكم."],
+              ["✧","تصميمات متنوعة","اختار من مجموعة تصميمات وأشكال مختلفة."],
+              ["◉","تحكم في الأقسام","اخفي أي قسم مش محتاجه وخلي الدعوة على ذوقك."],
+              ["♡","دعوتك معاك","الدعوة تفضل معاك مدى الحياة، مع إمكانية التعديل لمدة 30 يوم من التفعيل."],
+            ].map(([symbol,title,description]) => (
+              <div key={title} className="flex gap-3 rounded-2xl border border-white bg-white/80 p-4 shadow-sm">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#fff0f2] font-display text-lg text-[#b64b60]">{symbol}</span>
+                <div><h3 className="text-sm font-extrabold text-[#4a2d33]">{title}</h3><p className="mt-1 text-[11px] leading-6 text-[#806b70] sm:text-xs">{description}</p></div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link to="/packages" className="btn-gold min-h-11 w-full justify-center px-6 sm:w-auto">شوف تفاصيل الباقات والأسعار ←</Link>
+            <span className="text-[10px] text-[#90777d] sm:text-xs">تخصيص الدعوة من المحرر، من غير خبرة تقنية</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 pb-9 sm:pb-14">
+        <div className="grid gap-5 overflow-hidden rounded-[26px] border border-[#efd9df] bg-[linear-gradient(125deg,#fff7f7_0%,#fff 52%,#f8edf0_100%)] p-5 sm:rounded-[34px] sm:p-9 md:grid-cols-[1fr_220px] md:items-center md:p-11">
+          <div>
+            <p className="text-xs font-extrabold text-[#b36a78] sm:text-sm">شغل مخصص ليك</p>
+            <h2 className="mt-2 font-display text-2xl leading-relaxed text-[#4a2d33] sm:text-4xl">عايز حاجة متعمولة ليك إنت بالظبط؟</h2>
+            <p className="mt-2 max-w-2xl text-xs leading-7 text-[#806b70] sm:text-sm sm:leading-8">مش لازم تكون دعوة من تصميماتنا. لو عندك فكرة لموقع أو تصميم خاص، نتكلم ونشوف أنسب تنفيذ وميزانية ليك.</p>
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {["موقع كامل لشغلك أو مشروعك","تصميم دعوة مش موجود عندنا من الصفر","ألوان وشكل حصري على ذوقك","صفحات هبوط ومتاجر إلكترونية وأنظمة حجز","تعديلات وتطويرات حسب الاتفاق","تواصل مباشر مع الشخص اللي بينفذ الشغل"].map((item) => <p key={item} className="flex items-start gap-2 text-[11px] leading-6 text-[#665258] sm:text-xs"><span className="text-[#b83b50]">✓</span>{item}</p>)}
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-[#f0dce1] bg-white/85 p-4 text-center sm:p-5">
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-[#e8f7ed] text-2xl text-[#26834c]">✆</span>
+            <p className="mt-3 text-sm font-extrabold text-[#4a2d33]">خلينا نتكلم عن فكرتك</p>
+            <p className="mt-1 text-[11px] leading-5 text-[#806b70]">ابعت تفاصيل بسيطة على واتساب، ونبدأ نتفق على المطلوب.</p>
+            <a href="https://wa.me/201035225735?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%B9%D9%85%D9%84%20%D9%85%D9%88%D9%82%D8%B9%20%D8%A3%D9%88%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D8%AE%D8%B5%D8%B5.%20%D9%85%D9%85%D9%83%D9%86%20%D9%86%D8%AA%D9%83%D9%84%D9%85%D8%9F" target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#218c50] px-4 text-xs font-extrabold text-white transition hover:bg-[#197641]">كلّمني على واتساب ←</a>
+            <p className="mt-2 text-[10px] font-semibold text-[#806b70]" dir="ltr">01035225735</p>
+            <p className="mt-1 text-[9px] text-[#a18a8f]">من غير أي التزام</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-4xl px-4 pb-10 sm:pb-16">
+        <div className="text-center">
+          <p className="text-xs font-extrabold text-[#b36a78] sm:text-sm">عندك سؤال؟</p>
+          <h2 className="mt-2 font-display text-2xl text-[#4a2d33] sm:text-4xl">الأسئلة الشائعة</h2>
+          <p className="mt-2 text-xs leading-6 text-[#806b70] sm:text-sm">جمعنالك إجابات سريعة عن الدعوات والتعديل والدفع والمشاركة.</p>
+        </div>
+        <div className="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3">
+          {faqs.map((item,index) => (
+            <details key={item.q} className="group rounded-2xl border border-[#f0dce1] bg-white shadow-sm transition open:border-[#e5c1ca]">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-right text-xs font-bold text-[#4a2d33] [&::-webkit-details-marker]:hidden sm:min-h-16 sm:px-5 sm:text-sm">
+                <span className="flex items-center gap-3"><span className="font-display text-xs text-[#bd8792]">{String(index+1).padStart(2,"0")}</span>{item.q}</span>
+                <span className="shrink-0 text-lg text-[#b83b50] transition-transform group-open:rotate-180">⌄</span>
+              </summary>
+              <p className="border-t border-[#f7eaed] px-4 py-3 text-[11px] leading-7 text-[#806b70] sm:px-5 sm:py-4 sm:text-sm sm:leading-8">{item.a}</p>
+            </details>
+          ))}
+        </div>
+        <div className="mt-5 flex flex-col items-center justify-center gap-2 text-center sm:flex-row">
+          <p className="text-[11px] text-[#806b70] sm:text-xs">لسه محتاج تعرف حاجة؟</p>
+          <a href="https://wa.me/201276390301" target="_blank" rel="noreferrer" className="text-xs font-extrabold text-[#a64257] underline underline-offset-4">تواصل معانا على واتساب</a>
         </div>
       </section>
 
