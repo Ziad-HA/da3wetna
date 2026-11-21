@@ -65,9 +65,11 @@ export function Done() {
             </div>
           ) : null}
 
-          <div className="mt-7 border-t border-[#f3e6e9] pt-5">
-            <Link to="/templates" onClick={() => { clearDraft(); selectPackage("single") }} className="text-sm font-bold text-[#a64257] hover:underline">ابدأ طلب جديد ←</Link>
-          </div>
+          {remaining === 0 ? (
+            <div className="mt-7 border-t border-[#f3e6e9] pt-5">
+              <Link to="/templates" onClick={() => { clearDraft(); selectPackage("single") }} className="text-sm font-bold text-[#a64257] hover:underline">ابدأ طلب جديد ←</Link>
+            </div>
+          ) : null}
         </section>
       </div>
     </main>
