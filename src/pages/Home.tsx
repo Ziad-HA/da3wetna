@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
-import { Chevron, IconLink, IconPen, IconStory, IconWallet } from "../components/Icons"
+import { IconLink, IconPen, IconStory, IconWallet } from "../components/Icons"
 import { packages } from "../config"
-import { draftFor, faqs, templates } from "../data"
+import { draftFor, templates } from "../data"
 import { money } from "../lib/format"
-import { clearDraft, readLast, selectPackage } from "../lib/storage"
+import { clearDraft, readLast } from "../lib/storage"
 
 const features = [
   { icon: IconPen, title: "تعديل بنفسك", text: "اكتب الأسماء والتاريخ والمكان بنفسك، وشوف شكل الدعوة بيتغير قدامك." },
@@ -40,7 +40,7 @@ export function Home() {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
               <Link to="/templates" className="btn-gold shadow-[0_8px_22px_rgba(184,59,80,0.18)]">اختار دعوتك</Link>
-              <a href="#how" className="btn-ghost border-[#e5cbd0] bg-white/70 text-[#65434b]">اعرف الطريقة</a>
+              <a href="/how" className="btn-ghost border-[#e5cbd0] bg-white/70 text-[#65434b]">اعرف الطريقة</a>
             </div>
             {last ? (
               <Link to={`/done/${last.code}`} className="mt-5 inline-block text-sm font-semibold text-[#a34256] underline-offset-4 hover:underline">
@@ -88,27 +88,6 @@ export function Home() {
         </div>
       </section>
 
-      <section id="how" className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-bold text-[#b83b50]">ببساطة ومن غير تعقيد</p>
-          <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">دعوتك في ٣ خطوات</h2>
-          <p className="mt-3 leading-8 text-[#806b70]">كل حاجة بتعملها بنفسك، من أول اختيار التصميم لحد مشاركة الدعوة.</p>
-        </div>
-        <ol className="mt-10 grid gap-4 md:grid-cols-3">
-          {[
-            ["١", "اختار التصميم", "شوف التصاميم واختار الأقرب لذوقك."],
-            ["٢", "ضيف التفاصيل", "اكتب الأسماء والميعاد والمكان وشوف المعاينة."],
-            ["٣", "استلم وشارك", "بعد الدفع حمّل الصورة أو انسخ لينك الدعوة."],
-          ].map(([step, title, text]) => (
-            <li key={step} className="rounded-[26px] border border-[#f0dce1] bg-white p-6 shadow-[0_8px_30px_rgba(91,48,60,0.035)]">
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#fff0f2] font-display text-xl text-[#b83b50]">{step}</span>
-              <h3 className="mt-5 text-lg font-bold text-[#4a2d33]">{title}</h3>
-              <p className="mt-2 leading-7 text-[#806b70]">{text}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       <section className="bg-[#fff5f6] py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-4">
           <div className="mx-auto max-w-2xl text-center">
@@ -154,61 +133,6 @@ export function Home() {
         <Link to="/templates" className="btn-dark mt-8">شوف كل التصاميم</Link>
       </section>
 
-      <section id="price" className="bg-[#fff5f6] px-4 py-16 md:py-20">
-        <div className="mx-auto max-w-6xl">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-bold text-[#b83b50]">اختار اللي يناسبك</p>
-            <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">باقات لكل فرحة</h2>
-            <p className="mt-3 leading-8 text-[#806b70]">ابدأ بدعوة واحدة أو وفر أكتر مع باقات الدعوات المتعددة.</p>
-          </div>
-          <div className="mt-9 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {packages.map((item) => {
-              const featured = item.id === "plus"
-              return (
-                <article key={item.id} className={`relative flex flex-col rounded-[26px] border bg-white p-5 transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(166,66,87,0.09)] ${featured ? "border-[#d9a3ae] shadow-[0_10px_28px_rgba(166,66,87,0.09)]" : "border-[#f0dce1] shadow-[0_6px_20px_rgba(91,48,60,0.04)]"}`}>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="rounded-full bg-[#fff0f2] px-3 py-1.5 text-xs font-extrabold text-[#a64257]">
-                      {item.id === "single" ? item.discount : item.label || "باقة مرنة"}
-                    </span>
-                    {featured ? <span className="text-[11px] font-bold text-[#a64257]">الأكثر طلبًا</span> : null}
-                  </div>
-                  <h3 className="mt-4 text-lg font-extrabold text-[#4a2d33]">{item.name}</h3>
-                  <p className="mt-1 min-h-10 text-sm leading-6 text-[#806b70]">{item.description}</p>
-                  <div className="mt-5 flex flex-wrap items-end gap-2 border-b border-[#f3e7e9] pb-5">
-                    <strong className="font-display text-4xl text-[#a64257]">{money(item.price)}</strong>
-                    {item.oldPrice ? <span className="mb-1 text-sm text-[#a99599] line-through">{money(item.oldPrice)}</span> : null}
-                    <span className="mb-1 text-xs text-[#806b70]">ج.م · دفعة واحدة</span>
-                  </div>
-                  <div className="mt-4 flex-1 rounded-2xl bg-[#fff8f8] p-4">
-                    <p className="font-bold text-[#4a2d33]">تقدر تنشئ {item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات"}</p>
-                    <p className="mt-1 text-sm font-semibold text-[#a64257]">حوالي {money(Math.round(item.price / item.quantity))} ج.م للدعوة</p>
-                    <p className="mt-3 text-sm leading-6 text-[#806b70]">وتبعتها لعدد لا نهائي من الناس</p>
-                  </div>
-                  <Link to="/templates" onClick={() => selectPackage(item.id)} className={`mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-full px-4 py-3 text-sm font-bold transition ${featured ? "bg-[#a64257] text-white hover:bg-[#91384b]" : "border border-[#e8c8cf] bg-white text-[#a64257] hover:bg-[#fff0f2]"}`}>اختار الباقة</Link>
-                </article>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" className="mx-auto max-w-3xl px-4 pb-20">
-        <div className="text-center">
-          <p className="text-sm font-bold text-[#b83b50]">محتاج تعرف حاجة؟</p>
-          <h2 className="mt-2 font-display text-4xl text-[#4a2d33]">أسئلة شائعة</h2>
-        </div>
-        <div className="mt-8 grid gap-3">
-          {faqs.map((item) => (
-            <details key={item.q} className="group rounded-2xl border border-[#f0dce1] bg-white">
-              <summary className="flex min-h-14 cursor-pointer items-center justify-between gap-4 px-5 py-4 font-bold text-[#4a2d33]">
-                {item.q}
-                <Chevron className="h-5 w-5 shrink-0 text-[#b83b50] transition-transform group-open:rotate-180" />
-              </summary>
-              <p className="px-5 pb-5 leading-8 text-[#806b70]">{item.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
     </main>
   )
 }
