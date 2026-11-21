@@ -61,7 +61,7 @@ export function InviteView() {
         </div>
         <div className="opening-envelope" aria-label="ظرف دعوة زفاف يفتح">
           <div className="opening-letter">
-            <span className="opening-letter-spark">✦</span>
+            {photos[0] ? <img className="opening-letter-photo" src={photos[0]} alt="صورة من ذكريات العروسين" /> : <span className="opening-letter-spark">✦</span>}
             <strong>{draft.groom} <i>و</i> {draft.bride}</strong>
             <small>{draft.occasion} · {draft.date}</small>
             <span className="opening-letter-heart">♡</span>
