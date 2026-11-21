@@ -5,9 +5,9 @@ import { LogoMark, WhatsAppIcon } from "./Icons"
 
 const links = [
   { href: "/templates", label: "الدعوات" },
-  { href: "/#how", label: "الطريقة" },
-  { href: "/#price", label: "السعر" },
-  { href: "/#faq", label: "أسئلة شائعة" },
+  { href: "/how", label: "طريقة الاستخدام" },
+  { href: "/packages", label: "الباقات" },
+  { href: "/faq", label: "الأسئلة الشائعة" },
 ]
 
 export function SiteChrome() {
@@ -108,8 +108,9 @@ function Footer() {
         <div className="grid content-start gap-3">
           <p className="font-bold text-[#4a2d33]">تصفح</p>
           <Link className="text-[#806b70] hover:text-[#a64257]" to="/templates">كل الدعوات</Link>
-          <a className="text-[#806b70] hover:text-[#a64257]" href="/#how">طريقة الاستخدام</a>
-          <a className="text-[#806b70] hover:text-[#a64257]" href="/#price">الأسعار</a>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/how">طريقة الاستخدام</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/packages">الباقات والأسعار</Link>
+          <Link className="text-[#806b70] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
         </div>
         <div className="grid content-start gap-3">
           <p className="font-bold text-[#4a2d33]">طرق الدفع</p>
