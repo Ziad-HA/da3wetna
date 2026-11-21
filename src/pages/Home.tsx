@@ -22,93 +22,97 @@ export function Home() {
 
   return (
     <main id="main">
-      <section className="relative isolate overflow-hidden bg-[#fff9f7]">
+      <section className="da3-hero relative isolate overflow-hidden">
         <style>{`
-          @keyframes invitation-float { 0%,100% { transform: translateY(0) rotate(1deg); } 50% { transform: translateY(-9px) rotate(-.5deg); } }
-          @keyframes flower-sway { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
-          @keyframes glint { 0%,100% { opacity:.35; } 50% { opacity:.9; } }
-          .invitation-float { animation: invitation-float 6s ease-in-out infinite; }
-          .flower-sway { transform-origin: top center; animation: flower-sway 5s ease-in-out infinite; }
-          .hero-glint { animation: glint 3s ease-in-out infinite; }
-          @media (prefers-reduced-motion: reduce) { .invitation-float,.flower-sway,.hero-glint { animation:none !important; } }
+          @keyframes da3-float { 0%,100% { transform:translate3d(0,0,0) rotate(1deg) } 50% { transform:translate3d(0,-12px,0) rotate(-1deg) } }
+          @keyframes da3-drift { 0%,100% { transform:translateY(0) rotate(0) } 50% { transform:translateY(-8px) rotate(5deg) } }
+          @keyframes da3-glow { 0%,100% { opacity:.42; transform:scale(.96) } 50% { opacity:.9; transform:scale(1.06) } }
+          @keyframes da3-rise { from { opacity:0; transform:translateY(16px) } to { opacity:1; transform:translateY(0) } }
+          .da3-phone-float { animation:da3-float 7s ease-in-out infinite }
+          .da3-petal { animation:da3-drift 6s ease-in-out infinite }
+          .da3-spark { animation:da3-glow 3.2s ease-in-out infinite }
+          .da3-copy > * { animation:da3-rise .7s both }
+          .da3-copy > *:nth-child(2) { animation-delay:.08s }
+          .da3-copy > *:nth-child(3) { animation-delay:.16s }
+          .da3-copy > *:nth-child(4) { animation-delay:.24s }
+          @media(prefers-reduced-motion:reduce) { .da3-phone-float,.da3-petal,.da3-spark,.da3-copy > * { animation:none!important } }
         `}</style>
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <div className="absolute -right-32 -top-36 h-[32rem] w-[32rem] rounded-full bg-[#f7dce1]/55 blur-3xl" />
-          <div className="absolute -bottom-48 -left-28 h-[30rem] w-[30rem] rounded-full bg-[#f4e6d9]/70 blur-3xl" />
-          <div className="absolute inset-0 opacity-[.22] [background-image:radial-gradient(#c9958e_0.7px,transparent_0.7px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_78%)]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -right-40 -top-44 h-[34rem] w-[34rem] rounded-full bg-[#f3d8df]/70 blur-[90px]" />
+          <div className="absolute -bottom-52 -left-32 h-[34rem] w-[34rem] rounded-full bg-[#f4e8d9]/75 blur-[100px]" />
+          <div className="absolute inset-0 opacity-[.16] [background-image:radial-gradient(#b98b83_.7px,transparent_.7px)] [background-size:24px_24px]" />
+          <span className="da3-petal absolute right-[8%] top-[22%] text-3xl text-[#d69aa5]">✿</span>
+          <span className="da3-petal absolute bottom-[18%] left-[8%] text-2xl text-[#c6a15b]" style={{animationDelay:"-2s"}}>✧</span>
+          <span className="da3-spark absolute right-[45%] top-[12%] text-xl text-[#c6a15b]">✦</span>
         </div>
-        <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 pb-12 pt-10 sm:gap-10 sm:pb-16 sm:pt-14 md:grid-cols-[1fr_0.95fr] md:gap-12 md:py-24">
-          <div className="relative z-10 text-center md:text-right">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#e8c9c8] bg-white/80 px-4 py-2 text-xs font-bold tracking-wide text-[#9d5962] shadow-sm sm:text-sm">
+
+        <div className="relative mx-auto grid max-w-6xl items-center gap-5 px-4 pb-12 pt-8 sm:gap-8 sm:pb-16 sm:pt-12 md:grid-cols-[1.02fr_.98fr] md:gap-10 md:py-20 lg:gap-14">
+          <div className="da3-copy relative z-10 order-2 text-center md:order-1 md:text-right">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#e7c9c9] bg-white/75 px-4 py-2 shadow-[0_5px_20px_rgba(91,48,60,.05)] backdrop-blur">
               <span className="text-[#bd965e]">✦</span>
-              دعوات إلكترونية بتفاصيل مميزة
+              <span className="text-xs font-bold tracking-wide text-[#9d5962] sm:text-sm">تفاصيل تليق بيوم العمر</span>
               <span className="text-[#bd965e]">✦</span>
-            </span>
-            <h1 className="mt-6 font-display text-[2.8rem] leading-[1.22] text-[#493238] text-balance sm:text-5xl md:mt-7 md:text-[4.45rem]">
-              فرحتكم تستاهل
-              <span className="mt-1 block text-[#b64b60]">دعوة تفضل في البال</span>
+            </div>
+            <h1 className="mx-auto mt-5 max-w-[650px] font-display text-[2.65rem] leading-[1.3] text-[#493238] text-balance sm:text-5xl md:mx-0 md:mt-6 md:text-[4.25rem] md:leading-[1.22]">
+              لكل فرحة حكاية،
+              <span className="relative mt-1 block text-[#b64b60]">
+                ولكل حكاية دعوة
+                <svg aria-hidden="true" viewBox="0 0 320 16" className="mx-auto mt-1 h-3 w-52 text-[#c6a15b] md:mx-0 md:w-64"><path d="M3 11C82 1 227 1 317 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+              </span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-sm leading-8 text-[#806d70] sm:text-base md:mx-0 md:mt-6 md:text-lg">
-              صمّموا دعوة فرحكم بسهولة. اختاروا الشكل، اكتبوا تفاصيل يومكم، وشاركوا دعوتكم مع الأهل والأصحاب في لينك واحد.
+              خلّوا أول تفاصيل فرحتكم تبدأ بدعوة تشبهكم. اختاروا التصميم، اكتبوا بيانات يومكم، وشاركوا لينك أنيق مع كل اللي بتحبوهم.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3 md:justify-start">
-              <Link to="/templates" className="btn-gold min-w-40 justify-center shadow-[0_10px_26px_rgba(182,75,96,0.18)] transition duration-300 hover:-translate-y-1">اختاروا التصميم <span className="mr-1">←</span></Link>
-              <Link to="/how" className="btn-ghost min-w-36 justify-center border-[#e5cbd0] bg-white/80 text-[#65434b] transition duration-300 hover:-translate-y-1">اعرفوا الطريقة</Link>
+              <Link to="/templates" className="btn-gold min-w-44 justify-center shadow-[0_12px_28px_rgba(182,75,96,.22)] transition duration-300 hover:-translate-y-1">ابدأوا تصميم دعوتكم <span className="mr-2">←</span></Link>
+              <Link to="/how" className="btn-ghost min-w-36 justify-center border-[#e5cbd0] bg-white/80 text-[#65434b] transition duration-300 hover:-translate-y-1">شوفوا بتشتغل إزاي</Link>
             </div>
-            {last ? (
-              <Link to={`/done/${last.code}`} className="mt-5 inline-block text-sm font-semibold text-[#a34256] underline-offset-4 hover:underline">
-                ارجع لآخر دعوة اشتغلت عليها
-              </Link>
-            ) : null}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-[#806b70] sm:text-sm md:justify-start">
-              <span className="inline-flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-full bg-[#f5e4e7] text-[#ae5365]">✓</span> تعديل مباشر</span>
+            {last ? <Link to={`/done/${last.code}`} className="mt-5 inline-block text-sm font-semibold text-[#a34256] underline-offset-4 hover:underline">ارجع لآخر دعوة اشتغلت عليها</Link> : null}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-xs font-semibold text-[#806b70] sm:text-sm md:justify-start">
+              <span className="inline-flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-full bg-[#f5e4e7] text-[#ae5365]">✓</span> تعديل سهل ومباشر</span>
               <span className="inline-flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-full bg-[#f5e4e7] text-[#ae5365]">✓</span> صورة للستوري</span>
-              <span className="inline-flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-full bg-[#f5e4e7] text-[#ae5365]">✓</span> لينك خاص بدعوتكم</span>
+              <span className="inline-flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-full bg-[#f5e4e7] text-[#ae5365]">✓</span> لينك خاص لضيوفكم</span>
             </div>
           </div>
 
-          <div className="relative mx-auto flex min-h-[370px] w-full max-w-[470px] items-center justify-center sm:min-h-[455px] md:min-h-[550px]">
-            <div aria-hidden="true" className="absolute h-[285px] w-[285px] rounded-full bg-[radial-gradient(circle,#f2d5db_0%,rgba(242,213,219,0.45)_52%,transparent_72%)] sm:h-[370px] sm:w-[370px] md:h-[455px] md:w-[455px]" />
-            <div aria-hidden="true" className="absolute h-[300px] w-[300px] rounded-full border border-[#d8b9a5]/60 sm:h-[390px] sm:w-[390px] md:h-[475px] md:w-[475px]" />
-            <div aria-hidden="true" className="absolute bottom-[4%] left-1/2 h-[88%] w-[76%] -translate-x-1/2 rounded-t-[48%] border border-b-0 border-[#c9a36d]/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.58),rgba(255,245,242,0.12))] shadow-[inset_0_0_45px_rgba(255,255,255,0.6)]" />
-            <div aria-hidden="true" className="absolute left-1/2 top-[2%] z-[2] -translate-x-1/2 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#d9bd91]/70 bg-[#fffaf2]/95 px-3 py-1.5 text-[9px] font-semibold tracking-[0.2em] text-[#a77c43] shadow-sm sm:text-[10px]">
-                <span>✧</span> MADE FOR YOUR DAY <span>✧</span>
-              </span>
+          <div className="relative order-1 mx-auto flex min-h-[390px] w-full max-w-[500px] items-center justify-center sm:min-h-[500px] md:order-2 md:min-h-[570px]">
+            <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#f0d2d9_0%,rgba(240,210,217,.5)_52%,transparent_73%)] sm:h-[390px] sm:w-[390px] md:h-[470px] md:w-[470px]"/>
+            <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-[310px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-t-[48%] rounded-b-[45%] border border-[#c6a15b]/55 bg-[linear-gradient(145deg,rgba(255,255,255,.65),rgba(255,246,242,.12))] shadow-[inset_0_0_50px_rgba(255,255,255,.7)] sm:h-[405px] sm:w-[405px] md:h-[485px] md:w-[485px]"/>
+            <div aria-hidden="true" className="absolute left-1/2 top-[7%] z-[2] -translate-x-1/2 text-center">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#d9bd91]/80 bg-[#fffaf2]/95 px-3 py-1.5 text-[9px] font-semibold tracking-[.2em] text-[#a77c43] shadow-sm sm:text-[10px]">✧ WEDDING INVITATION ✧</span>
             </div>
-            <svg aria-hidden="true" viewBox="0 0 420 112" className="flower-sway pointer-events-none absolute -top-1 left-1/2 z-[3] w-[88%] -translate-x-1/2 overflow-visible sm:w-[94%]" fill="none">
-              <path d="M10 8C92 91 328 91 410 8" stroke="#b99a75" strokeOpacity=".75" strokeWidth="1.4"/>
-              {[38,76,116,158,202,244,286,326,366,398].map((x,i) => (
-                <g key={x} transform={`translate(${x} ${26 + Math.sin(i * .55) * 22})`}>
-                  <path d="M0 0c-6 7-7 12-3 17m3-17c6 7 7 12 3 17" stroke="#82977d" strokeWidth="1.3" strokeLinecap="round"/>
-                  <circle cy="-2" r="3.5" fill="#d98f9e"/>
-                  <circle cx="-4" cy="-5" r="3" fill="#f1cbd2"/>
-                  <circle cx="4" cy="-5" r="3" fill="#f1cbd2"/>
-                  <circle cy="-8" r="3" fill="#f1cbd2"/>
-                  <circle r="1.3" fill="#bd965e"/>
-                </g>
-              ))}
+            <svg aria-hidden="true" viewBox="0 0 440 130" className="pointer-events-none absolute left-1/2 top-[5%] z-[3] w-[92%] -translate-x-1/2 overflow-visible sm:top-[4%]">
+              <path d="M8 5C95 112 345 112 432 5" stroke="#b99a75" strokeOpacity=".8" strokeWidth="1.5" fill="none"/>
+              {[30,65,102,142,184,226,268,308,348,386,418].map((x,i)=><g key={x} transform={`translate(${x} ${22+Math.sin(i*.55)*25})`}>
+                <path d="M0 0c-7 8-7 13-3 18m3-18c7 8 7 13 3 18" stroke="#82977d" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+                <circle cy="-3" r="4" fill="#d98f9e"/><circle cx="-4" cy="-6" r="3.2" fill="#f1cbd2"/><circle cx="4" cy="-6" r="3.2" fill="#f1cbd2"/><circle cy="-9" r="3.2" fill="#f1cbd2"/><circle r="1.4" fill="#bd965e"/>
+              </g>)}
             </svg>
-            <span aria-hidden="true" className="hero-glint absolute left-[8%] top-[29%] z-[2] text-2xl text-[#c29a62]">✧</span>
-            <span aria-hidden="true" className="hero-glint absolute right-[8%] bottom-[22%] z-[2] text-3xl text-[#c29a62]" style={{animationDelay:"-1.4s"}}>✦</span>
-            <div className="invitation-float relative z-10 rotate-[1deg]">
-              <div className="phone !w-[min(238px,64vw)] !rounded-[35px] !border-[6px] !border-white !bg-white !p-1.5 !shadow-[0_28px_75px_rgba(91,48,60,0.22)] sm:!w-[min(270px,68vw)] md:!w-[min(292px,70vw)] md:!rounded-[42px] md:!border-[7px] md:!p-2">
+            <span aria-hidden="true" className="da3-spark absolute left-[7%] top-[31%] z-[4] text-3xl text-[#c29a62]">✧</span>
+            <span aria-hidden="true" className="da3-spark absolute right-[7%] bottom-[24%] z-[4] text-3xl text-[#c29a62]" style={{animationDelay:"-1.5s"}}>✦</span>
+            <span aria-hidden="true" className="da3-petal absolute right-[11%] top-[24%] z-[4] text-2xl text-[#d18d9b]">♡</span>
+            <span aria-hidden="true" className="da3-petal absolute bottom-[19%] left-[13%] z-[4] text-2xl text-[#d18d9b]" style={{animationDelay:"-2.8s"}}>♡</span>
+            <div className="da3-phone-float relative z-10 rotate-[1deg]">
+              <div className="phone !w-[min(230px,61vw)] !rounded-[34px] !border-[6px] !border-white !bg-white !p-1.5 !shadow-[0_32px_85px_rgba(91,48,60,.25)] sm:!w-[min(270px,65vw)] md:!w-[min(292px,68vw)] md:!rounded-[42px] md:!border-[7px] md:!p-2">
                 <div className="phone-screen h-full w-full overflow-hidden rounded-[26px] md:!rounded-[30px]">
-                  <div className="invite-frame">
-                    <Invitation draft={draftFor(templates[1])} />
-                  </div>
+                  <div className="invite-frame"><Invitation draft={draftFor(templates[1])}/></div>
                 </div>
               </div>
             </div>
-            <div className="absolute left-0 top-[17%] z-20 rounded-2xl border border-[#f0dce1] bg-white/95 px-3 py-2.5 shadow-[0_12px_30px_rgba(91,48,60,0.09)] backdrop-blur sm:left-[-1%] sm:px-4 sm:py-3">
-              <p className="text-[10px] text-[#9b7a81] sm:text-xs">كل التفاصيل في مكان واحد</p>
-              <p className="mt-1 text-xs font-bold text-[#9e4055] sm:text-sm">دعوتكم، بطريقتكم ♡</p>
+            <div className="absolute left-0 top-[22%] z-20 rounded-2xl border border-[#f0dce1] bg-white/95 px-3 py-2.5 shadow-[0_14px_35px_rgba(91,48,60,.11)] backdrop-blur sm:left-[-1%] sm:px-4 sm:py-3">
+              <p className="text-[10px] text-[#9b7a81] sm:text-xs">تفاصيلكم في تصميم واحد</p>
+              <p className="mt-1 text-xs font-bold text-[#9e4055] sm:text-sm">حكايتكم، بطريقتكم ♡</p>
             </div>
-            <div className="absolute bottom-[12%] right-0 z-20 rounded-2xl border border-[#ead7c5] bg-[#fffdf9]/95 px-3 py-2.5 shadow-[0_12px_30px_rgba(91,48,60,0.09)] backdrop-blur sm:right-[-1%] sm:px-4 sm:py-3">
-              <p className="text-[10px] text-[#9b7a81] sm:text-xs">جاهزة للمشاركة</p>
+            <div className="absolute bottom-[13%] right-0 z-20 rounded-2xl border border-[#ead7c5] bg-[#fffdf9]/95 px-3 py-2.5 shadow-[0_14px_35px_rgba(91,48,60,.11)] backdrop-blur sm:right-[-1%] sm:px-4 sm:py-3">
+              <p className="text-[10px] text-[#9b7a81] sm:text-xs">لينك واحد لكل ضيوفكم</p>
               <p className="mt-1 font-display text-lg text-[#9e4055] sm:text-xl">يوم العمر</p>
             </div>
           </div>
+        </div>
+        <div className="relative mx-auto -mt-1 flex max-w-6xl justify-center px-4 pb-7 md:pb-10">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#ead8d7] bg-white/65 px-4 py-2 text-[11px] font-semibold text-[#9b7a81] shadow-sm">
+            <span className="text-[#bd965e]">✦</span> دعوة رقمية تليق بفرحتكم <span className="text-[#bd965e]">✦</span>
+          </span>
         </div>
       </section>
 
