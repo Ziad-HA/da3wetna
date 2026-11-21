@@ -59,6 +59,9 @@ function Header() {
           )}
         </nav>
         <div className="flex items-center gap-2">
+          <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، محتاج مساعدة من دعوتنا")}`} target="_blank" rel="noreferrer" className="hidden h-10 items-center gap-2 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-4 text-sm font-bold text-[#247747] transition hover:-translate-y-0.5 hover:bg-[#e9f7ee] lg:inline-flex">
+            <WhatsAppIcon className="h-4 w-4" /> واتساب
+          </a>
           <Link to="/templates" className="btn-gold hidden h-11 px-5 text-sm sm:inline-flex">اختار دعوتك</Link>
           <button
             type="button"
@@ -84,6 +87,9 @@ function Header() {
               </Link>
             ),
           )}
+          <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، محتاج مساعدة من دعوتنا")}`} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-[#eaf7ee] px-4 py-3 font-bold text-[#247747]">
+            <WhatsAppIcon className="h-5 w-5" /> تواصل واتساب
+          </a>
         </nav>
       ) : null}
     </header>
@@ -150,6 +156,9 @@ function Footer() {
             <p className="text-[#806b70]">إنستاباي</p>
             <p className="text-[#a18a8f]">الدفع بالبطاقة قريبًا</p>
             <p className="mt-2 text-xs leading-6 text-[#a18a8f]">تواصل معانا لو محتاج مساعدة في اختيار دعوتك.</p>
+            <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عندي استفسار عن دعوتنا")}`} target="_blank" rel="noreferrer" dir="ltr" className="mt-1 inline-flex w-fit items-center gap-2 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-3 py-2 font-semibold text-[#247747] transition hover:bg-[#e9f7ee]">
+              <WhatsAppIcon className="h-4 w-4" /> 01276390301
+            </a>
           </div>
         </div>
 
