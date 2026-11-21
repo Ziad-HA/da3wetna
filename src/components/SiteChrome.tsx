@@ -12,8 +12,12 @@ const links = [
 ]
 
 export function SiteChrome() {
+  const { pathname } = useLocation()
+  const showAtmosphere = !/^\/(editor|checkout|done)(\/|$)/.test(pathname)
+
   return (
     <>
+      {showAtmosphere ? <RomanticAtmosphere /> : null}
       <a className="skip" href="#main">تخطي إلى المحتوى</a>
       <Header />
       <Outlet />
