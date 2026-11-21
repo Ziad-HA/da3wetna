@@ -16,8 +16,8 @@ export function Home() {
   }, [])
 
   return (
-    <main id="main" className="overflow-hidden">
-      <section className="relative isolate overflow-hidden bg-[radial-gradient(ellipse_at_12%_8%,#f8e5e9_0%,transparent_42%),radial-gradient(ellipse_at_88%_80%,#f5eadb_0%,transparent_38%),linear-gradient(135deg,#fffaf9_0%,#fff4f5_55%,#fffdfa_100%)]">
+    <main id="main" className="da3-home overflow-hidden">
+      <section className="da3-home-hero relative isolate overflow-hidden bg-[radial-gradient(ellipse_at_12%_8%,#f8e5e9_0%,transparent_42%),radial-gradient(ellipse_at_88%_80%,#f5eadb_0%,transparent_38%),linear-gradient(135deg,#fffaf9_0%,#fff4f5_55%,#fffdfa_100%)]">
         <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full border border-[#d9aab5]/40 sm:h-96 sm:w-96" />
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-[#f3dce1]/55 blur-3xl" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-5 px-4 py-8 sm:gap-10 sm:py-14 md:grid-cols-2 md:py-20">
@@ -45,8 +45,8 @@ export function Home() {
             <div aria-hidden="true" className="absolute h-[250px] w-[250px] rounded-[48%] border border-[#c6a15b]/55 bg-white/25 shadow-[inset_0_0_45px_rgba(255,255,255,.8)] sm:h-[390px] sm:w-[390px]" />
             <span aria-hidden="true" className="absolute right-[10%] top-[15%] z-10 animate-pulse text-3xl text-[#c6a15b]">✧</span>
             <span aria-hidden="true" className="absolute bottom-[14%] left-[9%] z-10 text-3xl text-[#d18d9b]">♡</span>
-            <div className="relative z-10 w-[min(205px,55vw)] rotate-[1deg] sm:w-[min(270px,58vw)]">
-              <div className="overflow-hidden rounded-[18px] shadow-[0_18px_45px_rgba(91,48,60,.16)] sm:rounded-[24px]"><Invitation draft={draftFor(templates[1])} /></div>
+            <div className="home-hero-invitation relative z-10 w-[min(235px,64vw)] rotate-[1deg] sm:w-[min(300px,58vw)]">
+              <div className="home-invitation-paper overflow-hidden"><Invitation draft={draftFor(templates[1])} /></div>
             </div>
             <div className="absolute right-0 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-2 rounded-2xl border border-[#ead7c5] bg-white/90 px-2 py-3 text-center shadow-lg backdrop-blur sm:flex">
               {[["Aa","الكلام"],["Tt","الخط"],["▧","الصور"],["♫","الموسيقى"],["◉","الألوان"],["◷","الميعاد"]].map(([symbol,label]) => <div key={label} className="w-10"><span className="block font-display text-base text-[#b64b60]">{symbol}</span><span className="block text-[8px] text-[#806b70]">{label}</span></div>)}
@@ -72,8 +72,8 @@ export function Home() {
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
           {templates.slice(0,4).map((template) => (
             <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group min-w-0">
-              <div className="overflow-hidden rounded-[18px] border border-[#f0dce1] bg-white p-1.5 shadow-[0_7px_22px_rgba(91,48,60,.05)] transition duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_15px_32px_rgba(91,48,60,.11)] sm:rounded-[24px] sm:p-2">
-                <PhonePreview className="w-[min(100%,170px)] sm:w-[min(100%,220px)]"><Invitation draft={draftFor(template)} /></PhonePreview>
+              <div className="home-template-art overflow-hidden">
+                <Invitation draft={draftFor(template)} />
               </div>
               <h3 className="mt-2 truncate text-xs font-extrabold text-[#4a2d33] sm:text-sm">{template.name}</h3>
               <p className="mt-1 line-clamp-2 text-[10px] leading-5 text-[#806b70] sm:text-xs">{template.blurb}</p>
