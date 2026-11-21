@@ -22,7 +22,7 @@ export function Gallery() {
   const visible = templates.filter((item) => filter === "الكل" || item.category === (filter as Occasion))
 
   return (
-    <main id="main" className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+    <main id="main" className="mx-auto max-w-6xl px-4 py-8 sm:py-10 md:py-14">
       <div className="mx-auto max-w-3xl text-center">
         <p className="inline-flex rounded-full bg-[#fff0f2] px-4 py-2 text-sm font-bold text-[#a64257]">معرض التصميمات</p>
         <h1 className="mt-4 font-display text-4xl text-[#4a2d33] md:text-6xl">اختار تصميم دعوتك</h1>
@@ -41,7 +41,7 @@ export function Gallery() {
         <p className="mt-2 text-sm text-[#806b70]">اختار المناسبة عشان تشوف التصميمات الأقرب ليك.</p>
       </div>
 
-      <div className="mt-8 flex justify-center gap-2 overflow-x-auto pb-2" role="tablist" aria-label="تصفية الدعوات">
+      <div className="mt-8 flex justify-start gap-2 overflow-x-auto pb-3 sm:justify-center" role="tablist" aria-label="تصفية الدعوات">
         {filters.map((item) => (
           <button
             key={item}
@@ -55,9 +55,9 @@ export function Gallery() {
           </button>
         ))}
       </div>
-      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {visible.map((template) => (
-          <article key={template.id} className="group relative rounded-[28px] border border-[#f0dce1] bg-white p-3 shadow-[0_8px_28px_rgba(91,48,60,0.045)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(91,48,60,0.10)]">
+          <article key={template.id} className="group relative rounded-[28px] border border-[#f0dce1] bg-white p-3 shadow-[0_8px_28px_rgba(91,48,60,0.045)] transition duration-300 hover:-translate-y-1 hover:border-[#e4c0c9] hover:shadow-[0_18px_42px_rgba(91,48,60,0.11)]">
             {template.isNew ? (
               <span className="absolute right-5 top-5 z-10 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-[#a64257] shadow-sm ring-1 ring-[#f0dce1]">جديد</span>
             ) : null}
