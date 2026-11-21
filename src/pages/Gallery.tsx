@@ -4,14 +4,17 @@ import { Invitation } from "../components/Invitation"
 import { packages, type PackageId } from "../config"
 import { draftFor, templates } from "../data"
 import { money } from "../lib/format"
-import { clearDraft, readSelectedPackage, selectPackage } from "../lib/storage"
+import { clearDraft, readActivePackage, readSelectedPackage, selectPackage } from "../lib/storage"
 import type { Occasion } from "../types"
 
 const filters = ["الكل", "فرح", "خطوبة", "كتب كتاب", "حنة"] as const
 
 export function Gallery() {
+  const activeOrder = readActivePackage()
+  const activeBundle = activeOrder ? packages.find((item) => item.id === activeOrder.packageId) : undefined
+  const hasUnusedInvites = Boolean(activeOrder && activeBundle && activeOrder.used < activeBundle.quantity)
   const [filter, setFilter] = useState<(typeof filters)[number]>("الكل")
-  const [selected, setSelected] = useState<PackageId>(() => readSelectedPackage())
+  const [selected, setSelected] = useState<PackageId>(() => hasUnusedInvites && activeOrder ? activeOrder.packageId : readSelectedPackage())
 
   useEffect(() => {
     document.title = "الباقات والتصاميم — دعوتنا"
@@ -20,6 +23,7 @@ export function Gallery() {
   const visible = templates.filter((item) => filter === "الكل" || item.category === (filter as Occasion))
 
   function choosePackage(id: PackageId) {
+    if (hasUnusedInvites && activeOrder && id !== activeOrder.packageId) return
     setSelected(id)
     selectPackage(id)
   }
@@ -60,10 +64,11 @@ export function Gallery() {
               <button
                 type="button"
                 onClick={() => choosePackage(item.id)}
+                disabled={hasUnusedInvites && activeOrder?.packageId !== item.id}
                 aria-pressed={active}
                 className={`mt-4 min-h-11 w-full rounded-full px-4 text-sm font-bold transition ${featured ? "bg-[#e8d39e] text-[#17382e] hover:bg-[#f0dfb6]" : "bg-[#a64257] text-white hover:bg-[#91384b]"}`}
               >
-                {active ? "✓ الباقة المختارة" : "اختار الباقة"}
+                {active ? "✓ الباقة المختارة" : hasUnusedInvites ? "الباقة الحالية غير مكتملة" : "اختار الباقة"}
               </button>
             </article>
           )
