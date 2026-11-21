@@ -661,3 +661,13 @@ main section > div { min-width: 0; }
   .da3-atmosphere .da3-floating-petal { animation: none !important; }
   .da3-hero .da3-phone-float { animation: none !important; }
 }
+
+
+/* Guided editor and searchable favorites */
+.editor-step-panel { animation: editor-step-in 260ms ease both; }
+@keyframes editor-step-in { from { opacity: .55; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 767px) {
+  main[aria-label="خطوات تجهيز الدعوة"] button { min-height: 68px; }
+  main[aria-label="خطوات تجهيز الدعوة"] button span:last-child { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) { .editor-step-panel { animation: none; } }
