@@ -5,7 +5,7 @@ import { Chevron, IconLink, IconPen, IconStory, IconWallet } from "../components
 import { packages } from "../config"
 import { draftFor, faqs, templates } from "../data"
 import { money } from "../lib/format"
-import { readLast, selectPackage } from "../lib/storage"
+import { clearDraft, readLast, selectPackage } from "../lib/storage"
 
 const features = [
   { icon: IconPen, title: "تعديل بنفسك", text: "اكتب الأسماء والتاريخ والمكان بنفسك، وشوف شكل الدعوة بيتغير قدامك." },
@@ -140,7 +140,7 @@ export function Home() {
         </div>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
           {templates.slice(0, 4).map((template) => (
-            <Link key={template.id} to={`/editor/${template.id}`} className="group block">
+            <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group block">
               <div className="overflow-hidden rounded-[26px] border border-[#f0dce1] bg-white p-2 shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lg">
                 <div className="overflow-hidden rounded-[19px]">
                   <Invitation draft={draftFor(template)} />
