@@ -4,7 +4,7 @@ import { Invitation } from "../components/Invitation"
 import { packages, type PackageId } from "../config"
 import { draftFor, templates } from "../data"
 import { money } from "../lib/format"
-import { readSelectedPackage, selectPackage } from "../lib/storage"
+import { clearDraft, readSelectedPackage, selectPackage } from "../lib/storage"
 import type { Occasion } from "../types"
 
 const filters = ["الكل", "فرح", "خطوبة", "كتب كتاب", "حنة"] as const
@@ -98,7 +98,7 @@ export function Gallery() {
             {template.isNew ? (
               <span className="absolute right-5 top-5 z-10 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-[#a64257] shadow-sm ring-1 ring-[#f0dce1]">جديد</span>
             ) : null}
-            <Link to={`/editor/${template.id}`} className="block overflow-hidden rounded-[21px] bg-[#fff8f8]">
+            <Link to={`/editor/${template.id}`} onClick={clearDraft} className="block overflow-hidden rounded-[21px] bg-[#fff8f8]">
               <Invitation draft={draftFor(template)} />
             </Link>
             <div className="flex items-center justify-between gap-3 px-2 pb-2 pt-4">
@@ -107,7 +107,7 @@ export function Gallery() {
                 <p className="mt-1 text-sm text-[#806b70]">{template.blurb}</p>
               </div>
             </div>
-            <Link to={`/editor/${template.id}`} className="btn-dark mb-1 mt-3 w-full">اختار التصميم</Link>
+            <Link to={`/editor/${template.id}`} onClick={clearDraft} className="btn-dark mb-1 mt-3 w-full">اختار التصميم</Link>
           </article>
         ))}
       </div>
