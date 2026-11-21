@@ -34,10 +34,6 @@ export function Checkout() {
 
   async function pay() {
     if (!draft) return
-    if (!continuing && method === "card") {
-      setError("الدفع بالبطاقة غير متاح حاليًا. اختار فودافون كاش أو إنستاباي.")
-      return
-    }
     if (!continuing && refNo.trim().length < 4) {
       setError("اكتب رقم عملية التحويل، وأقله ٤ أرقام.")
       return
@@ -138,11 +134,6 @@ export function Checkout() {
                 ))}
               </div>
 
-              {method === "card" ? (
-                <p className="mt-5 rounded-xl bg-[#fff8e9] p-4 text-sm leading-7 text-[#79603b]">
-                  الدفع بالبطاقة غير متاح حاليًا. استخدم فودافون كاش أو إنستاباي لحين ربط بوابة دفع حقيقية.
-                </p>
-              ) : (
                 <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
                   <p className="text-sm text-[#806b70]">حوّل {money(bundle.price)} إلى {destination}</p>
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xl font-bold text-[#4a2d33]" dir="ltr">{destination}</p><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(destination); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setError("مش قادرين ننسخ الرقم تلقائيًا؛ اضغط مطولًا على الرقم وانسخه."); } }} className="min-h-9 rounded-full border border-[#e8c8cf] bg-white px-3 text-xs font-bold text-[#a64257]">{copied ? "تم النسخ ✓" : "نسخ الرقم"}</button></div>
@@ -152,7 +143,7 @@ export function Checkout() {
                     <span>رقم عملية التحويل</span>
                     <input value={refNo} inputMode="numeric" maxLength={30} onChange={(event) => setRefNo(event.target.value)} placeholder="مثال: 4821" />
                   </label>
-                </div>
+      
               {walletsArePlaceholders ? <p className="mt-4 text-xs leading-6 text-[#9a6a45]">بيانات المحافظ الحالية تجريبية. حدّثها من src/config.ts قبل استقبال الطلبات.</p> : null}
               <p className="mt-2 text-xs leading-6 text-[#9a6a45]">إرسال الطلب لا يعني تأكيد الدفع. التفعيل بيتم بعد مراجعة الإيصال يدويًا.</p>
             </>
