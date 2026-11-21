@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { packages } from "../config"
@@ -13,8 +13,19 @@ export function Gallery() {
   const activeBundle = activeOrder ? packages.find((item) => item.id === activeOrder.packageId) : undefined
   const hasUnusedInvites = Boolean(activeOrder && activeBundle && activeOrder.used < activeBundle.quantity)
   const [filter, setFilter] = useState<(typeof filters)[number]>("الكل")
+  const [query, setQuery] = useState("")
+  const [favoritesOnly, setFavoritesOnly] = useState(false)
+  const [favorites, setFavorites] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem("da3wetna-favorites") || "[]") as string[] } catch { return [] } })
   const selected = hasUnusedInvites && activeOrder ? activeOrder.packageId : readSelectedPackage()
-  const visible = templates.filter((item) => filter === "الكل" || item.category === (filter as Occasion))
+  const visible = useMemo(() => templates.filter((item) => (filter === "الكل" || item.category === (filter as Occasion)) && (!favoritesOnly || favorites.includes(item.id)) && (!query.trim() || `${item.name} ${item.blurb} ${item.category}`.toLowerCase().includes(query.trim().toLowerCase()))), [filter, favoritesOnly, favorites, query])
+
+  function toggleFavorite(id: string) {
+    setFavorites((current) => {
+      const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
+      localStorage.setItem("da3wetna-favorites", JSON.stringify(next))
+      return next
+    })
+  }
 
   useEffect(() => {
     document.title = "تصميمات الدعوات — دعوتنا"
@@ -68,6 +79,11 @@ export function Gallery() {
           </div>
         </div>
 
+        <div className="mt-5 grid gap-2 sm:grid-cols-[1fr_auto]">
+          <label className="relative"><span className="sr-only">ابحث عن تصميم</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="دور على تصميم بالاسم أو المناسبة..." className="min-h-11 w-full rounded-2xl border border-[#f0dce1] bg-white px-4 text-sm text-[#4a2d33] outline-none transition focus:border-[#c98c9a] focus:ring-4 focus:ring-[#f8e8ec]" /></label>
+          <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`min-h-11 rounded-2xl border px-4 text-xs font-bold transition ${favoritesOnly ? "border-[#a64257] bg-[#a64257] text-white" : "border-[#f0dce1] bg-white text-[#a64257]"}`}>♡ المفضلة ({favorites.length})</button>
+        </div>
+
         <div className="mt-3 flex snap-x gap-2 overflow-x-auto pb-2 sm:mt-5 sm:flex-wrap sm:overflow-visible" role="tablist" aria-label="تصفية الدعوات">
           {filters.map((item) => (
             <button key={item} type="button" role="tab" aria-selected={filter === item} onClick={() => setFilter(item)}
@@ -85,11 +101,14 @@ export function Gallery() {
         <div className="grid grid-cols-2 items-start gap-2.5 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {visible.map((template) => (
             <article key={template.id} className="group min-w-0 overflow-hidden rounded-[16px] border border-[#f0dce1] bg-white p-1.5 shadow-[0_5px_22px_rgba(91,48,60,.045)] transition duration-300 hover:-translate-y-1 hover:border-[#dfb8c2] hover:shadow-[0_16px_34px_rgba(91,48,60,.10)] sm:rounded-[26px] sm:p-3">
-              <Link to={`/editor/${template.id}`} onClick={clearDraft} className="relative block overflow-hidden rounded-[11px] bg-[#fff5f6] sm:rounded-[19px]" aria-label={`اختار تصميم ${template.name}`}>
+              <div className="relative overflow-hidden rounded-[11px] bg-[#fff5f6] sm:rounded-[19px]">
+                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="block" aria-label={`اختار تصميم ${template.name}`}>
                 <Invitation draft={draftFor(template)} />
                 <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[9px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">معاينة واختيار</span>
                 {template.isNew ? <span className="absolute right-2 top-2 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] shadow-sm sm:right-3 sm:top-3 sm:text-[10px]">جديد</span> : null}
-              </Link>
+                </Link>
+                <button type="button" onClick={() => toggleFavorite(template.id)} aria-label={favorites.includes(template.id) ? "إزالة من المفضلة" : "إضافة للمفضلة"} aria-pressed={favorites.includes(template.id)} className={`absolute left-2 top-2 grid h-9 w-9 place-items-center rounded-full border border-white/80 text-xl shadow-md backdrop-blur transition active:scale-90 sm:left-3 sm:top-3 ${favorites.includes(template.id) ? "bg-[#a64257] text-white" : "bg-white/90 text-[#a64257]"}`}>{favorites.includes(template.id) ? "♥" : "♡"}</button>
+              </div>
               <div className="px-0.5 pb-1 pt-2 sm:px-2 sm:pt-4">
                 <h3 className="truncate text-[11px] font-extrabold text-[#4a2d33] sm:text-base">{template.name}</h3>
                 <p className="mt-1 line-clamp-2 min-h-8 text-[9px] leading-[1.45] text-[#90777d] sm:min-h-10 sm:text-xs sm:leading-5">{template.blurb}</p>
@@ -102,7 +121,7 @@ export function Gallery() {
         {visible.length === 0 ? (
           <div className="mt-6 rounded-3xl border border-dashed border-[#e8c8cf] bg-white/70 px-5 py-12 text-center">
             <span className="text-3xl text-[#c68b98]">♡</span>
-            <p className="mt-3 font-bold text-[#4a2d33]">مفيش تصميمات في القسم ده حاليًا</p>
+            <p className="mt-3 font-bold text-[#4a2d33]">مفيش تصميمات مطابقة للبحث أو الفلتر ده</p>
             <button type="button" onClick={() => setFilter("الكل")} className="mt-4 text-sm font-bold text-[#a64257] underline underline-offset-4">عرض كل التصميمات</button>
           </div>
         ) : null}
