@@ -5,7 +5,7 @@ import { Chevron, IconLink, IconPen, IconStory, IconWallet } from "../components
 import { packages } from "../config"
 import { draftFor, faqs, templates } from "../data"
 import { money } from "../lib/format"
-import { readLast } from "../lib/storage"
+import { readLast, selectPackage } from "../lib/storage"
 
 const features = [
   { icon: IconPen, title: "تعديل بنفسك", text: "اكتب الأسماء والتاريخ والمكان بنفسك، وشوف شكل الدعوة بيتغير قدامك." },
@@ -168,7 +168,7 @@ export function Home() {
                 <h3 className="mt-2 text-lg font-bold">{item.name}</h3>
                 <p className={`mt-1 text-sm ${item.id === "plus" ? "text-white/70" : "text-[#806b70]"}`}>{item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات مختلفة"}</p>
                 <p className={`mt-4 font-display text-4xl ${item.id === "plus" ? "text-[#e8d39e]" : "text-[#08745d]"}`}>{money(item.price)}</p>
-                <Link to="/templates" className={`mt-5 w-full rounded-full px-4 py-3 text-center text-sm font-bold inline-flex justify-center ${item.id === "plus" ? "bg-[#e8d39e] text-[#17382e]" : "bg-[#a64257] text-white"}`}>اختار الباقة</Link>
+                <Link to="/templates" onClick={() => selectPackage(item.id)} className={`mt-5 w-full rounded-full px-4 py-3 text-center text-sm font-bold inline-flex justify-center ${item.id === "plus" ? "bg-[#e8d39e] text-[#17382e]" : "bg-[#a64257] text-white"}`}>اختار الباقة</Link>
               </article>
             ))}
           </div>
