@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
-import { IconBank, IconCard, IconWallet } from "../components/Icons"
+import { IconBank, IconWallet } from "../components/Icons"
 import { getPackage, site, walletsArePlaceholders } from "../config"
 import { getTemplate } from "../data"
 import { encodeDraft } from "../lib/codec"
@@ -27,7 +27,7 @@ export function Checkout() {
   const [refNo, setRefNo] = useState("")
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false)\n  const [copied, setCopied] = useState(false)
 
   useEffect(() => { document.title = "تأكيد الطلب — دعوتنا" }, [])
   if (!draft || !draftReady(draft)) return <Navigate to="/templates" replace />
@@ -69,13 +69,13 @@ export function Checkout() {
   const remainingAfterThis = bundle.quantity - (continuing && active ? active.used + 1 : 1)
 
   return (
-    <main id="main" className="mx-auto max-w-5xl px-4 py-10 md:py-14">
-      <div className="mx-auto mb-8 max-w-2xl text-center">
+    <main id="main" className="mx-auto max-w-5xl px-3 pb-28 pt-6 sm:px-4 sm:py-10 md:py-14">
+      <div className="mx-auto mb-6 max-w-2xl text-center sm:mb-8">
         <p className="text-xs font-bold text-[#b83b50]">الخطوة ٢ من ٢</p>
         <h1 className="mt-2 font-display text-4xl text-[#4a2d33] md:text-5xl">{continuing ? "أضف دعوة للباقة" : "تأكيد الباقة"}</h1>
         <p className="mt-3 leading-7 text-[#806b70]">{continuing ? "دي دعوة جديدة ضمن الباقة اللي دفعت تمنها بالفعل." : "راجع تفاصيل أول دعوة واختار طريقة الدفع المناسبة."}</p>
       </div>
-      <div className="grid items-start gap-6 lg:grid-cols-[300px_1fr]">
+      <div className="grid items-start gap-4 sm:gap-6 lg:grid-cols-[300px_1fr]">
         <aside className="rounded-[26px] border border-[#f0dce1] bg-white p-4">
           <div className="overflow-hidden rounded-[18px] bg-[#fff8f8]">
             <Invitation draft={draft} />
@@ -87,7 +87,7 @@ export function Checkout() {
           <Link to={`/editor/${draft.templateId}`} className="mt-4 inline-block text-sm font-bold text-[#a64257] hover:underline">تعديل التفاصيل</Link>
         </aside>
 
-        <section className="rounded-[26px] border border-[#f0dce1] bg-white p-5 md:p-7">
+        <section className="rounded-[26px] border border-[#f0dce1] bg-white p-4 sm:p-5 md:p-7">
           <div className="rounded-2xl bg-[#fbf7f3] p-4">
             <p className="text-sm text-[#806b70]">الباقة</p>
             <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
@@ -146,7 +146,7 @@ export function Checkout() {
               ) : (
                 <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
                   <p className="text-sm text-[#806b70]">حوّل {money(bundle.price)} إلى {destination}</p>
-                  <p className="mt-2 text-xl font-bold text-[#4a2d33]" dir="ltr">{destination}</p>
+                  <div className="mt-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xl font-bold text-[#4a2d33]" dir="ltr">{destination}</p><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(destination); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setError("مش قادرين ننسخ الرقم تلقائيًا؛ اضغط مطولًا على الرقم وانسخه."); } }} className="min-h-9 rounded-full border border-[#e8c8cf] bg-white px-3 text-xs font-bold text-[#a64257]">{copied ? "تم النسخ ✓" : "نسخ الرقم"}</button></div>
                   <p className="mt-4 text-xs text-[#806b70]">رقم الطلب — اكتبه في ملاحظة التحويل</p>
                   <p className="mt-1 break-all font-mono text-sm text-[#a64257]">{orderId}</p>
                   <label className="field mt-4">
@@ -161,7 +161,7 @@ export function Checkout() {
           )}
 
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
-          {!submitted || continuing ? <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#f3e6e9] pt-5">
+          {!submitted || continuing ? <div className="fixed inset-x-0 bottom-0 z-30 mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#f3e6e9] bg-white/95 px-4 py-3 pb-[max(env(safe-area-inset-bottom),12px)] pt-3 backdrop-blur sm:static sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-5">
             <div><p className="text-xs text-[#806b70]">{continuing ? "المطلوب الآن" : "إجمالي الباقة"}</p><p className="text-xl font-bold text-[#4a2d33]">{continuing ? "بدون دفع إضافي" : money(bundle.price)}</p></div>
             <button type="button" className="btn-gold min-w-44" onClick={pay} disabled={busy}>
               {busy ? "بنجهّز الدعوة..." : continuing ? "أضف الدعوة للباقة" : "إرسال طلب التفعيل"}
