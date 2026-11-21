@@ -365,3 +365,119 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   body::before, body::after { animation: none !important; }
 }
+
+
+/* Mobile-first UX pass: consistent spacing, readable type and thumb-friendly controls */
+@media (max-width: 767px) {
+  html { scroll-padding-top: 1rem; }
+  body { font-size: 15px; }
+  main { min-width: 0; overflow-x: clip; }
+  main > :first-child { scroll-margin-top: 1rem; }
+
+  /* Page rhythm */
+  main#main { padding-top: 1.5rem; }
+  main#main > section,
+  main#main > article { min-width: 0; }
+  main#main h1 {
+    font-size: clamp(1.85rem, 8vw, 2.55rem);
+    line-height: 1.28;
+    text-wrap: balance;
+  }
+  main#main h2 { line-height: 1.35; text-wrap: balance; }
+  main#main p { text-wrap: pretty; }
+  main#main .max-w-6xl,
+  main#main .max-w-5xl,
+  main#main .max-w-4xl { max-width: 100%; }
+
+  /* Buttons and form controls */
+  .btn-gold, .btn-dark, .btn-ghost {
+    min-height: 48px;
+    padding-inline: 1rem;
+    font-size: 0.92rem;
+    border-radius: 15px;
+  }
+  .field { gap: 0.5rem; }
+  .field span { font-size: 0.88rem; }
+  .field input, .field select,
+  input:not([type="checkbox"]):not([type="radio"]),
+  select, textarea {
+    min-height: 50px;
+    border-radius: 14px;
+    font-size: 16px;
+  }
+  textarea { padding: 0.8rem 0.9rem; }
+  button, a, summary { -webkit-tap-highlight-color: transparent; }
+
+  /* Cards, content blocks and FAQ rows */
+  main article,
+  main .rounded-\[28px\],
+  main .rounded-\[30px\],
+  main .rounded-\[26px\] {
+    border-radius: 21px;
+  }
+  main article { min-width: 0; }
+  main details > summary { min-height: 48px; }
+  main details > p { line-height: 1.8; }
+
+  /* Home hero: less empty space, compact preview, clear primary action */
+  .da3-hero .relative.mx-auto.grid {
+    gap: 0.25rem;
+    padding: 1rem 1rem 2rem;
+  }
+  .da3-hero .relative.order-1 {
+    min-height: 285px;
+    max-width: 100%;
+  }
+  .da3-hero .da3-copy h1 { margin-top: 0.85rem; }
+  .da3-hero .da3-copy > p { margin-top: 0.85rem; line-height: 1.9; }
+  .da3-hero .da3-copy .mt-7.flex { margin-top: 1.15rem; gap: 0.65rem; }
+  .da3-hero .da3-copy .mt-7.flex > a { width: 100%; }
+  .da3-hero .da3-copy .mt-8.flex { margin-top: 1.2rem; gap: 0.65rem 1rem; }
+  .da3-hero .da3-tool-rail { bottom: calc(86px + env(safe-area-inset-bottom)) !important; }
+
+  /* Gallery: compact filters and preview cards */
+  main .overflow-x-auto[role="tablist"] {
+    margin-top: 1.25rem;
+    padding: 0.25rem 0.1rem 0.75rem;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  main .overflow-x-auto[role="tablist"]::-webkit-scrollbar { display: none; }
+  main [role="tablist"] button { min-height: 42px; padding-inline: 1rem; scroll-snap-align: start; }
+  main .group > a:first-child { max-height: 390px; }
+  main .group > a:first-child .invite { max-height: 390px; }
+
+  /* Editor: form first, preview second, with a compact persistent checkout bar */
+  main .field input, main .field select { width: 100%; }
+  main .fixed.inset-x-0.bottom-0.z-30 {
+    padding: 0.65rem 0.85rem calc(0.65rem + env(safe-area-inset-bottom));
+    box-shadow: 0 -8px 28px rgba(74,45,51,.10);
+  }
+  main .fixed.inset-x-0.bottom-0.z-30 .btn-gold { min-width: 112px; }
+  main .fixed.inset-x-0.bottom-0.z-30 > div { gap: 0.75rem; }
+  main .fixed.inset-x-0.bottom-0.z-30 p { line-height: 1.35; }
+
+  /* Package cards and payment content */
+  main .grid > article { min-width: 0; }
+  main section > .grid { min-width: 0; }
+  main .grid.grid-cols-2 { column-gap: 0.6rem; }
+  main [role="dialog"] { max-height: min(82dvh, 680px); }
+  
+  /* Footer and floating contact should not compete with the bottom navigation */
+  footer { padding-bottom: 0.5rem; }
+  footer .rounded-\[28px\] { padding: 1.15rem; }
+  footer .grid { gap: 1.5rem; }
+  body::before, body::after { opacity: 0.65; }
+}
+
+/* Slightly roomier small tablets without changing the desktop layout */
+@media (min-width: 480px) and (max-width: 767px) {
+  main#main { padding-inline: 1.25rem; }
+  .da3-hero .da3-copy .mt-7.flex { flex-direction: row; }
+  .da3-hero .da3-copy .mt-7.flex > a { width: auto; flex: 1; }
+}
+
+/* Respect the device's bottom safe area on modern phones */
+@media (max-width: 767px) {
+  body { padding-bottom: calc(82px + env(safe-area-inset-bottom)); }
+}
