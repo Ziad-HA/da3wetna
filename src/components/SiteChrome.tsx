@@ -49,7 +49,7 @@ function Header() {
   useEffect(() => setOpen(false), [pathname])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#f0dce1]/80 bg-[#fffdfa]/95 shadow-[0_4px_22px_rgba(74,45,51,0.035)] backdrop-blur-xl">
+    <header className="da3-site-header sticky top-0 z-40 border-b border-[#f0dce1]/80 bg-[#fffdfa]/95 shadow-[0_4px_22px_rgba(74,45,51,0.035)] backdrop-blur-xl">
       <div className="mx-auto flex h-[70px] max-w-6xl items-center justify-between gap-3 px-4 sm:h-[76px]">
         <Link to="/" className="group flex shrink-0 items-center gap-2.5" aria-label="دعوتنا، الصفحة الرئيسية">
           <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50] ring-1 ring-[#f3dfe3] transition duration-300 group-hover:-rotate-3 group-hover:scale-105">
