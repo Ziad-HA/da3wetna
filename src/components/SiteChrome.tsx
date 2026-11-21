@@ -24,6 +24,20 @@ export function SiteChrome() {
   )
 }
 
+
+function RomanticAtmosphere() {
+  return (
+    <div className="da3-atmosphere" aria-hidden="true">
+      <span className="da3-floating-petal">✿</span>
+      <span className="da3-floating-petal">♡</span>
+      <span className="da3-floating-petal">✧</span>
+      <span className="da3-floating-petal">❀</span>
+      <span className="da3-floating-petal">♡</span>
+      <span className="da3-floating-petal">✿</span>
+    </div>
+  )
+}
+
 function Header() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
