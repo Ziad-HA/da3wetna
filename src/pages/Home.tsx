@@ -85,7 +85,7 @@ export function Home() {
 
       <section className="mx-3 mb-9 overflow-hidden rounded-[24px] border border-[#efd9df] bg-[linear-gradient(120deg,#fff2f4_0%,#fffdfa_55%,#f8efe5_100%)] sm:mx-auto sm:mb-14 sm:max-w-6xl sm:rounded-[32px]">
         <div className="flex flex-col items-center justify-between gap-4 px-5 py-6 text-center sm:flex-row sm:px-9 sm:py-8 sm:text-right">
-          <div><p className="text-xs font-bold text-[#a64257] sm:text-sm">باقات واضحة من غير اشتراكات</p><h2 className="mt-1 font-display text-2xl text-[#4a2d33] sm:text-3xl">ابدأ دعوتك من ${money(packages[0].price)} جنيه</h2><p className="mt-1 text-xs leading-6 text-[#806b70] sm:text-sm">اختار عدد الدعوات المناسب، وكل دعوة ليها تصميمها ورابطها.</p></div>
+          <div><p className="text-xs font-bold text-[#a64257] sm:text-sm">باقات واضحة من غير اشتراكات</p><h2 className="mt-1 font-display text-2xl text-[#4a2d33] sm:text-3xl">ابدأ دعوتك من {money(packages[0].price)} جنيه</h2><p className="mt-1 text-xs leading-6 text-[#806b70] sm:text-sm">اختار عدد الدعوات المناسب، وكل دعوة ليها تصميمها ورابطها.</p></div>
           <Link to="/packages" className="btn-gold min-h-11 shrink-0 justify-center px-6">شوف الباقات والأسعار ←</Link>
         </div>
       </section>
