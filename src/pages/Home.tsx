@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { Chevron, IconLink, IconPen, IconStory, IconWallet } from "../components/Icons"
-import { site } from "../config"
+import { packages } from "../config"
 import { draftFor, faqs, templates } from "../data"
 import { money } from "../lib/format"
 import { readLast } from "../lib/storage"
@@ -78,7 +78,7 @@ export function Home() {
             ["١٠", "تصاميم متنوعة"],
             ["فوري", "تعديل بنفسك"],
             ["٢", "طرق للمشاركة"],
-            [money(site.price), "سعر واضح للدعوة"],
+            [money(packages[0].price), "باقات تبدأ من"],
           ].map(([value, label]) => (
             <div key={label}>
               <p className="font-display text-2xl text-[#a64257] md:text-3xl">{value}</p>
@@ -154,24 +154,23 @@ export function Home() {
         <Link to="/templates" className="btn-dark mt-8">شوف كل التصاميم</Link>
       </section>
 
-      <section id="price" className="px-4 pb-16 md:pb-20">
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-[34px] border border-[#f0dce1] bg-white shadow-[0_16px_50px_rgba(91,48,60,0.07)]">
-          <div className="grid md:grid-cols-[1fr_auto] md:items-center">
-            <div className="p-7 text-center md:p-10 md:text-right">
-              <p className="text-sm font-bold text-[#b83b50]">من غير مصاريف مخفية</p>
-              <h2 className="mt-2 font-display text-4xl text-[#4a2d33]">سعر بسيط وواضح</h2>
-              <p className="mt-3 leading-7 text-[#806b70]">كل اللي تحتاجه عشان تبعت دعوتك بشكل يليق بيومك.</p>
-              <ul className="mt-5 grid gap-2 text-sm text-[#806b70]">
-                <li>✓ تعديل التفاصيل قبل الدفع</li>
-                <li>✓ صورة جاهزة لستوري واتساب</li>
-                <li>✓ لينك خاص لمشاركة الدعوة</li>
-              </ul>
-            </div>
-            <div className="border-t border-[#f0dce1] bg-[#fff5f6] p-7 text-center md:min-w-64 md:border-r md:border-t-0 md:p-10">
-              <p className="text-sm text-[#806b70]">الدعوة الواحدة</p>
-              <p className="mt-2 font-display text-5xl text-[#a64257]">{money(site.price)}</p>
-              <Link to="/templates" className="btn-gold mt-5 w-full">ابدأ دلوقتي</Link>
-            </div>
+      <section id="price" className="bg-[#fff5f6] px-4 py-16 md:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-bold text-[#b83b50]">اختار اللي يناسبك</p>
+            <h2 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-5xl">باقات لكل فرحة</h2>
+            <p className="mt-3 leading-8 text-[#806b70]">ابدأ بدعوة واحدة أو وفر أكتر مع باقات الدعوات المتعددة.</p>
+          </div>
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {packages.map((item) => (
+              <article key={item.id} className={`rounded-[25px] border p-5 ${item.id === "plus" ? "border-[#17382e] bg-[#17382e] text-white shadow-xl" : "border-[#f0dce1] bg-white"}`}>
+                <p className={`text-sm font-bold ${item.id === "plus" ? "text-[#e8d39e]" : "text-[#a64257]"}`}>{item.label || "باقة مرنة"}</p>
+                <h3 className="mt-2 text-lg font-bold">{item.name}</h3>
+                <p className={`mt-1 text-sm ${item.id === "plus" ? "text-white/70" : "text-[#806b70]"}`}>{item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات مختلفة"}</p>
+                <p className={`mt-4 font-display text-4xl ${item.id === "plus" ? "text-[#e8d39e]" : "text-[#08745d]"}`}>{money(item.price)}</p>
+                <Link to="/templates" className={`mt-5 w-full rounded-full px-4 py-3 text-center text-sm font-bold inline-flex justify-center ${item.id === "plus" ? "bg-[#e8d39e] text-[#17382e]" : "bg-[#a64257] text-white"}`}>اختار الباقة</Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>
