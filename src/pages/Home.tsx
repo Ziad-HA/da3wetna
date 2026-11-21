@@ -35,7 +35,7 @@ export function Home() {
           .da3-copy > *:nth-child(2) { animation-delay:.08s }
           .da3-copy > *:nth-child(3) { animation-delay:.16s }
           .da3-copy > *:nth-child(4) { animation-delay:.24s }
-          @media(max-width:420px) { .da3-tool-rail { right:0!important; scale:.88; transform-origin:right center } }
+          @media(max-width:640px) { .da3-phone-float { animation:none; transform:scale(.96) rotate(0deg) } .da3-tool-rail { right:0!important; gap:3px!important; padding:7px 5px!important; border-radius:18px!important } .da3-tool-rail > div { width:34px!important; padding:4px 0!important } .da3-tool-rail > div span:first-child { font-size:13px!important; line-height:16px!important } .da3-tool-rail > div span:last-child { font-size:7px!important; line-height:10px!important } }
           @media(prefers-reduced-motion:reduce) { .da3-phone-float,.da3-petal,.da3-spark,.da3-copy > * { animation:none!important } }
         `}</style>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -47,7 +47,7 @@ export function Home() {
           <span className="da3-spark absolute right-[45%] top-[12%] text-xl text-[#c6a15b]">✦</span>
         </div>
 
-        <div className="relative mx-auto grid max-w-6xl items-center gap-5 px-4 pb-12 pt-8 sm:gap-8 sm:pb-16 sm:pt-12 md:grid-cols-[1.02fr_.98fr] md:gap-10 md:py-20 lg:gap-14">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-2 px-4 pb-9 pt-5 sm:gap-8 sm:pb-16 sm:pt-12 md:grid-cols-[1.02fr_.98fr] md:gap-10 md:py-20 lg:gap-14">
           <div className="da3-copy relative z-10 order-2 text-center md:order-1 md:text-right">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#e7c9c9] bg-white/75 px-4 py-2 shadow-[0_5px_20px_rgba(91,48,60,.05)] backdrop-blur">
               <span className="text-[#bd965e]">✦</span>
@@ -76,9 +76,9 @@ export function Home() {
             </div>
           </div>
 
-          <div className="relative order-1 mx-auto flex min-h-[390px] w-full max-w-[500px] items-center justify-center sm:min-h-[500px] md:order-2 md:min-h-[570px]">
-            <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#f0d2d9_0%,rgba(240,210,217,.5)_52%,transparent_73%)] sm:h-[390px] sm:w-[390px] md:h-[470px] md:w-[470px]"/>
-            <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-[310px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-t-[48%] rounded-b-[45%] border border-[#c6a15b]/55 bg-[linear-gradient(145deg,rgba(255,255,255,.65),rgba(255,246,242,.12))] shadow-[inset_0_0_50px_rgba(255,255,255,.7)] sm:h-[405px] sm:w-[405px] md:h-[485px] md:w-[485px]"/>
+          <div className="relative order-1 mx-auto flex min-h-[340px] w-full max-w-[500px] items-center justify-center sm:min-h-[500px] md:order-2 md:min-h-[570px]">
+            <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#f0d2d9_0%,rgba(240,210,217,.5)_52%,transparent_73%)] sm:h-[390px] sm:w-[390px] md:h-[470px] md:w-[470px]"/>
+            <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-[270px] w-[270px] -translate-x-1/2 -translate-y-1/2 rounded-t-[48%] rounded-b-[45%] border border-[#c6a15b]/55 bg-[linear-gradient(145deg,rgba(255,255,255,.65),rgba(255,246,242,.12))] shadow-[inset_0_0_50px_rgba(255,255,255,.7)] sm:h-[405px] sm:w-[405px] md:h-[485px] md:w-[485px]"/>
             <div aria-hidden="true" className="absolute left-1/2 top-[7%] z-[2] -translate-x-1/2 text-center">
               <span className="inline-flex items-center gap-2 rounded-full border border-[#d9bd91]/80 bg-[#fffaf2]/95 px-3 py-1.5 text-[9px] font-semibold tracking-[.2em] text-[#a77c43] shadow-sm sm:text-[10px]">✧ WEDDING INVITATION ✧</span>
             </div>
@@ -94,7 +94,7 @@ export function Home() {
             <span aria-hidden="true" className="da3-petal absolute right-[11%] top-[24%] z-[4] text-2xl text-[#d18d9b]">♡</span>
             <span aria-hidden="true" className="da3-petal absolute bottom-[19%] left-[13%] z-[4] text-2xl text-[#d18d9b]" style={{animationDelay:"-2.8s"}}>♡</span>
             <div className="da3-phone-float relative z-10 rotate-[1deg]">
-              <div className="phone !w-[min(230px,61vw)] !rounded-[34px] !border-[6px] !border-white !bg-white !p-1.5 !shadow-[0_32px_85px_rgba(91,48,60,.25)] sm:!w-[min(270px,65vw)] md:!w-[min(292px,68vw)] md:!rounded-[42px] md:!border-[7px] md:!p-2">
+              <div className="phone !w-[min(195px,54vw)] !rounded-[34px] !border-[6px] !border-white !bg-white !p-1.5 !shadow-[0_32px_85px_rgba(91,48,60,.25)] sm:!w-[min(270px,65vw)] md:!w-[min(292px,68vw)] md:!rounded-[42px] md:!border-[7px] md:!p-2">
                 <div className="phone-screen h-full w-full overflow-hidden rounded-[26px] md:!rounded-[30px]">
                   <div className="invite-frame"><Invitation draft={draftFor(templates[1])}/></div>
                 </div>
@@ -117,11 +117,11 @@ export function Home() {
               ))}
             </div>
 
-            <div className="absolute left-0 top-[22%] z-20 rounded-2xl border border-[#f0dce1] bg-white/95 px-3 py-2.5 shadow-[0_14px_35px_rgba(91,48,60,.11)] backdrop-blur sm:left-[-1%] sm:px-4 sm:py-3">
+            <div className="absolute left-0 top-[22%] z-20 hidden rounded-2xl sm:block border border-[#f0dce1] bg-white/95 px-3 py-2.5 shadow-[0_14px_35px_rgba(91,48,60,.11)] backdrop-blur sm:left-[-1%] sm:px-4 sm:py-3">
               <p className="text-[10px] text-[#9b7a81] sm:text-xs">تفاصيلكم في تصميم واحد</p>
               <p className="mt-1 text-xs font-bold text-[#9e4055] sm:text-sm">حكايتكم، بطريقتكم ♡</p>
             </div>
-            <div className="absolute bottom-[13%] right-0 z-20 rounded-2xl border border-[#ead7c5] bg-[#fffdf9]/95 px-3 py-2.5 shadow-[0_14px_35px_rgba(91,48,60,.11)] backdrop-blur sm:right-[-1%] sm:px-4 sm:py-3">
+            <div className="absolute bottom-[13%] right-0 z-20 hidden rounded-2xl sm:block border border-[#ead7c5] bg-[#fffdf9]/95 px-3 py-2.5 shadow-[0_14px_35px_rgba(91,48,60,.11)] backdrop-blur sm:right-[-1%] sm:px-4 sm:py-3">
               <p className="text-[10px] text-[#9b7a81] sm:text-xs">لينك واحد لكل ضيوفكم</p>
               <p className="mt-1 font-display text-lg text-[#9e4055] sm:text-xl">يوم العمر</p>
             </div>
