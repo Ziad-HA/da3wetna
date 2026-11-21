@@ -33,6 +33,7 @@ export function Checkout() {
   const template = getTemplate(draft.templateId)!
 
   async function pay() {
+    if (!draft) return
     if (!continuing && method !== "card" && refNo.trim().length < 4) {
       setError("اكتب رقم عملية التحويل، وأقله ٤ أرقام.")
       return
