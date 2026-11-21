@@ -28,7 +28,6 @@ export function Home() {
           @keyframes da3-drift { 0%,100% { transform:translateY(0) rotate(0) } 50% { transform:translateY(-8px) rotate(5deg) } }
           @keyframes da3-glow { 0%,100% { opacity:.42; transform:scale(.96) } 50% { opacity:.9; transform:scale(1.06) } }
           @keyframes da3-rise { from { opacity:0; transform:translateY(16px) } to { opacity:1; transform:translateY(0) } }
-          @keyframes da3-rail { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-7px) } }
           .da3-phone-float { animation:da3-float 7s ease-in-out infinite }
           .da3-petal { animation:da3-drift 6s ease-in-out infinite }
           .da3-spark { animation:da3-glow 3.2s ease-in-out infinite }
@@ -36,9 +35,8 @@ export function Home() {
           .da3-copy > *:nth-child(2) { animation-delay:.08s }
           .da3-copy > *:nth-child(3) { animation-delay:.16s }
           .da3-copy > *:nth-child(4) { animation-delay:.24s }
-          .da3-tool-rail { animation:da3-rail 6s ease-in-out infinite }
-          @media(max-width:420px) { .da3-tool-rail { right:0!important; transform:scale(.88); transform-origin:right center } }
-          @media(prefers-reduced-motion:reduce) { .da3-phone-float,.da3-petal,.da3-spark,.da3-copy > *,.da3-tool-rail { animation:none!important } }
+          @media(max-width:420px) { .da3-tool-rail { right:0!important; scale:.88; transform-origin:right center } }
+          @media(prefers-reduced-motion:reduce) { .da3-phone-float,.da3-petal,.da3-spark,.da3-copy > * { animation:none!important } }
         `}</style>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -right-40 -top-44 h-[34rem] w-[34rem] rounded-full bg-[#f3d8df]/70 blur-[90px]" />
