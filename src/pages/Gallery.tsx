@@ -41,35 +41,34 @@ export function Gallery() {
       <section className="mt-10 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="باقات الدعوات">
         {packages.map((item) => {
           const active = selected === item.id
-          const featured = item.id === "plus"
           return (
-            <article key={item.id} className={`relative flex flex-col rounded-[26px] border p-5 transition duration-200 ${featured ? "border-[#183d32] bg-[#102d25] text-white shadow-[0_16px_36px_rgba(16,45,37,0.18)] lg:-translate-y-2" : "border-[#eadde0] bg-white text-[#4a2d33]"} ${active ? "ring-2 ring-[#b83b50] ring-offset-2" : ""}`}>
-              <span className="mb-3 self-start rounded-full bg-[#fae8eb] px-3 py-1 text-xs font-extrabold text-[#bd4058]">
-                {item.id === "single" ? "خصم 37%" : item.label}
+            <article key={item.id} className={`relative flex flex-col rounded-[26px] border p-5 transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(166,66,87,0.09)] ${active ? "border-[#b83b50] bg-[#fffafb] shadow-[0_10px_28px_rgba(166,66,87,0.10)] ring-1 ring-[#b83b50]" : "border-[#f0dce1] bg-white shadow-[0_6px_20px_rgba(91,48,60,0.04)]"}`}>
+              <span className="mb-4 self-start rounded-full bg-[#fff0f2] px-3.5 py-1.5 text-xs font-extrabold text-[#a64257]">
+                {item.id === "single" ? item.discount : item.label}
               </span>
-              <h2 className="text-xl font-extrabold text-[#4a2d33]">{item.name}</h2>
+              <h2 className="text-lg font-extrabold tracking-tight text-[#4a2d33] md:text-xl">{item.name}</h2>
               <p className="mt-2 min-h-12 text-sm leading-6 text-[#806b70]">
                 {item.id === "single" ? item.description : `${item.quantity} دعوات مختلفة`}
               </p>
-              <div className="mt-5 flex flex-wrap items-end gap-2">
-                <strong className="font-display text-4xl text-[#08745d]">{money(item.price)}</strong>
+              <div className="mt-6 flex flex-wrap items-end gap-2 border-b border-[#f3e7e9] pb-5">
+                <strong className="font-display text-4xl text-[#a64257]">{money(item.price)}</strong>
                 {item.oldPrice ? <span className="mb-1 text-sm text-[#a99599] line-through">{money(item.oldPrice)}</span> : null}
                 <span className="mb-1 text-sm text-[#806b70]">ج.م · دفعة واحدة</span>
               </div>
-              <div className="mt-5 flex-1 rounded-2xl bg-[#fbf7f3] p-4">
+              <div className="mt-5 flex-1 rounded-2xl bg-[#fff8f8] p-4">
                 <p className="font-bold text-[#4a2d33]">
                   {item.id === "single" ? "تنشئ 1 دعوة مميزة" : `تنشئ ${item.quantity} دعوات مميزة`}
                 </p>
-                <p className="mt-1 text-sm text-[#08745d]">
+                <p className="mt-1 text-sm font-semibold text-[#a64257]">
                   ≈ {money(Math.round(item.price / item.quantity))} ج.م للدعوة
                 </p>
-                <p className="mt-3 text-sm font-semibold leading-6 text-[#08745d]">
+                <p className="mt-3 text-sm font-semibold leading-6 text-[#806b70]">
                   وتبعتها لعدد لا نهائي من الناس
                 </p>
                 <div className="mt-4 border-t border-[#eadde0] pt-4">
                   <p className="font-bold text-[#4a2d33]">اللي هتقدر تعمله</p>
                   {item.features.map((feature) => (
-                    <p key={feature} className="mt-2 flex gap-2 text-sm leading-6 text-[#08745d]">
+                    <p key={feature} className="mt-2 flex gap-2 text-sm leading-6 text-[#665258]">
                       <span aria-hidden="true">✓</span><span>{feature}</span>
                     </p>
                   ))}
@@ -84,7 +83,7 @@ export function Gallery() {
                 </div>
                 <div className="mt-4 border-t border-[#eadde0] pt-4">
                   {(item.id === "single" ? ["معاك مدى الحياة", "تعديل 30 يوم من التفعيل"] : ["كل دعوة مستقلة بتفاصيلها", "روابط منفصلة لكل دعوة"]).map((benefit) => (
-                    <p key={benefit} className="mt-2 text-sm font-semibold text-[#4a2d33]">• {benefit}</p>
+                    <p key={benefit} className="mt-2 text-sm font-semibold text-[#665258]">• {benefit}</p>
                   ))}
                 </div>
               </div>
@@ -97,7 +96,7 @@ export function Gallery() {
                 onClick={() => choosePackage(item.id)}
                 disabled={hasUnusedInvites && activeOrder?.packageId !== item.id}
                 aria-pressed={active}
-                className={`mt-4 min-h-11 w-full rounded-full px-4 text-sm font-bold transition ${featured ? "bg-[#e8d39e] text-[#17382e] hover:bg-[#f0dfb6]" : "bg-[#a64257] text-white hover:bg-[#91384b]"}`}
+                className={`mt-4 min-h-11 w-full rounded-full px-4 text-sm font-bold transition ${active ? "bg-[#fff0f2] text-[#a64257] ring-1 ring-[#e8c2ca]" : "bg-[#a64257] text-white hover:bg-[#91384b]"}`}
               >
                 {active ? (item.id === "single" ? "✓ الباقة المختارة" : "✓ الباقة المختارة") : hasUnusedInvites ? "الباقة الحالية غير مكتملة" : item.id === "single" ? "اطلب الباقة" : "اختار الباقة"}
               </button>
