@@ -28,6 +28,14 @@ export function Editor() {
   const [draft, setDraft] = useState<InviteDraft>(() => initDraft(id))
   const [active, setActive] = useState<FieldKey | null>("groom")
   const [error, setError] = useState("")
+  const requiredItems = [
+    { label: "اسم العريس", done: Boolean(draft.groom.trim()) },
+    { label: "اسم العروسة", done: Boolean(draft.bride.trim()) },
+    { label: "تاريخ المناسبة", done: Boolean(draft.date) },
+    { label: "مكان المناسبة", done: Boolean(draft.venue.trim()) },
+  ]
+  const completedItems = requiredItems.filter((item) => item.done).length
+  const progress = Math.round((completedItems / requiredItems.length) * 100)
 
   useEffect(() => setDraft(initDraft(id)), [id])
   useEffect(() => {
@@ -71,11 +79,33 @@ export function Editor() {
         <span className="rounded-full bg-white px-4 py-2 text-sm font-bold text-[#a64257] ring-1 ring-[#f0dce1]">{template.name}</span>
       </div>
 
+      <section className="mb-6 rounded-2xl border border-[#f0dce1] bg-white p-4 md:p-5" aria-label="اكتمال بيانات الدعوة">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p className="text-sm font-bold text-[#4a2d33]">جهّز بيانات دعوتك</p>
+            <p className="mt-1 text-xs text-[#806b70]">كمّل البيانات الأساسية عشان تقدر تنتقل لتأكيد الطلب.</p>
+          </div>
+          <strong className="text-sm text-[#a64257]">{completedItems} من {requiredItems.length} مكتمل</strong>
+        </div>
+        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#f7e9ec]" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress} aria-label="نسبة اكتمال بيانات الدعوة">
+          <div className="h-full rounded-full bg-[#b83b50] transition-all duration-300" style={{ width: `${progress}%` }} />
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {requiredItems.map((item) => (
+            <div key={item.label} className="flex items-center gap-2 text-xs">
+              <span className={`grid h-5 w-5 shrink-0 place-items-center rounded-full ${item.done ? "bg-[#edf7ef] text-[#28734b]" : "bg-[#fff0f2] text-[#a64257]"}`} aria-hidden="true">{item.done ? "✓" : "○"}</span>
+              <span className={item.done ? "text-[#527566]" : "text-[#806b70]"}>{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <div className="mb-6 rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <p className="text-xs text-[#806b70]">الباقة المختارة</p>
             <strong className="text-[#4a2d33]">{selectedPackage.name} · {selectedPackage.quantity} {selectedPackage.quantity === 1 ? "دعوة" : "دعوات"}</strong>
+            <Link to="/packages" className="mt-1 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4">تغيير الباقة</Link>
           </div>
           <strong className="text-xl text-[#a64257]">{money(selectedPackage.price)}</strong>
         </div>
