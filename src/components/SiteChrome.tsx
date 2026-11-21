@@ -4,6 +4,7 @@ import { site } from "../config"
 import { LogoMark, WhatsAppIcon } from "./Icons"
 import { faqs } from "../data"
 
+// Header invitation CTA intentionally removed; navigation stays focused on the main pages.
 const links = [
   { href: "/templates", label: "الدعوات" },
   { href: "/how", label: "طريقة الاستخدام" },
