@@ -1,7 +1,7 @@
 import { getTemplate } from "../data"
 import type { InviteDraft } from "../types"
 
-const fields = ["templateId", "groom", "bride", "occasion", "hosts", "message", "date", "time", "venue", "city", "opening"] as const
+const fields = ["groom", "bride", "occasion", "hosts", "message", "date", "time", "venue", "city", "opening"] as const
 
 export function encodeDraft(draft: InviteDraft): string {
   const slim: InviteDraft = {
@@ -20,7 +20,7 @@ export function encodeDraft(draft: InviteDraft): string {
   const bytes = new TextEncoder().encode(JSON.stringify(slim))
   let binary = ""
   for (const byte of bytes) binary += String.fromCharCode(byte)
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "")
+  return btoa(binary).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "")
 }
 
 export function decodeDraft(code: string): InviteDraft | null {
