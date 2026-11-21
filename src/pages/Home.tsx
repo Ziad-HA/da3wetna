@@ -63,9 +63,9 @@ export function Home() {
             <p className="mx-auto mt-5 max-w-xl text-sm leading-8 text-[#806d70] sm:text-base md:mx-0 md:mt-6 md:text-lg">
               خلّوا أول تفاصيل فرحتكم تبدأ بدعوة تشبهكم. اختاروا التصميم، اكتبوا بيانات يومكم، وشاركوا لينك أنيق مع كل اللي بتحبوهم.
             </p>
-            <div className="mt-7 flex flex-wrap justify-center gap-3 md:justify-start">
-              <Link to="/templates" className="btn-gold min-w-44 justify-center shadow-[0_12px_28px_rgba(182,75,96,.22)] transition duration-300 hover:-translate-y-1">ابدأوا تصميم دعوتكم <span className="mr-2">←</span></Link>
-              <Link to="/how" className="btn-ghost min-w-36 justify-center border-[#e5cbd0] bg-white/80 text-[#65434b] transition duration-300 hover:-translate-y-1">شوفوا بتشتغل إزاي</Link>
+            <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row md:justify-start">
+              <Link to="/templates" className="btn-gold min-h-12 min-w-44 justify-center shadow-[0_12px_28px_rgba(182,75,96,.22)] transition duration-300 hover:-translate-y-1">ابدأوا تصميم دعوتكم <span className="mr-2">←</span></Link>
+              <Link to="/how" className="btn-ghost min-h-12 min-w-36 justify-center border-[#e5cbd0] bg-white/80 text-[#65434b] transition duration-300 hover:-translate-y-1">شوفوا بتشتغل إزاي</Link>
             </div>
             {last ? <Link to={`/done/${last.code}`} className="mt-5 inline-block text-sm font-semibold text-[#a34256] underline-offset-4 hover:underline">ارجع لآخر دعوة اشتغلت عليها</Link> : null}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-xs font-semibold text-[#806b70] sm:text-sm md:justify-start">
@@ -116,8 +116,8 @@ export function Home() {
         </div>
       </section>
 
-      <section className="border-y border-[#f0dce1] bg-white">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-5 px-4 py-6 text-center md:grid-cols-4">
+      <section className="relative border-y border-[#f0dce1] bg-white shadow-[0_8px_28px_rgba(91,48,60,.035)]">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 py-5 text-center sm:gap-5 sm:py-7 md:grid-cols-4">
           {[
             ["١٠", "تصاميم متنوعة"],
             ["فوري", "تعديل بنفسك"],
@@ -132,7 +132,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="bg-[#fff5f6] py-16 md:py-20">
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fff5f6_0%,#fffafa_100%)] py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-4">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-bold text-[#b83b50]">كل اللي تحتاجه</p>
@@ -141,8 +141,8 @@ export function Home() {
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature) => (
-              <article key={feature.title} className="rounded-[26px] border border-[#f0dce1] bg-white p-6">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50]">
+              <article key={feature.title} className="group rounded-[26px] border border-[#f0dce1] bg-white p-6 shadow-[0_8px_28px_rgba(91,48,60,.035)] transition duration-300 hover:-translate-y-1 hover:border-[#e2bdc6] hover:shadow-[0_18px_40px_rgba(91,48,60,.09)]">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50] transition duration-300 group-hover:rotate-[-4deg] group-hover:scale-105">
                   <feature.icon className="h-6 w-6" />
                 </span>
                 <h3 className="mt-5 font-bold text-[#4a2d33]">{feature.title}</h3>
@@ -164,7 +164,7 @@ export function Home() {
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
           {templates.slice(0, 4).map((template) => (
             <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group block">
-              <div className="overflow-hidden rounded-[26px] border border-[#f0dce1] bg-white p-2 shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lg">
+              <div className="overflow-hidden rounded-[26px] border border-[#f0dce1] bg-white p-2 shadow-[0_8px_26px_rgba(91,48,60,.05)] transition duration-300 group-hover:-translate-y-1 group-hover:border-[#e2bdc6] group-hover:shadow-[0_18px_38px_rgba(91,48,60,.12)]">
                 <div className="overflow-hidden rounded-[19px]">
                   <Invitation draft={draftFor(template)} />
                 </div>
@@ -213,8 +213,8 @@ export function Home() {
             { n: "٢", title: "ضيف تفاصيلكم", text: "اكتب الأسماء والميعاد والمكان، وشوف التعديلات مباشرة." },
             { n: "٣", title: "كمّل طلبك وشارك", text: "اختار الباقة وطريقة الدفع، وبعد التأكيد جهّز دعوتك للمشاركة." },
           ].map((step) => (
-            <article key={step.n} className="rounded-[26px] border border-[#f0dce1] bg-white p-6">
-              <span className="font-display text-4xl text-[#c78391]">{step.n}</span>
+            <article key={step.n} className="relative overflow-hidden rounded-[26px] border border-[#f0dce1] bg-white p-6 shadow-[0_8px_28px_rgba(91,48,60,.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(91,48,60,.08)]">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff0f2] font-display text-2xl text-[#b64b60] ring-1 ring-[#f0dce1]">{step.n}</span>
               <h3 className="mt-4 text-lg font-extrabold text-[#4a2d33]">{step.title}</h3>
               <p className="mt-2 text-sm leading-7 text-[#806b70]">{step.text}</p>
             </article>
