@@ -114,7 +114,7 @@ function Footer() {
           <Link to="/templates" className="btn-gold min-h-10 shrink-0 px-5 text-xs sm:px-7 sm:text-sm">اكتشف الدعوات <span className="mr-2" aria-hidden="true">←</span></Link>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-3 gap-y-3 border-b border-[#efdde1] pb-4 sm:grid-cols-2 sm:gap-9 sm:pb-10 lg:grid-cols-[1.35fr_0.8fr_1.25fr_0.8fr] lg:gap-8">
+        <div className="grid grid-cols-2 gap-2.5 border-b border-[#efdde1] pb-4 sm:grid-cols-2 sm:gap-9 sm:pb-10 lg:grid-cols-[1.35fr_0.8fr_1.25fr_0.8fr] lg:gap-8">
           <div>
             <Link to="/" className="inline-flex items-center gap-2 sm:gap-3" aria-label="دعوتنا، الصفحة الرئيسية">
               <span className="grid h-9 w-9 place-items-center rounded-xl sm:h-12 sm:w-12 sm:rounded-2xl bg-[#fff0f2] text-[#b83b50] ring-1 ring-[#f2dce1]">
@@ -130,20 +130,20 @@ function Footer() {
             </p>
           </div>
 
-          <div className="grid content-start gap-1 text-[9px] sm:gap-3 sm:text-sm">
-            <p className="mb-0 font-bold text-[10px] text-[#4a2d33] sm:mb-1 sm:text-sm">روابط سريعة</p>
+          <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-[10px] sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-sm">
+            <p className="mb-1 flex items-center gap-1.5 font-bold text-[11px] text-[#4a2d33] sm:mb-1 sm:text-sm"><span className="h-1.5 w-1.5 rounded-full bg-[#c66d7d]" />روابط سريعة</p>
             <Link className="text-[9px] leading-4 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/templates">كل الدعوات</Link>
             <Link className="text-[9px] leading-4 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/how">طريقة الاستخدام</Link>
-            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/packages">الباقات والأسعار</Link>
+            <Link className="text-[10px] leading-5 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/packages">الباقات والأسعار</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/privacy">سياسة الخصوصية</Link>
           </div>
 
-          <div className="grid content-start gap-1.5 text-[9px] sm:gap-3 sm:text-sm">
-            <p className="mb-0 font-bold text-[10px] text-[#4a2d33] sm:mb-1 sm:text-sm">دعوات لكل مناسبة</p>
+          <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-[10px] sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-sm">
+            <p className="mb-1 flex items-center gap-1.5 font-bold text-[11px] text-[#4a2d33] sm:mb-1 sm:text-sm"><span className="h-1.5 w-1.5 rounded-full bg-[#c66d7d]" />دعوات لكل مناسبة</p>
             <div className="grid grid-cols-2 gap-x-1.5 gap-y-1 sm:gap-x-4 sm:gap-y-3">
-              <Link className="text-[9px] leading-4 text-[9px] leading-4 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal sm:text-sm sm:leading-normal" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
-              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-فرح">دعوة فرح</Link>
+              <Link className="text-[10px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
+              <Link className="text-[10px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/دعوة-فرح">دعوة فرح</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-خطوبة">دعوة خطوبة</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-كتب-كتاب">دعوة كتب كتاب</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوات-الكترونية">دعوات إلكترونية</Link>
@@ -152,8 +152,8 @@ function Footer() {
             </div>
           </div>
 
-          <div className="grid content-start gap-3 text-sm">
-            <p className="mb-1 font-bold text-[#4a2d33]">طرق الدفع</p>
+          <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-sm sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0">
+            <p className="mb-1 flex items-center gap-1.5 text-[11px] font-bold text-[#4a2d33] sm:mb-1 sm:text-sm"><span className="h-1.5 w-1.5 rounded-full bg-[#c66d7d]" />طرق الدفع</p>
             <p className="text-[9px] leading-4 text-[#806b70] sm:text-sm">فودافون كاش</p>
             <p className="text-[10px] text-[#806b70] sm:text-sm">إنستاباي</p>
             <p className="text-[9px] leading-4 text-[#a18a8f] sm:text-sm">الدفع بالبطاقة قريبًا</p>
