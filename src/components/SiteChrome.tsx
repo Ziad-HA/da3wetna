@@ -200,13 +200,13 @@ function BottomNavigation() {
   useEffect(() => setSupportOpen(false), [pathname])
   if (hidden) return null
 
-  const itemClass = "flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 text-[11px] font-bold transition"
+  const itemClass = "flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 text-[10px] font-bold leading-tight transition"
   const activeClass = "bg-[#fff0f2] text-[#a64257]"
   const idleClass = "text-[#90777d] hover:bg-[#fff8f8]"
 
   return (
     <>
-      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[#f0dce1] bg-[#fffdfa]/95 px-3 pb-[max(env(safe-area-inset-bottom),10px)] pt-2 shadow-[0_-8px_30px_rgba(74,45,51,0.08)] backdrop-blur-2xl md:hidden" aria-label="التنقل الرئيسي">
+      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[#f0dce1] bg-[#fffdfa]/95 px-3 pb-[max(env(safe-area-inset-bottom),5px)] pt-1 shadow-[0_-5px_20px_rgba(74,45,51,0.07)] backdrop-blur-2xl md:hidden" aria-label="التنقل الرئيسي">
         <div className="mx-auto flex max-w-lg items-center gap-1">
           <NavLink to="/templates" className={({ isActive }) => `${itemClass} ${isActive ? activeClass : idleClass}`}>
             <BottomIcon type="invite" /><span>الدعوات</span>
@@ -248,7 +248,7 @@ function BottomNavigation() {
 }
 
 function BottomIcon({ type }: { type: "invite" | "package" | "help" | "account" }) {
-  const common = "h-[21px] w-[21px]"
+  const common = "h-[18px] w-[18px]"
   if (type === "invite") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2.5" stroke="currentColor" strokeWidth="1.6"/><path d="M8 8h8M8 12h5M8 16h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
   if (type === "package") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8 4.2v9.6L12 21l-8-4.2V7.2L12 3Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="m4.5 7.5 7.5 4 7.5-4M12 11.5V21M8 5.2l8 4.1" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/></svg>
   if (type === "help") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6"/><path d="M9.6 9a2.5 2.5 0 1 1 4.3 1.8c-1.1 1-1.9 1.2-1.9 2.7M12 17.2v.1" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/></svg>
