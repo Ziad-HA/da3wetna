@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, type CSSProperties } from "react"
 import { Link, useParams } from "react-router-dom"
 import { StoryActions } from "../components/StoryActions"
 import { Invitation } from "../components/Invitation"
@@ -33,7 +33,7 @@ export function InviteView() {
     if (!draft || introSkipped || introStep >= 3) return
     const timer = window.setTimeout(() => setIntroStep((step) => Math.min(3, step + 1)), 950)
     return () => window.clearTimeout(timer)
-  }, [draft, introSkipped, introStep])
+  }, [code, introSkipped, introStep])
 
   useEffect(() => {
     document.title = draft ? `دعوة ${draft.groom} و${draft.bride}` : "دعوة"
@@ -52,7 +52,7 @@ export function InviteView() {
 
   if (!introSkipped && introStep < 3) {
     return (
-      <main className={`invite-opening-screen invite-opening-step-${introStep}`} style={{ "--invite-shell": template.vars.shell } as React.CSSProperties}>
+      <main className={`invite-opening-screen invite-opening-step-${introStep}`} style={{ "--invite-shell": template.vars.shell } as CSSProperties}>
         <div className="invite-opening-glow" aria-hidden="true" />
         <div className="invite-opening-copy">
           <span>بكل الحب ندعوكم لمشاركتنا</span>
