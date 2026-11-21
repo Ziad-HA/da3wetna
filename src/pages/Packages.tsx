@@ -18,11 +18,11 @@ export function Packages() {
         <p className="mx-auto mt-4 max-w-2xl leading-8 text-[#806b70]">ابدأ بدعوة واحدة أو اختار باقة متعددة لو عندك أكتر من مناسبة أو نسخة.</p>
       </section>
       <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        <div className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid items-stretch gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {packages.map((item) => {
             const featured = item.id === "plus"
             return (
-              <article key={item.id} className={"flex flex-col rounded-[26px] border bg-white p-5 transition hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(166,66,87,0.09)] " + (featured ? "border-[#d9a3ae] shadow-[0_10px_28px_rgba(166,66,87,0.08)]" : "border-[#f0dce1]")}>
+              <article key={item.id} className={"relative flex flex-col rounded-[26px] border bg-white p-5 shadow-[0_8px_28px_rgba(91,48,60,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(166,66,87,0.11)] " + (featured ? "border-[#d9a3ae] ring-1 ring-[#f4e2e6] shadow-[0_10px_28px_rgba(166,66,87,0.08)]" : "border-[#f0dce1]")}>
                 <span className="self-start rounded-full bg-[#fff0f2] px-3 py-1.5 text-xs font-extrabold text-[#a64257]">{item.id === "single" ? item.discount : item.label || "باقة مرنة"}</span>
                 <h2 className="mt-4 text-xl font-extrabold text-[#4a2d33]">{item.name}</h2>
                 <p className="mt-2 min-h-12 text-sm leading-6 text-[#806b70]">{item.description}</p>
