@@ -20,7 +20,7 @@ export function encodeDraft(draft: InviteDraft): string {
   const bytes = new TextEncoder().encode(JSON.stringify(slim))
   let binary = ""
   for (const byte of bytes) binary += String.fromCharCode(byte)
-  return btoa(binary).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "")
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "")
 }
 
 export function decodeDraft(code: string): InviteDraft | null {
@@ -45,5 +45,5 @@ export function decodeDraft(code: string): InviteDraft | null {
 }
 
 export function invitePath(code: string): string {
-  return `/i/${code}`
+  return \`/i/\${code}\`
 }
