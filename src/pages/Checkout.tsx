@@ -25,7 +25,7 @@ export function Checkout() {
   const [error, setError] = useState("")
 
   useEffect(() => {
-    document.title = "الدفع — زفّة"
+    document.title = "الدفع — دعوتنا"
   }, [])
 
   if (!draft || !draftReady(draft)) return <Navigate to="/templates" replace />
