@@ -15,6 +15,10 @@ export function encodeDraft(draft: InviteDraft): string {
     venue: draft.venue.slice(0, 80),
     city: draft.city.slice(0, 40),
     opening: draft.opening.slice(0, 60),
+    rsvpPhone: draft.rsvpPhone.slice(0, 20),
+    musicUrl: draft.musicUrl.slice(0, 500),
+    photoOne: draft.photoOne.slice(0, 500),
+    photoTwo: draft.photoTwo.slice(0, 500),
   }
 
   const bytes = new TextEncoder().encode(JSON.stringify(slim))
@@ -54,6 +58,10 @@ export function decodeDraft(code: string): InviteDraft | null {
       venue: readString("venue"),
       city: readString("city"),
       opening: readString("opening"),
+      rsvpPhone: readString("rsvpPhone"),
+      musicUrl: readString("musicUrl"),
+      photoOne: readString("photoOne"),
+      photoTwo: readString("photoTwo"),
     }
   } catch {
     return null
