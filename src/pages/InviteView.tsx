@@ -1,9 +1,11 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react"
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { Link, useParams } from "react-router-dom"
 import { StoryActions } from "../components/StoryActions"
 import { Invitation } from "../components/Invitation"
+import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { getTemplate } from "../data"
 import { decodeDraft } from "../lib/codec"
+import { isLight } from "../lib/color"
 
 export function InviteView() {
   const { code = "" } = useParams()
@@ -12,6 +14,8 @@ export function InviteView() {
   const [now, setNow] = useState(() => Date.now())
   const [introStep, setIntroStep] = useState(0)
   const [introSkipped, setIntroSkipped] = useState(false)
+  const [musicOn, setMusicOn] = useState(false)
+  const audioRef = useRef<HTMLAudioElement>(null)
   const eventDate = useMemo(() => draft?.date ? new Date(`${draft.date}T${draft.time || "00:00"}:00`) : null, [draft?.date, draft?.time])
   const remaining = eventDate && !Number.isNaN(eventDate.getTime()) ? Math.max(0, eventDate.getTime() - now) : 0
   const days = Math.floor(remaining / 86400000)
@@ -29,11 +33,33 @@ export function InviteView() {
     return () => window.clearInterval(timer)
   }, [])
 
+  // الظرف بيستنى ضغطة الضيف (step 0). بعد الضغطة: الرفرف يفتح ← الكارت يطلع ← الدعوة تظهر.
+  const hasDraft = Boolean(draft)
   useEffect(() => {
-    if (!draft || introSkipped || introStep >= 3) return
-    const timer = window.setTimeout(() => setIntroStep((step) => Math.min(3, step + 1)), 950)
+    if (!hasDraft || introSkipped || introStep < 1 || introStep >= 3) return
+    const timer = window.setTimeout(() => setIntroStep((step) => Math.min(3, step + 1)), introStep === 1 ? 950 : 1250)
     return () => window.clearTimeout(timer)
-  }, [code, introSkipped, introStep])
+  }, [hasDraft, introSkipped, introStep])
+
+  function startMusic() {
+    const audio = audioRef.current
+    if (!audio) return
+    audio.volume = 0.7
+    audio.play().then(() => setMusicOn(true)).catch(() => setMusicOn(false))
+  }
+
+  function toggleMusic() {
+    const audio = audioRef.current
+    if (!audio) return
+    if (audio.paused) startMusic()
+    else { audio.pause(); setMusicOn(false) }
+  }
+
+  function openEnvelope() {
+    if (introStep > 0) return
+    startMusic()
+    setIntroStep(1)
+  }
 
   useEffect(() => {
     document.title = draft ? `دعوة ${draft.groom} و${draft.bride}` : "دعوة"
@@ -50,35 +76,31 @@ export function InviteView() {
     )
   }
 
+  const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} loop preload="auto" /> : null
+
   if (!introSkipped && introStep < 3) {
     return (
-      <main className={`invite-opening-screen invite-opening-step-${introStep}`} style={{ "--invite-shell": template.vars.shell } as CSSProperties}>
-        <div className="invite-opening-glow" aria-hidden="true" />
-        <div className="invite-opening-copy">
-          <span>بكل الحب ندعوكم لمشاركتنا</span>
-          <h1>{draft.groom} <i>و</i> {draft.bride}</h1>
-          <p>لحظة صغيرة… وهنفتحلكم حكاية فرحتنا</p>
-        </div>
-        <div className="opening-envelope" aria-label="ظرف دعوة زفاف يفتح">
-          <div className="opening-letter">
-            {photos[0] ? <img className="opening-letter-photo" src={photos[0]} alt="صورة من ذكريات العروسين" /> : <span className="opening-letter-spark">✦</span>}
-            <strong>{draft.groom} <i>و</i> {draft.bride}</strong>
-            <small>{draft.occasion} · {draft.date}</small>
-            <span className="opening-letter-heart">♡</span>
+      <>
+        {audio}
+        <main className={`invite-opening-screen invite-opening-step-${introStep}`} style={{ "--invite-shell": template.vars.shell, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
+          <div className="invite-opening-glow" aria-hidden="true" />
+          <div className="invite-opening-copy">
+            <span>بكل الحب ندعوكم لمشاركتنا</span>
+            <h1>{draft.groom} <i>و</i> {draft.bride}</h1>
+            <p>{draft.occasion} · {draft.venue}</p>
           </div>
-          <div className="opening-envelope-back" />
-          <div className="opening-envelope-pocket" />
-          <div className="opening-envelope-flap" />
-          <div className="opening-envelope-seal">♡</div>
-        </div>
-        <p className="invite-opening-hint">{introStep === 0 ? "ظرف من القلب…" : introStep === 1 ? "بنفتح الظرف…" : "دعوتكم وصلت ♡"}</p>
-        <button type="button" className="invite-skip-opening" onClick={() => { setIntroSkipped(true); setIntroStep(3) }}>تخطي المقدمة ←</button>
-      </main>
+          <OpeningEnvelope template={template} draft={draft} photo={photos[0]} step={introStep} onOpen={openEnvelope} />
+          <p className="invite-opening-hint" data-step={introStep}>{introStep === 0 ? "اضغط على الظرف لفتح الدعوة" : introStep === 1 ? "بنفتح الظرف…" : "دعوتكم وصلت ♡"}</p>
+          <button type="button" className="invite-skip-opening" onClick={() => { startMusic(); setIntroSkipped(true); setIntroStep(3) }}>تخطي المقدمة ←</button>
+        </main>
+      </>
     )
   }
 
   return (
-    <main className="invite-public-page min-h-dvh px-4 py-8" style={{ background: template.vars.shell, color: template.vars.ink }}>
+    <>
+    {audio}
+    <main className="invite-public-page min-h-dvh px-4 py-8" style={{ background: template.vars.shell, color: isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
       <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
         <header className="invite-public-heading text-center">
           <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
@@ -98,7 +120,6 @@ export function InviteView() {
           {eventDate && !Number.isNaN(eventDate.getTime()) ? <div className="mt-3 grid grid-cols-4 gap-2" dir="rtl">{[[days,"يوم"],[hours,"ساعة"],[minutes,"دقيقة"],[seconds,"ثانية"]].map(([value,label]) => <div key={String(label)} className="rounded-2xl bg-white px-1 py-3 shadow-sm"><strong className="block font-display text-2xl text-[#a64257]">{String(value).padStart(2,"0")}</strong><span className="mt-1 block text-[10px] text-[#806b70]">{label}</span></div>)}</div> : <p className="mt-3 text-sm">ميعاد المناسبة هيتحدد قريبًا</p>}
         </section>
         {photos.length ? <section className="invite-photo-moments w-full rounded-[26px] border border-white/70 bg-white/80 p-4 shadow-lg"><p className="mb-3 text-center font-bold text-[#4a2d33]">صور من حكايتنا ♡</p><div className="grid grid-cols-2 gap-2">{photos.map((photo, index) => <img key={photo} src={photo} alt={`صورة من المناسبة ${index + 1}`} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />)}</div></section> : null}
-        {musicUrl ? <section className="w-full rounded-[24px] border border-white/70 bg-white/80 p-4 text-center shadow-lg"><p className="mb-2 text-sm font-bold text-[#4a2d33]">موسيقى الدعوة ♫</p><audio className="w-full" controls preload="none" src={musicUrl}>المتصفح لا يدعم تشغيل الصوت.</audio></section> : null}
         {rsvpLink ? <a href={rsvpLink} target="_blank" rel="noreferrer" className="btn-gold w-full justify-center">أكد حضورك على واتساب ♡</a> : null}
         <div className="w-full"><StoryActions draft={draft} code={code} /></div>
         <section className="w-full rounded-[26px] border border-white/70 bg-white/80 p-4 text-center shadow-lg">
@@ -109,6 +130,12 @@ export function InviteView() {
         </section>
         <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
       </div>
+      {musicUrl ? (
+        <button type="button" onClick={toggleMusic} className="invite-music-toggle" aria-pressed={musicOn} aria-label={musicOn ? "إيقاف موسيقى الدعوة" : "تشغيل موسيقى الدعوة"}>
+          {musicOn ? "♫" : "♪"}
+        </button>
+      ) : null}
     </main>
+    </>
   )
 }

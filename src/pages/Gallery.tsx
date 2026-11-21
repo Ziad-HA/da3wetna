@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
-import { Invitation } from "../components/Invitation"
+import { InviteThumb } from "../components/InviteThumb"
 import { packages } from "../config"
 import { draftFor, templates } from "../data"
 import { clearDraft, readActivePackage, readSelectedPackage } from "../lib/storage"
@@ -55,7 +55,7 @@ export function Gallery() {
           <div className="relative mx-auto w-full max-w-[150px] sm:max-w-[285px]">
             <div className="absolute -inset-1 rotate-[-5deg] rounded-[14px] sm:-inset-3 sm:rounded-[22px] border border-white/80 bg-white/25" />
             <div className="gallery-hero-frame relative rotate-[1deg] overflow-hidden rounded-[10px] border-[3px] sm:rotate-[2deg] sm:rounded-[18px] sm:border-[7px] border-white bg-white shadow-[0_22px_55px_rgba(94,49,61,.18)]">
-              <div className="invite-frame"><Invitation draft={draftFor(templates[0])} /></div>
+              <div className="invite-frame"><InviteThumb draft={draftFor(templates[0])} /></div>
             </div>
             <span className="absolute -bottom-2 -left-2 grid h-7 w-7 sm:-bottom-4 sm:-left-5 sm:h-12 sm:w-12 place-items-center rounded-full border-4 border-[#f8e9ec] bg-white text-2xl text-[#b83b50] shadow-md">♡</span>
             <span className="absolute -right-2 top-2 hidden rounded-full border border-white bg-white/90 sm:block sm:-right-5 sm:top-5 px-3 py-2 text-[10px] font-bold text-[#a64257] shadow-sm">دعوتك تبدأ من هنا</span>
@@ -103,7 +103,7 @@ export function Gallery() {
             <article key={template.id} className="group min-w-0 overflow-hidden rounded-[18px] border border-[#f0dce1] bg-white p-2 shadow-[0_5px_22px_rgba(91,48,60,.045)] transition duration-300 hover:-translate-y-1 hover:border-[#dfb8c2] hover:shadow-[0_16px_34px_rgba(91,48,60,.10)] sm:rounded-[26px] sm:p-3">
               <div className="relative overflow-hidden rounded-[11px] bg-[#fff5f6] sm:rounded-[19px]">
                 <Link to={`/editor/${template.id}`} onClick={clearDraft} className="block" aria-label={`اختار تصميم ${template.name}`}>
-                <div className="gallery-design-frame"><div className="invite-frame"><Invitation draft={draftFor(template)} /></div></div>
+                <div className="gallery-design-frame"><div className="invite-frame"><InviteThumb draft={draftFor(template)} /></div></div>
                 <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[9px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">معاينة واختيار</span>
                 {template.isNew ? <span className="absolute right-2 top-2 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] shadow-sm sm:right-3 sm:top-3 sm:text-[10px]">جديد</span> : null}
                 </Link>

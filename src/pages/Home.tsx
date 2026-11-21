@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Invitation } from "../components/Invitation"
+import { InviteThumb } from "../components/InviteThumb"
 import { packages } from "../config"
 import { faqs } from "../data"
 import { draftFor, templates } from "../data"
@@ -45,7 +45,7 @@ export function Home() {
             <span aria-hidden="true" className="absolute right-[10%] top-[15%] z-10 animate-pulse text-3xl text-[#c6a15b]">✧</span>
             <span aria-hidden="true" className="absolute bottom-[14%] left-[9%] z-10 text-3xl text-[#d18d9b]">♡</span>
             <div className="home-hero-invitation relative z-10 w-[min(235px,64vw)] rotate-[1deg] sm:w-[min(300px,58vw)]">
-              <div className="home-invitation-paper overflow-hidden"><Invitation draft={draftFor(templates[1])} /></div>
+              <div className="home-invitation-paper overflow-hidden"><InviteThumb draft={draftFor(templates[1])} /></div>
             </div>
             <div className="absolute right-0 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-2 rounded-2xl border border-[#ead7c5] bg-white/90 px-2 py-3 text-center shadow-lg backdrop-blur sm:flex">
               {[["Aa","الكلام"],["Tt","الخط"],["▧","الصور"],["♫","الموسيقى"],["◉","الألوان"],["◷","الميعاد"]].map(([symbol,label]) => <div key={label} className="w-10"><span className="block font-display text-base text-[#b64b60]">{symbol}</span><span className="block text-[8px] text-[#806b70]">{label}</span></div>)}
@@ -72,7 +72,7 @@ export function Home() {
           {templates.slice(0,4).map((template) => (
             <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group min-w-0">
               <div className="home-template-art overflow-hidden">
-                <Invitation draft={draftFor(template)} />
+                <InviteThumb draft={draftFor(template)} />
               </div>
               <h3 className="mt-2 truncate text-xs font-extrabold text-[#4a2d33] sm:text-sm">{template.name}</h3>
               <p className="mt-1 line-clamp-2 text-[10px] leading-5 text-[#806b70] sm:text-xs">{template.blurb}</p>

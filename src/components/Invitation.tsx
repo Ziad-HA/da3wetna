@@ -15,6 +15,11 @@ const stars = [
   [250, 470], [80, 560], [200, 28], [340, 300],
 ]
 
+/** حبات لؤلؤ على قوس معلّق (أعلى وأسفل الدعوة). */
+const pearlArc = Array.from({ length: 15 }, (_, i) => [34 + i * 21.7, 34 + 30 * Math.sin((Math.PI * i) / 14)] as const)
+const mirrorCorners = ["", "translate(360 0) scale(-1 1)", "translate(0 640) scale(1 -1)", "translate(360 640) scale(-1 -1)"]
+const sprigLeaves = Array.from({ length: 9 }, (_, i) => [110 + i * 52, i % 2 === 0 ? 1 : -1] as const)
+
 export function Invitation({ draft, activeField, onSelect }: Props) {
   const template = getTemplate(draft.templateId) ?? getTemplate("seal")!
   const maskId = useId().replace(/:/g, "")
@@ -193,6 +198,68 @@ function Ornament({ kind, maskId }: { kind: Ornament; maskId: string }) {
           ))}
         </>
       )}
+      {kind === "arch" && (
+        <>
+          <path d="M180 112v-20M170 100l10-10 10 10" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
+          {[0, 1].map((side) => (
+            <g key={side} transform={side ? "translate(360 0) scale(-1 1)" : undefined} fill="none" stroke="currentColor" strokeWidth="1.1">
+              <path d="M44 596c8-44 6-84 22-122" />
+              <path d="M66 474c-18-6-26-20-26-34 16 2 28 14 26 34Z" />
+              <path d="M58 524c18-4 28-18 28-34-16 0-28 12-28 34Z" />
+              <path d="M52 566c-16-8-22-22-20-36 14 4 24 16 20 36Z" />
+            </g>
+          ))}
+        </>
+      )}
+      {kind === "deco" && (
+        <>
+          {mirrorCorners.map((tf) => (
+            <g key={tf || "tl"} transform={tf || undefined} fill="none" stroke="currentColor" strokeWidth="1.1">
+              <path d="M26 96 96 26M26 124 124 26M26 152 152 26" />
+              <path d="M26 26h46" strokeWidth="2.2" />
+              <path d="M26 26v46" strokeWidth="2.2" />
+              <circle cx="26" cy="26" r="4.5" />
+            </g>
+          ))}
+          <path d="M180 38v22M168 49h24" stroke="currentColor" strokeWidth="1.1" />
+          <path d="M180 580v22M168 591h24" stroke="currentColor" strokeWidth="1.1" />
+        </>
+      )}
+      {kind === "damask" && (
+        <>
+          <defs>
+            <pattern id={`${maskId}d`} width="44" height="44" patternUnits="userSpaceOnUse">
+              <path d="M22 4 40 22 22 40 4 22Z" fill="none" stroke="currentColor" strokeWidth="1" />
+              <circle cx="22" cy="22" r="3.4" fill="currentColor" />
+              <circle cx="0" cy="0" r="2" fill="currentColor" />
+              <circle cx="44" cy="0" r="2" fill="currentColor" />
+              <circle cx="0" cy="44" r="2" fill="currentColor" />
+              <circle cx="44" cy="44" r="2" fill="currentColor" />
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="360" height="92" fill={`url(#${maskId}d)`} opacity="0.2" />
+          <rect x="0" y="548" width="360" height="92" fill={`url(#${maskId}d)`} opacity="0.2" />
+          <path d="M0 92h360M0 548h360" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M0 98h360M0 542h360" stroke="currentColor" strokeWidth="0.6" />
+        </>
+      )}
+      {kind === "pearls" && (
+        <>
+          {pearlArc.map(([x, y]) => <circle key={`t${x}`} cx={x} cy={y} r="3.4" fill="currentColor" opacity="0.85" />)}
+          {pearlArc.map(([x, y]) => <circle key={`b${x}`} cx={x} cy={640 - y} r="3.4" fill="currentColor" opacity="0.85" />)}
+          <path d="M34 34c60 52 232 52 292 0" fill="none" stroke="currentColor" strokeWidth="0.6" opacity="0.5" />
+          <path d="M34 606c60-52 232-52 292 0" fill="none" stroke="currentColor" strokeWidth="0.6" opacity="0.5" />
+        </>
+      )}
+      {kind === "sprig" &&
+        [0, 1].map((side) => (
+          <g key={side} transform={side ? "translate(360 0) scale(-1 1)" : undefined} fill="none" stroke="currentColor" strokeWidth="1.1">
+            <path d="M26 560C14 440 38 260 26 84" />
+            {sprigLeaves.map(([y, dir]) => (
+              <ellipse key={y} cx={26 + dir * 11} cy={y} rx="10" ry="4.4" transform={`rotate(${dir * -28} ${26 + dir * 11} ${y})`} />
+            ))}
+          </g>
+        ))}
       {kind === "silk" && (
         <>
           <path d="M24 92c70-48 242-48 312 0" fill="none" stroke="currentColor" strokeWidth="1.1" />
