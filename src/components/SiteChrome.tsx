@@ -28,10 +28,10 @@ function Header() {
   useEffect(() => setOpen(false), [pathname])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#f0dce1]/80 bg-[#fffdfa]/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-[76px] max-w-6xl items-center justify-between gap-4 px-4">
-        <Link to="/" className="flex items-center gap-2.5" aria-label="دعوتنا، الصفحة الرئيسية">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50]">
+    <header className="sticky top-0 z-40 border-b border-[#f0dce1]/80 bg-[#fffdfa]/95 shadow-[0_4px_22px_rgba(74,45,51,0.035)] backdrop-blur-xl">
+      <div className="mx-auto flex h-[70px] max-w-6xl items-center justify-between gap-3 px-4 sm:h-[76px]">
+        <Link to="/" className="group flex shrink-0 items-center gap-2.5" aria-label="دعوتنا، الصفحة الرئيسية">
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50] ring-1 ring-[#f3dfe3] transition duration-300 group-hover:-rotate-3 group-hover:scale-105">
             <LogoMark className="h-8 w-8" />
           </span>
           <span className="grid leading-none">
@@ -62,20 +62,20 @@ function Header() {
           <Link to="/templates" className="btn-gold hidden h-11 px-5 text-sm sm:inline-flex">اختار دعوتك</Link>
           <button
             type="button"
-            className="inline-flex h-11 cursor-pointer items-center rounded-full border border-[#f0dce1] bg-white px-4 text-sm font-bold text-[#65434b] md:hidden"
+            className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-full border border-[#f0dce1] bg-white px-4 text-sm font-bold text-[#65434b] shadow-sm transition hover:border-[#d9aab5] hover:bg-[#fff8f8] md:hidden"
             aria-expanded={open}
             aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? "إغلاق" : "القائمة"}
+            {open ? "إغلاق ✕" : "القائمة ☰"}
           </button>
         </div>
       </div>
       {open ? (
-        <nav className="grid gap-1 border-t border-[#f0dce1] bg-white px-4 py-3 md:hidden" aria-label="قائمة الموبايل">
+        <nav className="grid gap-1 border-t border-[#f0dce1] bg-[#fffdfa] px-4 py-3 shadow-[0_14px_24px_rgba(74,45,51,0.06)] md:hidden" aria-label="قائمة الموبايل">
           {links.map((link) =>
             link.href.startsWith("/#") ? (
-              <a key={link.href} href={link.href} className="rounded-xl px-3 py-3 font-semibold text-[#65434b] hover:bg-[#fff5f6]" onClick={() => setOpen(false)}>
+              <a key={link.href} href={link.href} className="rounded-xl px-3 py-3 font-semibold text-[#65434b] transition hover:bg-[#fff5f6] hover:text-[#a64257]" onClick={() => setOpen(false)}>
                 {link.label}
               </a>
             ) : (
