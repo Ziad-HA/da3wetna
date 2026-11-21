@@ -4,7 +4,7 @@ import { StoryActions } from "../components/StoryActions"
 import { Invitation } from "../components/Invitation"
 import { getPackage } from "../config"
 import { decodeDraft } from "../lib/codec"
-import { readActivePackage, readLast } from "../lib/storage"
+import { clearDraft, readActivePackage, readLast, selectPackage } from "../lib/storage"
 
 export function Done() {
   const { code = "" } = useParams()
@@ -60,13 +60,13 @@ export function Done() {
                 {remaining > 0 ? `متبقي لك ${remaining} دعوة في الباقة.` : "استخدمت كل دعوات الباقة."}
               </p>
               {remaining > 0 ? (
-                <Link to="/templates" className="btn-gold mt-4 w-full">أنشئ الدعوة التالية</Link>
+                <Link to="/templates" onClick={clearDraft} className="btn-gold mt-4 w-full">أنشئ الدعوة التالية</Link>
               ) : null}
             </div>
           ) : null}
 
           <div className="mt-7 border-t border-[#f3e6e9] pt-5">
-            <Link to="/templates" className="text-sm font-bold text-[#a64257] hover:underline">اعمل دعوة جديدة ←</Link>
+            <Link to="/templates" onClick={() => { clearDraft(); selectPackage("single") }} className="text-sm font-bold text-[#a64257] hover:underline">ابدأ طلب جديد ←</Link>
           </div>
         </section>
       </div>
