@@ -8,8 +8,8 @@ type Props = {
 /** A realistic phone mockup for invitation previews. */
 export function PhonePreview({ children, className = "" }: Props) {
   return (
-    <div className={`phone-preview relative mx-auto w-full ${className}`}>
-      <div className="phone-preview-frame relative overflow-hidden rounded-[2.15rem] border-[5px] border-[#29252a] bg-[#29252a] p-[5px] shadow-[0_18px_42px_rgba(63,35,43,.24),inset_0_0_0_1px_rgba(255,255,255,.24)] sm:rounded-[2.6rem] sm:border-[7px] sm:p-[7px]">
+    <div className={`phone-preview relative mx-auto aspect-[9/19.5] w-full ${className}`}>
+      <div className="phone-preview-frame relative h-full w-full overflow-hidden rounded-[2.15rem] border-[5px] border-[#29252a] bg-[#29252a] p-[5px] shadow-[0_18px_42px_rgba(63,35,43,.24),inset_0_0_0_1px_rgba(255,255,255,.24)] sm:rounded-[2.6rem] sm:border-[7px] sm:p-[7px]">
         <div className="phone-preview-screen relative flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-[#fffaf9] sm:rounded-[2.1rem]">
           <div className="relative z-10 flex h-[7.5%] shrink-0 items-center justify-between px-[8%] text-[7px] font-bold text-[#4a2d33] sm:text-[9px]" aria-hidden="true">
             <span>9:41</span>
