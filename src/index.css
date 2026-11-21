@@ -6,8 +6,8 @@
   --font-latin: "Cormorant Garamond", serif;
   --color-cream: #FFFCFA;
   --color-ink: #4A2D33;
-  --color-forest: #B83B50;
-  --color-gold: #B83B50;
+  --color-forest: #4A2D33;
+  --color-gold: #A64257;
   --color-gold-2: #C6A15B;
   --color-mute: #806B70;
   --color-line: #F0DCE1;
@@ -19,7 +19,7 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--color-cream);
+  background: #FFFCFA;
   color: var(--color-ink);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
@@ -64,16 +64,16 @@ body {
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 180ms ease, transform 180ms ease, border-color 180ms ease;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
-.btn-gold { background: #B83B50; color: white; border: 0; }
-.btn-gold:hover { background: #9D2F43; }
+.btn-gold { background: #A64257; color: white; border: 0; box-shadow: 0 5px 14px rgba(166, 66, 87, 0.14); }
+.btn-gold:hover { background: #91384B; transform: translateY(-1px); box-shadow: 0 8px 18px rgba(166, 66, 87, 0.18); }
 .btn-dark { background: #4A2D33; color: #FFFCFA; border: 0; }
-.btn-dark:hover { background: #000; }
+.btn-dark:hover { background: #352126; transform: translateY(-1px); }
 .btn-ghost {
-  background: transparent;
+  background: rgba(255,255,255,0.72);
   color: inherit;
-  border: 1px solid currentColor;
+  border: 1px solid #E8D5D9;
 }
 .btn-gold:disabled,
 .btn-dark:disabled { opacity: 0.55; cursor: wait; }
@@ -264,18 +264,25 @@ body {
   display: grid;
   gap: 0.4rem;
 }
-.field span { font-size: 0.92rem; font-weight: 700; }
+.field span { font-size: 0.88rem; font-weight: 700; color: #62464D; }
 .field input, .field select {
   min-height: 48px;
   width: 100%;
-  border-radius: 14px;
-  border: 1px solid var(--color-line);
-  background: white;
+  border-radius: 13px;
+  border: 1px solid #EAD9DD;
+  background: #FFFEFE;
   padding: 0 0.9rem;
   font: inherit;
   color: inherit;
 }
-.field input:focus, .field select:focus { border-color: #B83B50; }
+.field input:focus, .field select:focus { border-color: #B83B50; box-shadow: 0 0 0 3px rgba(184, 59, 80, 0.08); outline: none; }
+.field input::placeholder { color: #B49FA4; }
+
+button:focus-visible, a:focus-visible { outline-color: #B83B50; }
+
+@media (hover: hover) {
+  .btn-ghost:hover { background: #FFF5F6; border-color: #D9AAB5; }
+}
 
 details summary { list-style: none; }
 details summary::-webkit-details-marker { display: none; }
