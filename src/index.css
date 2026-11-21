@@ -481,3 +481,68 @@ body::after {
 @media (max-width: 767px) {
   body { padding-bottom: calc(82px + env(safe-area-inset-bottom)); }
 }
+
+
+/* Final mobile detail pass for secondary pages and dense UI */
+@media (max-width: 767px) {
+  header.sticky > div { height: 62px; padding-inline: 0.85rem; }
+  header.sticky a[aria-label="دعوتنا، الصفحة الرئيسية"] > span:first-child {
+    width: 2.35rem; height: 2.35rem; border-radius: 0.85rem;
+  }
+  header.sticky a[aria-label="دعوتنا، الصفحة الرئيسية"] > span:last-child > span:first-child {
+    font-size: 1.55rem; line-height: 1;
+  }
+  header.sticky button[aria-label="فتح القائمة"],
+  header.sticky button[aria-label="إغلاق القائمة"] {
+    min-height: 40px; padding-inline: 0.85rem;
+  }
+
+  /* Keep tiny labels readable, especially on the package cards */
+  main [class~="text-[9px]"] { font-size: 0.68rem !important; line-height: 1.45 !important; }
+  main [class~="text-[10px]"] { font-size: 0.73rem !important; line-height: 1.55 !important; }
+  main [class~="text-[11px]"] { font-size: 0.78rem !important; line-height: 1.55 !important; }
+
+  /* Packages: more breathing room while retaining compact cards */
+  main .max-w-md.items-stretch > article { padding: 0.85rem; gap: 0.1rem; }
+  main .max-w-md.items-stretch > article > a:last-child {
+    min-height: 46px; border-radius: 14px; font-size: 0.85rem;
+  }
+  main .max-w-md.items-stretch > article details summary { min-height: 42px; }
+  main .max-w-md.items-stretch > article details p { line-height: 1.65; }
+
+  /* Account: keep the welcome panel useful without pushing the form too far down */
+  main > .mx-auto.grid.max-w-5xl > aside { padding: 1.35rem; }
+  main > .mx-auto.grid.max-w-5xl > aside > div:nth-of-type(2) { margin-top: 1.1rem; }
+  main > .mx-auto.grid.max-w-5xl > aside h1 { font-size: 1.8rem; line-height: 1.35; }
+  main > .mx-auto.grid.max-w-5xl > aside > div:last-child { margin-top: 1rem; padding: 0.8rem; }
+  main > .mx-auto.grid.max-w-5xl > section { padding: 1.25rem; }
+
+  /* How-to, FAQ, SEO and policy pages */
+  main > section.border-b { padding-top: 2.4rem; padding-bottom: 2.4rem; }
+  main > section.border-b p { line-height: 1.8; }
+  main ol > li { gap: 0.85rem; padding: 1rem; border-radius: 1.15rem; }
+  main ol > li > div:first-child { width: 2.6rem; height: 2.6rem; border-radius: 0.9rem; }
+  main [role="group"], main details { min-width: 0; }
+  main details > summary { padding-inline: 0.9rem; }
+  main details > p { padding-inline: 0.9rem; }
+  main article.space-y-8 > section { padding-bottom: 0.25rem; }
+  main .max-w-3xl > .grid > a { min-height: 72px; }
+
+  /* Checkout and completion: stack naturally and avoid cramped side-by-side controls */
+  main .grid.items-start { grid-template-columns: minmax(0, 1fr); }
+  main .grid.items-start > * { min-width: 0; }
+  main form { min-width: 0; }
+  main form button, main form [type="submit"] { width: 100%; }
+  main [role="radiogroup"] { gap: 0.65rem; }
+  main .fixed.bottom-0 { padding-bottom: calc(0.7rem + env(safe-area-inset-bottom)); }
+}
+
+/* Narrow screens: avoid horizontal overflow from long Arabic labels */
+@media (max-width: 380px) {
+  main#main { padding-inline: 0.8rem; }
+  main .grid.grid-cols-2 { gap: 0.5rem; }
+  .da3-hero .da3-copy h1 { font-size: 2.05rem; }
+  .da3-hero .da3-copy .mt-7.flex { gap: 0.55rem; }
+  header.sticky > div { gap: 0.5rem; }
+  header.sticky button { font-size: 0.78rem; }
+}
