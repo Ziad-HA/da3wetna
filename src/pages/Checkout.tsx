@@ -24,10 +24,7 @@ export function Checkout() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
 
-  useEffect(() => {
-    document.title = "الدفع — دعوتنا"
-  }, [])
-
+  useEffect(() => { document.title = "الدفع — دعوتنا" }, [])
   if (!draft || !draftReady(draft)) return <Navigate to="/templates" replace />
   const template = getTemplate(draft.templateId)!
 
@@ -47,63 +44,76 @@ export function Checkout() {
   const destination = method === "vodafone" ? site.vodafoneCash : site.instapay
 
   return (
-    <main id="main" className="mx-auto grid max-w-5xl gap-8 px-4 py-10 lg:grid-cols-[280px_1fr]">
-      <aside className="rounded-[28px] bg-card p-4 ring-1 ring-line">
-        <div className="overflow-hidden rounded-2xl">
-          <Invitation draft={draft} />
-        </div>
-        <h1 className="mt-4 text-xl font-bold">{template.name}</h1>
-        <p className="text-mute">{draft.groom} و{draft.bride}</p>
-        <p className="mt-3 text-2xl font-bold">{money(site.price)}</p>
-        <Link to={`/editor/${draft.templateId}`} className="mt-3 inline-block text-sm font-bold text-gold">ارجع للتعديل</Link>
-      </aside>
-      <section>
-        <h2 className="font-display text-4xl">اختار طريقة الدفع</h2>
-        <p className="mt-2 leading-7 text-mute">بعد التأكيد هتلاقي تحميل الستوري ولينك الدعوة على طول.</p>
-        <div className="mt-6 grid gap-3" role="radiogroup" aria-label="طريقة الدفع">
-          {methods.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              role="radio"
-              aria-checked={method === item.id}
-              onClick={() => { setMethod(item.id); setError("") }}
-              className={`flex min-h-16 cursor-pointer items-center gap-4 rounded-2xl px-4 py-3 text-right ring-1 ${method === item.id ? "bg-white ring-gold" : "bg-card ring-line"}`}
-            >
-              <item.icon className="h-6 w-6 shrink-0 text-gold" />
-              <span>
-                <span className="block font-bold">{item.title}</span>
-                <span className="text-sm text-mute">{item.text}</span>
-              </span>
-            </button>
-          ))}
-        </div>
-
-        {method === "card" ? (
-          <p className="mt-5 rounded-2xl bg-[#f3ead8] p-4 leading-7 text-sm">
-            الدفع بالبطاقة هنا تجربة محلية: مفيش خصم من البنك. لما تربط بوابة زي Paymob، الزرار ده هيخصم فعليًا. التأكيد بيفتح الدعوة عشان تجرب التحميل.
-          </p>
-        ) : (
-          <div className="mt-5 rounded-2xl bg-card p-4 ring-1 ring-line">
-            <p className="text-sm text-mute">حوّل {money(site.price)} واكتب كود الطلب في الملاحظة</p>
-            <p className="mt-2 font-display text-3xl">{orderId}</p>
-            <p className="mt-3 text-sm">على الرقم أو العنوان</p>
-            <p className="text-xl font-bold" dir="ltr">{destination}</p>
-            {walletsArePlaceholders ? (
-              <p className="mt-3 text-sm leading-6 text-mute">الأرقام دي تجريبية. غيّرها من ملف src/config.ts قبل ما تنشر الموقع.</p>
-            ) : null}
-            <label className="field mt-4">
-              <span>رقم عملية التحويل</span>
-              <input value={refNo} inputMode="numeric" maxLength={30} onChange={(event) => setRefNo(event.target.value)} placeholder="مثال: 4821" />
-            </label>
+    <main id="main" className="mx-auto max-w-5xl px-4 py-10 md:py-14">
+      <div className="mx-auto mb-8 max-w-2xl text-center">
+        <p className="text-xs font-bold text-[#b83b50]">الخطوة ٢ من ٢</p>
+        <h1 className="mt-2 font-display text-4xl text-[#4a2d33] md:text-5xl">تأكيد الدعوة</h1>
+        <p className="mt-3 leading-7 text-[#806b70]">راجع طلبك واختار طريقة الدفع المناسبة.</p>
+      </div>
+      <div className="grid items-start gap-6 lg:grid-cols-[300px_1fr]">
+        <aside className="rounded-[26px] border border-[#f0dce1] bg-white p-4">
+          <div className="overflow-hidden rounded-[18px] bg-[#fff8f8]">
+            <Invitation draft={draft} />
           </div>
-        )}
+          <div className="mt-4 flex items-start justify-between gap-3">
+            <div><h2 className="font-bold text-[#4a2d33]">{template.name}</h2><p className="mt-1 text-sm text-[#806b70]">{draft.groom} و{draft.bride}</p></div>
+            <p className="font-bold text-[#a64257]">{money(site.price)}</p>
+          </div>
+          <Link to={`/editor/${draft.templateId}`} className="mt-4 inline-block text-sm font-bold text-[#a64257] hover:underline">تعديل التفاصيل</Link>
+        </aside>
 
-        {error ? <p className="mt-4 font-bold text-red-800" role="alert">{error}</p> : null}
-        <button type="button" className="btn-gold mt-5 w-full" onClick={pay} disabled={busy}>
-          {busy ? "بنأكد..." : method === "card" ? "تأكيد تجريبي وفتح الدعوة" : "تم التحويل، افتح الدعوة"}
-        </button>
-      </section>
+        <section className="rounded-[26px] border border-[#f0dce1] bg-white p-5 md:p-7">
+          <h2 className="text-lg font-bold text-[#4a2d33]">طريقة الدفع</h2>
+          <p className="mt-1 text-sm text-[#806b70]">اختار وسيلة الدفع اللي تناسبك.</p>
+          <div className="mt-5 grid gap-3" role="radiogroup" aria-label="طريقة الدفع">
+            {methods.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                role="radio"
+                aria-checked={method === item.id}
+                onClick={() => { setMethod(item.id); setError("") }}
+                className={`flex min-h-[72px] cursor-pointer items-center gap-4 rounded-2xl border px-4 py-3 text-right transition ${method === item.id ? "border-[#b83b50] bg-[#fff7f8]" : "border-[#f0dce1] bg-white hover:bg-[#fffafa]"}`}
+              >
+                <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${method === item.id ? "bg-[#f9e5e9] text-[#a64257]" : "bg-[#faf5f5] text-[#806b70]"}`}>
+                  <item.icon className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-bold text-[#4a2d33]">{item.title}</span>
+                  <span className="mt-0.5 block text-sm text-[#806b70]">{item.text}</span>
+                </span>
+                <span className={`h-4 w-4 rounded-full border ${method === item.id ? "border-[5px] border-[#b83b50]" : "border-[#d9c7cb]"}`} />
+              </button>
+            ))}
+          </div>
+
+          {method === "card" ? (
+            <p className="mt-5 rounded-xl bg-[#fff8e9] p-4 text-sm leading-7 text-[#79603b]">
+              الدفع بالبطاقة هنا تجربة محلية فقط، ومفيش خصم فعلي من البنك. لازم تربط بوابة دفع قبل استقبال مدفوعات حقيقية.
+            </p>
+          ) : (
+            <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
+              <p className="text-sm text-[#806b70]">حوّل {money(site.price)} إلى</p>
+              <p className="mt-2 text-xl font-bold text-[#4a2d33]" dir="ltr">{destination}</p>
+              <p className="mt-4 text-xs text-[#806b70]">رقم الطلب — اكتبه في ملاحظة التحويل</p>
+              <p className="mt-1 break-all font-mono text-sm text-[#a64257]">{orderId}</p>
+              {walletsArePlaceholders ? <p className="mt-3 text-xs leading-6 text-[#9a6a45]">بيانات الدفع الحالية تجريبية. لازم تتغير من src/config.ts قبل نشر الموقع.</p> : null}
+              <label className="field mt-4">
+                <span>رقم عملية التحويل</span>
+                <input value={refNo} inputMode="numeric" maxLength={30} onChange={(event) => setRefNo(event.target.value)} placeholder="مثال: 4821" />
+              </label>
+            </div>
+          )}
+
+          {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#f3e6e9] pt-5">
+            <div><p className="text-xs text-[#806b70]">الإجمالي</p><p className="text-xl font-bold text-[#4a2d33]">{money(site.price)}</p></div>
+            <button type="button" className="btn-gold min-w-44" onClick={pay} disabled={busy}>
+              {busy ? "بنأكد..." : method === "card" ? "تأكيد تجريبي" : "تأكيد التحويل"}
+            </button>
+          </div>
+        </section>
+      </div>
     </main>
   )
 }
