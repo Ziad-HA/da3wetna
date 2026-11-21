@@ -671,3 +671,48 @@ main section > div { min-width: 0; }
   main[aria-label="خطوات تجهيز الدعوة"] button span:last-child { white-space: normal; }
 }
 @media (prefers-reduced-motion: reduce) { .editor-step-panel { animation: none; } }
+
+
+/* Phone-first template gallery polish */
+.phone-preview { isolation: isolate; }
+.phone-preview-frame { box-sizing: border-box; }
+.phone-preview-screen { min-width: 0; }
+.phone-preview-invite { flex: 0 0 auto; }
+.phone-preview-invite > .invite { width: 100%; height: 100%; }
+.gallery-page { padding-bottom: max(6rem, calc(5rem + env(safe-area-inset-bottom))); }
+.gallery-page #designs { scroll-margin-top: 1rem; }
+@media (max-width: 767px) {
+  .gallery-page { padding-inline: 0.75rem; padding-top: 0.85rem; }
+  .gallery-page > section:first-child { border-radius: 1.35rem; padding: 1rem 0.8rem; }
+  .gallery-page > section:first-child h1 { font-size: clamp(1.3rem, 6.1vw, 1.8rem); line-height: 1.45; }
+  .gallery-page > section:first-child p { font-size: 0.72rem; line-height: 1.75; }
+  .gallery-page > section:first-child .grid { grid-template-columns: minmax(0, 1fr) 112px; gap: 0.55rem; }
+  .gallery-page > section:first-child .grid > div:first-child { min-width: 0; }
+  .gallery-page > section:first-child .grid > div:first-child > div { margin-top: 0.7rem; }
+  .gallery-page > section:first-child .grid > div:first-child a { min-height: 40px; padding-inline: 0.7rem; font-size: 0.68rem; }
+  .gallery-page .phone-preview { width: 100%; max-width: 112px; }
+  .gallery-page #designs { padding-top: 1.6rem; }
+  .gallery-page #designs h2 { font-size: 1.25rem; }
+  .gallery-page #designs > div:nth-of-type(2) { gap: 0.55rem; }
+  .gallery-page #designs input { min-height: 48px; font-size: 16px; }
+  .gallery-page #designs > div[role="tablist"] { margin-inline: -0.1rem; }
+  .gallery-page #designs > div.grid { gap: 0.55rem; }
+  .gallery-page #designs article { border-radius: 1rem; padding: 0.45rem; }
+  .gallery-page #designs article > div:first-child { border-radius: 0.75rem; }
+  .gallery-page #designs article .phone-preview { max-width: 100%; width: 100%; }
+  .gallery-page #designs article .phone-preview-frame { border-width: 4px; padding: 4px; border-radius: 1.65rem; }
+  .gallery-page #designs article .phone-preview-screen { border-radius: 1.3rem; }
+  .gallery-page #designs article .phone-preview-screen > div:first-child { font-size: 6px; }
+  .gallery-page #designs article .phone-preview-screen > div:first-child > span:nth-child(2) { height: 8px; }
+  .gallery-page #designs article .phone-preview-screen > div:last-child > span { height: 2px; }
+  .gallery-page #designs article > div:last-child { padding-inline: 0.15rem; }
+  .gallery-page #designs article h3 { font-size: 0.75rem; }
+  .gallery-page #designs article p { font-size: 0.67rem; line-height: 1.55; }
+  .gallery-page #designs article > div:last-child > a { min-height: 40px; font-size: 0.7rem; }
+}
+@media (max-width: 360px) {
+  .gallery-page > section:first-child .grid { grid-template-columns: minmax(0, 1fr) 96px; }
+  .gallery-page .phone-preview { max-width: 96px; }
+  .gallery-page #designs article .phone-preview-frame { border-width: 3px; padding: 3px; }
+  .gallery-page #designs article .phone-preview-frame { border-radius: 1.35rem; }
+}
