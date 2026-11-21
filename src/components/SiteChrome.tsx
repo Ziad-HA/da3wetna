@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom"
 import { site } from "../config"
 import { LogoMark, WhatsAppIcon } from "./Icons"
+import { faqs } from "../data"
 
 const links = [
   { href: "/templates", label: "الدعوات" },
@@ -18,6 +19,7 @@ export function SiteChrome() {
       <Outlet />
       <Footer />
       <HelpButton />
+      <BottomNavigation />
     </>
   )
 }
@@ -180,7 +182,7 @@ function HelpButton() {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-4 left-4 z-40 inline-flex h-12 items-center gap-2 rounded-full border border-white/70 bg-white px-4 text-sm font-bold text-[#4a2d33] shadow-[0_8px_28px_rgba(74,45,51,0.16)] transition hover:-translate-y-0.5"
+      className="fixed bottom-4 left-4 z-40 hidden h-12 md:inline-flex items-center gap-2 rounded-full border border-white/70 bg-white px-4 text-sm font-bold text-[#4a2d33] shadow-[0_8px_28px_rgba(74,45,51,0.16)] transition hover:-translate-y-0.5"
     >
       <span className="grid h-7 w-7 place-items-center rounded-full bg-[#1fa855] text-white">
         <WhatsAppIcon className="h-4 w-4" />
@@ -188,4 +190,67 @@ function HelpButton() {
       محتاج مساعدة؟
     </a>
   )
+}
+
+
+function BottomNavigation() {
+  const [supportOpen, setSupportOpen] = useState(false)
+  const { pathname } = useLocation()
+  const hidden = pathname.startsWith("/editor") || pathname.startsWith("/checkout") || pathname.startsWith("/i/")
+  useEffect(() => setSupportOpen(false), [pathname])
+  if (hidden) return null
+
+  const itemClass = "flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 text-[11px] font-bold transition"
+  const activeClass = "bg-[#fff0f2] text-[#a64257]"
+  const idleClass = "text-[#90777d] hover:bg-[#fff8f8]"
+
+  return (
+    <>
+      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[#f0dce1] bg-[#fffdfa]/95 px-3 pb-[max(env(safe-area-inset-bottom),10px)] pt-2 shadow-[0_-8px_30px_rgba(74,45,51,0.08)] backdrop-blur-2xl md:hidden" aria-label="التنقل الرئيسي">
+        <div className="mx-auto flex max-w-lg items-center gap-1">
+          <NavLink to="/templates" className={({ isActive }) => `${itemClass} ${isActive ? activeClass : idleClass}`}>
+            <BottomIcon type="invite" /><span>الدعوات</span>
+          </NavLink>
+          <NavLink to="/packages" className={({ isActive }) => `${itemClass} ${isActive ? activeClass : idleClass}`}>
+            <BottomIcon type="package" /><span>الباقات</span>
+          </NavLink>
+          <button type="button" onClick={() => setSupportOpen(true)} className={`${itemClass} ${supportOpen ? activeClass : idleClass}`}>
+            <BottomIcon type="help" /><span>الدعم</span>
+          </button>
+          <NavLink to="/account" className={({ isActive }) => `${itemClass} ${isActive ? activeClass : idleClass}`}>
+            <BottomIcon type="account" /><span>حسابي</span>
+          </NavLink>
+        </div>
+      </nav>
+      {supportOpen ? (
+        <div className="fixed inset-0 z-[70] flex items-end justify-center bg-[#342027]/35 p-0 backdrop-blur-[3px] md:items-center md:p-4" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setSupportOpen(false) }}>
+          <section role="dialog" aria-modal="true" aria-labelledby="support-title" className="w-full max-w-xl overflow-hidden rounded-t-[28px] border border-[#f0dce1] bg-[#fffdfa] shadow-[0_-15px_60px_rgba(53,33,38,0.18)] md:rounded-[28px]">
+            <div className="mx-auto mt-3 h-1.5 w-12 rounded-full bg-[#ead3d9] md:hidden" />
+            <div className="flex items-center justify-between border-b border-[#f4e5e8] px-5 py-4 sm:px-6">
+              <div><p className="text-xs font-bold tracking-wider text-[#b36a78]">DA3WETNA SUPPORT</p><h2 id="support-title" className="mt-1 font-display text-2xl text-[#4a2d33]">محتاج مساعدة؟</h2></div>
+              <button type="button" onClick={() => setSupportOpen(false)} aria-label="إغلاق الدعم" className="grid h-10 w-10 place-items-center rounded-full bg-[#fff0f2] text-lg text-[#a64257]">×</button>
+            </div>
+            <div className="max-h-[52vh] space-y-4 overflow-y-auto px-5 py-4 sm:px-6">
+              <p className="text-sm leading-7 text-[#806b70]">جمعنالك إجابات سريعة لأشهر الأسئلة. ولو محتاج مساعدة شخصية ابعتلنا على واتساب.</p>
+              <div className="grid gap-2">
+                {faqs.slice(0, 5).map((item) => <details key={item.q} className="group rounded-2xl border border-[#f0dce1] bg-white"><summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-bold text-[#4a2d33]"><span>{item.q}</span><span className="text-[#b83b50] transition group-open:rotate-45">＋</span></summary><p className="border-t border-[#f7eaed] px-4 py-3 text-sm leading-7 text-[#806b70]">{item.a}</p></details>)}
+              </div>
+              <Link to="/faq" onClick={() => setSupportOpen(false)} className="block text-center text-sm font-bold text-[#a64257] underline underline-offset-4">عرض كل الأسئلة الشائعة</Link>
+            </div>
+            <div className="border-t border-[#f4e5e8] bg-[#fff8f8] p-4 sm:p-5">
+              <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، محتاج مساعدة من دعوتنا")}`} target="_blank" rel="noreferrer" className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#21864c] px-5 text-sm font-bold text-white transition hover:bg-[#176d3d]"><WhatsAppIcon className="h-5 w-5" /> كلمنا على واتساب</a>
+            </div>
+          </section>
+        </div>
+      ) : null}
+    </>
+  )
+}
+
+function BottomIcon({ type }: { type: "invite" | "package" | "help" | "account" }) {
+  const common = "h-[21px] w-[21px]"
+  if (type === "invite") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2.5" stroke="currentColor" strokeWidth="1.6"/><path d="M8 8h8M8 12h5M8 16h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
+  if (type === "package") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8 4.2v9.6L12 21l-8-4.2V7.2L12 3Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="m4.5 7.5 7.5 4 7.5-4M12 11.5V21M8 5.2l8 4.1" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/></svg>
+  if (type === "help") return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6"/><path d="M9.6 9a2.5 2.5 0 1 1 4.3 1.8c-1.1 1-1.9 1.2-1.9 2.7M12 17.2v.1" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/></svg>
+  return <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.2" stroke="currentColor" strokeWidth="1.6"/><path d="M5 20c.6-3.2 3.1-5 7-5s6.4 1.8 7 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
 }
