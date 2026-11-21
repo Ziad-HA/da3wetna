@@ -19,7 +19,7 @@ export function InviteView() {
   const safeUrl = (value: string) => { try { const url = new URL(value); return url.protocol === "https:" || url.protocol === "http:" ? url.href : "" } catch { return "" } }
   const musicUrl = draft ? safeUrl(draft.musicUrl) : ""
   const photos = draft ? [draft.photoOne, draft.photoTwo].map(safeUrl).filter(Boolean) : []
-  const rsvpNumber = draft?.rsvpPhone.replace(/\\D/g, "") || ""
+  const rsvpNumber = draft?.rsvpPhone.replace(/\D/g, "") || ""
   const rsvpLink = draft && rsvpNumber ? `https://wa.me/${rsvpNumber}?text=${encodeURIComponent(`أهلاً، حابب أأكد حضوري لمناسبة ${draft.groom} و${draft.bride}.`)}` : ""
 
   useEffect(() => {
