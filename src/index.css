@@ -286,3 +286,35 @@ button:focus-visible, a:focus-visible { outline-color: #B83B50; }
 
 details summary { list-style: none; }
 details summary::-webkit-details-marker { display: none; }
+
+
+/* Site-wide refinement */
+html { scroll-padding-top: 5.5rem; }
+body {
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(248, 228, 232, 0.22), transparent 34rem),
+    #fffdfa;
+}
+a, button, input, select, summary { -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; }
+button:disabled { cursor: not-allowed; }
+::selection { color: #4A2D33; background: #F4DCE2; }
+main { animation: page-enter 420ms ease both; }
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.field input, .field select {
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.field input:hover, .field select:hover { border-color: #d9aab5; }
+details > summary { transition: color 180ms ease; }
+details[open] > summary { color: #a64257; }
+article, section { scroll-margin-top: 6rem; }
+@media (max-width: 640px) {
+  .btn-gold, .btn-dark, .btn-ghost { min-height: 46px; }
+  input, select { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  main { animation: none !important; }
+}
