@@ -56,8 +56,8 @@ export function Home() {
           <div className="relative flex justify-center">
             <div className="absolute inset-x-8 top-10 bottom-0 rounded-[48%] bg-[#edc8d0]/50 blur-2xl" />
             <div className="float relative rotate-[2deg]">
-              <div className="rounded-[42px] border-[7px] border-white bg-white p-2 shadow-[0_24px_70px_rgba(91,48,60,0.18)]">
-                <div className="phone-screen overflow-hidden rounded-[30px]">
+              <div className="phone !w-[min(280px,74vw)] !rounded-[42px] !border-[7px] !border-white !bg-white !p-2 !shadow-[0_24px_70px_rgba(91,48,60,0.18)]">
+                <div className="phone-screen h-full w-full overflow-hidden rounded-[30px]">
                   <div className="invite-frame">
                     <Invitation draft={draftFor(templates[1])} />
                   </div>
