@@ -50,9 +50,9 @@ export function Home() {
         <div className="relative mx-auto grid max-w-6xl items-center gap-5 px-4 py-10 sm:gap-8 sm:py-14 md:grid-cols-[1.05fr_0.95fr] md:gap-12 md:py-24">
           <div className="relative z-10 text-center md:text-right">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#e9cbd1] bg-white/85 px-4 py-2 text-sm font-semibold text-[#9e4659] shadow-[0_5px_20px_rgba(142,76,91,0.06)]">
-              <span className="text-[#c18b4c]">✦</span>
-              كل فرحة وليها دعوة حلوة
-              <span className="text-[#c18b4c]">✦</span>
+              <span className="text-[#c18b4c]">❀</span>
+              تفاصيل تليق بيوم العمر
+              <span className="text-[#c18b4c]">❀</span>
             </span>
             <h1 className="mt-5 font-display text-[2.65rem] leading-[1.25] text-[#4a2d33] text-balance sm:text-5xl md:mt-7 md:text-[4.6rem]">
               خلي دعوتك
@@ -84,6 +84,28 @@ export function Home() {
           <div className="relative mx-auto flex min-h-[350px] w-full max-w-[420px] items-center justify-center sm:min-h-[410px] md:min-h-[540px]">
             <div aria-hidden="true" className="absolute h-[260px] w-[260px] rounded-full bg-[radial-gradient(circle,#f1cbd3_0%,rgba(241,203,211,0.35)_52%,transparent_72%)] sm:h-[330px] sm:w-[330px] md:h-[430px] md:w-[430px]" />
             <div aria-hidden="true" className="absolute h-[285px] w-[285px] rounded-full border border-dashed border-[#d9aab4]/55 sm:h-[365px] sm:w-[365px] md:h-[465px] md:w-[465px]" />
+            <div aria-hidden="true" className="absolute bottom-[3%] left-1/2 h-[88%] w-[76%] -translate-x-1/2 rounded-t-[48%] border border-b-0 border-[#c9a36d]/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.42),rgba(255,242,244,0.08))] shadow-[inset_0_0_35px_rgba(255,255,255,0.45)] sm:w-[72%] md:w-[78%]" />
+            <div aria-hidden="true" className="absolute left-1/2 top-[5%] z-[1] -translate-x-1/2 text-center">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#d9bd91]/65 bg-[#fffaf2]/90 px-3 py-1.5 text-[10px] font-semibold tracking-[0.18em] text-[#a77c43] shadow-sm sm:text-xs">
+                <span>✧</span> WEDDING INVITATION <span>✧</span>
+              </span>
+            </div>
+            <svg aria-hidden="true" viewBox="0 0 420 130" className="pointer-events-none absolute -top-1 left-1/2 z-[2] w-[92%] -translate-x-1/2 overflow-visible sm:w-full" fill="none">
+              <path d="M12 18C94 108 326 108 408 18" stroke="#c9a36d" strokeOpacity=".65" strokeWidth="1.5" strokeDasharray="2 5"/>
+              <path d="M12 18l-5 13m5-13 13 4M408 18l5 13m-5-13-13 4" stroke="#c9a36d" strokeOpacity=".55" strokeWidth="1.5" strokeLinecap="round"/>
+              {[42,76,112,150,190,230,270,308,344,378].map((x, i) => (
+                <g key={x} transform={`translate(${x} ${42 + Math.sin(i * 0.55) * 24})`}>
+                  <path d="M0 0c-7 8-8 15-3 21m3-21c7 8 8 15 3 21" stroke="#83a17c" strokeWidth="1.5" strokeLinecap="round"/>
+                  <circle cy="-2" r="4" fill="#e7a8b4"/>
+                  <circle cx="-4" cy="-5" r="3.2" fill="#f4d9df"/>
+                  <circle cx="4" cy="-5" r="3.2" fill="#f4d9df"/>
+                  <circle cy="-8" r="3.2" fill="#f4d9df"/>
+                  <circle r="1.5" fill="#c79a58"/>
+                </g>
+              ))}
+            </svg>
+            <div aria-hidden="true" className="absolute bottom-[9%] left-[2%] z-[2] hidden text-5xl text-[#c98e9d]/75 sm:block">❀</div>
+            <div aria-hidden="true" className="absolute right-[1%] top-[30%] z-[2] hidden rotate-12 text-4xl text-[#c98e9d]/70 sm:block">✿</div>
             <div className="hero-orbit relative z-10 rotate-[2deg]">
               <div className="phone !w-[min(230px,62vw)] !rounded-[34px] !border-[6px] !border-white !bg-white !p-1.5 !shadow-[0_24px_65px_rgba(91,48,60,0.2)] sm:!w-[min(260px,68vw)] md:!w-[min(280px,70vw)] md:!rounded-[42px] md:!border-[7px] md:!p-2">
                 <div className="phone-screen h-full w-full overflow-hidden rounded-[25px] md:!rounded-[30px]">
