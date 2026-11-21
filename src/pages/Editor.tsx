@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
+import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
 import { getTemplate, occasions, templates } from "../data"
 import { money } from "../lib/format"
@@ -147,10 +148,10 @@ export function Editor() {
             <div><p className="text-sm font-extrabold text-[#4a2d33]">معاينة حية</p><p className="mt-0.5 text-[11px] text-[#9a8187]">كل تعديل هيظهر هنا</p></div>
             <span className="rounded-full bg-[#fff0f2] px-3 py-1.5 text-[11px] font-bold text-[#a64257]">مباشر ✦</span>
           </div>
-          <div className="relative mx-auto max-w-[360px] overflow-hidden rounded-[32px] border border-white bg-[radial-gradient(circle_at_50%_15%,#fff_0%,#f9e9ec_55%,#f3e4dc_100%)] p-3 shadow-[0_22px_55px_rgba(115,65,77,0.14)] ring-1 ring-[#efdce0]">
-            <Invitation draft={draft} activeField={active} onSelect={setActive} />
+          <div className="relative mx-auto w-[min(100%,270px)] sm:w-[min(100%,310px)]">
+            <PhonePreview><Invitation draft={draft} activeField={active} onSelect={setActive} /></PhonePreview>
           </div>
-          <div className="mx-auto mt-4 flex max-w-[360px] items-center justify-between rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
+          <div className="mx-auto mt-4 flex max-w-[310px] items-center justify-between rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
             <span className="text-sm text-[#806b70]">متوسط سعر الدعوة</span>
             <strong className="text-lg text-[#4a2d33]">{money(Math.round(selectedPackage.price / selectedPackage.quantity))}</strong>
           </div>
