@@ -142,7 +142,7 @@ export function Editor() {
       </section>
 
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,390px)_1fr]">
-        <section className="order-2 lg:order-1 lg:sticky lg:top-24">
+        <section id="live-preview" className="order-2 lg:order-1 lg:sticky lg:top-24">
           <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-[#f0dce1] bg-white/85 px-4 py-3 shadow-sm">
             <div><p className="text-sm font-extrabold text-[#4a2d33]">معاينة حية</p><p className="mt-0.5 text-[11px] text-[#9a8187]">كل تعديل هيظهر هنا</p></div>
             <span className="rounded-full bg-[#fff0f2] px-3 py-1.5 text-[11px] font-bold text-[#a64257]">مباشر ✦</span>
@@ -163,7 +163,7 @@ export function Editor() {
               <div className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#a64257] text-xs font-extrabold text-white">{step + 1}</span><p className="text-xs font-bold text-[#b83b50]">{steps[step].title}</p></div>
               <h2 className="mt-2 text-2xl font-extrabold text-[#4a2d33]">{step === 0 ? "أصحاب الفرحة" : step === 1 ? "ميعاد ومكان المناسبة" : "إضافات على ذوقك"}</h2>
             </div>
-            <span className="rounded-full bg-[#fff8f8] px-3 py-1.5 text-[11px] font-semibold text-[#9a8187]">بتتحفظ تلقائيًا</span>
+            <div className="flex shrink-0 flex-col items-end gap-1"><span className="rounded-full bg-[#fff8f8] px-3 py-1.5 text-[11px] font-semibold text-[#9a8187]">بتتحفظ تلقائيًا</span><a href="#live-preview" className="text-[10px] font-bold text-[#a64257] underline underline-offset-4 lg:hidden">شوف المعاينة ↓</a></div>
           </div>
 
           <div className="mt-5 rounded-2xl border border-[#f3e6e9] bg-[#fffdfd] p-4">
