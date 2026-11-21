@@ -33,11 +33,11 @@ export function Gallery() {
   }, [])
 
   return (
-    <main id="main" className="mx-auto min-h-screen max-w-7xl px-3 pb-14 pt-5 sm:px-6 sm:pt-9 lg:px-8">
+    <main id="main" className="gallery-page mx-auto min-h-screen max-w-7xl px-3 pb-14 pt-5 sm:px-6 sm:pt-9 lg:px-8">
       <section className="relative overflow-hidden rounded-[22px] bg-[#f8e9ec] px-4 py-5 sm:rounded-[34px] sm:px-10 sm:py-10 lg:px-14">
         <div className="pointer-events-none absolute -left-16 -top-20 h-56 w-56 rounded-full border border-[#d9aab5]/50 sm:h-72 sm:w-72" />
         <div className="pointer-events-none absolute -bottom-24 right-[42%] h-56 w-56 rounded-full bg-white/55 blur-3xl" />
-        <div className="relative grid grid-cols-[minmax(0,1fr)_104px] items-center gap-3 sm:gap-6 md:grid-cols-[1.2fr_.8fr] md:gap-10">
+        <div className="relative grid grid-cols-[minmax(0,1fr)_112px] items-center gap-2 sm:gap-6 md:grid-cols-[1.2fr_.8fr] md:gap-10">
           <div className="min-w-0 text-right md:text-right">
             <p className="text-[10px] font-extrabold tracking-[.2em] text-[#a64257] sm:text-xs">DA3WETNA • INVITATION STUDIO</p>
             <h1 className="mt-2 font-display text-[1.45rem] leading-[1.45] text-[#4a2d33] sm:text-5xl lg:text-6xl">كل فرحة وليها<br className="hidden md:block" /> تصميم يشبهها</h1>
@@ -53,7 +53,7 @@ export function Gallery() {
               </div>
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-[104px] sm:max-w-[285px]">
+          <div className="relative mx-auto w-full max-w-[112px] sm:max-w-[285px]">
             <div className="absolute -inset-1 rotate-[-5deg] rounded-[14px] sm:-inset-3 sm:rounded-[22px] border border-white/80 bg-white/25" />
             <div className="relative rotate-[1deg] overflow-hidden rounded-[10px] border-[3px] sm:rotate-[2deg] sm:rounded-[18px] sm:border-[7px] border-white bg-white shadow-[0_22px_55px_rgba(94,49,61,.18)]">
               <PhonePreview className="w-[min(100%,150px)] sm:w-[min(100%,250px)]"><Invitation draft={draftFor(templates[0])} /></PhonePreview>
@@ -99,12 +99,12 @@ export function Gallery() {
           <span className="text-[11px] text-[#a18a8f]">{visible.length} نتيجة</span>
         </div>
 
-        <div className="grid grid-cols-2 items-start gap-2.5 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {visible.map((template) => (
-            <article key={template.id} className="group min-w-0 overflow-hidden rounded-[16px] border border-[#f0dce1] bg-white p-1.5 shadow-[0_5px_22px_rgba(91,48,60,.045)] transition duration-300 hover:-translate-y-1 hover:border-[#dfb8c2] hover:shadow-[0_16px_34px_rgba(91,48,60,.10)] sm:rounded-[26px] sm:p-3">
+            <article key={template.id} className="group min-w-0 overflow-hidden rounded-[18px] border border-[#f0dce1] bg-white p-2 shadow-[0_5px_22px_rgba(91,48,60,.045)] transition duration-300 hover:-translate-y-1 hover:border-[#dfb8c2] hover:shadow-[0_16px_34px_rgba(91,48,60,.10)] sm:rounded-[26px] sm:p-3">
               <div className="relative overflow-hidden rounded-[11px] bg-[#fff5f6] sm:rounded-[19px]">
                 <Link to={`/editor/${template.id}`} onClick={clearDraft} className="block" aria-label={`اختار تصميم ${template.name}`}>
-                <PhonePreview className="w-[min(100%,172px)] sm:w-[min(100%,230px)]"><Invitation draft={draftFor(template)} /></PhonePreview>
+                <PhonePreview className="w-full sm:w-[min(100%,230px)]"><Invitation draft={draftFor(template)} /></PhonePreview>
                 <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[9px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">معاينة واختيار</span>
                 {template.isNew ? <span className="absolute right-2 top-2 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] shadow-sm sm:right-3 sm:top-3 sm:text-[10px]">جديد</span> : null}
                 </Link>
@@ -113,7 +113,7 @@ export function Gallery() {
               <div className="px-0.5 pb-1 pt-2 sm:px-2 sm:pt-4">
                 <h3 className="truncate text-[11px] font-extrabold text-[#4a2d33] sm:text-base">{template.name}</h3>
                 <p className="mt-1 line-clamp-2 min-h-8 text-[9px] leading-[1.45] text-[#90777d] sm:min-h-10 sm:text-xs sm:leading-5">{template.blurb}</p>
-                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="mt-2 flex min-h-9 items-center justify-center rounded-lg bg-[#fff0f2] px-1.5 text-[10px] font-extrabold text-[#a64257] transition hover:bg-[#a64257] hover:text-white active:scale-[.98] sm:mt-4 sm:min-h-11 sm:rounded-full sm:text-sm">اختار التصميم <span className="mr-1">←</span></Link>
+                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="mt-2 flex min-h-10 items-center justify-center rounded-xl bg-[#fff0f2] px-1.5 text-[10px] font-extrabold text-[#a64257] transition hover:bg-[#a64257] hover:text-white active:scale-[.98] sm:mt-4 sm:min-h-11 sm:rounded-full sm:text-sm">اختار التصميم <span className="mr-1">←</span></Link>
               </div>
             </article>
           ))}
