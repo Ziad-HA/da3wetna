@@ -127,8 +127,8 @@ export function Home() {
             <span className="grid h-12 w-12 place-items-center rounded-full bg-[#e8f7ed] text-2xl text-[#26834c]">✆</span>
             <p className="mt-3 text-sm font-extrabold text-[#4a2d33]">خلينا نتكلم عن فكرتك</p>
             <p className="mt-1 text-[11px] leading-5 text-[#806b70]">ابعت تفاصيل بسيطة على واتساب، ونبدأ نتفق على المطلوب.</p>
-            <a href="https://wa.me/201035225735?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%B9%D9%85%D9%84%20%D9%85%D9%88%D9%82%D8%B9%20%D8%A3%D9%88%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D8%AE%D8%B5%D8%B5.%20%D9%85%D9%85%D9%83%D9%86%20%D9%86%D8%AA%D9%83%D9%84%D9%85%D8%9F" target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#218c50] px-4 text-xs font-extrabold text-white transition hover:bg-[#197641]">كلّمني على واتساب ←</a>
-            <p className="mt-2 text-[10px] font-semibold text-[#806b70]" dir="ltr">01035225735</p>
+            <a href="https://wa.me/201276390301?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%B9%D9%85%D9%84%20%D9%85%D9%88%D9%82%D8%B9%20%D8%A3%D9%88%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D8%AE%D8%B5%D8%B5.%20%D9%85%D9%85%D9%83%D9%86%20%D9%86%D8%AA%D9%83%D9%84%D9%85%D8%9F" target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#218c50] px-4 text-xs font-extrabold text-white transition hover:bg-[#197641]">كلّمني على واتساب ←</a>
+            <p className="mt-2 text-[10px] font-semibold text-[#806b70]" dir="ltr">01276390301</p>
             <p className="mt-1 text-[9px] text-[#a18a8f]">من غير أي التزام</p>
           </div>
         </div>
