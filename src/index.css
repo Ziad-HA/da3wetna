@@ -716,3 +716,22 @@ main section > div { min-width: 0; }
   .gallery-page #designs article .phone-preview-frame { border-width: 3px; padding: 3px; }
   .gallery-page #designs article .phone-preview-frame { border-radius: 1.35rem; }
 }
+
+
+/* Real-device phone mockup: metallic rails, hardware buttons and clean screen proportions */
+.phone-preview { isolation: isolate; overflow: visible; }
+.phone-preview-frame { box-sizing: border-box; }
+.phone-preview-screen { min-width: 0; }
+.phone-preview-status { line-height: 1; }
+.phone-preview-invite { flex: 0 0 auto; }
+.phone-preview-invite > .invite { width: 100%; height: 100%; }
+@media (max-width: 767px) {
+  .phone-preview-frame { border-width: 4px; padding: 3px; border-radius: 2rem; }
+  .phone-preview-screen { border-radius: 1.65rem; }
+  .phone-preview-status { min-height: 15px; }
+  .phone-preview-homebar { min-height: 12px; }
+}
+@media (max-width: 380px) {
+  .phone-preview-frame { border-width: 3px; padding: 3px; border-radius: 1.7rem; }
+  .phone-preview-screen { border-radius: 1.4rem; }
+}
