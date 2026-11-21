@@ -61,5 +61,5 @@ export function decodeDraft(code: string): InviteDraft | null {
 }
 
 export function invitePath(code: string): string {
-  return \`/i/\${code}\`
+  return `/i/${code}`
 }
