@@ -92,45 +92,72 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[#f0dce1] bg-[#fff8f8]">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.3fr_1fr]">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50]">
-              <LogoMark className="h-7 w-7" />
-            </span>
-            <span className="font-display text-3xl text-[#4a2d33]">دعوتنا</span>
+    <footer className="relative overflow-hidden border-t border-[#efd9df] bg-[linear-gradient(180deg,#fff8f8_0%,#fffdfb_100%)]">
+      <div className="pointer-events-none absolute -left-24 -top-28 h-72 w-72 rounded-full bg-[#f8e4e8]/60 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-[#f4e8d5]/45 blur-3xl" />
+
+      <div className="relative mx-auto max-w-6xl px-4 pb-7 pt-12 sm:pt-16">
+        <div className="mb-10 flex flex-col gap-6 rounded-[28px] border border-[#f0dce1] bg-white/75 p-6 shadow-[0_12px_40px_rgba(115,65,77,0.05)] sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div className="max-w-xl">
+            <p className="mb-2 text-xs font-bold tracking-[0.18em] text-[#b36a78]">YOUR MOMENT, YOUR INVITATION</p>
+            <h2 className="font-display text-3xl leading-tight text-[#4a2d33] sm:text-4xl">خلي دعوتك بداية حكاية حلوة</h2>
+            <p className="mt-2 text-sm leading-7 text-[#806b70]">اختار التصميم اللي يشبه فرحتك وشارك دعوتك مع كل اللي بتحبهم.</p>
           </div>
-          <p className="mt-4 max-w-sm leading-7 text-[#806b70]">
-            كل فرحة وليها دعوة حلوة. صمّم دعوتك وشارك لحظتك مع كل اللي بتحبهم.
-          </p>
+          <Link to="/templates" className="btn-gold shrink-0 px-7">اكتشف الدعوات <span className="mr-2" aria-hidden="true">←</span></Link>
         </div>
-        <div className="grid content-start gap-3">
-          <p className="font-bold text-[#4a2d33]">تصفح</p>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/templates">كل الدعوات</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/how">طريقة الاستخدام</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/packages">الباقات والأسعار</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/privacy">سياسة الخصوصية</Link>
+
+        <div className="grid gap-9 border-b border-[#efdde1] pb-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_1.25fr_0.8fr] lg:gap-8">
+          <div>
+            <Link to="/" className="inline-flex items-center gap-3" aria-label="دعوتنا، الصفحة الرئيسية">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fff0f2] text-[#b83b50] ring-1 ring-[#f2dce1]">
+                <LogoMark className="h-8 w-8" />
+              </span>
+              <span className="grid leading-none">
+                <span className="font-display text-3xl text-[#4a2d33]">دعوتنا</span>
+                <span className="mt-1 font-latin text-[0.62rem] tracking-[0.3em] text-[#a45b69]">{site.nameEn}</span>
+              </span>
+            </Link>
+            <p className="mt-4 max-w-xs text-sm leading-7 text-[#806b70]">
+              كل فرحة وليها دعوة حلوة. صمّم دعوتك أونلاين بسهولة وشارك لحظتك مع كل اللي بتحبهم.
+            </p>
+          </div>
+
+          <div className="grid content-start gap-3 text-sm">
+            <p className="mb-1 font-bold text-[#4a2d33]">روابط سريعة</p>
+            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/templates">كل الدعوات</Link>
+            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/how">طريقة الاستخدام</Link>
+            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/packages">الباقات والأسعار</Link>
+            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
+            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/privacy">سياسة الخصوصية</Link>
+          </div>
+
+          <div className="grid content-start gap-3 text-sm">
+            <p className="mb-1 font-bold text-[#4a2d33]">دعوات لكل مناسبة</p>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
+              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-فرح">دعوة فرح</Link>
+              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-خطوبة">دعوة خطوبة</Link>
+              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-كتب-كتاب">دعوة كتب كتاب</Link>
+              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوات-الكترونية">دعوات إلكترونية</Link>
+              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/كروت-افراح">كروت أفراح</Link>
+              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/صيغ-دعوة-زفاف">صيغ دعوة زفاف</Link>
+            </div>
+          </div>
+
+          <div className="grid content-start gap-3 text-sm">
+            <p className="mb-1 font-bold text-[#4a2d33]">طرق الدفع</p>
+            <p className="text-[#806b70]">فودافون كاش</p>
+            <p className="text-[#806b70]">إنستاباي</p>
+            <p className="text-[#806b70]">بطاقة بنكية</p>
+            <p className="mt-2 text-xs leading-6 text-[#a18a8f]">تواصل معانا لو محتاج مساعدة في اختيار دعوتك.</p>
+          </div>
         </div>
-        <div className="grid content-start gap-3">
-          <p className="font-bold text-[#4a2d33]">مناسبات ودعوات</p>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوة-فرح">دعوة فرح</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوة-خطوبة">دعوة خطوبة</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوة-كتب-كتاب">دعوة كتب كتاب</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/دعوات-الكترونية">دعوات إلكترونية</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/كروت-افراح">كروت أفراح</Link>
-          <Link className="text-[#806b70] hover:text-[#a64257]" to="/صيغ-دعوة-زفاف">صيغ دعوة زفاف</Link>
-        </div>
-        <div className="grid content-start gap-3">
-          <p className="font-bold text-[#4a2d33]">طرق الدفع</p>
-          <p className="text-[#806b70]">فودافون كاش</p>
-          <p className="text-[#806b70]">إنستاباي</p>
-          <p className="text-[#806b70]">بطاقة بنكية</p>
+
+        <div className="flex flex-col items-center justify-between gap-3 pt-5 text-center text-xs text-[#9a8187] sm:flex-row sm:text-right">
+          <p>© {new Date().getFullYear()} دعوتنا — كل الحقوق محفوظة</p>
+          <p>اتعمل بكل حب عشان لحظاتكم الحلوة <span className="text-[#b83b50]">♥</span></p>
         </div>
       </div>
-      <p className="border-t border-[#f0dce1] px-4 py-4 text-center text-sm text-[#9a8187]">© {new Date().getFullYear()} دعوتنا — كل الحقوق محفوظة</p>
     </footer>
   )
 }
