@@ -29,7 +29,12 @@ export function readDraft(): InviteDraft | null {
     if (!raw) return null
     const data = JSON.parse(raw) as InviteDraft
     if (!data || !isTemplateId(data.templateId)) return null
-    return data
+    return { ...draftFor(getTemplate(data.templateId)!), ...data,
+      rsvpPhone: typeof data.rsvpPhone === "string" ? data.rsvpPhone : "",
+      musicUrl: typeof data.musicUrl === "string" ? data.musicUrl : "",
+      photoOne: typeof data.photoOne === "string" ? data.photoOne : "",
+      photoTwo: typeof data.photoTwo === "string" ? data.photoTwo : "",
+    }
   } catch {
     return null
   }
