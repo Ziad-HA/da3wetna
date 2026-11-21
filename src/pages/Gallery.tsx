@@ -44,23 +44,57 @@ export function Gallery() {
           const featured = item.id === "plus"
           return (
             <article key={item.id} className={`relative flex flex-col rounded-[26px] border p-5 transition duration-200 ${featured ? "border-[#183d32] bg-[#102d25] text-white shadow-[0_16px_36px_rgba(16,45,37,0.18)] lg:-translate-y-2" : "border-[#eadde0] bg-white text-[#4a2d33]"} ${active ? "ring-2 ring-[#b83b50] ring-offset-2" : ""}`}>
-              {item.label ? <span className={`mb-3 self-start rounded-full px-3 py-1 text-xs font-bold ${featured ? "bg-[#d9bd7b]/15 text-[#e8d39e]" : "bg-[#fff0f2] text-[#a64257]"}`}>{item.label}</span> : <span className="mb-3 h-6" />}
-              <h2 className="text-xl font-bold">{item.name}</h2>
-              <p className={`mt-2 min-h-12 text-sm leading-6 ${featured ? "text-white/70" : "text-[#806b70]"}`}>{item.description}</p>
-              <div className="mt-5 flex items-end gap-2">
-                <strong className={`font-display text-4xl ${featured ? "text-[#e8d39e]" : "text-[#08745d]"}`}>{money(item.price)}</strong>
-                <span className={`mb-1 text-sm line-through ${featured ? "text-white/45" : "text-[#a99599]"}`}>{money(item.oldPrice)}</span>
-              </div>
-              <p className={`mt-1 text-xs ${featured ? "text-white/60" : "text-[#806b70]"}`}>دفع مرة واحدة · {item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات"}</p>
-              <div className={`mt-5 flex-1 rounded-2xl p-3 ${featured ? "bg-white/[0.07]" : "bg-[#fbf7f3]"}`}>
-                <p className="text-sm font-bold">الباقة تشمل</p>
-                {item.features.map((feature) => (
-                  <p key={feature} className={`mt-2 text-sm leading-6 ${featured ? "text-white/80" : "text-[#08745d]"}`}>✓ {feature}</p>
-                ))}
-                <p className={`mt-3 border-t pt-3 text-sm font-bold ${featured ? "border-white/10 text-[#e8d39e]" : "border-[#eee3e3] text-[#08745d]"}`}>
-                  ≈ {money(Math.round(item.price / item.quantity))} للدعوة
-                </p>
-              </div>
+              {item.id === "single" ? (
+                <>
+                  <span className="mb-3 self-start rounded-full bg-[#fae8eb] px-3 py-1 text-xs font-extrabold text-[#bd4058]">خصم 37%</span>
+                  <h2 className="text-xl font-extrabold">{item.name}</h2>
+                  <p className="mt-2 min-h-12 text-sm leading-6 text-[#806b70]">{item.description}</p>
+                  <div className="mt-5 flex items-end gap-2">
+                    <strong className="font-display text-4xl text-[#08745d]">{money(item.price)}</strong>
+                    <span className="mb-1 text-sm text-[#a99599] line-through">{money(item.oldPrice)}</span>
+                    <span className="mb-1 text-sm text-[#806b70]">ج.م · دفعة واحدة</span>
+                  </div>
+                  <div className="mt-5 flex-1 rounded-2xl bg-[#fbf7f3] p-4">
+                    <p className="font-bold text-[#4a2d33]">تنشئ 1 دعوة مميزة</p>
+                    <p className="mt-1 text-sm text-[#08745d]">≈ {money(item.price)} ج.م للدعوة</p>
+                    <p className="mt-3 text-sm font-semibold leading-6 text-[#08745d]">وتبعتها لعدد لا نهائي من الناس</p>
+                    <div className="mt-4 border-t border-[#eadde0] pt-4">
+                      <p className="font-bold text-[#4a2d33]">اللي هتقدر تعمله</p>
+                      {item.features.map((feature) => (
+                        <p key={feature} className="mt-2 flex gap-2 text-sm leading-6 text-[#08745d]">
+                          <span aria-hidden="true">✓</span><span>{feature}</span>
+                        </p>
+                      ))}
+                    </div>
+                    <div className="mt-4 border-t border-[#eadde0] pt-4">
+                      {item.benefits.map((benefit) => (
+                        <p key={benefit} className="mt-2 text-sm font-semibold text-[#4a2d33]">• {benefit}</p>
+                      ))}
+                    </div>
+                  </div>
+                  <p className="mt-3 text-center text-xs font-semibold leading-5 text-[#806b70]">{item.paymentNote}</p>
+                </>
+              ) : (
+                <>
+                  {item.label ? <span className={`mb-3 self-start rounded-full px-3 py-1 text-xs font-bold ${featured ? "bg-[#d9bd7b]/15 text-[#e8d39e]" : "bg-[#fff0f2] text-[#a64257]"}`}>{item.label}</span> : <span className="mb-3 h-6" />}
+                  <h2 className="text-xl font-bold">{item.name}</h2>
+                  <p className={`mt-2 min-h-12 text-sm leading-6 ${featured ? "text-white/70" : "text-[#806b70]"}`}>{item.description}</p>
+                  <div className="mt-5 flex items-end gap-2">
+                    <strong className={`font-display text-4xl ${featured ? "text-[#e8d39e]" : "text-[#08745d]"}`}>{money(item.price)}</strong>
+                    <span className={`mb-1 text-sm line-through ${featured ? "text-white/45" : "text-[#a99599]"}`}>{money(item.oldPrice)}</span>
+                  </div>
+                  <p className={`mt-1 text-xs ${featured ? "text-white/60" : "text-[#806b70]"}`}>دفع مرة واحدة · {item.quantity} دعوات</p>
+                  <div className={`mt-5 flex-1 rounded-2xl p-3 ${featured ? "bg-white/[0.07]" : "bg-[#fbf7f3]"}`}>
+                    <p className="text-sm font-bold">الباقة تشمل</p>
+                    {item.features.map((feature) => (
+                      <p key={feature} className={`mt-2 text-sm leading-6 ${featured ? "text-white/80" : "text-[#08745d]"}`}>✓ {feature}</p>
+                    ))}
+                    <p className={`mt-3 border-t pt-3 text-sm font-bold ${featured ? "border-white/10 text-[#e8d39e]" : "border-[#eee3e3] text-[#08745d]"}`}>
+                      ≈ {money(Math.round(item.price / item.quantity))} للدعوة
+                    </p>
+                  </div>
+                </>
+              )}
               <button
                 type="button"
                 onClick={() => choosePackage(item.id)}
