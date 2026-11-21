@@ -28,6 +28,8 @@ export function Editor() {
   const [draft, setDraft] = useState<InviteDraft>(() => initDraft(id))
   const [active, setActive] = useState<FieldKey | null>("groom")
   const [error, setError] = useState("")
+  const [step, setStep] = useState(0)
+  const steps = [{ title: "الأسماء", hint: "مين أصحاب الفرحة؟" }, { title: "الموعد والمكان", hint: "إمتى وفين هنحتفل؟" }, { title: "لمستك الأخيرة", hint: "خصص نص الدعوة لو حابب" }]
   const requiredItems = [
     { label: "اسم العريس", done: Boolean(draft.groom.trim()) },
     { label: "اسم العروسة", done: Boolean(draft.bride.trim()) },
@@ -57,6 +59,20 @@ export function Editor() {
     const next = { ...draft, templateId: nextId as InviteDraft["templateId"] }
     writeDraft(next)
     navigate(`/editor/${nextId}`)
+  }
+
+  function nextStep() {
+    if (step === 0 && (!draft.groom.trim() || !draft.bride.trim())) {
+      setError("اكتب اسم العريس واسم العروسة الأول.");
+      return;
+    }
+    if (step === 1 && (!draft.date || !draft.venue.trim())) {
+      setError("حدد تاريخ ومكان المناسبة عشان نكمل.");
+      return;
+    }
+    setError("");
+    if (step < 2) setStep((value) => value + 1);
+    else goCheckout();
   }
 
   function goCheckout() {
@@ -114,6 +130,13 @@ export function Editor() {
         </div>
       </div>
 
+      <section className="mb-5 rounded-[24px] border border-[#f0dce1] bg-white p-4 shadow-sm sm:p-5" aria-label="خطوات تجهيز الدعوة">
+        <div className="grid grid-cols-3 gap-2">
+          {steps.map((item, index) => <button key={item.title} type="button" onClick={() => { if (index < step) setStep(index); }} className={`min-w-0 rounded-2xl px-2 py-3 text-center transition ${step === index ? "bg-[#a64257] text-white shadow-md" : index < step ? "bg-[#f8e8ec] text-[#a64257]" : "bg-[#fff8f8] text-[#a18a8f]"}`}><span className="mx-auto grid h-6 w-6 place-items-center rounded-full border border-current text-[11px] font-bold">{index < step ? "✓" : index + 1}</span><span className="mt-1 block truncate text-[11px] font-extrabold sm:text-sm">{item.title}</span></button>)}
+        </div>
+        <p className="mt-3 text-center text-xs text-[#806b70]">{steps[step].hint}</p>
+      </section>
+
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,390px)_1fr]">
         <section className="order-2 lg:order-1 lg:sticky lg:top-24">
           <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-[#f0dce1] bg-white/85 px-4 py-3 shadow-sm">
@@ -152,7 +175,7 @@ export function Editor() {
             <h3 className="font-bold text-[#4a2d33]">البيانات الأساسية</h3>
             <p className="mt-1 text-xs text-[#806b70]">ابدأ بالأسماء وميعاد ومكان المناسبة.</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {fields.filter((field) => ["occasion", "groom", "bride", "date", "time", "venue"].includes(field.key)).map((field) => (
+              {fields.filter((field) => (step === 0 && ["occasion", "groom", "bride"].includes(field.key)) || (step === 1 && ["date", "time", "venue", "city"].includes(field.key))).map((field) => (
                 <label key={field.key} className="field">
                   <span>{field.label}{["groom", "bride", "date", "venue"].includes(field.key) ? " *" : ""}</span>
                   {field.kind === "select" ? (
@@ -177,7 +200,7 @@ export function Editor() {
             </div>
           </div>
 
-          <details className="mt-4 rounded-[22px] border border-[#f0dce1] bg-white p-4 transition open:bg-[#fffdfd]">
+          {step === 2 ? <details open className="mt-4 rounded-[22px] border border-[#f0dce1] bg-white p-4 transition open:bg-[#fffdfd]">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-bold text-[#a64257]"><span className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#fff0f2]">＋</span> إضافات اختيارية للدعوة</span><span className="text-xs font-normal text-[#9a8187]">اختياري</span></summary>
             <p className="mt-2 text-xs leading-6 text-[#806b70]">تقدر تسيب الإضافات دي زي ما هي، أو تخصص نص الدعوة والمدينة.</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -194,11 +217,12 @@ export function Editor() {
                 </label>
               ))}
             </div>
-          </details>
+          </details> : null}
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
-            <p className="text-sm text-[#806b70]">راجع التفاصيل قبل ما تكمل.</p>
-            <button type="button" className="btn-gold" onClick={goCheckout}>كمل ←</button>
+            <button type="button" className="text-sm font-bold text-[#a64257]" onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={step === 0}>رجوع</button>
+            <p className="text-sm text-[#806b70]">الخطوة {step + 1} من 3</p>
+            <button type="button" className="btn-gold" onClick={nextStep}>{step === 2 ? "كمل للطلب ←" : "التالي ←"}</button>
           </div>
         </section>
       </div>
@@ -206,7 +230,7 @@ export function Editor() {
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#f0dce1] bg-white/95 p-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
           <div><p className="text-xs text-[#806b70]">{selectedPackage.name}</p><p className="font-bold text-[#4a2d33]">{money(selectedPackage.price)}</p></div>
-          <button type="button" className="btn-gold" onClick={goCheckout}>كمل ←</button>
+          <button type="button" className="btn-gold" onClick={nextStep}>{step === 2 ? "كمل للطلب ←" : "التالي ←"}</button>
         </div>
       </div>
     </main>
