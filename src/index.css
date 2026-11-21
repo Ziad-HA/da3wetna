@@ -682,9 +682,9 @@ main section > div { min-width: 0; }
 .gallery-page { padding-bottom: max(6rem, calc(5rem + env(safe-area-inset-bottom))); }
 .gallery-page #designs { scroll-margin-top: 1rem; }
 @media (max-width: 767px) {
-  .gallery-page { padding-inline: 0.75rem; padding-top: 0.85rem; }
+  main#main.gallery-page { padding-inline: 0.75rem; padding-top: 0.85rem; }
   .gallery-page > section:first-child { border-radius: 1.35rem; padding: 1rem 0.8rem; }
-  .gallery-page > section:first-child h1 { font-size: clamp(1.3rem, 6.1vw, 1.8rem); line-height: 1.45; }
+  main#main.gallery-page > section:first-child h1 { font-size: clamp(1.3rem, 6.1vw, 1.8rem); line-height: 1.45; }
   .gallery-page > section:first-child p { font-size: 0.72rem; line-height: 1.75; }
   .gallery-page > section:first-child .grid { grid-template-columns: minmax(0, 1fr) 112px; gap: 0.55rem; }
   .gallery-page > section:first-child .grid > div:first-child { min-width: 0; }
