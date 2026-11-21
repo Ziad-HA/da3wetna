@@ -324,3 +324,44 @@ article, section { scroll-margin-top: 6rem; }
 @media (max-width: 767px) {
   body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
 }
+
+
+/* Gentle romantic motion */
+body { position: relative; }
+body::before,
+body::after {
+  content: "♡";
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  color: rgba(184, 59, 80, 0.10);
+  font-family: Georgia, serif;
+  font-size: 2.2rem;
+  line-height: 1;
+  animation: romantic-drift 11s ease-in-out infinite;
+}
+body::before { top: 24%; left: 3%; }
+body::after {
+  content: "✿";
+  top: 66%;
+  right: 3%;
+  color: rgba(198, 161, 91, 0.13);
+  font-size: 1.8rem;
+  animation-duration: 14s;
+  animation-delay: -4s;
+}
+@keyframes romantic-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+  50% { transform: translate3d(7px, -18px, 0) rotate(8deg); }
+}
+@media (hover: hover) {
+  article { transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease; }
+  article:hover { transform: translateY(-3px); }
+}
+@media (max-width: 767px) {
+  body::before { top: 19%; left: 2%; font-size: 1.6rem; }
+  body::after { top: 58%; right: 2%; font-size: 1.35rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before, body::after { animation: none !important; }
+}
