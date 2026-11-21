@@ -69,17 +69,20 @@ export function Editor() {
   }
 
   return (
-    <main id="main" className="mx-auto max-w-6xl px-4 py-8 pb-28 lg:py-12">
-      <div className="mb-7 flex flex-wrap items-center justify-between gap-3">
+    <main id="main" className="relative isolate mx-auto max-w-6xl overflow-hidden px-4 py-8 pb-28 lg:py-12">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-0 -z-10 h-80 w-80 rounded-full bg-[#f8e3e8]/60 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-96 -z-10 h-72 w-72 rounded-full bg-[#f5eadb]/55 blur-3xl" />
+      <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <Link to="/templates" className="text-sm font-bold text-[#a64257] hover:underline">← كل التصاميم</Link>
-          <h1 className="mt-2 font-display text-3xl text-[#4a2d33] md:text-4xl">جهّز دعوتك</h1>
-          <p className="mt-1 text-sm text-[#806b70]">عدّل التفاصيل وشوف النتيجة مباشرة.</p>
+          <Link to="/templates" className="inline-flex items-center gap-2 text-sm font-bold text-[#a64257] transition hover:gap-3">← رجوع للتصميمات</Link>
+          <div className="mt-3 flex items-center gap-2 text-xs font-bold tracking-wide text-[#b36a78]"><span className="h-px w-7 bg-[#d9a3ae]" /> دعوة على ذوقك <span className="text-[#c6a15b]">✦</span></div>
+          <h1 className="mt-2 font-display text-4xl text-[#4a2d33] md:text-5xl">خلّي دعوتك تحكي فرحتك</h1>
+          <p className="mt-2 max-w-xl text-sm leading-7 text-[#806b70]">اكتب تفاصيل مناسبتك، وشوف كل تغيير بيظهر في التصميم قدامك فورًا.</p>
         </div>
-        <span className="rounded-full bg-white px-4 py-2 text-sm font-bold text-[#a64257] ring-1 ring-[#f0dce1]">{template.name}</span>
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#efd5dc] bg-white/90 px-4 py-2.5 text-sm font-bold text-[#a64257] shadow-sm"><span className="text-[#c6a15b]">✦</span>{template.name}<span className="text-[#c6a15b]">✦</span></span>
       </div>
 
-      <section className="mb-6 rounded-2xl border border-[#f0dce1] bg-white p-4 md:p-5" aria-label="اكتمال بيانات الدعوة">
+      <section className="mb-5 rounded-[26px] border border-white bg-white/90 p-4 shadow-[0_12px_35px_rgba(115,65,77,0.06)] ring-1 ring-[#f0dce1] md:p-5" aria-label="اكتمال بيانات الدعوة">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-sm font-bold text-[#4a2d33]">جهّز بيانات دعوتك</p>
@@ -100,7 +103,7 @@ export function Editor() {
         </div>
       </section>
 
-      <div className="mb-6 rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
+      <div className="mb-7 rounded-[22px] border border-[#efdce0] bg-[linear-gradient(110deg,#fff_0%,#fff7f8_100%)] px-5 py-4 shadow-[0_8px_24px_rgba(115,65,77,0.045)]">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <p className="text-xs text-[#806b70]">الباقة المختارة</p>
@@ -111,13 +114,13 @@ export function Editor() {
         </div>
       </div>
 
-      <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,390px)_1fr]">
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,390px)_1fr]">
         <section className="order-2 lg:order-1 lg:sticky lg:top-24">
-          <div className="mb-3 flex items-center justify-between text-sm">
-            <span className="font-bold text-[#4a2d33]">معاينة الدعوة</span>
-            <span className="text-[#9a8187]">اضغط على النص للتعديل</span>
+          <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-[#f0dce1] bg-white/85 px-4 py-3 shadow-sm">
+            <div><p className="text-sm font-extrabold text-[#4a2d33]">معاينة حية</p><p className="mt-0.5 text-[11px] text-[#9a8187]">كل تعديل هيظهر هنا</p></div>
+            <span className="rounded-full bg-[#fff0f2] px-3 py-1.5 text-[11px] font-bold text-[#a64257]">مباشر ✦</span>
           </div>
-          <div className="mx-auto max-w-[360px] overflow-hidden rounded-[28px] bg-white p-2 shadow-[0_14px_40px_rgba(74,45,51,0.10)] ring-1 ring-[#f0dce1]">
+          <div className="relative mx-auto max-w-[360px] overflow-hidden rounded-[32px] border border-white bg-[radial-gradient(circle_at_50%_15%,#fff_0%,#f9e9ec_55%,#f3e4dc_100%)] p-3 shadow-[0_22px_55px_rgba(115,65,77,0.14)] ring-1 ring-[#efdce0]">
             <Invitation draft={draft} activeField={active} onSelect={setActive} />
           </div>
           <div className="mx-auto mt-4 flex max-w-[360px] items-center justify-between rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
@@ -126,16 +129,17 @@ export function Editor() {
           </div>
         </section>
 
-        <section className="order-1 min-w-0 rounded-[28px] border border-[#f0dce1] bg-white p-5 shadow-[0_8px_28px_rgba(74,45,51,0.035)] md:p-7">
+        <section className="order-1 min-w-0 overflow-hidden rounded-[30px] border border-white bg-white/95 p-5 shadow-[0_18px_48px_rgba(115,65,77,0.075)] ring-1 ring-[#f0dce1] md:p-7">
+          <div className="-mx-5 -mt-5 mb-6 h-1.5 bg-[linear-gradient(90deg,#c6a15b_0%,#e8bdc8_45%,#a64257_100%)] md:-mx-7 md:-mt-7" />
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-bold text-[#b83b50]">الخطوة ١ من ٢</p>
-              <h2 className="mt-1 text-xl font-bold text-[#4a2d33]">تفاصيل المناسبة</h2>
+              <div className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#a64257] text-xs font-extrabold text-white">١</span><p className="text-xs font-bold text-[#b83b50]">الخطوة الأولى</p></div>
+              <h2 className="mt-2 text-2xl font-extrabold text-[#4a2d33]">تفاصيل المناسبة</h2>
             </div>
-            <span className="text-sm text-[#9a8187]">تقدر تعدّل في أي وقت</span>
+            <span className="rounded-full bg-[#fff8f8] px-3 py-1.5 text-[11px] font-semibold text-[#9a8187]">بتتحفظ تلقائيًا</span>
           </div>
 
-          <div className="mt-5">
+          <div className="mt-5 rounded-2xl border border-[#f3e6e9] bg-[#fffdfd] p-4">
             <label className="field">
               <span>التصميم</span>
               <select value={draft.templateId} onChange={(event) => chooseTemplate(event.target.value)}>
@@ -144,7 +148,7 @@ export function Editor() {
             </label>
           </div>
 
-          <div className="mt-5 rounded-2xl bg-[#fff8f8] p-4">
+          <div className="mt-4 rounded-[22px] border border-[#f1e0e4] bg-[linear-gradient(145deg,#fff8f8_0%,#fffdfb_100%)] p-4 md:p-5">
             <h3 className="font-bold text-[#4a2d33]">البيانات الأساسية</h3>
             <p className="mt-1 text-xs text-[#806b70]">ابدأ بالأسماء وميعاد ومكان المناسبة.</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -173,8 +177,8 @@ export function Editor() {
             </div>
           </div>
 
-          <details className="mt-4 rounded-2xl border border-[#f0dce1] bg-white p-4">
-            <summary className="cursor-pointer list-none font-bold text-[#a64257]">إضافات اختيارية للدعوة <span className="float-left text-xs font-normal text-[#9a8187]">مش لازم تملأها</span></summary>
+          <details className="mt-4 rounded-[22px] border border-[#f0dce1] bg-white p-4 transition open:bg-[#fffdfd]">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-bold text-[#a64257]"><span className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#fff0f2]">＋</span> إضافات اختيارية للدعوة</span><span className="text-xs font-normal text-[#9a8187]">اختياري</span></summary>
             <p className="mt-2 text-xs leading-6 text-[#806b70]">تقدر تسيب الإضافات دي زي ما هي، أو تخصص نص الدعوة والمدينة.</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               {fields.filter((field) => ["opening", "hosts", "message", "city"].includes(field.key)).map((field) => (
