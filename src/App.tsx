@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom"
 import { SiteChrome } from "./components/SiteChrome"
 import { Checkout } from "./pages/Checkout"
@@ -20,8 +20,35 @@ function ScrollToTop() {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual"
     }
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" })
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" })
   }, [pathname, search])
+
+  useEffect(() => {
+    const handleInternalLinkClick = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) return
+
+      const target = event.target
+      if (!(target instanceof Element)) return
+
+      const link = target.closest("a")
+      if (!link || link.target === "_blank" || link.hasAttribute("download")) return
+
+      const destination = new URL(link.href, window.location.href)
+      if (destination.origin !== window.location.origin) return
+
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+    }
+
+    document.addEventListener("click", handleInternalLinkClick, true)
+    return () => document.removeEventListener("click", handleInternalLinkClick, true)
+  }, [])
 
   return null
 }
