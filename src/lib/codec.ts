@@ -1,7 +1,6 @@
 import { getTemplate } from "../data"
+import { templateIds } from "../types"
 import type { InviteDraft } from "../types"
-
-const fields = ["groom", "bride", "occasion", "hosts", "message", "date", "time", "venue", "city", "opening"] as const
 
 export function encodeDraft(draft: InviteDraft): string {
   const slim: InviteDraft = {
@@ -17,28 +16,45 @@ export function encodeDraft(draft: InviteDraft): string {
     city: draft.city.slice(0, 40),
     opening: draft.opening.slice(0, 60),
   }
+
   const bytes = new TextEncoder().encode(JSON.stringify(slim))
   let binary = ""
   for (const byte of bytes) binary += String.fromCharCode(byte)
+
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "")
 }
 
 export function decodeDraft(code: string): InviteDraft | null {
   try {
-    const pad = code.replace(/-/g, "+").replace(/_/g, "/")
-    const padded = pad + "=".repeat((4 - (pad.length % 4)) % 4)
+    const normalized = code.replace(/-/g, "+").replace(/_/g, "/")
+    const padded = normalized + "=".repeat((4 - (normalized.length % 4)) % 4)
     const binary = atob(padded)
     const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0))
-    const data = JSON.parse(new TextDecoder().decode(bytes)) as Partial<InviteDraft>
-    if (!data.templateId || !getTemplate(data.templateId)) return null
+    const data = JSON.parse(new TextDecoder().decode(bytes)) as Record<string, unknown>
+
+    if (typeof data.templateId !== "string") return null
+
+    const templateId = templateIds.find((id) => id === data.templateId)
+    if (!templateId || !getTemplate(templateId)) return null
+
     if (typeof data.groom !== "string" || typeof data.bride !== "string") return null
-    const draft = {} as InviteDraft
-    for (const key of fields) {
-      const value = data[key]
-      draft[key] = typeof value === "string" ? value : ""
+
+    const readString = (key: string): string =>
+      typeof data[key] === "string" ? (data[key] as string) : ""
+
+    return {
+      templateId,
+      groom: readString("groom"),
+      bride: readString("bride"),
+      occasion: readString("occasion"),
+      hosts: readString("hosts"),
+      message: readString("message"),
+      date: readString("date"),
+      time: readString("time"),
+      venue: readString("venue"),
+      city: readString("city"),
+      opening: readString("opening"),
     }
-    draft.templateId = data.templateId
-    return draft
   } catch {
     return null
   }
