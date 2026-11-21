@@ -12,7 +12,6 @@ import type { PayMethod } from "../types"
 const methods: { id: PayMethod; title: string; text: string; icon: typeof IconWallet }[] = [
   { id: "vodafone", title: "فودافون كاش", text: "حوّل المبلغ واكتب رقم العملية", icon: IconWallet },
   { id: "instapay", title: "إنستاباي", text: "تحويل فوري من تطبيق البنك", icon: IconBank },
-  { id: "card", title: "بطاقة بنكية", text: "فيزا أو ماستركارد — تجربة لحد ربط البوابة", icon: IconCard },
 ]
 
 export function Checkout() {
@@ -154,7 +153,6 @@ export function Checkout() {
                     <input value={refNo} inputMode="numeric" maxLength={30} onChange={(event) => setRefNo(event.target.value)} placeholder="مثال: 4821" />
                   </label>
                 </div>
-              )}
               {walletsArePlaceholders ? <p className="mt-4 text-xs leading-6 text-[#9a6a45]">بيانات المحافظ الحالية تجريبية. حدّثها من src/config.ts قبل استقبال الطلبات.</p> : null}
               <p className="mt-2 text-xs leading-6 text-[#9a6a45]">إرسال الطلب لا يعني تأكيد الدفع. التفعيل بيتم بعد مراجعة الإيصال يدويًا.</p>
             </>
