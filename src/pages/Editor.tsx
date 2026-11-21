@@ -161,7 +161,7 @@ export function Editor() {
           <div className="flex items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#a64257] text-xs font-extrabold text-white">١</span><p className="text-xs font-bold text-[#b83b50]">الخطوة الأولى</p></div>
-              <h2 className="mt-2 text-2xl font-extrabold text-[#4a2d33]">تفاصيل المناسبة</h2>
+              <h2 className="mt-2 text-2xl font-extrabold text-[#4a2d33]">{step === 0 ? "أصحاب الفرحة" : step === 1 ? "ميعاد ومكان المناسبة" : "إضافات على ذوقك"}</h2>
             </div>
             <span className="rounded-full bg-[#fff8f8] px-3 py-1.5 text-[11px] font-semibold text-[#9a8187]">بتتحفظ تلقائيًا</span>
           </div>
@@ -177,9 +177,9 @@ export function Editor() {
 
           <div className="mt-4 rounded-[22px] border border-[#f1e0e4] bg-[linear-gradient(145deg,#fff8f8_0%,#fffdfb_100%)] p-4 md:p-5">
             <h3 className="font-bold text-[#4a2d33]">البيانات الأساسية</h3>
-            <p className="mt-1 text-xs text-[#806b70]">ابدأ بالأسماء وميعاد ومكان المناسبة.</p>
+            <p className="mt-1 text-xs leading-6 text-[#806b70]">{step === 0 ? "اكتب الاسمين واختار نوع المناسبة." : step === 1 ? "حدد اليوم والوقت والمكان اللي هتتقابلوا فيه." : "الخطوة دي اختيارية؛ تقدر تكمل من غير ما تضيف أي حاجة."}</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {fields.filter((field) => (step === 0 && ["occasion", "groom", "bride"].includes(field.key)) || (step === 1 && ["date", "time", "venue", "city"].includes(field.key))).map((field) => (
+              {fields.filter((field) => (step === 0 && ["occasion", "groom", "bride"].includes(field.key)) || (step === 1 && ["date", "time", "venue"].includes(field.key))).map((field) => (
                 <label key={field.key} className="field">
                   <span>{field.label}{["groom", "bride", "date", "venue"].includes(field.key) ? " *" : ""}</span>
                   {field.kind === "select" ? (
@@ -231,7 +231,7 @@ export function Editor() {
         </section>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#f0dce1] bg-white/95 p-3 backdrop-blur lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#f0dce1] bg-white/95 p-3 pb-[max(env(safe-area-inset-bottom),12px)] backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
           <div><p className="text-xs text-[#806b70]">{selectedPackage.name}</p><p className="font-bold text-[#4a2d33]">{money(selectedPackage.price)}</p></div>
           <button type="button" className="btn-gold" onClick={nextStep}>{step === 2 ? "كمل للطلب ←" : "التالي ←"}</button>
