@@ -2,7 +2,7 @@
 export const site = {
   name: "دعوتنا",
   nameEn: "DA3WETNA",
-  whatsapp: "201000000000",
+  whatsapp: "201276390301",
   vodafoneCash: "01000000000",
   instapay: "da3wetna@instapay",
 }
