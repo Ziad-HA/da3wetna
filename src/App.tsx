@@ -12,6 +12,7 @@ import { FAQ } from "./pages/FAQ"
 import { InviteView } from "./pages/InviteView"
 import { SeoContentPage } from "./pages/SeoContentPage"
 import { Privacy } from "./pages/Privacy"
+import { Account } from "./pages/Account"
 
 function ScrollToTop() {
   const { pathname, search } = useLocation()
@@ -64,6 +65,7 @@ export function App() {
           <Route path="/packages" element={<Packages />} />
           <Route path="/how" element={<How />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/دعوة-زفاف-الإلكترونية" element={<SeoContentPage pageKey="/دعوة-زفاف-الإلكترونية" />} />
           <Route path="/دعوة-فرح" element={<SeoContentPage pageKey="/دعوة-فرح" />} />
           <Route path="/دعوة-خطوبة" element={<SeoContentPage pageKey="/دعوة-خطوبة" />} />
