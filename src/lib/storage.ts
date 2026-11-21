@@ -35,6 +35,10 @@ export function readDraft(): InviteDraft | null {
   }
 }
 
+export function clearDraft() {
+  sessionStorage.removeItem(DRAFT_KEY)
+}
+
 export function writeDraft(draft: InviteDraft) {
   sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft))
 }
