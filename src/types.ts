@@ -54,6 +54,10 @@ export type InviteDraft = {
   venue: string
   city: string
   opening: string
+  rsvpPhone: string
+  musicUrl: string
+  photoOne: string
+  photoTwo: string
 }
 
 export type PayMethod = "vodafone" | "instapay" | "card"
