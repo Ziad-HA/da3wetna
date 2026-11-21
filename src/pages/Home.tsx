@@ -22,52 +22,88 @@ export function Home() {
 
   return (
     <main id="main">
-      <section className="relative overflow-hidden bg-[#fff5f6]">
-        <div className="pointer-events-none absolute -right-28 -top-32 h-96 w-96 rounded-full bg-[#f3cbd4]/45 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 -left-20 h-96 w-96 rounded-full bg-[#f6e6d1]/60 blur-3xl" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 md:grid-cols-[1.08fr_0.92fr] md:py-20">
-          <div className="text-center md:text-right">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#e9cbd1] bg-white/75 px-4 py-2 text-sm font-semibold text-[#9e4659]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#b83b50]" />
+      <section className="relative isolate overflow-hidden bg-[radial-gradient(ellipse_at_15%_15%,#ffe1e8_0%,transparent_38%),radial-gradient(ellipse_at_90%_80%,#f7e7d8_0%,transparent_35%),linear-gradient(135deg,#fff8f8_0%,#fff0f3_48%,#fffaf6_100%)]">
+        <style>{`
+          @keyframes heart-drift { 0%,100% { transform: translate3d(0,0,0) rotate(-8deg); } 50% { transform: translate3d(9px,-17px,0) rotate(8deg); } }
+          @keyframes petal-fall { 0% { transform: translate3d(0,-18px,0) rotate(0deg); opacity:0; } 18% { opacity:.8; } 85% { opacity:.55; } 100% { transform: translate3d(22px,95px,0) rotate(120deg); opacity:0; } }
+          @keyframes soft-orbit { 0%,100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-10px) rotate(-1deg); } }
+          @keyframes sparkle { 0%,100% { opacity:.35; transform:scale(.8); } 50% { opacity:1; transform:scale(1.15); } }
+          .hero-heart { animation: heart-drift 5s ease-in-out infinite; }
+          .hero-petal { animation: petal-fall 8s linear infinite; }
+          .hero-orbit { animation: soft-orbit 6s ease-in-out infinite; }
+          .hero-sparkle { animation: sparkle 2.8s ease-in-out infinite; }
+          @media (prefers-reduced-motion: reduce) { .hero-heart,.hero-petal,.hero-orbit,.hero-sparkle { animation:none !important; } }
+        `}</style>
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+          <span className="hero-heart absolute left-[7%] top-[18%] text-4xl text-[#e7a3b1]/70">♥</span>
+          <span className="hero-heart absolute left-[43%] top-[10%] text-xl text-[#c98b98]/60" style={{ animationDelay: "-2s" }}>♡</span>
+          <span className="hero-heart absolute right-[8%] top-[16%] text-5xl text-[#e8a9b7]/65" style={{ animationDelay: "-1s" }}>♡</span>
+          <span className="hero-heart absolute right-[42%] bottom-[12%] text-2xl text-[#c98b98]/50" style={{ animationDelay: "-3s" }}>♥</span>
+          <span className="hero-petal absolute left-[22%] top-[8%] text-xl text-[#d69aa6]" style={{ animationDelay: "-1s" }}>✿</span>
+          <span className="hero-petal absolute right-[23%] top-[4%] text-2xl text-[#d69aa6]" style={{ animationDelay: "-4s" }}>✧</span>
+          <span className="hero-petal absolute right-[10%] top-[48%] text-lg text-[#d69aa6]" style={{ animationDelay: "-6s" }}>✿</span>
+          <span className="hero-sparkle absolute left-[49%] top-[38%] text-xl text-[#c89a55]">✦</span>
+          <span className="hero-sparkle absolute right-[5%] bottom-[17%] text-2xl text-[#c89a55]" style={{ animationDelay: "-1.2s" }}>✧</span>
+        </div>
+        <div className="pointer-events-none absolute -right-28 -top-36 h-[28rem] w-[28rem] rounded-full border border-white/70" />
+        <div className="pointer-events-none absolute -right-16 -top-24 h-[22rem] w-[22rem] rounded-full border border-[#e8c3cb]/45" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-[1.05fr_0.95fr] md:py-24">
+          <div className="relative z-10 text-center md:text-right">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#e9cbd1] bg-white/85 px-4 py-2 text-sm font-semibold text-[#9e4659] shadow-[0_5px_20px_rgba(142,76,91,0.06)]">
+              <span className="text-[#c18b4c]">✦</span>
               كل فرحة وليها دعوة حلوة
+              <span className="text-[#c18b4c]">✦</span>
             </span>
-            <h1 className="mt-6 font-display text-5xl leading-[1.3] text-[#4a2d33] text-balance md:text-7xl">
+            <h1 className="mt-7 font-display text-5xl leading-[1.28] text-[#4a2d33] text-balance md:text-[4.6rem]">
               خلي دعوتك
-              <span className="block text-[#b83b50]">تحكي فرحتك</span>
+              <span className="relative mt-1 block text-[#b83b50]">
+                تحكي فرحتك
+                <svg aria-hidden="true" viewBox="0 0 300 16" className="mx-auto mt-1 h-3 w-56 md:mx-0 md:w-64" fill="none">
+                  <path d="M3 11C72 1 204 1 296 9" stroke="#d69b75" strokeWidth="3" strokeLinecap="round" />
+                </svg>
+              </span>
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-[#806b70] md:mx-0 md:text-lg">
+            <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-[#806b70] md:mx-0 md:text-lg">
               اختار تصميم بتحبه، ضيف تفاصيل يومك، وشارك دعوتك مع كل الناس اللي بتحبهم — بصورة أنيقة أو لينك واحد.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
-              <Link to="/templates" className="btn-gold shadow-[0_8px_22px_rgba(184,59,80,0.18)]">اختار دعوتك</Link>
-              <a href="/how" className="btn-ghost border-[#e5cbd0] bg-white/70 text-[#65434b]">اعرف الطريقة</a>
+              <Link to="/templates" className="btn-gold shadow-[0_10px_26px_rgba(184,59,80,0.2)] transition duration-300 hover:-translate-y-1">اختار دعوتك <span className="mr-1">←</span></Link>
+              <a href="/how" className="btn-ghost border-[#e5cbd0] bg-white/80 text-[#65434b] transition duration-300 hover:-translate-y-1">اعرف الطريقة</a>
             </div>
             {last ? (
               <Link to={`/done/${last.code}`} className="mt-5 inline-block text-sm font-semibold text-[#a34256] underline-offset-4 hover:underline">
                 رجّع آخر دعوة اشتغلت عليها
               </Link>
             ) : null}
-            <div className="mt-9 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-[#806b70] md:justify-start">
-              <span>✓ تعديل فوري</span>
-              <span>✓ صورة ستوري</span>
-              <span>✓ لينك للضيوف</span>
+            <div className="mt-9 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-[#806b70] md:justify-start">
+              <span className="inline-flex items-center gap-2"><span className="text-[#b83b50]">♡</span> تعديل فوري</span>
+              <span className="inline-flex items-center gap-2"><span className="text-[#b83b50]">♡</span> صورة ستوري</span>
+              <span className="inline-flex items-center gap-2"><span className="text-[#b83b50]">♡</span> لينك للضيوف</span>
             </div>
           </div>
-          <div className="relative flex justify-center">
-            <div className="absolute inset-x-8 top-10 bottom-0 rounded-[48%] bg-[#edc8d0]/50 blur-2xl" />
-            <div className="float relative rotate-[2deg]">
-              <div className="phone !w-[min(280px,74vw)] !rounded-[42px] !border-[7px] !border-white !bg-white !p-2 !shadow-[0_24px_70px_rgba(91,48,60,0.18)]">
+          <div className="relative mx-auto flex min-h-[440px] w-full max-w-[480px] items-center justify-center md:min-h-[540px]">
+            <div aria-hidden="true" className="absolute h-[310px] w-[310px] rounded-full bg-[radial-gradient(circle,#f1cbd3_0%,rgba(241,203,211,0.35)_52%,transparent_72%)] md:h-[430px] md:w-[430px]" />
+            <div aria-hidden="true" className="absolute h-[340px] w-[340px] rounded-full border border-dashed border-[#d9aab4]/55 md:h-[465px] md:w-[465px]" />
+            <div className="hero-orbit relative z-10 rotate-[2deg]">
+              <div className="phone !w-[min(280px,70vw)] !rounded-[42px] !border-[7px] !border-white !bg-white !p-2 !shadow-[0_30px_90px_rgba(91,48,60,0.22)]">
                 <div className="phone-screen h-full w-full overflow-hidden rounded-[30px]">
                   <div className="invite-frame">
                     <Invitation draft={draftFor(templates[1])} />
                   </div>
                 </div>
               </div>
-              <div className="absolute -bottom-5 -left-10 rounded-2xl border border-[#f0dce1] bg-white px-4 py-3 shadow-lg">
-                <p className="text-xs text-[#9b7a81]">دعوة معمولة بحب</p>
-                <p className="mt-0.5 font-display text-xl text-[#9e4055]">يوم العمر ♡</p>
-              </div>
             </div>
+            <div className="absolute left-0 top-[18%] z-20 rounded-2xl border border-white/90 bg-white/90 px-4 py-3 shadow-[0_12px_35px_rgba(91,48,60,0.12)] backdrop-blur-sm md:left-[-1%]">
+              <p className="text-xs text-[#9b7a81]">تفاصيل يومكم</p>
+              <p className="mt-1 font-bold text-[#9e4055]">في دعوة واحدة ♡</p>
+            </div>
+            <div className="absolute bottom-[13%] right-0 z-20 rounded-2xl border border-[#f0dce1] bg-white/95 px-4 py-3 shadow-[0_12px_35px_rgba(91,48,60,0.12)] backdrop-blur-sm md:right-[-2%]">
+              <p className="text-xs text-[#9b7a81]">دعوة معمولة بحب</p>
+              <p className="mt-0.5 font-display text-xl text-[#9e4055]">يوم العمر ♡</p>
+            </div>
+            <span aria-hidden="true" className="hero-heart absolute right-[7%] top-[10%] z-20 text-5xl text-[#d98b9c] drop-shadow-sm">♥</span>
+            <span aria-hidden="true" className="hero-heart absolute bottom-[10%] left-[9%] z-20 text-3xl text-[#d98b9c]" style={{ animationDelay: "-2.5s" }}>♡</span>
+            <span aria-hidden="true" className="hero-sparkle absolute left-[17%] top-[35%] z-20 text-3xl text-[#c89a55]">✧</span>
           </div>
         </div>
       </section>
