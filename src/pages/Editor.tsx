@@ -28,12 +28,9 @@ export function Editor() {
   const [active, setActive] = useState<FieldKey | null>("groom")
   const [error, setError] = useState("")
 
+  useEffect(() => setDraft(initDraft(id)), [id])
   useEffect(() => {
-    setDraft(initDraft(id))
-  }, [id])
-
-  useEffect(() => {
-    document.title = template ? `${template.name} — دعوتنا` : "تعديل الدعوة"
+    document.title = template ? `تعديل ${template.name} — دعوتنا` : "تعديل الدعوة"
   }, [template])
 
   if (!template) return <Navigate to="/templates" replace />
@@ -63,68 +60,85 @@ export function Editor() {
   }
 
   return (
-    <main id="main" className="mx-auto grid max-w-6xl gap-8 px-4 py-8 pb-36 lg:grid-cols-[minmax(0,420px)_1fr] lg:pb-10">
-      <section className="lg:sticky lg:top-24 lg:self-start">
-        <p className="mb-3 text-center text-sm font-bold text-gold">اضغط على أي كلمة وعدّلها</p>
-        <div className="mx-auto max-w-[380px] overflow-hidden rounded-[32px] shadow-xl ring-1 ring-black/10">
-          <Invitation draft={draft} activeField={active} onSelect={setActive} />
+    <main id="main" className="mx-auto max-w-6xl px-4 py-8 pb-28 lg:py-12">
+      <div className="mb-7 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <Link to="/templates" className="text-sm font-bold text-[#a64257] hover:underline">← كل التصاميم</Link>
+          <h1 className="mt-2 font-display text-3xl text-[#4a2d33] md:text-4xl">جهّز دعوتك</h1>
+          <p className="mt-1 text-sm text-[#806b70]">عدّل التفاصيل وشوف النتيجة مباشرة.</p>
         </div>
-      </section>
-      <section>
-        <Link to="/templates" className="text-sm font-bold text-gold">كل التصاميم</Link>
-        <h1 className="mt-2 font-display text-4xl">{template.name}</h1>
-        <p className="mt-2 text-mute">{template.blurb}</p>
-        <div className="mt-5 flex gap-2 overflow-x-auto pb-2" aria-label="تغيير التصميم">
-          {templates.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => chooseTemplate(item.id)}
-              className={`h-11 shrink-0 cursor-pointer rounded-full px-4 text-sm font-bold ${item.id === draft.templateId ? "bg-ink text-cream" : "bg-card ring-1 ring-line"}`}
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {fields.map((field) => (
-            <label key={field.key} className={`field ${field.key === "message" || field.key === "hosts" || field.key === "opening" ? "sm:col-span-2" : ""}`}>
-              <span>{field.label}</span>
-              {field.kind === "select" ? (
-                <select
-                  value={draft.occasion}
-                  onFocus={() => setActive("occasion")}
-                  onChange={(event) => update({ occasion: event.target.value })}
-                >
-                  {occasions.map((item) => (
-                    <option key={item}>{item}</option>
-                  ))}
-                </select>
-              ) : (
-                <input
-                  type={field.kind}
-                  maxLength={field.max}
-                  value={draft[field.key]}
-                  onFocus={() => setActive(field.key)}
-                  onChange={(event) => update({ [field.key]: event.target.value })}
-                />
-              )}
-            </label>
-          ))}
-        </div>
-        {error ? <p className="mt-4 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
-        <div className="mt-6 hidden items-center justify-between gap-4 rounded-3xl bg-card p-4 ring-1 ring-line lg:flex">
-          <div>
-            <p className="text-sm text-mute">دعوة واحدة</p>
-            <p className="text-2xl font-bold">{money(site.price)}</p>
+        <span className="rounded-full bg-white px-4 py-2 text-sm font-bold text-[#a64257] ring-1 ring-[#f0dce1]">{template.name}</span>
+      </div>
+
+      <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,390px)_1fr]">
+        <section className="order-1 lg:sticky lg:top-24">
+          <div className="mb-3 flex items-center justify-between text-sm">
+            <span className="font-bold text-[#4a2d33]">معاينة الدعوة</span>
+            <span className="text-[#9a8187]">اضغط على النص للتعديل</span>
           </div>
-          <button type="button" className="btn-gold" onClick={goCheckout}>كمل للدفع</button>
-        </div>
-      </section>
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-cream/95 p-3 backdrop-blur lg:hidden">
+          <div className="mx-auto max-w-[360px] overflow-hidden rounded-[28px] bg-white p-2 shadow-[0_14px_40px_rgba(74,45,51,0.10)] ring-1 ring-[#f0dce1]">
+            <Invitation draft={draft} activeField={active} onSelect={setActive} />
+          </div>
+          <div className="mx-auto mt-4 flex max-w-[360px] items-center justify-between rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
+            <span className="text-sm text-[#806b70]">سعر الدعوة</span>
+            <strong className="text-lg text-[#4a2d33]">{money(site.price)}</strong>
+          </div>
+        </section>
+
+        <section className="order-2 min-w-0 rounded-[28px] border border-[#f0dce1] bg-white p-5 shadow-[0_8px_28px_rgba(74,45,51,0.035)] md:p-7">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-bold text-[#b83b50]">الخطوة ١ من ٢</p>
+              <h2 className="mt-1 text-xl font-bold text-[#4a2d33]">تفاصيل المناسبة</h2>
+            </div>
+            <span className="text-sm text-[#9a8187]">تقدر تعدّل في أي وقت</span>
+          </div>
+
+          <div className="mt-5">
+            <label className="field">
+              <span>التصميم</span>
+              <select value={draft.templateId} onChange={(event) => chooseTemplate(event.target.value)}>
+                {templates.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+              </select>
+            </label>
+          </div>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            {fields.map((field) => (
+              <label key={field.key} className={`field ${["message", "hosts", "opening"].includes(field.key) ? "sm:col-span-2" : ""}`}>
+                <span>{field.label}</span>
+                {field.kind === "select" ? (
+                  <select
+                    value={draft.occasion}
+                    onFocus={() => setActive("occasion")}
+                    onChange={(event) => update({ occasion: event.target.value })}
+                  >
+                    {occasions.map((item) => <option key={item}>{item}</option>)}
+                  </select>
+                ) : (
+                  <input
+                    type={field.kind}
+                    maxLength={field.max}
+                    value={draft[field.key]}
+                    onFocus={() => setActive(field.key)}
+                    onChange={(event) => update({ [field.key]: event.target.value })}
+                  />
+                )}
+              </label>
+            ))}
+          </div>
+          {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
+          <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
+            <p className="text-sm text-[#806b70]">راجع التفاصيل قبل ما تكمل.</p>
+            <button type="button" className="btn-gold" onClick={goCheckout}>كمل للدفع ←</button>
+          </div>
+        </section>
+      </div>
+
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#f0dce1] bg-white/95 p-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-          <p className="font-bold">{money(site.price)}</p>
-          <button type="button" className="btn-gold" onClick={goCheckout}>كمل للدفع</button>
+          <div><p className="text-xs text-[#806b70]">سعر الدعوة</p><p className="font-bold text-[#4a2d33]">{money(site.price)}</p></div>
+          <button type="button" className="btn-gold" onClick={goCheckout}>كمل للدفع ←</button>
         </div>
       </div>
     </main>
