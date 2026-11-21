@@ -76,21 +76,22 @@ export function Gallery() {
                 </>
               ) : (
                 <>
-                  {item.label ? <span className={`mb-3 self-start rounded-full px-3 py-1 text-xs font-bold ${featured ? "bg-[#d9bd7b]/15 text-[#e8d39e]" : "bg-[#fff0f2] text-[#a64257]"}`}>{item.label}</span> : <span className="mb-3 h-6" />}
-                  <h2 className="text-xl font-bold">{item.name}</h2>
-                  <p className={`mt-2 min-h-12 text-sm leading-6 ${featured ? "text-white/70" : "text-[#806b70]"}`}>{item.description}</p>
-                  <div className="mt-5 flex items-end gap-2">
-                    <strong className={`font-display text-4xl ${featured ? "text-[#e8d39e]" : "text-[#08745d]"}`}>{money(item.price)}</strong>
-                    <span className={`mb-1 text-sm line-through ${featured ? "text-white/45" : "text-[#a99599]"}`}>{money(item.oldPrice)}</span>
+                  <span className={`mb-4 self-start rounded-full px-3 py-1.5 text-xs font-extrabold ${featured ? "bg-[#d9bd7b]/15 text-[#e8d39e]" : "bg-[#fae8eb] text-[#bd4058]"}`}>
+                    {item.label}
+                  </span>
+                  <h2 className="text-xl font-extrabold">{item.name}</h2>
+                  <p className={`mt-3 text-sm font-medium ${featured ? "text-white/75" : "text-[#806b70]"}`}>
+                    {item.quantity} دعوات مختلفة
+                  </p>
+                  <div className="mt-8 flex items-baseline gap-2">
+                    <strong className={`font-display text-4xl ${featured ? "text-[#e8d39e]" : "text-[#08745d]"}`}>
+                      {money(item.price)}
+                    </strong>
+                    <span className={`text-sm ${featured ? "text-white/65" : "text-[#806b70]"}`}>جنيه</span>
                   </div>
-                  <p className={`mt-1 text-xs ${featured ? "text-white/60" : "text-[#806b70]"}`}>دفع مرة واحدة · {item.quantity} دعوات</p>
-                  <div className={`mt-5 flex-1 rounded-2xl p-3 ${featured ? "bg-white/[0.07]" : "bg-[#fbf7f3]"}`}>
-                    <p className="text-sm font-bold">الباقة تشمل</p>
-                    {item.features.map((feature) => (
-                      <p key={feature} className={`mt-2 text-sm leading-6 ${featured ? "text-white/80" : "text-[#08745d]"}`}>✓ {feature}</p>
-                    ))}
-                    <p className={`mt-3 border-t pt-3 text-sm font-bold ${featured ? "border-white/10 text-[#e8d39e]" : "border-[#eee3e3] text-[#08745d]"}`}>
-                      ≈ {money(Math.round(item.price / item.quantity))} للدعوة
+                  <div className={`mt-6 flex-1 rounded-2xl p-4 ${featured ? "bg-white/[0.07]" : "bg-[#fbf7f3]"}`}>
+                    <p className={`text-sm leading-7 ${featured ? "text-white/80" : "text-[#806b70]"}`}>
+                      اختار الباقة وابدأ في تصميم دعواتك المختلفة.
                     </p>
                   </div>
                 </>
