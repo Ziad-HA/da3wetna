@@ -112,7 +112,7 @@ export function Editor() {
       </div>
 
       <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,390px)_1fr]">
-        <section className="order-1 lg:sticky lg:top-24">
+        <section className="order-2 lg:order-1 lg:sticky lg:top-24">
           <div className="mb-3 flex items-center justify-between text-sm">
             <span className="font-bold text-[#4a2d33]">معاينة الدعوة</span>
             <span className="text-[#9a8187]">اضغط على النص للتعديل</span>
@@ -126,7 +126,7 @@ export function Editor() {
           </div>
         </section>
 
-        <section className="order-2 min-w-0 rounded-[28px] border border-[#f0dce1] bg-white p-5 shadow-[0_8px_28px_rgba(74,45,51,0.035)] md:p-7">
+        <section className="order-1 min-w-0 rounded-[28px] border border-[#f0dce1] bg-white p-5 shadow-[0_8px_28px_rgba(74,45,51,0.035)] md:p-7">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="text-xs font-bold text-[#b83b50]">الخطوة ١ من ٢</p>
@@ -144,30 +144,53 @@ export function Editor() {
             </label>
           </div>
 
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            {fields.map((field) => (
-              <label key={field.key} className={`field ${["message", "hosts", "opening"].includes(field.key) ? "sm:col-span-2" : ""}`}>
-                <span>{field.label}</span>
-                {field.kind === "select" ? (
-                  <select
-                    value={draft.occasion}
-                    onFocus={() => setActive("occasion")}
-                    onChange={(event) => update({ occasion: event.target.value })}
-                  >
-                    {occasions.map((item) => <option key={item}>{item}</option>)}
-                  </select>
-                ) : (
+          <div className="mt-5 rounded-2xl bg-[#fff8f8] p-4">
+            <h3 className="font-bold text-[#4a2d33]">البيانات الأساسية</h3>
+            <p className="mt-1 text-xs text-[#806b70]">ابدأ بالأسماء وميعاد ومكان المناسبة.</p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {fields.filter((field) => ["occasion", "groom", "bride", "date", "time", "venue"].includes(field.key)).map((field) => (
+                <label key={field.key} className="field">
+                  <span>{field.label}{["groom", "bride", "date", "venue"].includes(field.key) ? " *" : ""}</span>
+                  {field.kind === "select" ? (
+                    <select
+                      value={draft.occasion}
+                      onFocus={() => setActive("occasion")}
+                      onChange={(event) => update({ occasion: event.target.value })}
+                    >
+                      {occasions.map((item) => <option key={item}>{item}</option>)}
+                    </select>
+                  ) : (
+                    <input
+                      type={field.kind}
+                      maxLength={field.max}
+                      value={draft[field.key]}
+                      onFocus={() => setActive(field.key)}
+                      onChange={(event) => update({ [field.key]: event.target.value })}
+                    />
+                  )}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <details className="mt-4 rounded-2xl border border-[#f0dce1] bg-white p-4">
+            <summary className="cursor-pointer list-none font-bold text-[#a64257]">إضافات اختيارية للدعوة <span className="float-left text-xs font-normal text-[#9a8187]">مش لازم تملأها</span></summary>
+            <p className="mt-2 text-xs leading-6 text-[#806b70]">تقدر تسيب الإضافات دي زي ما هي، أو تخصص نص الدعوة والمدينة.</p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {fields.filter((field) => ["opening", "hosts", "message", "city"].includes(field.key)).map((field) => (
+                <label key={field.key} className={`field ${["message", "hosts", "opening"].includes(field.key) ? "sm:col-span-2" : ""}`}>
+                  <span>{field.label}</span>
                   <input
-                    type={field.kind}
+                    type="text"
                     maxLength={field.max}
                     value={draft[field.key]}
                     onFocus={() => setActive(field.key)}
                     onChange={(event) => update({ [field.key]: event.target.value })}
                   />
-                )}
-              </label>
-            ))}
-          </div>
+                </label>
+              ))}
+            </div>
+          </details>
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
             <p className="text-sm text-[#806b70]">راجع التفاصيل قبل ما تكمل.</p>
