@@ -761,3 +761,161 @@ main section > div { min-width: 0; }
   .gallery-design-frame { padding: 4px; border-radius: .85rem; }
   .gallery-design-frame > .invite-frame { border-radius: .55rem; }
 }
+
+
+/* Cinematic wedding invitation: a two-stage envelope reveal */
+.invite-opening-screen {
+  --invite-shell: #f6e5e8;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 1.25rem max(2rem, env(safe-area-inset-bottom));
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(255,255,255,.96), rgba(255,255,255,.2) 48%, transparent 72%),
+    linear-gradient(145deg, #fff8f6 0%, var(--invite-shell) 52%, #f3dce2 100%);
+  color: #633c47;
+  text-align: center;
+  animation: invite-opening-fade .7s ease both;
+}
+.invite-opening-glow {
+  position: absolute;
+  z-index: -1;
+  width: min(88vw, 460px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255,255,255,.64);
+  filter: blur(42px);
+}
+.invite-opening-copy { margin-bottom: 2.4rem; animation: invite-copy-in .9s .12s both; }
+.invite-opening-copy > span, .invite-public-kicker {
+  color: #a66c78;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.invite-opening-copy h1 { margin-top: .7rem; font-family: inherit; font-size: clamp(2rem, 8vw, 3rem); font-weight: 800; }
+.invite-opening-copy h1 i, .invite-public-heading h1 i, .opening-letter i { color: #b83b50; font-style: normal; }
+.invite-opening-copy p { margin-top: .7rem; color: #987a82; font-size: .83rem; }
+.opening-envelope {
+  position: relative;
+  width: min(82vw, 340px);
+  aspect-ratio: 1.48;
+  perspective: 1100px;
+  filter: drop-shadow(0 24px 26px rgba(110,47,66,.2));
+  animation: envelope-arrive .9s .15s cubic-bezier(.2,.8,.2,1) both;
+}
+.opening-envelope-back {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #c45b70, #873347 75%);
+}
+.opening-letter {
+  position: absolute;
+  z-index: 1;
+  left: 8%;
+  right: 8%;
+  top: 7%;
+  height: 86%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  border: 1px solid #ead8bd;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #fffdf8, #f7eadf);
+  box-shadow: 0 4px 15px rgba(70,35,45,.1);
+  color: #603c45;
+  transform: translateY(25%) scale(.94);
+  transition: transform 1.05s cubic-bezier(.18,.75,.22,1);
+}
+.opening-letter strong { font-family: inherit; font-size: clamp(1.35rem, 6vw, 1.8rem); }
+.opening-letter small { color: #96747c; font-size: .68rem; }
+.opening-letter-spark, .opening-letter-heart { color: #c39b5a; font-size: 1.2rem; }
+.opening-envelope-pocket {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #b64b62, #873347);
+  clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+  transform-origin: 50% 100%;
+  transition: transform .85s cubic-bezier(.2,.75,.2,1);
+}
+.opening-envelope-flap {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #d77c8d, #a33d55);
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: 50% 0;
+  backface-visibility: visible;
+  transition: transform .85s cubic-bezier(.2,.75,.2,1), opacity .35s ease;
+}
+.opening-envelope-seal {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 48%;
+  display: grid;
+  width: 44px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid rgba(255,231,214,.8);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e5a0a8, #a83b54 72%);
+  color: #fff3e8;
+  font-size: 1.3rem;
+  box-shadow: 0 3px 10px rgba(80,25,40,.25);
+  transform: translate(-50%,-50%);
+  transition: opacity .35s ease, transform .5s ease;
+}
+.invite-opening-step-1 .opening-envelope-flap,
+.invite-opening-step-2 .opening-envelope-flap { transform: rotateX(180deg); opacity: .35; }
+.invite-opening-step-1 .opening-envelope-seal,
+.invite-opening-step-2 .opening-envelope-seal { opacity: 0; transform: translate(-50%,-50%) scale(.4); }
+.invite-opening-step-2 .opening-envelope-pocket { transform: rotateX(180deg); }
+.invite-opening-step-2 .opening-letter { transform: translateY(-38%) scale(1.04); }
+.invite-opening-hint { min-height: 1.5rem; margin-top: 2rem; color: #a66c78; font-size: .8rem; font-weight: 700; animation: invite-hint-in .5s ease both; }
+.invite-skip-opening {
+  position: absolute;
+  right: 1.25rem;
+  bottom: max(1.2rem, env(safe-area-inset-bottom));
+  border: 1px solid rgba(166,66,87,.2);
+  border-radius: 999px;
+  background: rgba(255,255,255,.65);
+  padding: .65rem 1rem;
+  color: #995467;
+  font-size: .72rem;
+  font-weight: 800;
+}
+.invite-public-page { animation: invite-page-reveal .85s cubic-bezier(.2,.75,.2,1) both; }
+.invite-public-heading { animation: invite-copy-in .8s .12s both; }
+.invite-public-card { animation: invite-card-reveal 1s .18s cubic-bezier(.2,.75,.2,1) both; transform-origin: 50% 15%; }
+.invite-welcome-message, .invite-photo-moments { animation: invite-section-reveal .8s .3s both; }
+@keyframes invite-opening-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes envelope-arrive { from { opacity: 0; transform: translateY(24px) scale(.92); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes invite-copy-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes invite-hint-in { from { opacity: .2; } to { opacity: 1; } }
+@keyframes invite-page-reveal { from { opacity: .35; } to { opacity: 1; } }
+@keyframes invite-card-reveal { from { opacity: 0; transform: translateY(28px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes invite-section-reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 380px) {
+  .invite-opening-copy { margin-bottom: 1.8rem; }
+  .opening-envelope { width: min(84vw, 300px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .invite-opening-screen, .invite-opening-copy, .opening-envelope, .invite-public-page,
+  .invite-public-heading, .invite-public-card, .invite-welcome-message, .invite-photo-moments {
+    animation: none !important;
+  }
+  .opening-envelope-flap, .opening-envelope-pocket, .opening-letter, .opening-envelope-seal { transition: none !important; }
+}
