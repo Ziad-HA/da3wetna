@@ -2,13 +2,18 @@ import { useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 import { StoryActions } from "../components/StoryActions"
 import { Invitation } from "../components/Invitation"
+import { getPackage } from "../config"
 import { decodeDraft } from "../lib/codec"
-import { readLast } from "../lib/storage"
+import { readActivePackage, readLast } from "../lib/storage"
 
 export function Done() {
   const { code = "" } = useParams()
   const draft = decodeDraft(code)
   const order = readLast()
+  const active = readActivePackage()
+  const bundle = active ? getPackage(active.packageId) : null
+  const remaining = bundle && active ? Math.max(0, bundle.quantity - active.used) : 0
+
   useEffect(() => {
     document.title = draft ? `دعوة ${draft.groom} و${draft.bride}` : "الدعوة"
   }, [draft])
@@ -41,6 +46,25 @@ export function Done() {
           <div className="mt-6 max-w-sm">
             <StoryActions draft={draft} code={code} />
           </div>
+
+          {bundle && active ? (
+            <div className="mt-7 rounded-2xl border border-[#f0dce1] bg-[#fbf7f3] p-4">
+              <div className="flex items-center justify-between gap-3">
+                <strong className="text-[#4a2d33]">{bundle.name}</strong>
+                <span className="text-sm font-bold text-[#08745d]">{active.used} / {bundle.quantity}</span>
+              </div>
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#eadde0]">
+                <div className="h-full rounded-full bg-[#08745d]" style={{ width: `${Math.min(100, (active.used / bundle.quantity) * 100)}%` }} />
+              </div>
+              <p className="mt-3 text-sm text-[#806b70]">
+                {remaining > 0 ? `متبقي لك ${remaining} دعوة في الباقة.` : "استخدمت كل دعوات الباقة."}
+              </p>
+              {remaining > 0 ? (
+                <Link to="/templates" className="btn-gold mt-4 w-full">أنشئ الدعوة التالية</Link>
+              ) : null}
+            </div>
+          ) : null}
+
           <div className="mt-7 border-t border-[#f3e6e9] pt-5">
             <Link to="/templates" className="text-sm font-bold text-[#a64257] hover:underline">اعمل دعوة جديدة ←</Link>
           </div>
