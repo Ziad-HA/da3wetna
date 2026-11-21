@@ -153,6 +153,10 @@ export function draftFor(template: Template): InviteDraft {
     venue: template.venue,
     city: "القاهرة",
     opening: "بسم الله الرحمن الرحيم",
+    rsvpPhone: "",
+    musicUrl: "",
+    photoOne: "",
+    photoTwo: "",
   }
 }
 
