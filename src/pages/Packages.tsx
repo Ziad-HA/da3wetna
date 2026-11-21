@@ -12,8 +12,8 @@ export function Packages() {
   useEffect(() => { document.title = "الباقات والأسعار — دعوتنا" }, [])
 
   return (
-    <main id="main" className="min-h-[70vh] bg-[#fffafb]">
-      <section className="border-b border-[#f0dce1] bg-[radial-gradient(ellipse_at_top,white_0%,#fff5f6_70%)] px-4 py-8 text-center sm:py-14 md:py-20">
+    <main id="main" className="da3-packages min-h-[70vh] bg-[#fffafb]">
+      <section className="da3-packages-hero border-b border-[#f0dce1] bg-[radial-gradient(ellipse_at_top,white_0%,#fff5f6_70%)] px-4 py-8 text-center sm:py-14 md:py-20">
         <p className="inline-flex rounded-full border border-[#f0dce1] bg-white px-3 py-1 text-[11px] font-bold text-[#b83b50] sm:text-sm">باقات دعوتنا</p>
         <h1 className="mt-2.5 font-display text-[27px] leading-tight text-[#4a2d33] sm:mt-3 sm:text-4xl md:text-6xl">اختار الباقة المناسبة لفرحتك</h1>
         <p className="mx-auto mt-2 max-w-xl text-xs leading-6 text-[#806b70] sm:mt-4 sm:text-base sm:leading-8">كل اللي تحتاجه عشان تبعت دعوتك بشكل مميز وسهل.</p>
@@ -25,7 +25,7 @@ export function Packages() {
             const extras = item.id === "single" ? ["أكتر من 10 خطوط عربي وإنجليزي", "تغيير أي صورة في الدعوة", "موسيقى من اختيارك", "إخفاء أي قسم مش عايزه"] : []
             const benefits = item.id === "single" ? ["معاك مدى الحياة", "تعديل 30 يوم من التفعيل"] : ["كل دعوة مستقلة بتفاصيلها", "روابط منفصلة لكل دعوة"]
             return (
-              <article key={item.id} className={"relative flex flex-col overflow-hidden rounded-2xl border bg-white p-3 shadow-[0_5px_18px_rgba(91,48,60,0.045)] sm:rounded-[26px] sm:p-5 " + (featured ? "border-[#d9a3ae] ring-1 ring-[#f4e2e6] sm:shadow-[0_10px_28px_rgba(166,66,87,0.08)]" : "border-[#f0dce1]")}>
+              <article key={item.id} className={"da3-package-card relative flex flex-col overflow-hidden rounded-2xl border bg-white p-3 shadow-[0_5px_18px_rgba(91,48,60,0.045)] sm:rounded-[26px] sm:p-5 " + (featured ? "border-[#d9a3ae] ring-1 ring-[#f4e2e6] sm:shadow-[0_10px_28px_rgba(166,66,87,0.08)]" : "border-[#f0dce1]")}>
                 <div className="flex items-center justify-between gap-2">
                   <span className="rounded-full bg-[#fff0f2] px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] sm:px-3 sm:py-1.5 sm:text-xs">{item.id === "single" ? item.discount : item.label || "باقة مرنة"}</span>
                   {featured ? <span className="rounded-full bg-[#a64257] px-2.5 py-1 text-[9px] font-bold text-white">الأكثر تميزًا</span> : null}
