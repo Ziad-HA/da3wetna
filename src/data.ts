@@ -13,7 +13,7 @@ export const templates: Template[] = [
     bride: "مريم",
     venue: "قاعة النيل",
     time: "19:30",
-    vars: { paper: "#F3EADF", ink: "#3F2E22", gold: "#8A5A12", soft: "#6B5344", shell: "#E7DCC8" },
+    vars: { paper: "#FFF8F6", ink: "#5B303C", gold: "#C6A15B", soft: "#936B78", shell: "#F6DDE5" },
   },
   {
     id: "calla",
@@ -27,7 +27,7 @@ export const templates: Template[] = [
     bride: "ليلى",
     venue: "حديقة الأوركيد",
     time: "18:00",
-    vars: { paper: "#F7F4EE", ink: "#2C3330", gold: "#7D6A48", soft: "#5C6560", shell: "#E7E2D8" },
+    vars: { paper: "#FFFCFA", ink: "#633C47", gold: "#B83B50", soft: "#9A7680", shell: "#F4E3E8" },
   },
   {
     id: "lace",
@@ -40,7 +40,7 @@ export const templates: Template[] = [
     bride: "نادين",
     venue: "قصر البارون",
     time: "20:00",
-    vars: { paper: "#F8EFEA", ink: "#4A2C33", gold: "#8E5E55", soft: "#7A4E58", shell: "#F0DDD6" },
+    vars: { paper: "#F8E9ED", ink: "#572B39", gold: "#C6A15B", soft: "#8D5C6B", shell: "#E9B9C8" },
   },
   {
     id: "envelope",
@@ -53,7 +53,7 @@ export const templates: Template[] = [
     bride: "هالة",
     venue: "فندق الماريوت",
     time: "19:00",
-    vars: { paper: "#FBF6F1", ink: "#3C242C", gold: "#8C6A3A", soft: "#6E5360", shell: "#5A2036" },
+    vars: { paper: "#FFF8F6", ink: "#5B2637", gold: "#C6A15B", soft: "#865563", shell: "#B83B50" },
   },
   {
     id: "night",
@@ -66,7 +66,7 @@ export const templates: Template[] = [
     bride: "جنى",
     venue: "سطح الزمالك",
     time: "21:00",
-    vars: { paper: "#0E1C18", ink: "#F6F0E4", gold: "#E0C48A", soft: "#DDD0BA", shell: "#0E1C18" },
+    vars: { paper: "#421E2B", ink: "#FFF8F6", gold: "#E2C58B", soft: "#F0D9DF", shell: "#421E2B" },
   },
   {
     id: "marble",
@@ -79,7 +79,7 @@ export const templates: Template[] = [
     bride: "سلمى",
     venue: "دار الكتب",
     time: "17:00",
-    vars: { paper: "#F4F2EF", ink: "#2A2826", gold: "#8C7344", soft: "#5C564F", shell: "#E6E1DA" },
+    vars: { paper: "#FFFCFA", ink: "#603C45", gold: "#C6A15B", soft: "#92737A", shell: "#F3E7E9" },
   },
   {
     id: "garden",
@@ -92,7 +92,7 @@ export const templates: Template[] = [
     bride: "رهف",
     venue: "مزرعة الياسمين",
     time: "16:30",
-    vars: { paper: "#E7F0E6", ink: "#1C3328", gold: "#5E6B38", soft: "#3E5648", shell: "#D5E4D4" },
+    vars: { paper: "#F9EDEB", ink: "#633C43", gold: "#B83B50", soft: "#9A6F75", shell: "#E9B9C8" },
   },
   {
     id: "moon",
@@ -106,7 +106,7 @@ export const templates: Template[] = [
     bride: "ملك",
     venue: "كورنيش النيل",
     time: "20:30",
-    vars: { paper: "#0C1428", ink: "#F4EFE4", gold: "#E4C98A", soft: "#D5D8EA", shell: "#0C1428" },
+    vars: { paper: "#4A2032", ink: "#FFF7F5", gold: "#E4C98A", soft: "#EFDCE3", shell: "#4A2032" },
   },
   {
     id: "silk",
@@ -119,7 +119,7 @@ export const templates: Template[] = [
     bride: "دينا",
     venue: "بيت العيلة",
     time: "18:30",
-    vars: { paper: "#F8E6E2", ink: "#5A2434", gold: "#8C4A42", soft: "#7A4452", shell: "#F3D5CF" },
+    vars: { paper: "#F8E6E8", ink: "#6A2D3C", gold: "#B83B50", soft: "#905C69", shell: "#F3D5DC" },
   },
   {
     id: "ink",
@@ -132,7 +132,7 @@ export const templates: Template[] = [
     bride: "فرح",
     venue: "جاليري تاون هاوس",
     time: "19:00",
-    vars: { paper: "#F6F3EE", ink: "#161513", gold: "#8A6A32", soft: "#4A453F", shell: "#E8E2D8" },
+    vars: { paper: "#FFFCFA", ink: "#3D3034", gold: "#C6A15B", soft: "#78666C", shell: "#F1E5E7" },
   },
 ]
 

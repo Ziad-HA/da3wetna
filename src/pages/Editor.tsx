@@ -33,7 +33,7 @@ export function Editor() {
   }, [id])
 
   useEffect(() => {
-    document.title = template ? `${template.name} — زفّة` : "تعديل الدعوة"
+    document.title = template ? `${template.name} — دعوتنا` : "تعديل الدعوة"
   }, [template])
 
   if (!template) return <Navigate to="/templates" replace />

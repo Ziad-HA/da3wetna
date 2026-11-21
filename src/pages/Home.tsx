@@ -17,21 +17,21 @@ const features = [
 export function Home() {
   const last = readLast()
   useEffect(() => {
-    document.title = "زفّة — دعوات أفراح رقمية"
+    document.title = "دعوتنا — دعوات أفراح رقمية"
   }, [])
 
   return (
     <main id="main">
       <section className="relative overflow-hidden bg-forest text-cream">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(198,161,91,0.2),transparent_46%),radial-gradient(ellipse_at_10%_90%,rgba(90,32,54,0.35),transparent_42%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(246,221,229,0.22),transparent_46%),radial-gradient(ellipse_at_10%_90%,rgba(233,185,200,0.28),transparent_42%)]" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-[1.15fr_0.85fr] md:py-24">
           <div>
-            <p className="inline-flex rounded-full border border-gold-2/40 px-3 py-1 text-sm text-gold-2">استوديو الدعوات الرقمية</p>
+            <p className="inline-flex rounded-full border border-gold-2/40 px-3 py-1 text-sm text-gold-2">كل فرحة وليها دعوة حلوة</p>
             <h1 className="mt-5 font-display text-5xl leading-[1.25] text-balance md:text-7xl">
               دعوة فرحك
               <span className="block">في لينك واحد</span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-[#eadfcb]">
+            <p className="mt-5 max-w-xl text-lg leading-8 text-[#FFF0F2]">
               عشر دعوات جاهزة. تكتب الأسماء والتاريخ والمكان بنفسك، وتدفع، وتستلم ستوري واتساب أو لينك تبعتُه للضيوف.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -89,13 +89,13 @@ export function Home() {
       <section className="bg-forest py-16 text-cream">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="font-display text-4xl md:text-5xl">دعوتك، بتفاصيلك أنت</h2>
-          <p className="mt-3 max-w-2xl leading-8 text-[#eadfcb]">مفيش تعديل بطلب، ومفيش انتظار. اللي هتكتبه هو اللي هيظهر للضيوف.</p>
+          <p className="mt-3 max-w-2xl leading-8 text-[#FFF0F2]">مفيش تعديل بطلب، ومفيش انتظار. اللي هتكتبه هو اللي هيظهر للضيوف.</p>
           <div className="mt-8 grid gap-4 md:grid-cols-4">
             {features.map((feature) => (
               <article key={feature.title} className="rounded-3xl border border-white/10 bg-white/5 p-5">
                 <feature.icon className="h-7 w-7 text-gold-2" />
                 <h3 className="mt-4 text-lg font-bold">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-[#ddd1bc]">{feature.text}</p>
+                <p className="mt-2 text-sm leading-7 text-[#F8E7EA]">{feature.text}</p>
               </article>
             ))}
           </div>

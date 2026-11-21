@@ -4,14 +4,14 @@
   --font-sans: "Cairo", sans-serif;
   --font-display: "Amiri", serif;
   --font-latin: "Cormorant Garamond", serif;
-  --color-cream: #f7f3ec;
-  --color-ink: #1c1917;
-  --color-forest: #101916;
-  --color-gold: #7c4a12;
-  --color-gold-2: #c6a15b;
-  --color-mute: #57534e;
-  --color-line: #e4dcd0;
-  --color-card: #fffdf9;
+  --color-cream: #FFFCFA;
+  --color-ink: #4A2D33;
+  --color-forest: #B83B50;
+  --color-gold: #B83B50;
+  --color-gold-2: #C6A15B;
+  --color-mute: #806B70;
+  --color-line: #F0DCE1;
+  --color-card: #FFFFFF;
 }
 
 html { scroll-behavior: smooth; }
@@ -25,10 +25,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-::selection { background: #ead7b5; }
+::selection { background: #F6DDE5; }
 
 :focus-visible {
-  outline: 2px solid #7c4a12;
+  outline: 2px solid #B83B50;
   outline-offset: 3px;
 }
 
@@ -66,9 +66,9 @@ body {
   text-decoration: none;
   transition: background-color 180ms ease, transform 180ms ease, border-color 180ms ease;
 }
-.btn-gold { background: #7c4a12; color: white; border: 0; }
-.btn-gold:hover { background: #693f0f; }
-.btn-dark { background: #1c1917; color: #f7f3ec; border: 0; }
+.btn-gold { background: #B83B50; color: white; border: 0; }
+.btn-gold:hover { background: #9D2F43; }
+.btn-dark { background: #4A2D33; color: #FFFCFA; border: 0; }
 .btn-dark:hover { background: #000; }
 .btn-ghost {
   background: transparent;
@@ -83,7 +83,7 @@ body {
   aspect-ratio: 9 / 16;
   padding: 10px;
   border-radius: 36px;
-  background: #1a1714;
+  background: #4A2D33;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
   position: relative;
 }
@@ -102,7 +102,7 @@ body {
   height: 16px;
   transform: translateX(-50%);
   border-radius: 999px;
-  background: #1a1714;
+  background: #4A2D33;
 }
 .float { animation: float 7s ease-in-out infinite; }
 @keyframes float {
@@ -224,8 +224,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.7cqi;
-  background: radial-gradient(circle at 35% 30%, #f0d7a2, #b88845 46%, #7c5424 78%);
-  color: #fff8ea;
+  background: radial-gradient(circle at 35% 30%, #F5D8DF, #C6A15B 46%, #8D5967 78%);
+  color: #FFF8F6;
   box-shadow: inset 0 0 0 0.7cqi rgba(255, 236, 200, 0.35), 0 1cqi 2cqi rgba(0, 0, 0, 0.18);
   font-size: 3.1cqi;
 }
@@ -275,7 +275,7 @@ body {
   font: inherit;
   color: inherit;
 }
-.field input:focus, .field select:focus { border-color: #7c4a12; }
+.field input:focus, .field select:focus { border-color: #B83B50; }
 
 details summary { list-style: none; }
 details summary::-webkit-details-marker { display: none; }

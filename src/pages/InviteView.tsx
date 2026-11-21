@@ -19,7 +19,7 @@ export function InviteView() {
       <main className="grid min-h-dvh place-items-center bg-cream px-4 text-center">
         <div>
           <h1 className="font-display text-4xl">الدعوة دي مش متاحة</h1>
-          <Link to="/" className="btn-gold mt-6 inline-flex">اعمل دعوة من زفّة</Link>
+          <Link to="/" className="btn-gold mt-6 inline-flex">اعمل دعوة من دعوتنا</Link>
         </div>
       </main>
     )
@@ -35,7 +35,7 @@ export function InviteView() {
         <div className="w-full">
           <StoryActions draft={draft} code={code} />
         </div>
-        <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من زفّة</Link>
+        <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
       </div>
     </main>
   )

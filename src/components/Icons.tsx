@@ -3,9 +3,16 @@ type IconProps = { className?: string }
 export function LogoMark({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 48" aria-hidden="true">
-      <circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="24" cy="24" r="11.5" fill="none" stroke="currentColor" strokeWidth="0.7" />
-      <path d="M24 14.5l1.8 5.4 5.5.2-4.4 3.4 1.6 5.4L24 26.2l-4.5 2.7 1.6-5.4-4.4-3.4 5.5-.2z" fill="currentColor" />
+      <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" strokeWidth="1.2" opacity=".55" />
+      <g fill="none" stroke="currentColor" strokeWidth="1.35">
+        <ellipse cx="24" cy="15.5" rx="5.2" ry="8" />
+        <ellipse cx="31.4" cy="20" rx="5.2" ry="8" transform="rotate(60 31.4 20)" />
+        <ellipse cx="31.4" cy="28" rx="5.2" ry="8" transform="rotate(120 31.4 28)" />
+        <ellipse cx="24" cy="32.5" rx="5.2" ry="8" />
+        <ellipse cx="16.6" cy="28" rx="5.2" ry="8" transform="rotate(60 16.6 28)" />
+        <ellipse cx="16.6" cy="20" rx="5.2" ry="8" transform="rotate(120 16.6 20)" />
+      </g>
+      <circle cx="24" cy="24" r="3" fill="#C6A15B" />
     </svg>
   )
 }

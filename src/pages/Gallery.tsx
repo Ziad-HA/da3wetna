@@ -11,7 +11,7 @@ const filters = ["الكل", "فرح", "خطوبة", "كتب كتاب", "حنة"
 export function Gallery() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("الكل")
   useEffect(() => {
-    document.title = "الدعوات — زفّة"
+    document.title = "الدعوات — دعوتنا"
   }, [])
   const visible = templates.filter((item) => filter === "الكل" || item.category === (filter as Occasion))
 
@@ -28,7 +28,7 @@ export function Gallery() {
             role="tab"
             aria-selected={filter === item}
             onClick={() => setFilter(item)}
-            className={`h-11 shrink-0 cursor-pointer rounded-full px-4 font-bold ${filter === item ? "bg-ink text-cream" : "bg-card text-ink ring-1 ring-line"}`}
+            className={`h-11 shrink-0 cursor-pointer rounded-full px-4 font-bold ${filter === item ? "bg-rose-100 text-rose-900" : "bg-card text-ink ring-1 ring-line"}`}
           >
             {item}
           </button>

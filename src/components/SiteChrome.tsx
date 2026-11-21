@@ -32,10 +32,10 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-cream/90 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-4 px-4">
-        <Link to="/" className="flex items-center gap-2 text-gold" aria-label="زفّة، الصفحة الرئيسية">
+        <Link to="/" className="flex items-center gap-2 text-gold" aria-label="دعوتنا، الصفحة الرئيسية">
           <LogoMark className="h-10 w-10" />
           <span className="grid leading-none">
-            <span className="font-display text-[1.7rem] text-ink">زفّة</span>
+            <span className="font-display text-[1.7rem] text-ink">دعوتنا</span>
             <span className="font-latin text-[0.7rem] tracking-[0.28em] text-gold">{site.nameEn}</span>
           </span>
         </Link>
@@ -98,7 +98,7 @@ function Footer() {
         <div>
           <div className="flex items-center gap-2 text-gold">
             <LogoMark className="h-9 w-9" />
-            <span className="font-display text-3xl text-ink">زفّة</span>
+            <span className="font-display text-3xl text-ink">دعوتنا</span>
           </div>
           <p className="mt-3 max-w-sm leading-7 text-mute">
             دعوات أفراح جاهزة. أنت تكتب الأسماء والتفاصيل، وتستلم ستوري واتساب ولينك للضيوف.
@@ -117,7 +117,7 @@ function Footer() {
           <p className="text-mute">بطاقة بنكية</p>
         </div>
       </div>
-      <p className="border-t border-line px-4 py-4 text-center text-sm text-mute">© {new Date().getFullYear()} زفّة</p>
+      <p className="border-t border-line px-4 py-4 text-center text-sm text-mute">© {new Date().getFullYear()} دعوتنا</p>
     </footer>
   )
 }
@@ -125,7 +125,7 @@ function Footer() {
 function HelpButton() {
   const { pathname } = useLocation()
   if (pathname.startsWith("/editor") || pathname.startsWith("/checkout")) return null
-  const href = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عايز أسأل عن دعوات زفّة")}`
+  const href = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عايز أسأل عن دعوات دعوتنا")}`
   return (
     <a
       href={href}
