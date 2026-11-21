@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
-import { PhonePreview } from "../components/PhonePreview"
 import { packages } from "../config"
 import { faqs } from "../data"
 import { draftFor, templates } from "../data"
