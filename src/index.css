@@ -696,7 +696,7 @@ main section > div { min-width: 0; }
   .gallery-page #designs > div:nth-of-type(2) { gap: 0.55rem; }
   .gallery-page #designs input { min-height: 48px; font-size: 16px; }
   .gallery-page #designs > div[role="tablist"] { margin-inline: -0.1rem; }
-  .gallery-page #designs > div.grid { gap: 0.55rem; }
+  .gallery-page #designs > div.grid.items-start { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 0.55rem; }
   .gallery-page #designs article { border-radius: 1rem; padding: 0.45rem; }
   .gallery-page #designs article > div:first-child { border-radius: 0.75rem; }
   .gallery-page #designs article .phone-preview { max-width: 100%; width: 100%; }
