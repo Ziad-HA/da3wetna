@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { IconBank, IconCard, IconWallet } from "../components/Icons"
-import { getPackage } from "../config"
+import { getPackage, site, walletsArePlaceholders } from "../config"
 import { getTemplate } from "../data"
 import { encodeDraft } from "../lib/codec"
 import { money } from "../lib/format"
@@ -57,7 +57,7 @@ export function Checkout() {
     navigate(`/done/${code}`)
   }
 
-  const destination = method === "vodafone" ? "فودافون كاش" : "إنستاباي"
+  const destination = method === "vodafone" ? site.vodafoneCash : site.instapay
   const remainingAfterThis = bundle.quantity - (continuing && active ? active.used + 1 : 1)
 
   return (
@@ -130,7 +130,7 @@ export function Checkout() {
               ) : (
                 <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
                   <p className="text-sm text-[#806b70]">حوّل {money(bundle.price)} إلى {destination}</p>
-                  <p className="mt-2 text-xl font-bold text-[#4a2d33]" dir="ltr">{method === "vodafone" ? "01000000000" : "da3wetna@instapay"}</p>
+                  <p className="mt-2 text-xl font-bold text-[#4a2d33]" dir="ltr">{destination}</p>
                   <p className="mt-4 text-xs text-[#806b70]">رقم الطلب — اكتبه في ملاحظة التحويل</p>
                   <p className="mt-1 break-all font-mono text-sm text-[#a64257]">{orderId}</p>
                   <label className="field mt-4">
@@ -139,7 +139,8 @@ export function Checkout() {
                   </label>
                 </div>
               )}
-              <p className="mt-4 text-xs leading-6 text-[#9a6a45]">ملحوظة: بيانات المحافظ الحالية تجريبية، وتأكيد الطلب هنا محلي وليس تحققًا آليًا من التحويل.</p>
+              {walletsArePlaceholders ? <p className="mt-4 text-xs leading-6 text-[#9a6a45]">بيانات المحافظ الحالية تجريبية. حدّثها من src/config.ts قبل استقبال الطلبات.</p> : null}
+              <p className="mt-2 text-xs leading-6 text-[#9a6a45]">تأكيد الطلب هنا محلي وليس تحققًا آليًا من التحويل.</p>
             </>
           )}
 
