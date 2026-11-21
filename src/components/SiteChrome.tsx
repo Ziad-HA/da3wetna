@@ -182,12 +182,12 @@ function HelpButton() {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-4 left-4 z-40 hidden h-12 md:inline-flex items-center gap-2 rounded-full border border-white/70 bg-white px-4 text-sm font-bold text-[#4a2d33] shadow-[0_8px_28px_rgba(74,45,51,0.16)] transition hover:-translate-y-0.5"
+      aria-label="تواصل معنا عبر واتساب"
+      title="تواصل معنا عبر واتساب"
+      className="fixed bottom-24 right-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-white bg-[#20b85a] text-white shadow-[0_6px_24px_rgba(22,163,74,0.35)] transition hover:-translate-y-1 hover:scale-105 active:scale-95 md:bottom-6 md:left-6 md:right-auto md:h-14 md:w-auto md:gap-2 md:rounded-full md:px-4"
     >
-      <span className="grid h-7 w-7 place-items-center rounded-full bg-[#1fa855] text-white">
-        <WhatsAppIcon className="h-4 w-4" />
-      </span>
-      محتاج مساعدة؟
+      <WhatsAppIcon className="h-6 w-6 md:h-5 md:w-5" />
+      <span className="hidden text-sm font-bold md:inline">كلمنا واتساب</span>
     </a>
   )
 }
