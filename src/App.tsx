@@ -1,4 +1,5 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { useLayoutEffect } from "react"
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom"
 import { SiteChrome } from "./components/SiteChrome"
 import { Checkout } from "./pages/Checkout"
 import { Done } from "./pages/Done"
@@ -12,9 +13,23 @@ import { InviteView } from "./pages/InviteView"
 import { SeoContentPage } from "./pages/SeoContentPage"
 import { Privacy } from "./pages/Privacy"
 
+function ScrollToTop() {
+  const { pathname, search } = useLocation()
+
+  useLayoutEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual"
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" })
+  }, [pathname, search])
+
+  return null
+}
+
 export function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<SiteChrome />}>
           <Route path="/" element={<Home />} />
