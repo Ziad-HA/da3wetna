@@ -81,6 +81,9 @@ export type InviteDraft = {
   rsvpPhone: string
   /** لينك الموقع على خرائط جوجل (اختياري) */
   mapUrl: string
+  venueAddress: string
+  venueLat: number | null
+  venueLng: number | null
   musicUrl: string
   photoOne: string
   photoTwo: string
