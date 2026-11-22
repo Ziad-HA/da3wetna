@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
+import { SiteInvite } from "../components/SiteInvite"
 import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
-import { defaultProgram, getTemplate, occasions, siteDefaults, templates } from "../data"
+import { activeTemplates, defaultProgram, getTemplate, occasions, siteDefaults } from "../data"
 import { encodeDraft } from "../lib/codec"
 import { money } from "../lib/format"
 import { draftReady, initDraft, readSelectedPackage, writeDraft } from "../lib/storage"
@@ -101,7 +102,7 @@ export function Editor() {
           <Link to="/templates" className="inline-flex items-center gap-2 text-sm font-bold text-[#a64257] transition hover:gap-3">← رجوع للتصميمات</Link>
           <div className="mt-3 flex items-center gap-2 text-xs font-bold tracking-wide text-[#b36a78]"><span className="h-px w-7 bg-[#d9a3ae]" /> دعوة على ذوقك <span className="text-[#c6a15b]">✦</span></div>
           <h1 className="mt-2 font-display text-4xl text-[#4a2d33] md:text-5xl">خلّي دعوتك تحكي فرحتك</h1>
-          <p className="mt-2 max-w-xl text-sm leading-7 text-[#806b70]">اكتب تفاصيل مناسبتك، وشوف كل تغيير بيظهر في التصميم قدامك فورًا.</p>
+          <p className="mt-2 max-w-xl text-sm leading-7 text-[#806b70]">امشي معانا خطوة خطوة. اكتب البيانات المطلوبة بس، وسيب أي حاجة مش محتاجها فاضية.</p>
         </div>
         <span className="inline-flex items-center gap-2 rounded-full border border-[#efd5dc] bg-white/90 px-4 py-2.5 text-sm font-bold text-[#a64257] shadow-sm"><span className="text-[#c6a15b]">✦</span>{template.name}<span className="text-[#c6a15b]">✦</span></span>
       </div>
@@ -152,7 +153,7 @@ export function Editor() {
             <span className="rounded-full bg-[#fff0f2] px-3 py-1.5 text-[11px] font-bold text-[#a64257]">مباشر ✦</span>
           </div>
           <div className="relative mx-auto w-[min(100%,270px)] sm:w-[min(100%,310px)]">
-            <PhonePreview><Invitation draft={draft} activeField={active} onSelect={setActive} /></PhonePreview>
+            <PhonePreview>{template.layout === "site" ? <SiteInvite draft={draft} template={template} /> : <Invitation draft={draft} activeField={active} onSelect={setActive} />}</PhonePreview>
           </div>
           <div className="mx-auto mt-4 flex max-w-[310px] items-center justify-between rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
             <span className="text-sm text-[#806b70]">متوسط سعر الدعوة</span>
@@ -174,14 +175,14 @@ export function Editor() {
             <label className="field">
               <span>التصميم</span>
               <select value={draft.templateId} onChange={(event) => chooseTemplate(event.target.value)}>
-                {templates.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+                {activeTemplates.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
               </select>
             </label>
           </div>
 
           <div className="mt-4 rounded-[22px] border border-[#f1e0e4] bg-[linear-gradient(145deg,#fff8f8_0%,#fffdfb_100%)] p-4 md:p-5">
             <h3 className="font-bold text-[#4a2d33]">البيانات الأساسية</h3>
-            <p className="mt-1 text-xs leading-6 text-[#806b70]">{step === 0 ? "اكتب الاسمين واختار نوع المناسبة." : step === 1 ? "حدد اليوم والوقت والمكان اللي هتتقابلوا فيه." : "الخطوة دي اختيارية؛ تقدر تكمل من غير ما تضيف أي حاجة."}</p>
+            <p className="mt-1 text-xs leading-6 text-[#806b70]">{step === 0 ? "اكتب اسم العريس والعروسة زي ما تحب يظهروا في الدعوة." : step === 1 ? "اختار التاريخ من التقويم واكتب اسم القاعة أو المكان." : "مش لازم تملأ أي خانة هنا. الإضافات دي اختيارية وتقدر تتخطاها."}</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               {fields.filter((field) => (step === 0 && ["occasion", "groom", "bride"].includes(field.key)) || (step === 1 && ["date", "time", "venue"].includes(field.key))).map((field) => (
                 <label key={field.key} className="field">
