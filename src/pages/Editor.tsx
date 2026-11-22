@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
+import { MediaUploadField } from "../components/MediaUploadField"
 import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
 import { activeTemplates, defaultProgram, getTemplate, occasions, siteDefaults } from "../data"
 import { encodeDraft } from "../lib/codec"
 import { money } from "../lib/format"
+import { mapLink } from "../lib/maps"
 import { draftReady, initDraft, readSelectedPackage, writeDraft } from "../lib/storage"
 import type { FieldKey, InviteDraft } from "../types"
 
@@ -20,11 +22,7 @@ const fields: { key: FieldKey; label: string; kind: "text" | "select" | "date" |
   { key: "time", label: "الوقت", kind: "time" },
   { key: "venue", label: "المكان", kind: "text", max: 80 },
   { key: "city", label: "المدينة", kind: "text", max: 40 },
-  { key: "mapUrl", label: "لينك الموقع على خرائط جوجل (اختياري)", kind: "text", max: 300 },
   { key: "rsvpPhone", label: "رقم واتساب لتأكيد الحضور (بكود الدولة)", kind: "text", max: 20 },
-  { key: "musicUrl", label: "رابط الموسيقى (اختياري)", kind: "text", max: 500 },
-  { key: "photoOne", label: "رابط الصورة الأولى", kind: "text", max: 500 },
-  { key: "photoTwo", label: "رابط الصورة الثانية", kind: "text", max: 500 },
 ]
 
 export function Editor() {
@@ -36,7 +34,7 @@ export function Editor() {
   const [active, setActive] = useState<FieldKey | null>("groom")
   const [error, setError] = useState("")
   const [step, setStep] = useState(0)
-  const steps = [{ title: "الأسماء", hint: "مين أصحاب الفرحة؟" }, { title: "الموعد والمكان", hint: "إمتى وفين هنحتفل؟" }, { title: "لمستك الأخيرة", hint: "خصص نص الدعوة لو حابب" }]
+  const steps = [{ title: "الأسماء", hint: "اكتب اسم العريس والعروسة" }, { title: "الموعد والمكان", hint: "حدد يوم الفرح والقاعة" }, { title: "الصور واللمسات", hint: "ارفع صورك واختار الموسيقى — وكل ده اختياري" }]
   const requiredItems = [
     { label: "اسم العريس", done: Boolean(draft.groom.trim()) },
     { label: "اسم العروسة", done: Boolean(draft.bride.trim()) },
@@ -167,7 +165,7 @@ export function Editor() {
               <div className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#a64257] text-xs font-extrabold text-white">{step + 1}</span><p className="text-xs font-bold text-[#b83b50]">{steps[step].title}</p></div>
               <h2 className="mt-2 text-2xl font-extrabold text-[#4a2d33]">{step === 0 ? "أصحاب الفرحة" : step === 1 ? "ميعاد ومكان المناسبة" : "إضافات على ذوقك"}</h2>
             </div>
-            <div className="flex shrink-0 flex-col items-end gap-1"><span className="rounded-full bg-[#fff8f8] px-3 py-1.5 text-[11px] font-semibold text-[#9a8187]">بتتحفظ تلقائيًا</span><a href="#live-preview" className="text-[10px] font-bold text-[#a64257] underline underline-offset-4 lg:hidden">شوف المعاينة ↓</a></div>
+            <div className="flex shrink-0 flex-col items-end gap-1"><span className="rounded-full bg-[#fff8f8] px-3 py-1.5 text-[11px] font-semibold text-[#9a8187]">بتتحفظ على جهازك تلقائيًا</span><a href="#live-preview" className="text-[10px] font-bold text-[#a64257] underline underline-offset-4 lg:hidden">شوف المعاينة ↓</a></div>
           </div>
 
           <div className="mt-5 rounded-2xl border border-[#f3e6e9] bg-[#fffdfd] p-4">
@@ -183,7 +181,7 @@ export function Editor() {
             <h3 className="font-bold text-[#4a2d33]">البيانات الأساسية</h3>
             <p className="mt-1 text-xs leading-6 text-[#806b70]">{step === 0 ? "اكتب اسم العريس والعروسة زي ما تحب يظهروا في الدعوة." : step === 1 ? "اختار التاريخ من التقويم واكتب اسم القاعة أو المكان." : "مش لازم تملأ أي خانة هنا. الإضافات دي اختيارية وتقدر تتخطاها."}</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {fields.filter((field) => (step === 0 && ["occasion", "groom", "bride"].includes(field.key)) || (step === 1 && ["date", "time", "venue"].includes(field.key))).map((field) => (
+              {fields.filter((field) => (step === 0 && ["occasion", "groom", "bride"].includes(field.key)) || (step === 1 && ["date", "time", "venue", "city"].includes(field.key))).map((field) => (
                 <label key={field.key} className="field">
                   <span>{field.label}{["groom", "bride", "date", "venue"].includes(field.key) ? " *" : ""}</span>
                   {field.kind === "select" ? (
@@ -210,10 +208,10 @@ export function Editor() {
 
           {step === 2 ? <details className="mt-4 rounded-[22px] border border-[#f0dce1] bg-white p-4 transition open:bg-[#fffdfd]">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-bold text-[#a64257]"><span className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#fff0f2]">＋</span> إضافات اختيارية لو حابب</span><span className="text-xs font-normal text-[#9a8187]">اضغط للفتح</span></summary>
-            <p className="mt-2 text-xs leading-6 text-[#806b70]">خصص نص الدعوة، وأضف رقم واتساب لتأكيد الحضور وروابط صور أو موسيقى مستضافة على الإنترنت.</p>
+            <p className="mt-2 text-xs leading-6 text-[#806b70]">ارفع الصور والموسيقى من موبايلك مباشرة. وممكن تسيب أي إضافة مش محتاجها.</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {fields.filter((field) => ["opening", "hosts", "message", "city", "mapUrl", "rsvpPhone", "musicUrl", "photoOne", "photoTwo"].includes(field.key)).map((field) => (
-                <label key={field.key} className={`field ${["message", "hosts", "opening", "mapUrl", "rsvpPhone", "musicUrl", "photoOne", "photoTwo"].includes(field.key) ? "sm:col-span-2" : ""}`}>
+              {fields.filter((field) => ["opening", "hosts", "message", "rsvpPhone"].includes(field.key)).map((field) => (
+                <label key={field.key} className={`field ${["message", "hosts", "opening", "rsvpPhone"].includes(field.key) ? "sm:col-span-2" : ""}`}>
                   <span>{field.label}</span>
                   <input
                     type="text"
@@ -224,6 +222,18 @@ export function Editor() {
                   />
                 </label>
               ))}
+            </div>
+            <div className="mt-5 grid gap-3 border-t border-[#f3e6e9] pt-5">
+              <label className="field">
+                <span>موقع القاعة على Google Maps (اختياري)</span>
+                <input dir="ltr" type="url" placeholder="https://maps.app.goo.gl/..." value={draft.mapUrl} onChange={(event) => update({ mapUrl: event.target.value })} />
+                <span className="text-[11px] leading-6 text-[#90777d]">لو مش معاك رابط، سيب الخانة فاضية؛ هنفتح بحث باسم القاعة والمدينة تلقائيًا.</span>
+                <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="text-xs font-bold text-[#a64257] underline underline-offset-4">افتح موقع القاعة على الخريطة للتأكد ↗</a>
+              </label>
+              <MediaUploadField label="صورة الدعوة الأولى" kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
+              <MediaUploadField label="صورة إضافية" kind="image" value={draft.photoTwo} onChange={(url) => update({ photoTwo: url })} />
+              <MediaUploadField label="موسيقى الدعوة" kind="audio" value={draft.musicUrl} onChange={(url) => update({ musicUrl: url })} />
+              <p className="text-[11px] leading-6 text-[#90777d]">رفع الملفات يحتاج إعداد Supabase Storage مرة واحدة. لو لسه مش مربوط، هتظهر رسالة توضح المطلوب بدل ما يضيع الملف.</p>
             </div>
             {template.layout === "strip" || template.layout === "site" ? (
               <div className="mt-5 grid gap-4 border-t border-[#f3e6e9] pt-5">
