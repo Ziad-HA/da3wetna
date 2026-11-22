@@ -35,7 +35,7 @@ function downloadIcs(draft: InviteDraft) {
 function Countdown({ draft }: { draft: InviteDraft }) {
   const [now, setNow] = useState(() => Date.now())
   useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 30000)
+    const timer = window.setInterval(() => setNow(Date.now()), 1000)
     return () => window.clearInterval(timer)
   }, [])
   const target = new Date(draft.date + "T" + (draft.time || "00:00") + ":00").getTime()
@@ -44,7 +44,8 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   const cells: [number, string][] = [
     [Math.floor(left / 86400000), "يوم"],
     [Math.floor((left % 86400000) / 3600000), "ساعة"],
-    [Math.floor((left % 3600000) / 60000), "دقيقة"]
+    [Math.floor((left % 3600000) / 60000), "دقيقة"],
+    [Math.floor((left % 60000) / 1000), "ثانية"]
   ]
   return <div className="vaux-count" dir="rtl">{cells.map(([value, label]) => (
     <div key={label} className="vaux-count-item"><strong>{value}</strong><span>{label}</span></div>
