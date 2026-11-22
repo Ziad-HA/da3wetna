@@ -14,6 +14,7 @@ function CardCountdown({ draft }: { draft: InviteDraft }) {
   const target = new Date(`${draft.date}T${draft.time || "00:00"}:00`).getTime()
   if (!draft.date || Number.isNaN(target)) return null
   const left = Math.max(0, target - now)
+  if (left === 0) return <div className="invite-thumb-countdown invite-thumb-countdown-ended">فرحتنا بدأت ♡</div>
   const units = [
     [Math.floor(left / 86400000), "ي"],
     [Math.floor((left % 86400000) / 3600000), "س"],
