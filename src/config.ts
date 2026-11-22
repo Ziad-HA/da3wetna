@@ -1,9 +1,10 @@
-/** غيّر بيانات التحويل دي قبل نشر الموقع. */
+/** بيانات التواصل ووسائل الدفع الخاصة بدعوتنا. */
 export const site = {
   name: "دعوتنا",
   nameEn: "DA3WETNA",
   whatsapp: "201276390301",
-  vodafoneCash: "01000000000",
+  email: "zh.nobii@gmail.com",
+  vodafoneCash: "01098616961",
   instapay: "da3wetna@instapay",
 }
 
