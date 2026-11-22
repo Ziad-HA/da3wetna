@@ -76,6 +76,10 @@ export function Editor() {
       setError("حدد تاريخ ومكان المناسبة عشان نكمل.");
       return;
     }
+    if (step === 1 && draft.date < new Date().toISOString().slice(0, 10)) {
+      setError("اختار تاريخ النهارده أو تاريخ بعده.");
+      return;
+    }
     setError("");
     if (step < 2) setStep((value) => value + 1);
     else goCheckout();
@@ -149,7 +153,8 @@ export function Editor() {
             <div><p className="text-sm font-extrabold text-[#4a2d33]">معاينة حية</p><p className="mt-0.5 text-[11px] text-[#9a8187]">كل تعديل هيظهر هنا</p></div>
             <span className="rounded-full bg-[#fff0f2] px-3 py-1.5 text-[11px] font-bold text-[#a64257]">مباشر ✦</span>
           </div>
-          <div className="relative mx-auto w-[min(100%,270px)] sm:w-[min(100%,310px)]">\n            {template.layout === "site" ? <a href={`/i/${encodeDraft(draft)}`} target="_blank" rel="noreferrer" className="mb-3 flex min-h-10 items-center justify-center rounded-full bg-[#a64257] px-4 text-xs font-bold text-white shadow-sm">افتح معاينة الدعوة كاملة بالظرف ↗</a> : null}
+          <div className="relative mx-auto w-[min(100%,270px)] sm:w-[min(100%,310px)]">
+            {template.layout === "site" ? <a href={`/i/${encodeDraft(draft)}`} target="_blank" rel="noreferrer" className="mb-3 flex min-h-10 items-center justify-center rounded-full bg-[#a64257] px-4 text-xs font-bold text-white shadow-sm">افتح معاينة الدعوة كاملة بالظرف ↗</a> : null}
             <PhonePreview><Invitation draft={draft} activeField={active} onSelect={setActive} /></PhonePreview>
           </div>
           <div className="mx-auto mt-4 flex max-w-[310px] items-center justify-between rounded-2xl border border-[#f0dce1] bg-white px-4 py-3">
@@ -195,6 +200,8 @@ export function Editor() {
                   ) : (
                     <input
                       type={field.kind}
+                      min={field.kind === "date" ? new Date().toISOString().slice(0, 10) : undefined}
+                      placeholder={field.key === "groom" ? "مثال: محمد" : field.key === "bride" ? "مثال: سلمى" : field.key === "venue" ? "مثال: قاعة النيل" : field.key === "city" ? "مثال: الإسكندرية" : undefined}
                       maxLength={field.max}
                       value={draft[field.key]}
                       onFocus={() => setActive(field.key)}
