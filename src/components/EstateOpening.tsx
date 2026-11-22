@@ -110,11 +110,11 @@ export function EstateOpening({ draft, step, onOpen, onComplete, onSkip }: Props
           />
           <h2 className="vaux-overlay-title">
             <span>{draft.groom}</span>
-            <i>&</i>
+            <i>و</i>
             <span>{draft.bride}</span>
           </h2>
           <p className="vaux-overlay-kicker">
-            {draft.hosts || "JOYFULLY INVITE YOU TO CELEBRATE THEIR WEDDING"}
+            {draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}
           </p>
         </div>
 
