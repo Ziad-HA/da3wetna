@@ -132,7 +132,7 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
       setLoading(true)
       setError("")
       try {
-        const params = new URLSearchParams({ q: [search, city.trim(), "مصر"].filter(Boolean).join(" "), limit: "6", lang: "ar" })
+        const params = new URLSearchParams({ q: [search, city.trim(), "مصر"].filter(Boolean).join(" "), limit: "6" })
         const response = await fetch(`https://photon.komoot.io/api/?${params.toString()}`, { headers: { Accept: "application/json" } })
         if (!response.ok) throw new Error("خدمة البحث مش متاحة حاليًا. جرّب تاني بعد شوية.")
         const data = await response.json() as PhotonResponse
