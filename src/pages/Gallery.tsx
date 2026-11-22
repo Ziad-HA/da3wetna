@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { InviteThumb } from "../components/InviteThumb"
 import { packages } from "../config"
-import { draftFor, templates } from "../data"
+import { activeTemplates, draftFor } from "../data"
 import { clearDraft, readActivePackage, readSelectedPackage } from "../lib/storage"
 import type { Occasion } from "../types"
 
@@ -17,7 +17,7 @@ export function Gallery() {
   const [favoritesOnly, setFavoritesOnly] = useState(false)
   const [favorites, setFavorites] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem("da3wetna-favorites") || "[]") as string[] } catch { return [] } })
   const selected = hasUnusedInvites && activeOrder ? activeOrder.packageId : readSelectedPackage()
-  const visible = useMemo(() => templates.filter((item) => (filter === "الكل" || item.category === (filter as Occasion)) && (!favoritesOnly || favorites.includes(item.id)) && (!query.trim() || `${item.name} ${item.blurb} ${item.category}`.toLowerCase().includes(query.trim().toLowerCase()))), [filter, favoritesOnly, favorites, query])
+  const visible = useMemo(() => activeTemplates.filter((item) => (filter === "الكل" || item.category === (filter as Occasion)) && (!favoritesOnly || favorites.includes(item.id)) && (!query.trim() || `${item.name} ${item.blurb} ${item.category}`.toLowerCase().includes(query.trim().toLowerCase()))), [filter, favoritesOnly, favorites, query])
 
   function toggleFavorite(id: string) {
     setFavorites((current) => {
@@ -46,7 +46,7 @@ export function Gallery() {
             <div className="mt-3 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center md:justify-start">
               <a href="#designs" className="inline-flex min-h-9 items-center justify-center rounded-full bg-[#a64257] px-3 text-[11px] font-bold text-white shadow-[0_7px_18px_rgba(166,66,87,.18)] transition hover:-translate-y-0.5 hover:bg-[#91384b]">تصفح التصميمات <span className="mr-2">↓</span></a>
               <div className="hidden items-center justify-center gap-2 rounded-full border border-white/80 bg-white/65 sm:flex px-4 py-2.5 text-xs text-[#806b70]">
-                <span className="font-extrabold text-[#4a2d33]">{templates.length}</span> تصميم متاح
+                <span className="font-extrabold text-[#4a2d33]">{activeTemplates.length}</span> تصميم متاح
                 <span className="mx-1 text-[#d8aab5]">•</span>
                 <span>تخصيص سهل</span>
               </div>
