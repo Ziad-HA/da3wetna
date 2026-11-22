@@ -44,7 +44,7 @@ export default async function handler(req: Req, res: Res) {
       return send(res, 502, { error: "upload_sign_failed" })
     }
     const signedPath = data.url ?? data.signedURL!
-    const uploadUrl = new URL(signedPath, `${base}/storage/v1`).toString()
+    const uploadUrl = /^https?:\\/\\//i.test(signedPath)\n      ? signedPath\n      : `${base}/storage/v1${signedPath.startsWith("/") ? "" : "/"}${signedPath}`
     return send(res, 200, {
       uploadUrl,
       publicUrl: `${base}/storage/v1/object/public/${BUCKET}/${path}`,
