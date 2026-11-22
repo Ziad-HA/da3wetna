@@ -101,4 +101,5 @@ export type InviteDraft = {
 
 export type PayMethod = "vodafone" | "instapay" | "paymob"
 
-export type FieldKey = keyof Omit<InviteDraft, "templateId">
+/** مفاتيح الحقول النصية بس (من غير القالب والإحداثيات) */
+export type FieldKey = Exclude<{ [K in keyof InviteDraft]: InviteDraft[K] extends string ? K : never }[keyof InviteDraft], "templateId">

@@ -24,6 +24,10 @@ function multiline(value: unknown, max: number, lines: number): string {
   return value.replace(/\r/g, "").split("\n").map((l) => text(l, 80)).filter(Boolean).slice(0, lines).join("\n").slice(0, max)
 }
 
+function coordinate(value: unknown, min: number, max: number): number | null {
+  return typeof value === "number" && Number.isFinite(value) && value >= min && value <= max ? value : null
+}
+
 function galleryUrls(value: unknown): string {
   if (typeof value !== "string") return ""
   return value.split(/\s+/).map((u) => url(u, 200)).filter(Boolean).slice(0, 6).join("\n").slice(0, 900)
@@ -49,6 +53,9 @@ export function sanitizeDraft(raw: unknown): InviteDraft | null {
     opening: text(d.opening, 60),
     rsvpPhone: text(d.rsvpPhone, 20),
     mapUrl: url(d.mapUrl, 300),
+    venueAddress: text(d.venueAddress, 240),
+    venueLat: coordinate(d.venueLat, -90, 90),
+    venueLng: coordinate(d.venueLng, -180, 180),
     musicUrl: url(d.musicUrl, 500),
     photoOne: url(d.photoOne, 500),
     photoTwo: url(d.photoTwo, 500),

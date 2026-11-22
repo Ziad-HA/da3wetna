@@ -143,10 +143,11 @@ export function GoogleVenueField({ value, city, mapUrl, address, latitude, longi
       markerRef.current = null
     }
     if (!key || latitude == null || longitude == null || !mapElement.current) return
+    const mapsKey: string = key
     let cancelled = false
     async function setupMap() {
       try {
-        await loadGoogleMaps(key)
+        await loadGoogleMaps(mapsKey)
         const maps = await (window as GoogleMapsWindow).google!.maps!.importLibrary!("maps") as MapsLibrary
         if (cancelled || !mapElement.current) return
         const position = { lat: latitude!, lng: longitude! }
