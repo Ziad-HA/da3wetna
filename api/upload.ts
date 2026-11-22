@@ -33,9 +33,11 @@ export default async function handler(req: Req, res: Res) {
   const path = `${type.kind}/${randomUUID()}.${type.ext}`
 
   try {
+    const headers: Record<string, string> = { apikey: key, "Content-Type": "application/json" }
+    if (!key.startsWith("sb_secret_")) headers.Authorization = `Bearer ${key}`
     const response = await fetch(`${base}/storage/v1/object/upload/sign/${BUCKET}/${path}`, {
       method: "POST",
-      headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({}),
     })
     const data = await response.json().catch(() => ({})) as { url?: string; signedURL?: string; message?: string }
