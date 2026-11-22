@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { MediaUploadField } from "../components/MediaUploadField"
+import { GoogleVenueField } from "../components/GoogleVenueField"
 import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
 import { activeTemplates, defaultProgram, getTemplate, occasions, siteDefaults } from "../data"
@@ -197,11 +198,18 @@ export function Editor() {
                     >
                       {occasions.map((item) => <option key={item}>{item}</option>)}
                     </select>
+                  ) : field.key === "venue" ? (
+                    <GoogleVenueField
+                      value={draft.venue}
+                      city={draft.city}
+                      mapUrl={draft.mapUrl}
+                      onChange={(venue, mapUrl) => update({ venue, mapUrl })}
+                    />
                   ) : (
                     <input
                       type={field.kind}
                       min={field.kind === "date" ? new Date().toISOString().slice(0, 10) : undefined}
-                      placeholder={field.key === "groom" ? "مثال: محمد" : field.key === "bride" ? "مثال: سلمى" : field.key === "venue" ? "مثال: قاعة النيل" : field.key === "city" ? "مثال: الإسكندرية" : undefined}
+                      placeholder={field.key === "groom" ? "مثال: محمد" : field.key === "bride" ? "مثال: سلمى" : field.key === "city" ? "مثال: الإسكندرية" : undefined}
                       maxLength={field.max}
                       value={draft[field.key]}
                       onFocus={() => setActive(field.key)}
@@ -231,12 +239,10 @@ export function Editor() {
               ))}
             </div>
             <div className="mt-5 grid gap-3 border-t border-[#f3e6e9] pt-5">
-              <label className="field">
-                <span>موقع القاعة على Google Maps (اختياري)</span>
-                <input dir="ltr" type="url" placeholder="https://maps.app.goo.gl/..." value={draft.mapUrl} onChange={(event) => update({ mapUrl: event.target.value })} />
-                <span className="text-[11px] leading-6 text-[#90777d]">لو مش معاك رابط، سيب الخانة فاضية؛ هنفتح بحث باسم القاعة والمدينة تلقائيًا.</span>
-                <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="text-xs font-bold text-[#a64257] underline underline-offset-4">افتح موقع القاعة على الخريطة للتأكد ↗</a>
-              </label>
+              <div className="rounded-2xl border border-[#f1e0e4] bg-[#fffafa] p-3">
+                <p className="text-xs leading-6 text-[#806b70]">اختيار القاعة من نتائج البحث بيحفظ رابطها تلقائيًا في الدعوة.</p>
+                {draft.mapUrl ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4">راجع المكان المختار على Google Maps ↗</a> : null}
+              </div>
               <MediaUploadField label="صورة الدعوة الأولى" kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
               <MediaUploadField label="صورة إضافية" kind="image" value={draft.photoTwo} onChange={(url) => update({ photoTwo: url })} />
               <MediaUploadField label="موسيقى الدعوة" kind="audio" value={draft.musicUrl} onChange={(url) => update({ musicUrl: url })} />
