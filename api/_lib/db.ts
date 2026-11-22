@@ -9,14 +9,18 @@ type Init = { method?: "GET" | "POST" | "PATCH"; body?: unknown; prefer?: string
 
 /** Call Supabase PostgREST with a server-only privileged key. */
 export async function db<T = unknown[]>(path: string, init: Init = {}): Promise<T> {
+  const key = KEY()
+  const headers: Record<string, string> = {
+    apikey: key,
+    "Content-Type": "application/json",
+    Prefer: init.prefer ?? "return=representation",
+  }
+  // New sb_secret keys are opaque API keys, not JWTs. Do not send them as Bearer tokens.
+  if (!key.startsWith("sb_secret_")) headers.Authorization = `Bearer ${key}`
+
   const res = await fetch(`${URL_()}/rest/v1/${path}`, {
     method: init.method ?? "GET",
-    headers: {
-      apikey: KEY(),
-      Authorization: `Bearer ${KEY()}`,
-      "Content-Type": "application/json",
-      Prefer: init.prefer ?? "return=representation",
-    },
+    headers,
     body: init.body === undefined ? undefined : JSON.stringify(init.body),
   })
   if (!res.ok) {
