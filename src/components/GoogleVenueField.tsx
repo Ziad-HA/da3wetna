@@ -132,7 +132,10 @@ export function GoogleVenueField({ value, city, mapUrl, onChange }: Props) {
       }
     }, 350)
 
-    return () => window.clearTimeout(timer)
+    return () => {
+      window.clearTimeout(timer)
+      if (requestId.current === currentRequest) requestId.current += 1
+    }
   }, [query, city, apiKey, value, mapUrl])
 
   async function choosePlace(prediction: PlacePrediction) {
