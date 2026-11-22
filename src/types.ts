@@ -16,6 +16,7 @@ export const templateIds = [
   "nikah",
   "strip",
   "estate",
+  "estate-rose",
 ] as const
 
 export type TemplateId = (typeof templateIds)[number]
