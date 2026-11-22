@@ -55,7 +55,7 @@ export function Gallery() {
           <div className="relative mx-auto w-full max-w-[150px] sm:max-w-[285px]">
             <div className="absolute -inset-1 rotate-[-5deg] rounded-[14px] sm:-inset-3 sm:rounded-[22px] border border-white/80 bg-white/25" />
             <div className="gallery-hero-frame relative rotate-[1deg] overflow-hidden rounded-[10px] border-[3px] sm:rotate-[2deg] sm:rounded-[18px] sm:border-[7px] border-white bg-white shadow-[0_22px_55px_rgba(94,49,61,.18)]">
-              <div className="invite-frame"><InviteThumb draft={draftFor(templates[0])} /></div>
+              <div className="invite-frame">{activeTemplates[0] ? <InviteThumb draft={draftFor(activeTemplates[0])} /> : null}</div>
             </div>
             <span className="absolute -bottom-2 -left-2 grid h-7 w-7 sm:-bottom-4 sm:-left-5 sm:h-12 sm:w-12 place-items-center rounded-full border-4 border-[#f8e9ec] bg-white text-2xl text-[#b83b50] shadow-md">♡</span>
             <span className="absolute -right-2 top-2 hidden rounded-full border border-white bg-white/90 sm:block sm:-right-5 sm:top-5 px-3 py-2 text-[10px] font-bold text-[#a64257] shadow-sm">دعوتك تبدأ من هنا</span>
