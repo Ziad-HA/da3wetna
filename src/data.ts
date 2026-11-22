@@ -2,6 +2,22 @@ import type { InviteDraft, Template, TemplateId } from "./types"
 
 export const templates: Template[] = [
   {
+    id: "estate",
+    name: "قصر الدير",
+    blurb: "دعوة زفاف فخمة بظرف متحرك وصفحة تفاصيل كاملة بالعربي",
+    category: "فرح",
+    isNew: true,
+    layout: "site",
+    frame: "arch",
+    ornament: "sprig",
+    groom: "محمد",
+    bride: "سلمى",
+    venue: "قاعة النيل",
+    time: "19:00",
+    vars: { paper: "#FAF6EE", ink: "#5E1C2A", gold: "#8B6B3A", soft: "#7A6A55", shell: "#4F5629" },
+    envelope: { body: ["#6F7640", "#4F5629"], flap: ["#7A8248", "#59602F"], liner: "#FAF6EE", linerPattern: "plain", seal: "#7A1F2D", sealKind: "initials", flapShape: "deep", zoom: true },
+  },
+  {
     id: "calla",
     name: "زهور الكالا",
     blurb: "عاجي هادي وخطوط زهور ناعمة",
@@ -45,22 +61,6 @@ export const templates: Template[] = [
     time: "19:00",
     vars: { paper: "#FFF8F6", ink: "#673744", gold: "#B98A61", soft: "#9A7480", shell: "#F2E4E6" },
     envelope: { body: ["#B76C7E", "#8D3D52"], flap: ["#CA8795", "#9E4E63"], liner: "#FFF8F2", linerPattern: "plain", seal: "#762B3D", sealKind: "flower", flapShape: "deep" },
-  },
-  {
-    id: "estate",
-    name: "قصر الدير",
-    blurb: "دعوة زفاف فخمة بظرف متحرك وصفحة تفاصيل كاملة بالعربي",
-    category: "فرح",
-    isNew: true,
-    layout: "site",
-    frame: "arch",
-    ornament: "sprig",
-    groom: "محمد",
-    bride: "سلمى",
-    venue: "قاعة النيل",
-    time: "19:00",
-    vars: { paper: "#FAF6EE", ink: "#5E1C2A", gold: "#8B6B3A", soft: "#7A6A55", shell: "#4F5629" },
-    envelope: { body: ["#6F7640", "#4F5629"], flap: ["#7A8248", "#59602F"], liner: "#FAF6EE", linerPattern: "plain", seal: "#7A1F2D", sealKind: "initials", flapShape: "deep", zoom: true },
   },
 ]
 
