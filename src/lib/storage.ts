@@ -25,7 +25,7 @@ export type ActivePackage = {
 
 export function readDraft(): InviteDraft | null {
   try {
-    const raw = localStorage.getItem(DRAFT_KEY)
+    const raw = localStorage.getItem(DRAFT_KEY) ?? sessionStorage.getItem(DRAFT_KEY)
     if (!raw) return null
     const data = JSON.parse(raw) as InviteDraft
     if (!data || !isTemplateId(data.templateId)) return null
