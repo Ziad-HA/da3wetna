@@ -238,15 +238,15 @@ export const templates: Template[] = [
   {
     id: "estate",
     name: "قصر الدير",
-    blurb: "ظرف زيتي فاخر بختم شمع وفتح ثلاثي الأبعاد، مع صفحة زفاف كلاسيكية كاملة",
+    blurb: "دعوة زفاف فخمة بظرف متحرك وصفحة تفاصيل كاملة بالعربي",
     category: "فرح",
     isNew: true,
     layout: "site",
     frame: "arch",
     ornament: "sprig",
-    groom: "Élise",
-    bride: "Raphaël",
-    venue: "Abbaye des Vaux-de-Cernay",
+    groom: "محمد",
+    bride: "سلمى",
+    venue: "قاعة النيل",
     time: "15:00",
     vars: { paper: "#FAF6EE", ink: "#5E1C2A", gold: "#8B6B3A", soft: "#7A6A55", shell: "#4F5629" },
     envelope: { body: ["#6F7640", "#4F5629"], flap: ["#7A8248", "#59602F"], liner: "#FAF6EE", linerPattern: "plain", seal: "#7A1F2D", sealKind: "initials", flapShape: "deep", zoom: true },
@@ -258,10 +258,10 @@ export function getTemplate(id: string | undefined): Template | undefined {
 }
 
 export const siteDefaults = {
-  program: "5:30 pm | Cocktail in the cloister\n7:00 pm | Dinner beneath the vaults\n9:30 pm | First Dance\n11:00 pm | Late Night Dancing",
-  story: "A bench in the Luxembourg gardens, a forgotten book, a rose at page 112. Raphaël took three weeks to find its owner; Élise took three seconds.\n\nSix years later, the rose is still between the pages. The next page is written by two.",
-  faq: "The Vaux-de-Cernay waterfalls | Beautiful scenic walk 5 minutes from the estate.\nThe château de la Madeleine | Historic 11th century castle with panoramic valley views.\nRambouillet market | Charming local market on Saturday mornings.",
-  dressCode: "Autumn Elegance: Burgundy, Forest Green, Ivory & Warm Neutrals",
+  program: "٥:٣٠ مساءً | استقبال الضيوف\n٦:٣٠ مساءً | دخول العروسين\n٧:٠٠ مساءً | العشاء\n٩:٠٠ مساءً | تقطيع التورتة والاحتفال",
+  story: "بداية حكايتنا كانت صدفة جميلة، ومع الأيام بقت أجمل حكاية في حياتنا.\n\nوالنهارده بنبدأ فصل جديد، ونتمنى تكونوا معانا وتشاركونا فرحتنا.",
+  faq: "",
+  dressCode: "يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا.",
 }
 
 export const defaultProgram = "17:00 | استقبال الضيوف\n18:00 | دخول العروسين\n19:00 | حفل العشاء\n21:00 | قص التورتة والتصوير"
@@ -273,13 +273,13 @@ export function draftFor(template: Template): InviteDraft {
     groom: template.groom,
     bride: template.bride,
     occasion: template.category,
-    hosts: isSite ? "JOYFULLY INVITE YOU TO CELEBRATE THEIR WEDDING" : "يتشرف الأهل بدعوتكم",
-    message: isSite ? "JOYFULLY INVITE YOU TO CELEBRATE THEIR WEDDING" : "ونكون سعداء بوجودكم في يومنا",
+    hosts: "يتشرف الأهل بدعوتكم لحضور حفل زفاف",
+    message: "وجودكم معانا يكمل فرحتنا، ومستنيينكم تشاركونا أجمل يوم في حياتنا.",
     date: isSite ? "2027-10-02" : "2026-12-18",
     time: template.time,
     venue: template.venue,
-    city: isSite ? "Yvelines" : "القاهرة",
-    opening: isSite ? "" : "بسم الله الرحمن الرحيم",
+    city: "القاهرة",
+    opening: "بسم الله الرحمن الرحيم",
     rsvpPhone: "",
     mapUrl: "",
     musicUrl: "",
