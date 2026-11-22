@@ -51,9 +51,9 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   ))}</div>
 }
 
-type Props = { draft: InviteDraft; template: Template; rsvp?: ReactNode }
+type Props = { draft: InviteDraft; template: Template; rsvp?: ReactNode; shareUrl?: string }
 
-export function SiteInvite({ draft, template, rsvp }: Props) {
+export function SiteInvite({ draft, template, rsvp, shareUrl = "" }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--paper": template.vars.paper,
@@ -157,6 +157,16 @@ export function SiteInvite({ draft, template, rsvp }: Props) {
         <p className="vaux-body-text">وجودكم وسطنا هو أجمل هدية لينا</p>
         <div className="vaux-footer-monogram"><img src="/vaux/monogram_rose.png" alt="" /></div>
       </section>
+
+      {shareUrl ? <section className="vaux-sec site-reveal vaux-share-sec">
+        <span className="vaux-kicker">خلي الدعوة معاك</span>
+        <h2 className="vaux-script-title">شارك فرحتنا</h2>
+        <p className="vaux-body-text">امسح رمز QR علشان تفتح الدعوة بسهولة أو تبعتها لحد تحبه.</p>
+        <div style={{ width: 184, margin: "1rem auto 0", padding: 12, borderRadius: 18, background: "#fff", border: "1px solid rgba(94,28,42,.14)", boxShadow: "0 8px 24px rgba(50,20,25,.08)" }}>
+          <img src={"https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=8&data=" + encodeURIComponent(shareUrl)} alt="رمز QR لفتح دعوة الزفاف" width="160" height="160" style={{ display: "block", width: "100%", height: "auto" }} loading="lazy" />
+        </div>
+        <p dir="ltr" style={{ maxWidth: 320, margin: "0.75rem auto 0", fontSize: "0.68rem", lineHeight: 1.6, overflowWrap: "anywhere", color: "#8B6B3A" }}>{shareUrl}</p>
+      </section> : null}
     </article>
   )
 }
