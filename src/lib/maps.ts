@@ -3,7 +3,10 @@ import type { InviteDraft } from "../types"
 const MAP_HOSTS = ["google.com", "google.com.eg", "goo.gl", "maps.app.goo.gl", "maps.google.com"]
 
 /** لينك خرائط آمن: بيقبل لينكات جوجل ماب بس، وإلا بيبحث باسم المكان والمدينة. */
-export function mapLink(draft: Pick<InviteDraft, "mapUrl" | "venue" | "city">): string {
+export function mapLink(draft: Pick<InviteDraft, "mapUrl" | "venue" | "city" | "venueLat" | "venueLng">): string {
+  if (typeof draft.venueLat === "number" && Number.isFinite(draft.venueLat) && typeof draft.venueLng === "number" && Number.isFinite(draft.venueLng)) {
+    return `https://www.google.com/maps/search/?api=1&query=${draft.venueLat},${draft.venueLng}`
+  }
   const raw = draft.mapUrl.trim()
   if (raw) {
     try {
