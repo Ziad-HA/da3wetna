@@ -203,7 +203,10 @@ export function Editor() {
                       value={draft.venue}
                       city={draft.city}
                       mapUrl={draft.mapUrl}
-                      onChange={(venue, mapUrl) => update({ venue, mapUrl })}
+                      address={draft.venueAddress}
+                      latitude={draft.venueLat}
+                      longitude={draft.venueLng}
+                      onChange={(venue, venueAddress, venueLat, venueLng, mapUrl) => update({ venue, venueAddress, venueLat, venueLng, mapUrl })}
                     />
                   ) : (
                     <input
@@ -240,7 +243,7 @@ export function Editor() {
             </div>
             <div className="mt-5 grid gap-3 border-t border-[#f3e6e9] pt-5">
               <div className="rounded-2xl border border-[#f1e0e4] bg-[#fffafa] p-3">
-                <p className="text-xs leading-6 text-[#806b70]">اختيار القاعة من نتائج البحث بيحفظ رابطها تلقائيًا في الدعوة.</p>
+                <p className="text-xs leading-6 text-[#806b70]">اختيار القاعة من نتائج البحث بيحفظ اسمها وعنوانها وإحداثياتها تلقائيًا. وتقدر تحرك العلامة على الخريطة لتصحيح المكان.</p>
                 {draft.mapUrl ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4">راجع المكان المختار على Google Maps ↗</a> : null}
               </div>
               <MediaUploadField label="صورة الدعوة الأولى" kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
