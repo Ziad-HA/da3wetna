@@ -1812,7 +1812,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 }
 .vaux-count-item span {
   font-size: 0.65rem;
-  letter-spacing: 0.22em;
+  letter-spacing:  0.08em;
   text-transform: uppercase;
   color: #8B6B3A;
   margin-top: 0.4rem;
