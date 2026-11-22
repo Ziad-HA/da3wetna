@@ -36,7 +36,8 @@ export function Account() {
           {error ? <p className="mt-2 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           <button type="submit" className={`${saved ? "btn-ghost" : "btn-gold"} mt-4 w-full`}>فتح</button>
         </form>
-        <Link to="/templates" className="mt-6 block text-sm font-bold text-[#a64257] underline underline-offset-4">تصفح الدعوات</Link>
+        <Link to="/auth" className="mt-6 block text-sm font-bold text-[#a64257] underline underline-offset-4">تسجيل حساب جديد أو الدخول</Link>
+        <Link to="/templates" className="mt-3 block text-sm font-bold text-[#a64257] underline underline-offset-4">تصفح الدعوات</Link>
       </div>
     </main>
   )
