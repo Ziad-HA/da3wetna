@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react"
 import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
+import { VenueMap } from "./VenueMap"
 import type { InviteDraft, Template } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -135,6 +136,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "" }: Props) {
             {draft.mapUrl || draft.venue ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="vaux-btn">الموقع على الخريطة</a> : null}
             {validDate ? <button type="button" onClick={() => downloadIcs(draft)} className="vaux-btn">أضف الموعد للتقويم</button> : null}
           </div>
+          <VenueMap draft={draft} />
         </div>
       </section>
 
