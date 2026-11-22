@@ -5,6 +5,12 @@ import type { InviteDraft, Template } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
 
+const formatTime = (value: string) => {
+  const [hour, minute] = value.split(":").map(Number)
+  if (!Number.isFinite(hour) || !Number.isFinite(minute)) return value
+  return new Intl.DateTimeFormat("ar-EG", { hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(2000, 0, 1, hour, minute))
+}
+
 function downloadIcs(draft: InviteDraft) {
   const [y, m, d] = draft.date.split("-").map(Number)
   const [hh, mm] = (draft.time || "18:00").split(":").map(Number)
@@ -114,7 +120,7 @@ export function SiteInvite({ draft, template, rsvp }: Props) {
           <span className="vaux-kicker">مستنيينكم تشاركونا</span>
           <h2 className="vaux-script-title">ميعادنا ومكاننا</h2>
           {validDate ? <p className="vaux-body-text">{formatArabicDate(draft.date)}</p> : null}
-          <p className="vaux-time-display">{draft.time || "السادسة مساءً"}</p>
+          <p className="vaux-time-display">{draft.time ? formatTime(draft.time) : "السادسة مساءً"}</p>
           <p className="vaux-body-meta">{[draft.venue, draft.city].filter(Boolean).join(" — ")}</p>
           <div className="vaux-btn-row">
             {draft.mapUrl || draft.venue ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="vaux-btn">الموقع على الخريطة</a> : null}
