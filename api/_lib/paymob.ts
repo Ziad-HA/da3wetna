@@ -3,8 +3,16 @@ import { safeEqual } from "./http.js"
 
 const BASE = "https://accept.paymob.com/api"
 
-export const paymobReady = () =>
-  Boolean(process.env.PAYMOB_API_KEY && process.env.PAYMOB_INTEGRATION_ID && process.env.PAYMOB_IFRAME_ID && process.env.PAYMOB_HMAC)
+export const paymobReady = () => {
+  const integrationId = Number(process.env.PAYMOB_INTEGRATION_ID)
+  const iframeId = Number(process.env.PAYMOB_IFRAME_ID)
+  return Boolean(
+    process.env.PAYMOB_API_KEY?.trim() &&
+    process.env.PAYMOB_HMAC?.trim() &&
+    Number.isInteger(integrationId) && integrationId > 0 &&
+    Number.isInteger(iframeId) && iframeId > 0
+  )
+}
 
 async function post<T>(path: string, payload: unknown): Promise<T> {
   const res = await fetch(`${BASE}${path}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
