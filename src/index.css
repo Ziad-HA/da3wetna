@@ -2146,3 +2146,41 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   text-transform: none;
   font-family: "Cairo", "Tajawal", sans-serif;
 }
+
+
+.invite-thumb-countdown {
+  position: absolute;
+  z-index: 4;
+  inset-inline: 7%;
+  bottom: 3%;
+  padding: 0.35rem 0.45rem 0.4rem;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 12px;
+  background: rgba(255,250,249,.92);
+  color: #633c47;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(58,24,34,.16);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+.invite-thumb-countdown > span {
+  display: block;
+  margin-bottom: .18rem;
+  font-size: clamp(6px, 1.8vw, 9px);
+  font-weight: 800;
+}
+.invite-thumb-countdown > div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .2rem;
+}
+.invite-thumb-countdown strong {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  font-size: clamp(8px, 2.4vw, 12px);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.invite-thumb-countdown small { font-size: .7em; font-weight: 600; }
