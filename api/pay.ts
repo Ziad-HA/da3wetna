@@ -48,9 +48,10 @@ async function webhook(req: Req, res: Res) {
     return send(res, 409, { error: "payment_order_mismatch" })
   }
 
+  const integrationOk = Number(obj.integration_id) === Number(process.env.PAYMOB_INTEGRATION_ID)
   const ok = obj.success === true && obj.pending !== true && obj.is_voided !== true && obj.is_refunded !== true
   const amountOk = Number(obj.amount_cents) === row.amount * 100 && obj.currency === "EGP"
-  if (ok && amountOk && row.status === "pending") {
+  if (ok && amountOk && integrationOk && row.status === "pending") {
     await db("orders?id=" + eq(row.id), { method: "PATCH", body: { status: "paid", paid_at: new Date().toISOString() }, prefer: "return=minimal" })
   }
   return send(res, 200, { received: true })
