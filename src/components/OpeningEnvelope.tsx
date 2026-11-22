@@ -18,6 +18,7 @@ const sealGlyph: Record<Exclude<SealKind, "initials">, string> = {
   flower: "✿",
   moon: "☾",
   ring: "◎",
+  leaf: "❧",
 }
 
 export function OpeningEnvelope({ template, draft, photo, step, onOpen }: Props) {
@@ -48,6 +49,7 @@ export function OpeningEnvelope({ template, draft, photo, step, onOpen }: Props)
       className="opening-envelope"
       data-flap={envelope.flapShape}
       data-pattern={envelope.linerPattern}
+      data-band={envelope.band ? "pearls" : undefined}
       data-step={step}
       style={style}
       onClick={onOpen}
@@ -64,6 +66,7 @@ export function OpeningEnvelope({ template, draft, photo, step, onOpen }: Props)
       </span>
       <span className="env-pocket" aria-hidden="true" />
       <span className="env-flap" aria-hidden="true" />
+      {envelope.band ? <span className="env-band" aria-hidden="true"><i /><i /></span> : null}
       <span className="env-seal" aria-hidden="true" data-kind={envelope.sealKind}>
         <span>{sealText}</span>
       </span>

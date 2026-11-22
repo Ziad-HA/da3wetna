@@ -14,6 +14,7 @@ export const templateIds = [
   "henna",
   "pearl",
   "nikah",
+  "strip",
 ] as const
 
 export type TemplateId = (typeof templateIds)[number]
@@ -31,7 +32,7 @@ export type FlapShape = "v" | "deep" | "round" | "wing"
 /** نقشة بطانة الظرف (اللي بتبان لما الرفرف يفتح). */
 export type LinerPattern = "plain" | "dots" | "diamonds" | "stripes" | "stars"
 /** شكل الختم على الظرف. */
-export type SealKind = "heart" | "star" | "flower" | "moon" | "ring" | "initials"
+export type SealKind = "heart" | "star" | "flower" | "moon" | "ring" | "leaf" | "initials"
 
 export type EnvelopeStyle = {
   /** لون جسم الظرف (فاتح، غامق) */
@@ -45,6 +46,8 @@ export type EnvelopeStyle = {
   seal: string
   sealKind: SealKind
   flapShape: FlapShape
+  /** شريط لؤلؤ بيتقطع لما الظرف يفتح (اختياري) */
+  band?: boolean
 }
 
 export type ThemeVars = {
@@ -61,6 +64,8 @@ export type Template = {
   blurb: string
   category: Occasion
   isNew?: boolean
+  /** "strip" = بعد فتح الظرف بيطلع شريط دعوة طويل بيتحرك لتحت */
+  layout?: "card" | "strip"
   frame: Frame
   ornament: Ornament
   vars: ThemeVars
@@ -89,6 +94,10 @@ export type InviteDraft = {
   musicUrl: string
   photoOne: string
   photoTwo: string
+  /** برنامج الحفل: كل سطر "الساعة | النشاط" (لقالب الشريط) */
+  program: string
+  /** روابط صور إضافية للمعرض، كل رابط في سطر (لقالب الشريط) */
+  gallery: string
 }
 
 export type PayMethod = "vodafone" | "instapay" | "paymob"

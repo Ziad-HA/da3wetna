@@ -219,11 +219,29 @@ export const templates: Template[] = [
     vars: { paper: "#F6F1FA", ink: "#4B2E6B", gold: "#B8964E", soft: "#7B6591", shell: "#E2D6F0" },
     envelope: { body: ["#C9B4E0", "#9B7FC0"], flap: ["#D8C6EA", "#AB91CD"], liner: "#F4EEFA", linerPattern: "stripes", seal: "#B8964E", sealKind: "heart", flapShape: "deep" },
   },
+  {
+    id: "strip",
+    name: "شريط اللؤلؤ",
+    blurb: "ظرف كريمي بشريط لؤلؤ وختم شمع، وشريط دعوة طويل بالصور والبرنامج ينزل منه",
+    category: "فرح",
+    isNew: true,
+    layout: "strip",
+    frame: "paper",
+    ornament: "sprig",
+    groom: "أدهم",
+    bride: "ليلى",
+    venue: "فيلا الورد",
+    time: "17:00",
+    vars: { paper: "#F3EEE3", ink: "#3A3D2A", gold: "#A88B52", soft: "#6E6F55", shell: "#EAE2D2" },
+    envelope: { body: ["#F4EFE3", "#E4DAC5"], flap: ["#F8F4EA", "#E9E0CC"], liner: "#FBF8F0", linerPattern: "plain", seal: "#8A6A3B", sealKind: "leaf", flapShape: "deep", band: true },
+  },
 ]
 
 export function getTemplate(id: string | undefined): Template | undefined {
   return templates.find((item) => item.id === id)
 }
+
+export const defaultProgram = "17:00 | استقبال الضيوف\n18:00 | دخول العروسين\n19:00 | حفل العشاء\n21:00 | قص التورتة والتصوير"
 
 export function draftFor(template: Template): InviteDraft {
   return {
@@ -243,6 +261,8 @@ export function draftFor(template: Template): InviteDraft {
     musicUrl: "",
     photoOne: "",
     photoTwo: "",
+    program: template.layout === "strip" ? defaultProgram : "",
+    gallery: "",
   }
 }
 

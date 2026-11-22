@@ -20,6 +20,8 @@ export function encodeDraft(draft: InviteDraft): string {
     musicUrl: draft.musicUrl.slice(0, 500),
     photoOne: draft.photoOne.slice(0, 500),
     photoTwo: draft.photoTwo.slice(0, 500),
+    program: draft.program.slice(0, 400),
+    gallery: draft.gallery.slice(0, 900),
   }
 
   const bytes = new TextEncoder().encode(JSON.stringify(slim))
@@ -64,6 +66,8 @@ export function decodeDraft(code: string): InviteDraft | null {
       musicUrl: readString("musicUrl"),
       photoOne: readString("photoOne"),
       photoTwo: readString("photoTwo"),
+      program: readString("program"),
+      gallery: readString("gallery"),
     }
   } catch {
     return null

@@ -19,6 +19,16 @@ function url(value: unknown, max: number): string {
   }
 }
 
+function multiline(value: unknown, max: number, lines: number): string {
+  if (typeof value !== "string") return ""
+  return value.replace(/\r/g, "").split("\n").map((l) => text(l, 80)).filter(Boolean).slice(0, lines).join("\n").slice(0, max)
+}
+
+function galleryUrls(value: unknown): string {
+  if (typeof value !== "string") return ""
+  return value.split(/\s+/).map((u) => url(u, 200)).filter(Boolean).slice(0, 6).join("\n").slice(0, 900)
+}
+
 /** تنضيف وفحص بيانات الدعوة (بنستخدمه على السيرفر قبل الحفظ). بيرجع null لو البيانات الأساسية ناقصة. */
 export function sanitizeDraft(raw: unknown): InviteDraft | null {
   if (!raw || typeof raw !== "object") return null
@@ -42,6 +52,8 @@ export function sanitizeDraft(raw: unknown): InviteDraft | null {
     musicUrl: url(d.musicUrl, 500),
     photoOne: url(d.photoOne, 500),
     photoTwo: url(d.photoTwo, 500),
+    program: multiline(d.program, 400, 8),
+    gallery: galleryUrls(d.gallery),
   }
   if (!draft.groom || !draft.bride || !draft.date || !draft.venue) return null
   return draft

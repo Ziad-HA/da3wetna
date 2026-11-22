@@ -3,7 +3,8 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
-import { getTemplate, occasions, templates } from "../data"
+import { defaultProgram, getTemplate, occasions, templates } from "../data"
+import { encodeDraft } from "../lib/codec"
 import { money } from "../lib/format"
 import { draftReady, initDraft, readSelectedPackage, writeDraft } from "../lib/storage"
 import type { FieldKey, InviteDraft } from "../types"
@@ -62,7 +63,8 @@ export function Editor() {
   }
 
   function chooseTemplate(nextId: string) {
-    const next = { ...draft, templateId: nextId as InviteDraft["templateId"] }
+    const target = getTemplate(nextId)
+    const next = { ...draft, templateId: nextId as InviteDraft["templateId"], program: draft.program || (target?.layout === "strip" ? defaultProgram : "") }
     writeDraft(next)
     navigate(`/editor/${nextId}`)
   }
@@ -223,6 +225,20 @@ export function Editor() {
                 </label>
               ))}
             </div>
+            {template.layout === "strip" ? (
+              <div className="mt-5 grid gap-4 border-t border-[#f3e6e9] pt-5">
+                <p className="text-xs font-bold text-[#a64257]">خاص بقالب الشريط</p>
+                <label className="field">
+                  <span>برنامج الحفل — كل سطر: الساعة | النشاط (لحد ٨ أسطر)</span>
+                  <textarea rows={5} maxLength={400} value={draft.program} placeholder={"17:00 | استقبال الضيوف\n19:00 | حفل العشاء"} onFocus={() => setActive("program")} onChange={(event) => update({ program: event.target.value })} />
+                </label>
+                <label className="field">
+                  <span>صور المعرض — رابط صورة في كل سطر (لحد ٦ صور)</span>
+                  <textarea rows={4} dir="ltr" maxLength={900} value={draft.gallery} placeholder="https://..." onFocus={() => setActive("gallery")} onChange={(event) => update({ gallery: event.target.value })} />
+                </label>
+                <a className="btn-ghost justify-center" target="_blank" rel="noreferrer" href={`/i/${encodeDraft(draft)}`}>معاينة الدعوة كاملة (الظرف والشريط) ↗</a>
+              </div>
+            ) : null}
           </details> : null}
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
