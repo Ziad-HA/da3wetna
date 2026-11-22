@@ -169,6 +169,10 @@ export function GoogleVenueField({ value, city, mapUrl, address, latitude, longi
   }, [apiKey, latitude, longitude])
 
   async function choosePlace(prediction: PlacePrediction) {
+    if (!apiKey) {
+      setError("خدمة البحث مش مفعّلة حاليًا. اكتب اسم القاعة يدويًا.")
+      return
+    }
     setSelecting(true)
     setError("")
     try {
