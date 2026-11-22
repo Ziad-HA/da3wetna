@@ -1,34 +1,41 @@
-const bucket = "invitation-media"
-
-function config() {
-  const url = import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, "")
-  const key = import.meta.env.VITE_SUPABASE_ANON_KEY
-  if (!url || !key) throw new Error("رفع الملفات محتاج إعداد التخزين مرة واحدة من إدارة الموقع.")
-  return { url, key }
-}
+const maxByKind = { image: 8, audio: 12 } as const
 
 export async function uploadInvitationMedia(file: File, kind: "image" | "audio"): Promise<string> {
-  const { url, key } = config()
-  const allowed = kind === "image" ? file.type.startsWith("image/") : file.type.startsWith("audio/")
-  if (!allowed) throw new Error(kind === "image" ? "اختار صورة بصيغة JPG أو PNG أو WebP." : "اختار ملف صوتي بصيغة MP3 أو M4A أو WAV.")
-  const max = kind === "image" ? 8 : 12
-  if (file.size > max * 1024 * 1024) throw new Error(`حجم الملف لازم يكون أقل من ${max} ميجابايت.`)
+  const allowed = kind === "image"
+    ? ["image/jpeg", "image/png", "image/webp"]
+    : ["audio/mpeg", "audio/mp4", "audio/wav", "audio/x-wav", "audio/aac"]
 
-  const extension = file.name.split(".").pop()?.toLowerCase().replace(/[^a-z0-9]/g, "") || (kind === "image" ? "jpg" : "mp3")
-  const path = `${kind}/${crypto.randomUUID()}.${extension}`
-  const response = await fetch(`${url}/storage/v1/object/${bucket}/${path}`, {
+  if (!allowed.includes(file.type)) {
+    throw new Error(kind === "image"
+      ? "اختار صورة بصيغة JPG أو PNG أو WebP."
+      : "اختار ملف صوتي بصيغة MP3 أو M4A أو WAV أو AAC.")
+  }
+  if (file.size <= 0 || file.size > maxByKind[kind] * 1024 * 1024) {
+    throw new Error(`حجم الملف لازم يكون أقل من ${maxByKind[kind]} ميجابايت.`)
+  }
+
+  // The server validates the file and signs a one-time upload URL.
+  const signed = await fetch("/api/upload", {
     method: "POST",
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": file.type,
-      "x-upsert": "false",
-    },
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ contentType: file.type, size: file.size }),
+  })
+  const payload = await signed.json().catch(() => ({})) as { uploadUrl?: string; publicUrl?: string; error?: string }
+  if (!signed.ok || !payload.uploadUrl || !payload.publicUrl) {
+    throw new Error(signed.status === 503
+      ? "رفع الملفات غير متاح حاليًا. إعداد التخزين على السيرفر لسه ناقص."
+      : "تعذر تجهيز رفع الملف. حاول مرة تانية.")
+  }
+
+  const uploaded = await fetch(payload.uploadUrl, {
+    method: "PUT",
+    headers: { "Content-Type": file.type, "x-upsert": "false" },
     body: file,
   })
-  if (!response.ok) {
-    const details = await response.text().catch(() => "")
-    throw new Error(response.status === 413 ? "الملف حجمه كبير." : `تعذر رفع الملف. راجع إعدادات Supabase Storage. ${details.slice(0, 140)}`)
+  if (!uploaded.ok) {
+    throw new Error(uploaded.status === 413
+      ? "الملف حجمه كبير."
+      : "تعذر رفع الملف إلى التخزين. حاول مرة تانية.")
   }
-  return `${url}/storage/v1/object/public/${bucket}/${path}`
+  return payload.publicUrl
 }
