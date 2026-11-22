@@ -1,21 +1,7 @@
 export const templateIds = [
-  "seal",
-  "calla",
-  "lace",
-  "envelope",
-  "night",
-  "marble",
-  "garden",
-  "moon",
-  "silk",
-  "ink",
-  "arch",
-  "deco",
-  "henna",
-  "pearl",
-  "nikah",
-  "strip",
   "estate",
+  "calla",
+  "envelope",
   "estate-rose",
 ] as const
 
