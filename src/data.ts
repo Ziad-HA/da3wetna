@@ -239,6 +239,7 @@ export function draftFor(template: Template): InviteDraft {
     city: "القاهرة",
     opening: "بسم الله الرحمن الرحيم",
     rsvpPhone: "",
+    mapUrl: "",
     musicUrl: "",
     photoOne: "",
     photoTwo: "",

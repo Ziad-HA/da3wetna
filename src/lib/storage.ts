@@ -31,6 +31,7 @@ export function readDraft(): InviteDraft | null {
     if (!data || !isTemplateId(data.templateId)) return null
     return { ...draftFor(getTemplate(data.templateId)!), ...data,
       rsvpPhone: typeof data.rsvpPhone === "string" ? data.rsvpPhone : "",
+      mapUrl: typeof data.mapUrl === "string" ? data.mapUrl : "",
       musicUrl: typeof data.musicUrl === "string" ? data.musicUrl : "",
       photoOne: typeof data.photoOne === "string" ? data.photoOne : "",
       photoTwo: typeof data.photoTwo === "string" ? data.photoTwo : "",
@@ -117,4 +118,14 @@ export function makeOrderId(): string {
 
 export function draftReady(draft: InviteDraft): boolean {
   return Boolean(draft.groom.trim() && draft.bride.trim() && draft.date && draft.venue.trim())
+}
+
+const OWNER_TOKEN_KEY = "da3wetna-owner-token"
+
+/** سر لوحة الزبون (بيتحفظ على جهازه بعد ما يعمل طلب). */
+export function readOwnerToken(): string {
+  try { return localStorage.getItem(OWNER_TOKEN_KEY) ?? "" } catch { return "" }
+}
+export function writeOwnerToken(token: string) {
+  try { localStorage.setItem(OWNER_TOKEN_KEY, token) } catch { /* التخزين مقفول */ }
 }

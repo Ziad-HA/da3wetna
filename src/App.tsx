@@ -13,6 +13,9 @@ import { InviteView } from "./pages/InviteView"
 import { SeoContentPage } from "./pages/SeoContentPage"
 import { Privacy } from "./pages/Privacy"
 import { Account } from "./pages/Account"
+import { Dashboard } from "./pages/Dashboard"
+import { Admin } from "./pages/Admin"
+import { PayResult } from "./pages/PayResult"
 
 function ScrollToTop() {
   const { pathname, search } = useLocation()
@@ -77,6 +80,9 @@ export function App() {
           <Route path="/editor/:id" element={<Editor />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/done/:code" element={<Done />} />
+          <Route path="/dashboard/:token" element={<Dashboard />} />
+          <Route path="/pay-result" element={<PayResult />} />
+          <Route path="/admin" element={<Admin />} />
         </Route>
         <Route path="/i/:code" element={<InviteView />} />
         <Route path="*" element={<Navigate to="/" replace />} />

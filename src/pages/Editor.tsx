@@ -19,6 +19,7 @@ const fields: { key: FieldKey; label: string; kind: "text" | "select" | "date" |
   { key: "time", label: "الوقت", kind: "time" },
   { key: "venue", label: "المكان", kind: "text", max: 80 },
   { key: "city", label: "المدينة", kind: "text", max: 40 },
+  { key: "mapUrl", label: "لينك الموقع على خرائط جوجل (اختياري)", kind: "text", max: 300 },
   { key: "rsvpPhone", label: "رقم واتساب لتأكيد الحضور (بكود الدولة)", kind: "text", max: 20 },
   { key: "musicUrl", label: "رابط الموسيقى (اختياري)", kind: "text", max: 500 },
   { key: "photoOne", label: "رابط الصورة الأولى", kind: "text", max: 500 },
@@ -209,8 +210,8 @@ export function Editor() {
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-bold text-[#a64257]"><span className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#fff0f2]">＋</span> إضافات اختيارية للدعوة</span><span className="text-xs font-normal text-[#9a8187]">اختياري</span></summary>
             <p className="mt-2 text-xs leading-6 text-[#806b70]">خصص نص الدعوة، وأضف رقم واتساب لتأكيد الحضور وروابط صور أو موسيقى مستضافة على الإنترنت.</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {fields.filter((field) => ["opening", "hosts", "message", "city", "rsvpPhone", "musicUrl", "photoOne", "photoTwo"].includes(field.key)).map((field) => (
-                <label key={field.key} className={`field ${["message", "hosts", "opening", "rsvpPhone", "musicUrl", "photoOne", "photoTwo"].includes(field.key) ? "sm:col-span-2" : ""}`}>
+              {fields.filter((field) => ["opening", "hosts", "message", "city", "mapUrl", "rsvpPhone", "musicUrl", "photoOne", "photoTwo"].includes(field.key)).map((field) => (
+                <label key={field.key} className={`field ${["message", "hosts", "opening", "mapUrl", "rsvpPhone", "musicUrl", "photoOne", "photoTwo"].includes(field.key) ? "sm:col-span-2" : ""}`}>
                   <span>{field.label}</span>
                   <input
                     type="text"

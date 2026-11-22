@@ -3,12 +3,14 @@ import { Link, useParams } from "react-router-dom"
 import { StoryActions } from "../components/StoryActions"
 import { Invitation } from "../components/Invitation"
 import { getPackage } from "../config"
-import { decodeDraft } from "../lib/codec"
-import { clearDraft, readActivePackage, readLast, selectPackage } from "../lib/storage"
+import { useInvite } from "../lib/useInvite"
+import { clearDraft, readActivePackage, readLast, readOwnerToken, selectPackage } from "../lib/storage"
 
 export function Done() {
   const { code = "" } = useParams()
-  const draft = decodeDraft(code)
+  const state = useInvite(code)
+  const draft = state.status === "ready" ? state.draft : null
+  const token = readOwnerToken()
   const order = readLast()
   const active = readActivePackage()
   const bundle = active ? getPackage(active.packageId) : null
@@ -18,6 +20,18 @@ export function Done() {
     document.title = draft ? `دعوة ${draft.groom} و${draft.bride}` : "الدعوة"
   }, [draft])
 
+  if (state.status === "loading") {
+    return <main id="main" className="mx-auto max-w-lg px-4 py-20 text-center"><p role="status" className="font-display text-2xl text-[#a64257]">بنجهّز دعوتك…</p></main>
+  }
+  if (state.status === "pending") {
+    return (
+      <main id="main" className="mx-auto max-w-lg px-4 py-20 text-center">
+        <h1 className="font-display text-4xl text-[#4a2d33]">الدعوة مستنية تأكيد الدفع</h1>
+        <p className="mt-3 leading-8 text-[#806b70]">هتتفعّل أول ما يتأكد الدفع، وتقدر تتابع من لوحة طلبك.</p>
+        {token ? <Link to={`/dashboard/${token}`} className="btn-gold mt-6 inline-flex">افتح لوحة الطلب</Link> : null}
+      </main>
+    )
+  }
   if (!draft) {
     return (
       <main id="main" className="mx-auto max-w-lg px-4 py-20 text-center">
@@ -42,6 +56,9 @@ export function Done() {
           <p className="text-sm font-bold text-[#a64257]">مبروك</p>
           <h2 className="mt-2 font-display text-3xl text-[#4a2d33]">{draft.groom} و{draft.bride}</h2>
           <p className="mt-2 leading-7 text-[#806b70]">دعوتكم بقت جاهزة. اختار طريقة المشاركة اللي تريحك.</p>
+          {token && state.status === "ready" && state.inviteId ? (
+            <Link to={`/dashboard/${token}`} className="mt-4 inline-flex min-h-11 items-center rounded-full bg-[#fff4f5] px-4 text-sm font-bold text-[#a64257]">لوحة الطلب وردود الضيوف ←</Link>
+          ) : null}
           {order && order.code === code ? <p className="mt-4 text-xs text-[#9a8187]">رقم الطلب: {order.id}</p> : null}
           <div className="mt-6 max-w-sm">
             <StoryActions draft={draft} code={code} />

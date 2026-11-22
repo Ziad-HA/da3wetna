@@ -4,29 +4,59 @@ import { StoryActions } from "../components/StoryActions"
 import { Invitation } from "../components/Invitation"
 import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { getTemplate } from "../data"
-import { decodeDraft } from "../lib/codec"
 import { isLight } from "../lib/color"
+import { mapLink } from "../lib/maps"
+import { RsvpForm } from "../components/RsvpForm"
+import { useInvite } from "../lib/useInvite"
+import type { InviteDraft } from "../types"
 
 export function InviteView() {
   const { code = "" } = useParams()
-  const draft = decodeDraft(code)
-  const template = draft ? getTemplate(draft.templateId) : undefined
+  const state = useInvite(code)
+
+  useEffect(() => { if (state.status !== "ready") document.title = "دعوة" }, [state.status])
+
+  if (state.status === "loading") {
+    return <main className="grid min-h-dvh place-items-center bg-cream px-4 text-center"><p className="font-display text-2xl text-[#a64257]" role="status">بنجهّز الدعوة…</p></main>
+  }
+  if (state.status === "pending") {
+    return (
+      <main className="grid min-h-dvh place-items-center bg-cream px-4 text-center">
+        <div className="max-w-sm"><span className="text-4xl text-[#c6a15b]">✦</span><h1 className="mt-3 font-display text-3xl">الدعوة لسه مفعّلتش</h1><p className="mt-3 leading-8 text-[#806b70]">الدعوة هتفتح للضيوف أول ما يتأكد الدفع. جرّب تاني بعد شوية.</p></div>
+      </main>
+    )
+  }
+  if (state.status === "missing") {
+    return (
+      <main className="grid min-h-dvh place-items-center bg-cream px-4 text-center">
+        <div>
+          <h1 className="font-display text-4xl">الدعوة دي مش متاحة</h1>
+          <Link to="/" className="btn-gold mt-6 inline-flex">اعمل دعوة من دعوتنا</Link>
+        </div>
+      </main>
+    )
+  }
+  return <InviteBody draft={state.draft} inviteId={state.inviteId} code={code} />
+}
+
+function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: string | null; code: string }) {
+  const template = getTemplate(draft.templateId)
   const [now, setNow] = useState(() => Date.now())
   const [introStep, setIntroStep] = useState(0)
   const [introSkipped, setIntroSkipped] = useState(false)
   const [musicOn, setMusicOn] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const eventDate = useMemo(() => draft?.date ? new Date(`${draft.date}T${draft.time || "00:00"}:00`) : null, [draft?.date, draft?.time])
+  const eventDate = useMemo(() => draft.date ? new Date(`${draft.date}T${draft.time || "00:00"}:00`) : null, [draft.date, draft.time])
   const remaining = eventDate && !Number.isNaN(eventDate.getTime()) ? Math.max(0, eventDate.getTime() - now) : 0
   const days = Math.floor(remaining / 86400000)
   const hours = Math.floor((remaining % 86400000) / 3600000)
   const minutes = Math.floor((remaining % 3600000) / 60000)
   const seconds = Math.floor((remaining % 60000) / 1000)
   const safeUrl = (value: string) => { try { const url = new URL(value); return url.protocol === "https:" || url.protocol === "http:" ? url.href : "" } catch { return "" } }
-  const musicUrl = draft ? safeUrl(draft.musicUrl) : ""
-  const photos = draft ? [draft.photoOne, draft.photoTwo].map(safeUrl).filter(Boolean) : []
-  const rsvpNumber = draft?.rsvpPhone.replace(/\D/g, "") || ""
-  const rsvpLink = draft && rsvpNumber ? `https://wa.me/${rsvpNumber}?text=${encodeURIComponent(`أهلاً، حابب أأكد حضوري لمناسبة ${draft.groom} و${draft.bride}.`)}` : ""
+  const musicUrl = safeUrl(draft.musicUrl)
+  const photos = [draft.photoOne, draft.photoTwo].map(safeUrl).filter(Boolean)
+  const rsvpNumber = draft.rsvpPhone.replace(/\D/g, "")
+  const rsvpLink = rsvpNumber ? `https://wa.me/${rsvpNumber}?text=${encodeURIComponent(`أهلاً، حابب أأكد حضوري لمناسبة ${draft.groom} و${draft.bride}.`)}` : ""
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
@@ -34,7 +64,7 @@ export function InviteView() {
   }, [])
 
   // الظرف بيستنى ضغطة الضيف (step 0). بعد الضغطة: الرفرف يفتح ← الكارت يطلع ← الدعوة تظهر.
-  const hasDraft = Boolean(draft)
+  const hasDraft = true
   useEffect(() => {
     if (!hasDraft || introSkipped || introStep < 1 || introStep >= 3) return
     const timer = window.setTimeout(() => setIntroStep((step) => Math.min(3, step + 1)), introStep === 1 ? 950 : 1250)
@@ -62,19 +92,10 @@ export function InviteView() {
   }
 
   useEffect(() => {
-    document.title = draft ? `دعوة ${draft.groom} و${draft.bride}` : "دعوة"
+    document.title = `دعوة ${draft.groom} و${draft.bride}`
   }, [draft])
 
-  if (!draft || !template) {
-    return (
-      <main className="grid min-h-dvh place-items-center bg-cream px-4 text-center">
-        <div>
-          <h1 className="font-display text-4xl">الدعوة دي مش متاحة</h1>
-          <Link to="/" className="btn-gold mt-6 inline-flex">اعمل دعوة من دعوتنا</Link>
-        </div>
-      </main>
-    )
-  }
+  if (!template) return null
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} loop preload="auto" /> : null
 
@@ -120,7 +141,9 @@ export function InviteView() {
           {eventDate && !Number.isNaN(eventDate.getTime()) ? <div className="mt-3 grid grid-cols-4 gap-2" dir="rtl">{[[days,"يوم"],[hours,"ساعة"],[minutes,"دقيقة"],[seconds,"ثانية"]].map(([value,label]) => <div key={String(label)} className="rounded-2xl bg-white px-1 py-3 shadow-sm"><strong className="block font-display text-2xl text-[#a64257]">{String(value).padStart(2,"0")}</strong><span className="mt-1 block text-[10px] text-[#806b70]">{label}</span></div>)}</div> : <p className="mt-3 text-sm">ميعاد المناسبة هيتحدد قريبًا</p>}
         </section>
         {photos.length ? <section className="invite-photo-moments w-full rounded-[26px] border border-white/70 bg-white/80 p-4 shadow-lg"><p className="mb-3 text-center font-bold text-[#4a2d33]">صور من حكايتنا ♡</p><div className="grid grid-cols-2 gap-2">{photos.map((photo, index) => <img key={photo} src={photo} alt={`صورة من المناسبة ${index + 1}`} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />)}</div></section> : null}
-        {rsvpLink ? <a href={rsvpLink} target="_blank" rel="noreferrer" className="btn-gold w-full justify-center">أكد حضورك على واتساب ♡</a> : null}
+        <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="btn-ghost w-full justify-center bg-white/80">📍 اتجاهات المكان على الخريطة</a>
+        {inviteId ? <RsvpForm inviteId={inviteId} /> : null}
+        {rsvpLink ? <a href={rsvpLink} target="_blank" rel="noreferrer" className={`${inviteId ? "btn-ghost bg-white/80" : "btn-gold"} w-full justify-center`}>{inviteId ? "أو كلّمنا على واتساب" : "أكد حضورك على واتساب ♡"}</a> : null}
         <div className="w-full"><StoryActions draft={draft} code={code} /></div>
         <section className="w-full rounded-[26px] border border-white/70 bg-white/80 p-4 text-center shadow-lg">
           <p className="font-bold text-[#4a2d33]">احتفظ بالدعوة وشاركها</p>

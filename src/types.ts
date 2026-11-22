@@ -84,11 +84,13 @@ export type InviteDraft = {
   city: string
   opening: string
   rsvpPhone: string
+  /** لينك الموقع على خرائط جوجل (اختياري) */
+  mapUrl: string
   musicUrl: string
   photoOne: string
   photoTwo: string
 }
 
-export type PayMethod = "vodafone" | "instapay" | "card"
+export type PayMethod = "vodafone" | "instapay" | "paymob"
 
 export type FieldKey = keyof Omit<InviteDraft, "templateId">

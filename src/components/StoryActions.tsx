@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
 import { invitePath } from "../lib/codec"
 import { downloadStory, fileName } from "../lib/download"
+import { mapLink } from "../lib/maps"
 import type { InviteDraft } from "../types"
 import { Invitation } from "./Invitation"
 
@@ -39,7 +40,7 @@ export function StoryActions({ draft, code }: { draft: InviteDraft; code: string
     window.setTimeout(() => setCopied(false), 1800)
   }
 
-  const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${draft.venue} ${draft.city}`)}`
+  const mapHref = mapLink(draft)
 
   return (
     <div className="grid gap-3">
