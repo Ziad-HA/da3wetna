@@ -31,31 +31,85 @@ function Leaf({ x, y, rot, s, c }: { x: number; y: number; rot: number; s: numbe
   )
 }
 
-/** كرمة متدلية من فوق، فيها ورد وأوراق وخيوط. mirror لقلب الاتجاه. */
-export function Vine({ height = 420, seed = 3, mirror = false, className = "" }: { height?: number; seed?: number; mirror?: boolean; className?: string }) {
-  const R = rng(seed)
-  const w = 150
-  const items: React.ReactNode[] = []
-  const stem: string[] = []
-  let cx = 70
-  stem.push(`M${cx} 0`)
-  for (let y = 0; y < height; y += 18) {
-    cx = 60 + Math.sin(y / 55 + seed) * 22 + (1 - y / height) * 8
-    stem.push(`L${cx.toFixed(1)} ${y}`)
-    const bias = 1 - y / height
-    if (R() < 0.8) items.push(<Leaf key={`l${y}`} x={cx} y={y} rot={(R() < 0.5 ? -1 : 1) * (20 + R() * 70) + 90} s={0.9 + R() * 0.8} c={LEAF[Math.floor(R() * 4)]} />)
-    if (R() < 0.55 * bias + 0.18) items.push(<Rose key={`r${y}`} x={cx + (R() - 0.5) * 46} y={y} r={9 + R() * 11 * (0.5 + bias)} k={Math.floor(R() * 4)} />)
-  }
-  const strands = Array.from({ length: 5 }, (_, i) => {
-    const x0 = 40 + i * 18 + R() * 8
-    const len = 120 + R() * 140
-    return <path key={`s${i}`} d={`M${x0} ${height * 0.3 + i * 10} q${(R() - 0.5) * 20} ${len / 2} ${(R() - 0.5) * 10} ${len}`} stroke="#8E2A3E" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeDasharray="1 4" />
+const HYD = ["#E8A9B8", "#D98CA2", "#F2CCD2", "#C97690"]
+
+function Hydrangea({ x, y, r, R }: { x: number; y: number; r: number; R: () => number }) {
+  const dots = Array.from({ length: 16 }, (_, i) => {
+    const a = R() * Math.PI * 2, d = Math.sqrt(R()) * r
+    return <circle key={i} cx={x + Math.cos(a) * d} cy={y + Math.sin(a) * d} r={r * (0.2 + R() * 0.12)} fill={HYD[Math.floor(R() * 4)]} stroke="#B65F78" strokeWidth=".6" />
   })
+  return <g>{dots}</g>
+}
+
+function Anthurium({ x, y, s, rot }: { x: number; y: number; s: number; rot: number }) {
   return (
-    <svg className={className} viewBox={`0 0 ${w} ${height + 60}`} aria-hidden="true" style={mirror ? { transform: "scaleX(-1)" } : undefined}>
-      <path d={stem.join(" ")} stroke="#55622B" strokeWidth="3" fill="none" />
-      {strands}
-      {items}
+    <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`}>
+      <path d="M0 0 C-15 -6 -17 -27 0 -34 C17 -27 15 -6 0 0Z" fill="#7B1F30" />
+      <path d="M0 -4 C-8 -10 -8 -24 0 -29" stroke="#B8485D" strokeWidth="1.2" fill="none" opacity=".7" />
+      <path d="M0 -4 q3 -10 6 -22" stroke="#E7CB7A" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+    </g>
+  )
+}
+
+type Pt = [number, number]
+
+/** بيفرش ورد وأوراق وهورتنسيا وأنثوريوم على طول خط (كرمة أو إكليل). */
+function Flora({ pts, seed, rose = 1, tails = true }: { pts: Pt[]; seed: number; rose?: number; tails?: boolean }) {
+  const R = rng(seed)
+  const leaves: React.ReactNode[] = []
+  const blooms: React.ReactNode[] = []
+  const strands: React.ReactNode[] = []
+  pts.forEach(([x, y], i) => {
+    const ang = (R() < 0.5 ? -1 : 1) * (25 + R() * 70)
+    leaves.push(<Leaf key={`a${i}`} x={x} y={y} rot={ang} s={1.1 + R() * 1.0} c={LEAF[Math.floor(R() * 4)]} />)
+    if (R() < 0.8) leaves.push(<Leaf key={`b${i}`} x={x + (R() - 0.5) * 16} y={y + (R() - 0.5) * 16} rot={ang + 180} s={0.9 + R() * 0.9} c={LEAF[Math.floor(R() * 4)]} />)
+    const k = R()
+    const px = x + (R() - 0.5) * 34, py = y + (R() - 0.5) * 22
+    if (k < 0.4 * rose) blooms.push(<Rose key={`r${i}`} x={px} y={py} r={11 + R() * 13} k={Math.floor(R() * 4)} />)
+    else if (k < 0.58 * rose) blooms.push(<Hydrangea key={`h${i}`} x={px} y={py} r={14 + R() * 8} R={R} />)
+    else if (k < 0.68 * rose) blooms.push(<Anthurium key={`n${i}`} x={px} y={py} s={0.8 + R() * 0.5} rot={(R() - 0.5) * 80} />)
+    if (tails && R() < 0.3) {
+      const len = 70 + R() * 130
+      strands.push(<path key={`t${i}`} d={`M${x} ${y} q${(R() - 0.5) * 26} ${len / 2} ${(R() - 0.5) * 12} ${len}`} stroke="#8E2A3E" strokeWidth="2.6" fill="none" strokeLinecap="round" strokeDasharray="1.2 4.2" />)
+    }
+  })
+  return <>{leaves}{strands}{blooms}</>
+}
+
+/** كرمة متدلية من فوق، فيها ورد وهورتنسيا وأنثوريوم وأوراق وخيوط. */
+export function Vine({ height = 420, seed = 3, mirror = false, className = "" }: { height?: number; seed?: number; mirror?: boolean; className?: string }) {
+  const pts: Pt[] = []
+  for (let y = 0; y < height; y += 15) pts.push([68 + Math.sin(y / 60 + seed) * 20, y])
+  const stem = "M68 0 " + pts.map(([x, y]) => `L${x.toFixed(1)} ${y}`).join(" ")
+  return (
+    <svg className={className} viewBox={`0 0 160 ${height + 90}`} aria-hidden="true" style={mirror ? { transform: "scaleX(-1)" } : undefined}>
+      <path d={stem} stroke="#55622B" strokeWidth="3.4" fill="none" />
+      <Flora pts={pts} seed={seed} rose={1 - (pts.length ? 0 : 0)} />
+    </svg>
+  )
+}
+
+/** إكليل أفقي على شكل قوس فوق الصفحة. */
+export function Garland({ className = "", seed = 21 }: { className?: string; seed?: number }) {
+  const pts: Pt[] = []
+  for (let x = -10; x <= 410; x += 13) pts.push([x, 38 + Math.sin(((x + 10) / 420) * Math.PI) * -22 + Math.sin(x / 31) * 6])
+  const stem = "M-10 38 " + pts.map(([x, y]) => `L${x} ${y.toFixed(1)}`).join(" ")
+  return (
+    <svg className={className} viewBox="0 0 400 170" aria-hidden="true" preserveAspectRatio="xMidYMin slice">
+      <path d={stem} stroke="#55622B" strokeWidth="3.4" fill="none" />
+      <Flora pts={pts} seed={seed} />
+    </svg>
+  )
+}
+
+/** فاصل بين الأقسام: خط بوردة صغيرة وورقتين. */
+export function Divider({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 220 40" aria-hidden="true">
+      <path d="M10 20 H92 M128 20 H210" stroke="#7F8A47" strokeWidth="1.2" />
+      <Leaf x={94} y={20} rot={-160} s={0.9} c="#6C7A3A" />
+      <Leaf x={126} y={20} rot={-20} s={0.9} c="#6C7A3A" />
+      <Rose x={110} y={20} r={9} k={0} />
     </svg>
   )
 }

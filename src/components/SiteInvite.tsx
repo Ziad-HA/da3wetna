@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import type { InviteDraft, Template } from "../types"
-import { Calla, Cypress, Fountain, ScallopOval, Vine } from "./Botanicals"
+import { Calla, Cypress, Divider, Fountain, Garland, ScallopOval, Vine } from "./Botanicals"
 
 const num = (n: number | string) => Number(n).toLocaleString("ar-EG", { useGrouping: false })
 
@@ -85,8 +85,9 @@ export function SiteInvite({ draft, template, rsvp }: Props) {
   return (
     <article ref={root} className="site" style={style}>
       <section className="site-hero">
-        <Vine className="site-vine site-vine-r" seed={5} height={430} />
-        <Vine className="site-vine site-vine-l" seed={11} height={430} mirror />
+        <Garland className="site-garland" />
+        <Vine className="site-vine site-vine-r" seed={5} height={520} />
+        <Vine className="site-vine site-vine-l" seed={11} height={520} mirror />
         <div className="site-hero-copy">
           <p className="site-mono" aria-hidden="true">{initials}</p>
           <p className="site-kicker">{draft.opening || "بسم الله الرحمن الرحيم"}</p>
@@ -102,7 +103,7 @@ export function SiteInvite({ draft, template, rsvp }: Props) {
           {draft.time ? <p className="site-script">الساعة {draft.time}</p> : null}
         </div>
         <div className="site-garden" aria-hidden="true">
-          <Cypress className="cy c1" /><Cypress className="cy c2" /><Fountain className="fountain" /><Cypress className="cy c3" /><Cypress className="cy c4" />
+          <Calla className="calla-g g1" /><Cypress className="cy c1" /><Cypress className="cy c2" /><Fountain className="fountain" /><Cypress className="cy c3" /><Cypress className="cy c4" /><Calla className="calla-g g2" flip />
         </div>
       </section>
 
@@ -111,6 +112,7 @@ export function SiteInvite({ draft, template, rsvp }: Props) {
         <h2 className="site-h">العدّ التنازلي</h2>
         <p className="site-small">حتى {formatArabicDate(draft.date)}</p>
         <Countdown draft={draft} />
+        <Divider className="site-div" />
       </section>
 
       {draft.story ? (
@@ -137,6 +139,7 @@ export function SiteInvite({ draft, template, rsvp }: Props) {
           <a href={mapLink(draft)} target="_blank" rel="noreferrer">الخريطة</a>
           {validDate ? <button type="button" onClick={() => downloadIcs(draft)}>أضف للتقويم</button> : null}
         </div>
+        <Divider className="site-div" />
       </section>
 
       {program.length ? (

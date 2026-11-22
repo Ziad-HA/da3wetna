@@ -6,6 +6,7 @@ import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
+import { EstateOpening } from "../components/EstateOpening"
 import { SiteInvite } from "../components/SiteInvite"
 import { StripInvite } from "../components/StripInvite"
 import { RsvpForm } from "../components/RsvpForm"
@@ -102,6 +103,10 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const isSite = template.layout === "site"
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} loop preload="auto" /> : null
+
+  if (!introSkipped && introStep < 3 && template.envelope.zoom) {
+    return (<>{audio}<EstateOpening step={introStep} onOpen={openEnvelope} /></>)
+  }
 
   if (!introSkipped && introStep < 3) {
     return (

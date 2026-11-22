@@ -1520,3 +1520,70 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 @media (prefers-reduced-motion: reduce) { .site-vine { animation: none; } .site-reveal { opacity: 1; transform: none; transition: none; } .opening-envelope[data-zoom] { transition: none; } }
 .site-page > div > :not(.site) { width: calc(100% - 2rem); margin-inline: 1rem; }
 .site-page > div > :last-child { margin-bottom: 2rem; }
+
+/* ===== حكاية الحديقة: شاشة الافتتاح (ظرف بالشاشة كلها) ===== */
+.estate-open { position: fixed; inset: 0; z-index: 50; overflow: hidden; background: #4F5629; transition: background-color .9s ease .5s; }
+.estate-open[data-step="2"] { background: #EFE7D1; }
+.estate-env { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; perspective: 1400px; -webkit-tap-highlight-color: transparent; touch-action: manipulation; animation: eo-in .9s ease both; }
+.estate-env:disabled { cursor: default; }
+@keyframes eo-in { from { opacity: 0; } to { opacity: 1; } }
+.estate-env > span, .estate-env > img { position: absolute; display: block; }
+.eo-liner { inset: 0; background: radial-gradient(circle at 50% 30%, #FBF7EA, #EADFC2); }
+.eo-body, .eo-flap {
+  inset: 0;
+  background-color: #6C7440;
+  background-image:
+    radial-gradient(circle at 22% 24%, rgba(255,255,255,.025) 0 26px, transparent 27px),
+    radial-gradient(circle at 70% 60%, rgba(0,0,0,.035) 0 30px, transparent 31px),
+    radial-gradient(circle at 48% 86%, rgba(255,255,255,.02) 0 20px, transparent 21px),
+    linear-gradient(170deg, #7A8248, #565D2E 70%);
+  background-size: 96px 96px, 120px 120px, 78px 78px, auto;
+}
+.eo-body { clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%); }
+.eo-flap {
+  z-index: 3;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  background-color: #7E874D;
+  background-image: linear-gradient(175deg, #929B5B, #6C7440 80%);
+  transform-origin: 50% 0;
+  transition: transform 1s cubic-bezier(.3,.7,.2,1), opacity .4s ease .7s;
+}
+.eo-card {
+  z-index: 4;
+  left: 50%; top: 6%;
+  width: min(60vw, 300px);
+  max-height: 42dvh;
+  object-fit: contain;
+  transform: translateX(-50%) rotate(-1.2deg);
+  border: 6px solid #F4EEE0;
+  border-radius: 3px;
+  background: #F4EEE0;
+  box-shadow: 0 14px 30px rgba(0,0,0,.4);
+  transition: transform 1.1s cubic-bezier(.4,0,.2,1), opacity .7s ease .2s;
+}
+.eo-seal {
+  z-index: 5;
+  left: 50%; top: 60%;
+  width: 4.6rem; aspect-ratio: 1;
+  display: grid !important; place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #B8485D, #7A1F2D 62%, #5A1420);
+  box-shadow: 0 6px 14px rgba(0,0,0,.45), inset 0 0 0 5px rgba(255,255,255,.07), inset 0 0 0 7px rgba(0,0,0,.12);
+  color: #F0CFD3; font: 1.9rem "Amiri", serif;
+  transform: translate(-50%, -50%);
+  transition: transform .8s cubic-bezier(.5,0,.8,.4), opacity .5s ease .1s;
+  animation: seal-pulse 2s ease-in-out infinite;
+}
+.estate-open[data-step="1"] .eo-flap, .estate-open[data-step="2"] .eo-flap { transform: rotateX(-178deg); opacity: 0; }
+.estate-open[data-step="1"] .eo-seal, .estate-open[data-step="2"] .eo-seal { opacity: 0; transform: translate(-50%, 520%) rotate(30deg); animation: none; }
+.estate-open[data-step="1"] .eo-card, .estate-open[data-step="2"] .eo-card { transform: translate(-50%, -130%) rotate(-3deg); opacity: 0; }
+.estate-open[data-step="2"] .estate-env { transform: scale(2.6); opacity: 0; transition: transform 1.25s cubic-bezier(.5,0,.9,.4), opacity .9s ease .35s; }
+@media (prefers-reduced-motion: reduce) { .estate-env, .eo-flap, .eo-card, .eo-seal { transition: none !important; animation: none !important; } }
+.site-garland { position: absolute; top: 0; left: 0; width: 100%; height: 11rem; z-index: 3; pointer-events: none; }
+.site-hero { padding-top: 7.2rem; min-height: 52rem; }
+.site-vine { width: 40%; z-index: 2; }
+.site-garden .calla-g { position: absolute; bottom: .2rem; width: 5.4rem; }
+.site-garden .g1 { left: -.4rem; } .site-garden .g2 { right: -.4rem; }
+.site-div { display: block; width: 11rem; margin: 2rem auto 0; }
+.eo-flap-shadow { z-index: 2; inset: 0; clip-path: polygon(0 0, 100% 0, 50% 60%); background: rgba(20,24,6,.55); filter: blur(9px); transform: translateY(10px); transform-origin: 50% 0; transition: opacity .3s ease; }
+.estate-open[data-step="1"] .eo-flap-shadow, .estate-open[data-step="2"] .eo-flap-shadow { opacity: 0; }
