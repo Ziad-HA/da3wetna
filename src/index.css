@@ -2105,3 +2105,33 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   max-width: 80%;
   text-align: center;
 }
+
+
+/* Arabic typography for the localized Qasr Al Deir invitation */
+.vaux-site[dir="rtl"] {
+  direction: rtl;
+  text-align: center;
+  font-family: "Cairo", "Tajawal", sans-serif;
+  letter-spacing: 0;
+}
+.vaux-site[dir="rtl"] .vaux-script-title,
+.vaux-site[dir="rtl"] .vaux-story-heading,
+.vaux-site[dir="rtl"] .vaux-count-item strong {
+  font-family: "Aref Ruqaa", "Cairo", serif;
+  letter-spacing: 0;
+}
+.vaux-site[dir="rtl"] .vaux-kicker,
+.vaux-site[dir="rtl"] .vaux-subhead,
+.vaux-site[dir="rtl"] .vaux-story-kicker,
+.vaux-site[dir="rtl"] .vaux-hero-hosts,
+.vaux-site[dir="rtl"] .vaux-count-item span,
+.vaux-site[dir="rtl"] .vaux-btn {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.vaux-site[dir="rtl"] .vaux-program-list { text-align: right; }
+.vaux-site[dir="rtl"] .vaux-program-item { direction: rtl; }
+.vaux-site[dir="rtl"] .vaux-place-btn,
+.vaux-site[dir="rtl"] .vaux-place-desc { text-align: right; }
+.vaux-site[dir="rtl"] .vaux-body-meta { font-style: normal; }
+.vaux-site[dir="rtl"] .vaux-hero-names { letter-spacing: 0; }
