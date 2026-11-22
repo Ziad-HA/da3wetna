@@ -35,7 +35,7 @@ export function MediaUploadField({ label, kind, value, onChange }: Props) {
         </div>
         <label className="inline-flex min-h-10 cursor-pointer items-center justify-center rounded-full bg-[#fff0f2] px-4 text-xs font-extrabold text-[#a64257] transition hover:bg-[#f8e1e6]">
           {busy ? "جاري الرفع..." : value ? "تغيير الملف" : "اختار ملف"}
-          <input className="sr-only" type="file" accept={kind === "image" ? "image/jpeg,image/png,image/webp,image/avif" : "audio/mpeg,audio/mp4,audio/wav,audio/aac"} disabled={busy} onChange={(event) => { void choose(event.target.files?.[0]); event.currentTarget.value = "" }} />
+          <input className="sr-only" type="file" accept={kind === "image" ? "image/jpeg,image/png,image/webp" : "audio/mpeg,audio/mp4,audio/wav,audio/aac"} disabled={busy} onChange={(event) => { void choose(event.target.files?.[0]); event.currentTarget.value = "" }} />
         </label>
       </div>
       {value ? (
