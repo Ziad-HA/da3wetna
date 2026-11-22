@@ -203,8 +203,8 @@ export function Checkout() {
                   </label>
                 </div>}
               {walletsArePlaceholders && method !== "paymob" ? <p className="mt-4 text-xs leading-6 text-[#9a6a45]">بيانات المحافظ الحالية تجريبية. حدّثها من src/config.ts قبل استقبال الطلبات.</p> : null}
-              {method !== "paymob" ? <div className="mt-4 rounded-2xl border border-[#f0dce1] bg-[#fffafa] p-4"><p className="text-xs font-extrabold text-[#4a2d33]">بعد التحويل اعمل 3 خطوات بسيطة:</p><ol className="mt-2 grid gap-2 text-xs leading-6 text-[#806b70]"><li>١. اكتب رقم عملية التحويل هنا.</li><li>٢. اضغط إرسال طلب التفعيل.</li><li>٣. ابعت صورة الإيصال على واتساب، واكتب رقم الطلب في الرسالة.</li></ol></div> : null}
-              {method !== "paymob" ? <p className="mt-2 text-xs leading-6 text-[#9a6a45]">إرسال الطلب لا يعني تأكيد الدفع. التفعيل بيتم بعد مراجعة الإيصال يدويًا.</p> : null}
+              {!walletsArePlaceholders && method !== "paymob" ? <div className="mt-4 rounded-2xl border border-[#f0dce1] bg-[#fffafa] p-4"><p className="text-xs font-extrabold text-[#4a2d33]">بعد التحويل اعمل 3 خطوات بسيطة:</p><ol className="mt-2 grid gap-2 text-xs leading-6 text-[#806b70]"><li>١. اكتب رقم عملية التحويل هنا.</li><li>٢. اضغط إرسال طلب التفعيل.</li><li>٣. ابعت صورة الإيصال على واتساب، واكتب رقم الطلب في الرسالة.</li></ol></div> : null}
+              {!walletsArePlaceholders && method !== "paymob" ? <p className="mt-2 text-xs leading-6 text-[#9a6a45]">إرسال الطلب لا يعني تأكيد الدفع. التفعيل بيتم بعد مراجعة الإيصال يدويًا.</p> : null}
             </>
           )}
 
