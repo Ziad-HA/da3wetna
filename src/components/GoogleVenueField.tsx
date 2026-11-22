@@ -138,6 +138,10 @@ export function GoogleVenueField({ value, city, mapUrl, address, latitude, longi
 
   useEffect(() => {
     const key = apiKey
+    if (latitude == null || longitude == null) {
+      mapRef.current = null
+      markerRef.current = null
+    }
     if (!key || latitude == null || longitude == null || !mapElement.current) return
     let cancelled = false
     async function setupMap() {
