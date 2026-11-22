@@ -8,7 +8,7 @@ export const paymobReady = () => {
   const iframeId = Number(process.env.PAYMOB_IFRAME_ID)
   return Boolean(
     process.env.PAYMOB_API_KEY?.trim() &&
-    process.env.PAYMOB_HMAC?.trim() &&
+    (process.env.PAYMOB_HMAC ?? process.env.PAYMOB_HMAC_SECRET)?.trim() &&
     Number.isInteger(integrationId) && integrationId > 0 &&
     Number.isInteger(iframeId) && iframeId > 0
   )
@@ -64,7 +64,7 @@ const HMAC_FIELDS = [
 ]
 
 export function verifyHmac(obj: Obj, received: string): boolean {
-  const secret = process.env.PAYMOB_HMAC ?? ""
+  const secret = process.env.PAYMOB_HMAC ?? process.env.PAYMOB_HMAC_SECRET ?? ""
   if (!secret || !received) return false
   const expected = createHmac("sha512", secret).update(HMAC_FIELDS.map((f) => pick(obj, f)).join("")).digest("hex")
   return safeEqual(expected, received.toLowerCase())
