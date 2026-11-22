@@ -16,6 +16,7 @@ import { Account } from "./pages/Account"
 import { Dashboard } from "./pages/Dashboard"
 import { Admin } from "./pages/Admin"
 import { PayResult } from "./pages/PayResult"
+import { TemplatePreview } from "./pages/TemplatePreview"
 
 function ScrollToTop() {
   const { pathname, search } = useLocation()
@@ -84,6 +85,7 @@ export function App() {
           <Route path="/pay-result" element={<PayResult />} />
           <Route path="/admin" element={<Admin />} />
         </Route>
+        <Route path="/preview/:id" element={<TemplatePreview />} />
         <Route path="/i/:code" element={<InviteView />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

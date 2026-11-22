@@ -105,7 +105,18 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} loop preload="auto" /> : null
 
   if (!introSkipped && introStep < 3 && template.envelope.zoom) {
-    return (<>{audio}<EstateOpening step={introStep} onOpen={openEnvelope} /></>)
+    return (
+      <>
+        {audio}
+        <EstateOpening
+          draft={draft}
+          step={introStep}
+          onOpen={openEnvelope}
+          onComplete={() => setIntroStep(3)}
+          onSkip={() => { startMusic(); setIntroSkipped(true); setIntroStep(3) }}
+        />
+      </>
+    )
   }
 
   if (!introSkipped && introStep < 3) {

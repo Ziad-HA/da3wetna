@@ -237,19 +237,19 @@ export const templates: Template[] = [
   },
   {
     id: "estate",
-    name: "حكاية الحديقة",
-    blurb: "ظرف زيتي بختم عنابي وصفحة زفاف طويلة بالزهور والتقويم والبرنامج",
+    name: "قصر الدير",
+    blurb: "ظرف زيتي فاخر بختم شمع وفتح ثلاثي الأبعاد، مع صفحة زفاف كلاسيكية كاملة",
     category: "فرح",
     isNew: true,
     layout: "site",
     frame: "arch",
     ornament: "sprig",
-    groom: "رامي",
-    bride: "إيلين",
-    venue: "حديقة الدير",
+    groom: "Élise",
+    bride: "Raphaël",
+    venue: "Abbaye des Vaux-de-Cernay",
     time: "15:00",
-    vars: { paper: "#F1EAD6", ink: "#5E1C2A", gold: "#8B6B3A", soft: "#7A6A55", shell: "#5A612F" },
-    envelope: { body: ["#6F7640", "#4F5629"], flap: ["#7A8248", "#59602F"], liner: "#F1EAD6", linerPattern: "plain", seal: "#7A1F2D", sealKind: "initials", flapShape: "deep", zoom: true },
+    vars: { paper: "#FAF6EE", ink: "#5E1C2A", gold: "#8B6B3A", soft: "#7A6A55", shell: "#4F5629" },
+    envelope: { body: ["#6F7640", "#4F5629"], flap: ["#7A8248", "#59602F"], liner: "#FAF6EE", linerPattern: "plain", seal: "#7A1F2D", sealKind: "initials", flapShape: "deep", zoom: true },
   },
 ]
 
@@ -258,37 +258,38 @@ export function getTemplate(id: string | undefined): Template | undefined {
 }
 
 export const siteDefaults = {
-  program: "15:00 | استقبال الضيوف في الحديقة\n16:00 | عقد القران\n17:30 | كوكتيل تحت الأشجار\n19:00 | العشاء\n21:00 | الرقصة الأولى",
-  story: "التقينا صدفة على مقعد في حديقة، ونسي واحد فينا كتابه. بعد ست سنين قررنا نكتب الصفحة الجاية سوا، ويسعدنا تكونوا معانا فيها.",
-  faq: "هل في مواصلات للمكان؟ | هنوفر سيارات من الفندق للمكان وترجعكم بعد الحفل.\nهل الأطفال مدعوون؟ | أهلاً بيهم طبعًا.\nلو الجو مطر؟ | الحفل في قاعة مغطاة والحديقة للتصوير.",
-  dressCode: "أنيق بألوان الخريف الدافئة: العنابي والزيتي والعاجي",
+  program: "5:30 pm | Cocktail in the cloister\n7:00 pm | Dinner beneath the vaults\n9:30 pm | First Dance\n11:00 pm | Late Night Dancing",
+  story: "A bench in the Luxembourg gardens, a forgotten book, a rose at page 112. Raphaël took three weeks to find its owner; Élise took three seconds.\n\nSix years later, the rose is still between the pages. The next page is written by two.",
+  faq: "The Vaux-de-Cernay waterfalls | Beautiful scenic walk 5 minutes from the estate.\nThe château de la Madeleine | Historic 11th century castle with panoramic valley views.\nRambouillet market | Charming local market on Saturday mornings.",
+  dressCode: "Autumn Elegance: Burgundy, Forest Green, Ivory & Warm Neutrals",
 }
 
 export const defaultProgram = "17:00 | استقبال الضيوف\n18:00 | دخول العروسين\n19:00 | حفل العشاء\n21:00 | قص التورتة والتصوير"
 
 export function draftFor(template: Template): InviteDraft {
+  const isSite = template.layout === "site"
   return {
     templateId: template.id,
     groom: template.groom,
     bride: template.bride,
     occasion: template.category,
-    hosts: "يتشرف الأهل بدعوتكم",
-    message: "ونكون سعداء بوجودكم في يومنا",
-    date: "2026-12-18",
+    hosts: isSite ? "JOYFULLY INVITE YOU TO CELEBRATE THEIR WEDDING" : "يتشرف الأهل بدعوتكم",
+    message: isSite ? "JOYFULLY INVITE YOU TO CELEBRATE THEIR WEDDING" : "ونكون سعداء بوجودكم في يومنا",
+    date: isSite ? "2027-10-02" : "2026-12-18",
     time: template.time,
     venue: template.venue,
-    city: "القاهرة",
-    opening: "بسم الله الرحمن الرحيم",
+    city: isSite ? "Yvelines" : "القاهرة",
+    opening: isSite ? "" : "بسم الله الرحمن الرحيم",
     rsvpPhone: "",
     mapUrl: "",
     musicUrl: "",
     photoOne: "",
     photoTwo: "",
-    program: template.layout === "strip" ? defaultProgram : template.layout === "site" ? siteDefaults.program : "",
+    program: template.layout === "strip" ? defaultProgram : isSite ? siteDefaults.program : "",
     gallery: "",
-    story: template.layout === "site" ? siteDefaults.story : "",
-    faq: template.layout === "site" ? siteDefaults.faq : "",
-    dressCode: template.layout === "site" ? siteDefaults.dressCode : "",
+    story: isSite ? siteDefaults.story : "",
+    faq: isSite ? siteDefaults.faq : "",
+    dressCode: isSite ? siteDefaults.dressCode : "",
   }
 }
 

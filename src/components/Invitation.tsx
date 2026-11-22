@@ -31,6 +31,31 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     "--shell": template.vars.shell,
   } as CSSProperties
 
+  if (template.id === "estate") {
+    return (
+      <article className="invite vaux-thumb-invite" style={vars}>
+        <div className="vaux-thumb-wrapper">
+          <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-thumb-bg" />
+          <div className="vaux-thumb-content">
+            <img src="/vaux/monogram_rose.png" alt="" className="vaux-thumb-monogram" />
+            <div className="vaux-thumb-names">
+              <Line field="groom" className="vaux-name" active={activeField} onSelect={onSelect}>
+                {draft.groom || "اسم العريس"}
+              </Line>
+              <i className="vaux-amp">&</i>
+              <Line field="bride" className="vaux-name" active={activeField} onSelect={onSelect}>
+                {draft.bride || "اسم العروسة"}
+              </Line>
+            </div>
+            <Line field="hosts" className="vaux-hosts" active={activeField} onSelect={onSelect}>
+              {draft.hosts || "JOYFULLY INVITE YOU TO CELEBRATE THEIR WEDDING"}
+            </Line>
+          </div>
+        </div>
+      </article>
+    )
+  }
+
   const content = (
     <div className="invite-inner">
       <Line field="opening" className="t-open" active={activeField} onSelect={onSelect}>
