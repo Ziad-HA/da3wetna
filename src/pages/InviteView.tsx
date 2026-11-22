@@ -167,7 +167,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
           </>
         )}
         {!isSite ? <VenueMap draft={draft} /> : null}
-        {!isSite ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="btn-ghost w-full justify-center bg-white/80">📍 افتح الاتجاهات على Google Maps</a> : null}
+        {!isSite ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="btn-ghost w-full justify-center bg-white/80">📍 افتح الموقع على الخريطة</a> : null}
         {inviteId && !isSite ? <RsvpForm inviteId={inviteId} /> : null}
         {rsvpLink && !isSite ? <a href={rsvpLink} target="_blank" rel="noreferrer" className={`${inviteId ? "btn-ghost bg-white/80" : "btn-gold"} w-full justify-center`}>{inviteId ? "أو كلّمنا على واتساب" : "أكد حضورك على واتساب ♡"}</a> : null}
         <div className="w-full"><StoryActions draft={draft} code={code} /></div>
