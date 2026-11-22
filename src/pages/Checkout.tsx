@@ -55,7 +55,7 @@ export function Checkout() {
 
   const cont = continuing || Boolean(paidToken)
   const dbOn = Boolean(health?.db)
-  const methodsShown = methods.filter((m) => m.id !== "paymob" || health?.paymob)
+  const methodsShown = methods.filter((m) => m.id === "paymob" ? Boolean(health?.db && health.paymob) : Boolean(health?.db && !walletsArePlaceholders))
 
   async function pay() {
     if (!draft) return
@@ -192,7 +192,7 @@ export function Checkout() {
                 ))}
               </div>
 
-                {method === "paymob" && dbOn ? <p className="mt-5 rounded-2xl bg-[#f2faf5] p-4 text-sm leading-7 text-[#527566]">هتتحوّل لصفحة دفع آمنة. بعد الدفع الدعوة بتتفعّل تلقائيًا وتفتح لوحة طلبك.</p> : <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
+                {method === "paymob" && dbOn ? <p className="mt-5 rounded-2xl bg-[#f2faf5] p-4 text-sm leading-7 text-[#527566]">هتتحوّل لصفحة دفع آمنة. بعد الدفع الدعوة بتتفعّل تلقائيًا وتفتح لوحة طلبك.</p> : walletsArePlaceholders ? <p className="mt-5 rounded-2xl bg-[#fffafa] p-4 text-sm leading-7 text-[#806b70]">وسائل التحويل اليدوي غير مفعّلة حاليًا حتى يتم تأكيد بياناتها. جرّب لاحقًا أو تواصل معانا.</p> : <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
                   <p className="text-sm text-[#806b70]">حوّل {money(bundle.price)} إلى {destination}</p>
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xl font-bold text-[#4a2d33]" dir="ltr">{destination}</p><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(destination); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setError("مش قادرين ننسخ الرقم تلقائيًا؛ اضغط مطولًا على الرقم وانسخه."); } }} className="min-h-9 rounded-full border border-[#e8c8cf] bg-white px-3 text-xs font-bold text-[#a64257]">{copied ? "تم النسخ ✓" : "نسخ الرقم"}</button></div>
                   <p className="mt-4 text-xs text-[#806b70]">رقم الطلب — اكتبه في ملاحظة التحويل</p>
