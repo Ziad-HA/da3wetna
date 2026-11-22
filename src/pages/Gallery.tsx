@@ -98,7 +98,7 @@ export function Gallery() {
           <span className="text-[11px] text-[#a18a8f]">{visible.length} نتيجة</span>
         </div>
 
-        <div className="grid grid-cols-[repeat(2,minmax(0,1fr))] items-start gap-2.5 sm:gap-4">
+        <div className="grid grid-cols-[repeat(2,minmax(0,1fr))] items-start gap-2.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
           {visible.map((template) => (
             <article key={template.id} className="group min-w-0 overflow-hidden rounded-[18px] border border-[#f0dce1] bg-white p-2 shadow-[0_5px_22px_rgba(91,48,60,.045)] transition duration-300 hover:-translate-y-1 hover:border-[#dfb8c2] hover:shadow-[0_16px_34px_rgba(91,48,60,.10)] sm:rounded-[26px] sm:p-3">
               <div className="relative overflow-hidden rounded-[11px] bg-[#fff5f6] sm:rounded-[19px]">
