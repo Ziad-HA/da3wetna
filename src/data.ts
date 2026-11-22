@@ -247,7 +247,7 @@ export const templates: Template[] = [
     groom: "محمد",
     bride: "سلمى",
     venue: "قاعة النيل",
-    time: "15:00",
+    time: "19:00",
     vars: { paper: "#FAF6EE", ink: "#5E1C2A", gold: "#8B6B3A", soft: "#7A6A55", shell: "#4F5629" },
     envelope: { body: ["#6F7640", "#4F5629"], flap: ["#7A8248", "#59602F"], liner: "#FAF6EE", linerPattern: "plain", seal: "#7A1F2D", sealKind: "initials", flapShape: "deep", zoom: true },
   },
