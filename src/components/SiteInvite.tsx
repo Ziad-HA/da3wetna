@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react"
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react"
 import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import type { InviteDraft, Template } from "../types"
@@ -45,9 +45,9 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   ))}</div>
 }
 
-type Props = { draft: InviteDraft; template: Template }
+type Props = { draft: InviteDraft; template: Template; rsvp?: ReactNode }
 
-export function SiteInvite({ draft, template }: Props) {
+export function SiteInvite({ draft, template, rsvp }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--paper": template.vars.paper,
@@ -131,6 +131,12 @@ export function SiteInvite({ draft, template }: Props) {
             {item.time ? <time>{item.time}</time> : null}<span>{item.title}</span>
           </li>
         ))}</ol>
+      </section> : null}
+
+      {rsvp ? <section className="vaux-sec site-reveal vaux-rsvp-sec">
+        <h2 className="vaux-script-title">تأكيد الحضور</h2>
+        <p className="vaux-body-text">يسعدنا تأكيد حضوركم ومشاركتنا فرحتنا</p>
+        <div className="vaux-rsvp-wrapper">{rsvp}</div>
       </section> : null}
 
       {draft.dressCode ? <section className="vaux-sec site-reveal">
