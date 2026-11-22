@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { MediaUploadField } from "../components/MediaUploadField"
-import { GoogleVenueField } from "../components/GoogleVenueField"
+import { VenueField } from "../components/VenueField"
 import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
 import { activeTemplates, defaultProgram, getTemplate, occasions, siteDefaults } from "../data"
@@ -199,7 +199,7 @@ export function Editor() {
                       {occasions.map((item) => <option key={item}>{item}</option>)}
                     </select>
                   ) : field.key === "venue" ? (
-                    <GoogleVenueField
+                    <VenueField
                       value={draft.venue}
                       city={draft.city}
                       mapUrl={draft.mapUrl}
@@ -244,7 +244,7 @@ export function Editor() {
             <div className="mt-5 grid gap-3 border-t border-[#f3e6e9] pt-5">
               <div className="rounded-2xl border border-[#f1e0e4] bg-[#fffafa] p-3">
                 <p className="text-xs leading-6 text-[#806b70]">اختيار القاعة من نتائج البحث بيحفظ اسمها وعنوانها وإحداثياتها تلقائيًا. وتقدر تحرك العلامة على الخريطة لتصحيح المكان.</p>
-                {draft.mapUrl ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4">راجع المكان المختار على Google Maps ↗</a> : null}
+                {draft.mapUrl ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4">راجع المكان المختار على الخريطة ↗</a> : null}
               </div>
               <MediaUploadField label="صورة الدعوة الأولى" kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
               <MediaUploadField label="صورة إضافية" kind="image" value={draft.photoTwo} onChange={(url) => update({ photoTwo: url })} />
