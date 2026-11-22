@@ -29,6 +29,7 @@ export function readDraft(): InviteDraft | null {
     if (!raw) return null
     const data = JSON.parse(raw) as InviteDraft
     if (!data || !isTemplateId(data.templateId)) return null
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(data))
     return { ...draftFor(getTemplate(data.templateId)!), ...data,
       rsvpPhone: typeof data.rsvpPhone === "string" ? data.rsvpPhone : "",
       mapUrl: typeof data.mapUrl === "string" ? data.mapUrl : "",
