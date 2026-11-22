@@ -103,7 +103,8 @@ export function GoogleVenueField({ value, city, mapUrl, address, latitude, longi
 
   useEffect(() => {
     const search = query.trim()
-    if (!apiKey || search.length < 3 || (search === value && mapUrl)) {
+    const key = apiKey
+    if (!key || search.length < 3 || (search === value && mapUrl)) {
       setSuggestions([])
       setLoading(false)
       return
@@ -113,7 +114,7 @@ export function GoogleVenueField({ value, city, mapUrl, address, latitude, longi
       setLoading(true)
       setError("")
       try {
-        await loadGoogleMaps(apiKey)
+        await loadGoogleMaps(key)
         const places = await (window as GoogleMapsWindow).google!.maps!.importLibrary!("places") as PlacesLibrary
         if (!sessionToken.current) sessionToken.current = new places.AutocompleteSessionToken()
         const response = await places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
@@ -136,11 +137,12 @@ export function GoogleVenueField({ value, city, mapUrl, address, latitude, longi
   }, [query, city, apiKey, value, mapUrl])
 
   useEffect(() => {
-    if (!apiKey || latitude == null || longitude == null || !mapElement.current) return
+    const key = apiKey
+    if (!key || latitude == null || longitude == null || !mapElement.current) return
     let cancelled = false
     async function setupMap() {
       try {
-        await loadGoogleMaps(apiKey)
+        await loadGoogleMaps(key)
         const maps = await (window as GoogleMapsWindow).google!.maps!.importLibrary!("maps") as MapsLibrary
         if (cancelled || !mapElement.current) return
         const position = { lat: latitude!, lng: longitude! }
