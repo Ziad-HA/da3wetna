@@ -1,29 +1,25 @@
-# إعداد رفع الصور والموسيقى في دعوتنا
+# Supabase setup — Da3wetna
 
-1. افتح مشروع Supabase الخاص بالموقع.
-2. من Storage أنشئ Bucket باسم `invitation-media` واجعله **Public**.
-3. أضف سياسة Storage تسمح للمستخدمين المجهولين برفع الملفات إلى هذا الـ bucket (INSERT) وقراءة الملفات (SELECT). لا تضع service-role key في الموقع.
-4. في Vercel > Project Settings > Environment Variables أضف:
-   - `VITE_SUPABASE_URL` = Project URL
-   - `VITE_SUPABASE_ANON_KEY` = Publishable/anon key
-5. أعد نشر الموقع.
+The production project uses the Supabase project named `da3wetna` in the Nobi-2 organization.
 
-الرفع يستخدم المفتاح العام فقط. لا تضع `service_role` أو أي سر إداري داخل متغيرات تبدأ بـ `VITE_`.
-الحدود في واجهة الموقع: الصور 8MB والصوت 12MB. روابط الملفات العامة تُحفظ داخل بيانات الدعوة، لذلك يقدر الضيوف يشوفوها بعد مشاركة الرابط.
+## Database
+The `orders`, `invites`, and `rsvps` tables are created by the migration. Row Level Security is enabled and direct access for `anon` and `authenticated` is revoked. Only server API routes may use the privileged server-side key.
 
-## سياسة الرفع (مرحلة التطوير فقط)
+## Storage
+The bucket `invitation-media` is public for reading because published invitation pages need to display uploaded photos and audio. Anonymous direct uploads are not allowed. The API route `POST /api/upload` issues a short-lived, single-object signed upload URL after checking MIME type, size, and request rate. The privileged key must never be exposed to browser code.
 
-لو هتختبر الرفع قبل تفعيل حسابات العملاء، أنشئ سياسة INSERT مؤقتة في SQL Editor:
+Bucket limits: 12 MiB maximum; JPEG, PNG, WebP, MP3, MP4/M4A, WAV, and AAC only.
 
-```sql
-create policy "temporary invitation media uploads"
-on storage.objects
-for insert
-to anon
-with check (
-  bucket_id = 'invitation-media'
-  and (storage.foldername(name))[1] in ('image', 'audio')
-);
-```
+## Vercel environment variables
+Set these for Production, Preview, and Development:
 
-اضبط من إعدادات الـ bucket حدًا أقصى لحجم الملف، واقصر أنواع الملفات على الصور والصوت فقط. هذه السياسة تسمح لأي زائر مجهول برفع ملفات، لذلك هي للاختبار المحدود فقط وليست إعدادًا مناسبًا للإطلاق التجاري العام. قبل استقبال عملاء حقيقيين، اربط الرفع بحساب مسجل أو بوظيفة خادمية تتحقق من الطلب وتحد من عدد الملفات.
+- `SUPABASE_URL`: Supabase Project URL.
+- `SUPABASE_SERVICE_ROLE_KEY`: server-only Supabase service-role key. Never prefix this with `VITE_`; never put it in client-side code.
+- `VITE_SUPABASE_URL`: Project URL (public).
+- `VITE_SUPABASE_ANON_KEY`: publishable/anon key (public; currently retained for compatibility with the client config).
+
+For admin order review, set a separate high-entropy `ADMIN_KEY`. Do not reuse a Supabase key or share it in chat.
+
+For Paymob, configure `PAYMOB_API_KEY`, `PAYMOB_INTEGRATION_ID`, `PAYMOB_IFRAME_ID`, and `PAYMOB_HMAC` only after the account owner has completed the provider's setup and a supervised sandbox test. The code currently reads `PAYMOB_HMAC`, not `PAYMOB_HMAC_SECRET`.
+
+Redeploy after changing environment variables. Test the health endpoint, a test order, invitation publication, RSVP submission, and upload before enabling real payments.
