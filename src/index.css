@@ -2135,3 +2135,12 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .vaux-site[dir="rtl"] .vaux-place-desc { text-align: right; }
 .vaux-site[dir="rtl"] .vaux-body-meta { font-style: normal; }
 .vaux-site[dir="rtl"] .vaux-hero-names { letter-spacing: 0; }
+
+.vaux-open-screen { font-family: "Cairo", "Tajawal", sans-serif; }
+.vaux-overlay-title,
+.vaux-overlay-kicker {
+  direction: rtl;
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: "Cairo", "Tajawal", sans-serif;
+}
