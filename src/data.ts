@@ -269,6 +269,14 @@ export const templates: Template[] = [
   },
 ]
 
+// القوالب المعروضة حاليًا فقط. القوالب القديمة تظل معرفة بالأسفل حتى لا تتعطل روابط العملاء السابقين.
+export const activeTemplates: Template[] = [
+  templates.find((item) => item.id === "estate")!,
+  templates.find((item) => item.id === "calla")!,
+  templates.find((item) => item.id === "envelope")!,
+  templates.find((item) => item.id === "estate-rose")!,
+]
+
 export function getTemplate(id: string | undefined): Template | undefined {
   return templates.find((item) => item.id === id)
 }
