@@ -102,9 +102,9 @@ export function Gallery() {
           {visible.map((template) => (
             <article key={template.id} className="group min-w-0 overflow-hidden rounded-[18px] border border-[#f0dce1] bg-white p-2 shadow-[0_5px_22px_rgba(91,48,60,.045)] transition duration-300 hover:-translate-y-1 hover:border-[#dfb8c2] hover:shadow-[0_16px_34px_rgba(91,48,60,.10)] sm:rounded-[26px] sm:p-3">
               <div className="relative overflow-hidden rounded-[11px] bg-[#fff5f6] sm:rounded-[19px]">
-                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="block" aria-label={`اختار تصميم ${template.name}`}>
+                <Link to={`/preview/${template.id}`} className="block" aria-label={`اتفرج على دعوة ${template.name}`}>
                 <div className="gallery-design-frame"><div className="invite-frame"><InviteThumb draft={draftFor(template)} /></div></div>
-                <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[9px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">معاينة واختيار</span>
+                <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[9px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">اتفرج على الدعوة</span>
                 {template.isNew ? <span className="absolute right-2 top-2 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] shadow-sm sm:right-3 sm:top-3 sm:text-[10px]">جديد</span> : null}
                 </Link>
                 <button type="button" onClick={() => toggleFavorite(template.id)} aria-label={favorites.includes(template.id) ? "إزالة من المفضلة" : "إضافة للمفضلة"} aria-pressed={favorites.includes(template.id)} className={`absolute left-2 top-2 grid h-9 w-9 place-items-center rounded-full border border-white/80 text-xl shadow-md backdrop-blur transition active:scale-90 sm:left-3 sm:top-3 ${favorites.includes(template.id) ? "bg-[#a64257] text-white" : "bg-white/90 text-[#a64257]"}`}>{favorites.includes(template.id) ? "♥" : "♡"}</button>
@@ -112,7 +112,8 @@ export function Gallery() {
               <div className="px-0.5 pb-1 pt-2 sm:px-2 sm:pt-4">
                 <h3 className="truncate text-[11px] font-extrabold text-[#4a2d33] sm:text-base">{template.name}</h3>
                 <p className="mt-1 line-clamp-2 min-h-8 text-[9px] leading-[1.45] text-[#90777d] sm:min-h-10 sm:text-xs sm:leading-5">{template.blurb}</p>
-                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="mt-2 flex min-h-10 items-center justify-center rounded-xl bg-[#fff0f2] px-1.5 text-[10px] font-extrabold text-[#a64257] transition hover:bg-[#a64257] hover:text-white active:scale-[.98] sm:mt-4 sm:min-h-11 sm:rounded-full sm:text-sm">اختار التصميم <span className="mr-1">←</span></Link>
+                <Link to={`/preview/${template.id}`} className="mt-2 flex min-h-10 items-center justify-center rounded-xl border border-[#f0dce1] bg-white px-1.5 text-[10px] font-extrabold text-[#806b70] transition hover:border-[#d9aab5] hover:text-[#a64257] active:scale-[.98] sm:mt-4 sm:min-h-11 sm:rounded-full sm:text-sm">اتفرج على الدعوة <span className="mr-1">↗</span></Link>
+                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="mt-2 flex min-h-10 items-center justify-center rounded-xl bg-[#fff0f2] px-1.5 text-[10px] font-extrabold text-[#a64257] transition hover:bg-[#a64257] hover:text-white active:scale-[.98] sm:rounded-full sm:text-sm">اختار التصميم <span className="mr-1">←</span></Link>
               </div>
             </article>
           ))}
