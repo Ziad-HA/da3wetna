@@ -1,12 +1,13 @@
-const URL_ = () => (process.env.SUPABASE_URL ?? "").replace(/\/+$/, "")
-const KEY = () => process.env.SUPABASE_SERVICE_KEY ?? ""
+const URL_ = () => (process.env.SUPABASE_URL ?? "").replace(/\\/+$/, "")
+// Server-only credential. Never expose this value through a VITE_ variable.
+const KEY = () => process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_KEY ?? ""
 
 export const dbReady = () => Boolean(URL_() && KEY())
 export const eq = (value: string) => `eq.${encodeURIComponent(value)}`
 
 type Init = { method?: "GET" | "POST" | "PATCH"; body?: unknown; prefer?: string }
 
-/** استدعاء PostgREST بتاع Supabase بـ service key (السيرفر بس). */
+/** Call Supabase PostgREST with a server-only privileged key. */
 export async function db<T = unknown[]>(path: string, init: Init = {}): Promise<T> {
   const res = await fetch(`${URL_()}/rest/v1/${path}`, {
     method: init.method ?? "GET",
