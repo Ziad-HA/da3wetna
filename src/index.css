@@ -2184,3 +2184,9 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   font-variant-numeric: tabular-nums;
 }
 .invite-thumb-countdown small { font-size: .7em; font-weight: 600; }
+
+.invite-thumb-countdown-ended {
+  padding-block: .7rem;
+  font-size: clamp(8px, 2.5vw, 13px);
+  font-weight: 900;
+}
