@@ -177,8 +177,8 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
   }, [query, city, value, mapUrl])
 
   useEffect(() => {
-    if ((!mapPickerOpen && (latitude == null || longitude == null)) || !mapElement.current) {
-      if (!mapPickerOpen && (latitude == null || longitude == null)) {
+    if (!mapPickerOpen || !mapElement.current) {
+      if (!mapPickerOpen) {
         mapRef.current?.remove()
         mapRef.current = null
         markerRef.current = null
@@ -276,7 +276,7 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
         {mapPickerOpen || (latitude != null && longitude != null) ? "إخفاء الخريطة" : "📍 تحديد المكان على الخريطة"}
       </button>
       {address ? <p className="mt-2 text-xs leading-6 text-[#527566]">العنوان: {address}</p> : null}
-      {mapPickerOpen || (latitude != null && longitude != null) ? (
+      {mapPickerOpen ? (
         <div className="mt-3 overflow-hidden rounded-2xl border border-[#efd5dc] bg-[#fffafa]">
           <div ref={mapElement} className="h-64 w-full" aria-label="خريطة تفاعلية لاختيار مكان المناسبة" />
           <p className="px-3 py-2 text-[11px] leading-5 text-[#806b70]">اضغط على الخريطة لنقل العلامة، أو اسحب العلامة للمكان الصحيح. {latitude == null || longitude == null ? "الخريطة تبدأ من المدينة المكتوبة، أو القاهرة لو المدينة فاضية." : "تم حفظ الإحداثيات تلقائيًا."}</p>
