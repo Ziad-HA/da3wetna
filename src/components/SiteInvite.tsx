@@ -116,6 +116,14 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "" }: Props) {
         </div>
       </section> : null}
 
+      {(draft.photoOne || draft.photoTwo) ? <section className="vaux-sec site-reveal vaux-gallery-sec">
+        <span className="vaux-kicker">لحظات من حكايتنا</span>
+        <h2 className="vaux-script-title">صورنا</h2>
+        <div style={{ display: "grid", gridTemplateColumns: draft.photoOne && draft.photoTwo ? "1fr 1fr" : "1fr", gap: "0.75rem", maxWidth: 420, margin: "1rem auto 0" }}>
+          {[draft.photoOne, draft.photoTwo].filter(Boolean).map((src, index) => <img key={src} src={src} alt={`صورة من حكاية العروسين ${index + 1}`} loading="lazy" style={{ width: "100%", aspectRatio: "4 / 5", objectFit: "cover", borderRadius: 14, border: "1px solid color-mix(in srgb, var(--ink) 18%, transparent)" }} />)}
+        </div>
+      </section> : null}
+
       <section className="vaux-sec site-reveal vaux-reception-sec">
         <div className="vaux-reception-copy">
           <span className="vaux-kicker">مستنيينكم تشاركونا</span>
