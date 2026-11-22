@@ -239,7 +239,7 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
         </ul>
       ) : null}
       {error ? <p role="status" className="mt-2 text-xs text-[#b83b50]">{error}</p> : null}
-      <p className="mt-2 text-[11px] leading-6 text-[#90777d]">البحث والخرائط بدون مفتاح Google. اختار المكان من النتائج، أو اكتب اسمه يدويًا. اسحب العلامة لتعديل الموقع بدقة.</p>
+      <p className="mt-2 text-[11px] leading-6 text-[#90777d]">البحث والخرائط متاحة بدون مفاتيح API. اختار المكان من النتائج، أو اكتب اسمه يدويًا. اسحب العلامة لتعديل الموقع بدقة.</p>
       {address ? <p className="mt-2 text-xs leading-6 text-[#527566]">العنوان: {address}</p> : null}
       {latitude != null && longitude != null ? (
         <div className="mt-3 overflow-hidden rounded-2xl border border-[#efd5dc] bg-[#fffafa]">
