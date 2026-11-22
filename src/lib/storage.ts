@@ -25,7 +25,7 @@ export type ActivePackage = {
 
 export function readDraft(): InviteDraft | null {
   try {
-    const raw = sessionStorage.getItem(DRAFT_KEY)
+    const raw = localStorage.getItem(DRAFT_KEY)
     if (!raw) return null
     const data = JSON.parse(raw) as InviteDraft
     if (!data || !isTemplateId(data.templateId)) return null
@@ -47,15 +47,17 @@ export function readDraft(): InviteDraft | null {
 }
 
 export function clearDraft() {
-  sessionStorage.removeItem(DRAFT_KEY)
+  localStorage.removeItem(DRAFT_KEY)
 }
 
 export function writeDraft(draft: InviteDraft) {
-  sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft))
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(draft)) } catch {
+    console.warn("تعذر حفظ المسودة محليًا. تأكد من مساحة التخزين المتاحة.")
+  }
 }
 
 export function initDraft(id: string | undefined): InviteDraft {
-  const template = getTemplate(id) ?? getTemplate("seal")!
+  const template = getTemplate(id) ?? getTemplate("estate")!
   const saved = readDraft()
   if (saved && saved.templateId === template.id) return saved
   return draftFor(template)
@@ -63,7 +65,7 @@ export function initDraft(id: string | undefined): InviteDraft {
 
 export function readSelectedPackage(): PackageId {
   try {
-    const value = sessionStorage.getItem(SELECTED_PACKAGE_KEY)
+    const value = localStorage.getItem(SELECTED_PACKAGE_KEY)
     return getPackage(value).id
   } catch {
     return "single"
@@ -71,7 +73,7 @@ export function readSelectedPackage(): PackageId {
 }
 
 export function selectPackage(id: PackageId) {
-  sessionStorage.setItem(SELECTED_PACKAGE_KEY, id)
+  localStorage.setItem(SELECTED_PACKAGE_KEY, id)
 }
 
 export function readActivePackage(): ActivePackage | null {
@@ -127,7 +129,6 @@ export function draftReady(draft: InviteDraft): boolean {
 
 const OWNER_TOKEN_KEY = "da3wetna-owner-token"
 
-/** سر لوحة الزبون (بيتحفظ على جهازه بعد ما يعمل طلب). */
 export function readOwnerToken(): string {
   try { return localStorage.getItem(OWNER_TOKEN_KEY) ?? "" } catch { return "" }
 }
