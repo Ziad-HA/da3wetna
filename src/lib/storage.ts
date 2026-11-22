@@ -49,6 +49,7 @@ export function readDraft(): InviteDraft | null {
 
 export function clearDraft() {
   localStorage.removeItem(DRAFT_KEY)
+  sessionStorage.removeItem(DRAFT_KEY)
 }
 
 export function writeDraft(draft: InviteDraft) {
@@ -66,7 +67,8 @@ export function initDraft(id: string | undefined): InviteDraft {
 
 export function readSelectedPackage(): PackageId {
   try {
-    const value = localStorage.getItem(SELECTED_PACKAGE_KEY)
+    const value = localStorage.getItem(SELECTED_PACKAGE_KEY) ?? sessionStorage.getItem(SELECTED_PACKAGE_KEY)
+    if (value) localStorage.setItem(SELECTED_PACKAGE_KEY, value)
     return getPackage(value).id
   } catch {
     return "single"
