@@ -13,6 +13,7 @@ import { InviteView } from "./pages/InviteView"
 import { SeoContentPage } from "./pages/SeoContentPage"
 import { Privacy } from "./pages/Privacy"
 import { Account } from "./pages/Account"
+import { Auth } from "./pages/Auth"
 import { Dashboard } from "./pages/Dashboard"
 import { Admin } from "./pages/Admin"
 import { PayResult } from "./pages/PayResult"
@@ -70,6 +71,7 @@ export function App() {
           <Route path="/how" element={<How />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/دعوة-زفاف-الإلكترونية" element={<SeoContentPage pageKey="/دعوة-زفاف-الإلكترونية" />} />
           <Route path="/دعوة-فرح" element={<SeoContentPage pageKey="/دعوة-فرح" />} />
           <Route path="/دعوة-خطوبة" element={<SeoContentPage pageKey="/دعوة-خطوبة" />} />
