@@ -21,7 +21,7 @@ const mirrorCorners = ["", "translate(360 0) scale(-1 1)", "translate(0 640) sca
 const sprigLeaves = Array.from({ length: 9 }, (_, i) => [110 + i * 52, i % 2 === 0 ? 1 : -1] as const)
 
 export function Invitation({ draft, activeField, onSelect }: Props) {
-  const template = getTemplate(draft.templateId) ?? getTemplate("seal")!
+  const template = getTemplate(draft.templateId) ?? getTemplate("estate")!
   const maskId = useId().replace(/:/g, "")
   const vars = {
     "--paper": template.vars.paper,
