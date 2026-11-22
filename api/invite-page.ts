@@ -1,7 +1,7 @@
 import { db, dbReady, eq, type InviteRow, type OrderRow } from "./_lib/db.js"
 import { header, param, type Req, type Res } from "./_lib/http.js"
 
-const TEMPLATES = new Set(["seal", "calla", "lace", "envelope", "night", "marble", "garden", "moon", "silk", "ink", "arch", "deco", "henna", "pearl", "nikah", "strip"])
+const TEMPLATES = new Set(["seal", "calla", "lace", "envelope", "night", "marble", "garden", "moon", "silk", "ink", "arch", "deco", "henna", "pearl", "nikah", "strip", "estate"])
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
 
 type Meta = { groom: string; bride: string; templateId: string; date: string; venue: string }

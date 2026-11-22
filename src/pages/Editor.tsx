@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
-import { defaultProgram, getTemplate, occasions, templates } from "../data"
+import { defaultProgram, getTemplate, occasions, siteDefaults, templates } from "../data"
 import { encodeDraft } from "../lib/codec"
 import { money } from "../lib/format"
 import { draftReady, initDraft, readSelectedPackage, writeDraft } from "../lib/storage"
@@ -64,7 +64,7 @@ export function Editor() {
 
   function chooseTemplate(nextId: string) {
     const target = getTemplate(nextId)
-    const next = { ...draft, templateId: nextId as InviteDraft["templateId"], program: draft.program || (target?.layout === "strip" ? defaultProgram : "") }
+    const next = { ...draft, templateId: nextId as InviteDraft["templateId"], program: draft.program || (target?.layout === "strip" ? defaultProgram : target?.layout === "site" ? siteDefaults.program : ""), ...(target?.layout === "site" ? { story: draft.story || siteDefaults.story, faq: draft.faq || siteDefaults.faq, dressCode: draft.dressCode || siteDefaults.dressCode } : {}) }
     writeDraft(next)
     navigate(`/editor/${nextId}`)
   }
@@ -225,17 +225,24 @@ export function Editor() {
                 </label>
               ))}
             </div>
-            {template.layout === "strip" ? (
+            {template.layout === "strip" || template.layout === "site" ? (
               <div className="mt-5 grid gap-4 border-t border-[#f3e6e9] pt-5">
-                <p className="text-xs font-bold text-[#a64257]">خاص بقالب الشريط</p>
+                <p className="text-xs font-bold text-[#a64257]">خاص بالقالب ده</p>
                 <label className="field">
                   <span>برنامج الحفل — كل سطر: الساعة | النشاط (لحد ٨ أسطر)</span>
                   <textarea rows={5} maxLength={400} value={draft.program} placeholder={"17:00 | استقبال الضيوف\n19:00 | حفل العشاء"} onFocus={() => setActive("program")} onChange={(event) => update({ program: event.target.value })} />
                 </label>
-                <label className="field">
+                {template.layout === "site" ? (
+                  <>
+                    <label className="field"><span>حكايتكم</span><textarea rows={4} maxLength={300} value={draft.story} onFocus={() => setActive("story")} onChange={(event) => update({ story: event.target.value })} /></label>
+                    <label className="field"><span>أسئلة وأجوبة — كل سطر: السؤال | الجواب (لحد ٦)</span><textarea rows={5} maxLength={500} value={draft.faq} onFocus={() => setActive("faq")} onChange={(event) => update({ faq: event.target.value })} /></label>
+                    <label className="field"><span>كود اللبس</span><input maxLength={120} value={draft.dressCode} onFocus={() => setActive("dressCode")} onChange={(event) => update({ dressCode: event.target.value })} /></label>
+                  </>
+                ) : null}
+                {template.layout === "strip" ? <label className="field">
                   <span>صور المعرض — رابط صورة في كل سطر (لحد ٦ صور)</span>
                   <textarea rows={4} dir="ltr" maxLength={900} value={draft.gallery} placeholder="https://..." onFocus={() => setActive("gallery")} onChange={(event) => update({ gallery: event.target.value })} />
-                </label>
+                </label> : null}
                 <a className="btn-ghost justify-center" target="_blank" rel="noreferrer" href={`/i/${encodeDraft(draft)}`}>معاينة الدعوة كاملة (الظرف والشريط) ↗</a>
               </div>
             ) : null}

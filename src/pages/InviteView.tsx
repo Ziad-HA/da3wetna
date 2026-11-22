@@ -6,6 +6,7 @@ import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
+import { SiteInvite } from "../components/SiteInvite"
 import { StripInvite } from "../components/StripInvite"
 import { RsvpForm } from "../components/RsvpForm"
 import { useInvite } from "../lib/useInvite"
@@ -98,6 +99,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
 
   if (!template) return null
   const isStrip = template.layout === "strip"
+  const isSite = template.layout === "site"
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} loop preload="auto" /> : null
 
@@ -123,9 +125,9 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   return (
     <>
     {audio}
-    <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : template.vars.shell, color: isStrip ? "#f4efe2" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
+    <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? "#EFE7D1" : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? "#5E1C2A" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
       <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
-        {isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
+        {isSite ? <SiteInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} /> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
           <>
         <header className="invite-public-heading text-center">
           <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
@@ -148,8 +150,8 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
         <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="btn-ghost w-full justify-center bg-white/80">📍 اتجاهات المكان على الخريطة</a>
           </>
         )}
-        {inviteId ? <RsvpForm inviteId={inviteId} /> : null}
-        {rsvpLink ? <a href={rsvpLink} target="_blank" rel="noreferrer" className={`${inviteId ? "btn-ghost bg-white/80" : "btn-gold"} w-full justify-center`}>{inviteId ? "أو كلّمنا على واتساب" : "أكد حضورك على واتساب ♡"}</a> : null}
+        {inviteId && !isSite ? <RsvpForm inviteId={inviteId} /> : null}
+        {rsvpLink && !isSite ? <a href={rsvpLink} target="_blank" rel="noreferrer" className={`${inviteId ? "btn-ghost bg-white/80" : "btn-gold"} w-full justify-center`}>{inviteId ? "أو كلّمنا على واتساب" : "أكد حضورك على واتساب ♡"}</a> : null}
         <div className="w-full"><StoryActions draft={draft} code={code} /></div>
         <section className="w-full rounded-[26px] border border-white/70 bg-white/80 p-4 text-center shadow-lg">
           <p className="font-bold text-[#4a2d33]">احتفظ بالدعوة وشاركها</p>

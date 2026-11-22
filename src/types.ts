@@ -15,6 +15,7 @@ export const templateIds = [
   "pearl",
   "nikah",
   "strip",
+  "estate",
 ] as const
 
 export type TemplateId = (typeof templateIds)[number]
@@ -48,6 +49,8 @@ export type EnvelopeStyle = {
   flapShape: FlapShape
   /** شريط لؤلؤ بيتقطع لما الظرف يفتح (اختياري) */
   band?: boolean
+  /** الظرف بيقرّب لحد ما يملا الشاشة بعد الفتح */
+  zoom?: boolean
 }
 
 export type ThemeVars = {
@@ -65,7 +68,7 @@ export type Template = {
   category: Occasion
   isNew?: boolean
   /** "strip" = بعد فتح الظرف بيطلع شريط دعوة طويل بيتحرك لتحت */
-  layout?: "card" | "strip"
+  layout?: "card" | "strip" | "site"
   frame: Frame
   ornament: Ornament
   vars: ThemeVars
@@ -98,6 +101,12 @@ export type InviteDraft = {
   program: string
   /** روابط صور إضافية للمعرض، كل رابط في سطر (لقالب الشريط) */
   gallery: string
+  /** حكايتنا (لقالب الموقع) */
+  story: string
+  /** أسئلة وأجوبة، كل سطر "سؤال | جواب" (لقالب الموقع) */
+  faq: string
+  /** كود اللبس (لقالب الموقع) */
+  dressCode: string
 }
 
 export type PayMethod = "vodafone" | "instapay" | "paymob"

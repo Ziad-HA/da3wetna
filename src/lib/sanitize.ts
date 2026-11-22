@@ -54,6 +54,9 @@ export function sanitizeDraft(raw: unknown): InviteDraft | null {
     photoTwo: url(d.photoTwo, 500),
     program: multiline(d.program, 400, 8),
     gallery: galleryUrls(d.gallery),
+    story: text(d.story, 300),
+    faq: multiline(d.faq, 500, 6),
+    dressCode: text(d.dressCode, 120),
   }
   if (!draft.groom || !draft.bride || !draft.date || !draft.venue) return null
   return draft

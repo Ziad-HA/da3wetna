@@ -37,6 +37,9 @@ export function readDraft(): InviteDraft | null {
       photoTwo: typeof data.photoTwo === "string" ? data.photoTwo : "",
       program: typeof data.program === "string" ? data.program : "",
       gallery: typeof data.gallery === "string" ? data.gallery : "",
+      story: typeof data.story === "string" ? data.story : "",
+      faq: typeof data.faq === "string" ? data.faq : "",
+      dressCode: typeof data.dressCode === "string" ? data.dressCode : "",
     }
   } catch {
     return null

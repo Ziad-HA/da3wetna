@@ -25,7 +25,7 @@ export function OpeningEnvelope({ template, draft, photo, step, onOpen }: Props)
   const { envelope, vars } = template
   const sealText =
     envelope.sealKind === "initials"
-      ? `${draft.groom.trim().charAt(0) || "ز"}${draft.bride.trim().charAt(0) || "ف"}`
+      ? `${draft.groom.trim().charAt(0) || "ز"}${envelope.zoom ? "·" : ""}${draft.bride.trim().charAt(0) || "ف"}`
       : sealGlyph[envelope.sealKind]
 
   const style = {
@@ -50,6 +50,7 @@ export function OpeningEnvelope({ template, draft, photo, step, onOpen }: Props)
       data-flap={envelope.flapShape}
       data-pattern={envelope.linerPattern}
       data-band={envelope.band ? "pearls" : undefined}
+      data-zoom={envelope.zoom ? "1" : undefined}
       data-step={step}
       style={style}
       onClick={onOpen}

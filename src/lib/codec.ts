@@ -22,6 +22,9 @@ export function encodeDraft(draft: InviteDraft): string {
     photoTwo: draft.photoTwo.slice(0, 500),
     program: draft.program.slice(0, 400),
     gallery: draft.gallery.slice(0, 900),
+    story: draft.story.slice(0, 300),
+    faq: draft.faq.slice(0, 500),
+    dressCode: draft.dressCode.slice(0, 120),
   }
 
   const bytes = new TextEncoder().encode(JSON.stringify(slim))
@@ -68,6 +71,9 @@ export function decodeDraft(code: string): InviteDraft | null {
       photoTwo: readString("photoTwo"),
       program: readString("program"),
       gallery: readString("gallery"),
+      story: readString("story"),
+      faq: readString("faq"),
+      dressCode: readString("dressCode"),
     }
   } catch {
     return null

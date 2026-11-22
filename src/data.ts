@@ -235,10 +235,33 @@ export const templates: Template[] = [
     vars: { paper: "#F3EEE3", ink: "#3A3D2A", gold: "#A88B52", soft: "#6E6F55", shell: "#EAE2D2" },
     envelope: { body: ["#F4EFE3", "#E4DAC5"], flap: ["#F8F4EA", "#E9E0CC"], liner: "#FBF8F0", linerPattern: "plain", seal: "#8A6A3B", sealKind: "leaf", flapShape: "deep", band: true },
   },
+  {
+    id: "estate",
+    name: "حكاية الحديقة",
+    blurb: "ظرف زيتي بختم عنابي وصفحة زفاف طويلة بالزهور والتقويم والبرنامج",
+    category: "فرح",
+    isNew: true,
+    layout: "site",
+    frame: "arch",
+    ornament: "sprig",
+    groom: "رامي",
+    bride: "إيلين",
+    venue: "حديقة الدير",
+    time: "15:00",
+    vars: { paper: "#F1EAD6", ink: "#5E1C2A", gold: "#8B6B3A", soft: "#7A6A55", shell: "#5A612F" },
+    envelope: { body: ["#6F7640", "#4F5629"], flap: ["#7A8248", "#59602F"], liner: "#F1EAD6", linerPattern: "plain", seal: "#7A1F2D", sealKind: "initials", flapShape: "deep", zoom: true },
+  },
 ]
 
 export function getTemplate(id: string | undefined): Template | undefined {
   return templates.find((item) => item.id === id)
+}
+
+export const siteDefaults = {
+  program: "15:00 | استقبال الضيوف في الحديقة\n16:00 | عقد القران\n17:30 | كوكتيل تحت الأشجار\n19:00 | العشاء\n21:00 | الرقصة الأولى",
+  story: "التقينا صدفة على مقعد في حديقة، ونسي واحد فينا كتابه. بعد ست سنين قررنا نكتب الصفحة الجاية سوا، ويسعدنا تكونوا معانا فيها.",
+  faq: "هل في مواصلات للمكان؟ | هنوفر سيارات من الفندق للمكان وترجعكم بعد الحفل.\nهل الأطفال مدعوون؟ | أهلاً بيهم طبعًا.\nلو الجو مطر؟ | الحفل في قاعة مغطاة والحديقة للتصوير.",
+  dressCode: "أنيق بألوان الخريف الدافئة: العنابي والزيتي والعاجي",
 }
 
 export const defaultProgram = "17:00 | استقبال الضيوف\n18:00 | دخول العروسين\n19:00 | حفل العشاء\n21:00 | قص التورتة والتصوير"
@@ -261,8 +284,11 @@ export function draftFor(template: Template): InviteDraft {
     musicUrl: "",
     photoOne: "",
     photoTwo: "",
-    program: template.layout === "strip" ? defaultProgram : "",
+    program: template.layout === "strip" ? defaultProgram : template.layout === "site" ? siteDefaults.program : "",
     gallery: "",
+    story: template.layout === "site" ? siteDefaults.story : "",
+    faq: template.layout === "site" ? siteDefaults.faq : "",
+    dressCode: template.layout === "site" ? siteDefaults.dressCode : "",
   }
 }
 
