@@ -16,7 +16,6 @@ export function TemplatePreview() {
 
   const [introStep, setIntroStep] = useState(0)
   const [introSkipped, setIntroSkipped] = useState(false)
-  const [musicOn, setMusicOn] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const draft = useMemo(() => {
@@ -37,7 +36,7 @@ export function TemplatePreview() {
     const audio = audioRef.current
     if (!audio) return
     audio.volume = 0.7
-    audio.play().then(() => setMusicOn(true)).catch(() => setMusicOn(false))
+    audio.play().catch(() => {})
   }
 
   function openEnvelope() {
@@ -47,6 +46,7 @@ export function TemplatePreview() {
   }
 
   function handleStartEditing() {
+    if (!template) return
     clearDraft()
     navigate(`/editor/${template.id}`)
   }

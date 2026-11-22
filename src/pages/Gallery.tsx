@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { InviteThumb } from "../components/InviteThumb"
 import { packages } from "../config"
-import { activeTemplates, draftFor } from "../data"
+import { activeTemplates, draftFor, templates } from "../data"
 import { clearDraft, readActivePackage, readSelectedPackage } from "../lib/storage"
 import type { Occasion } from "../types"
 
