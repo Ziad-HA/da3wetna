@@ -107,10 +107,10 @@ export function SiteInvite({ draft, template, rsvp }: Props) {
       {draft.story ? <section className="vaux-sec site-reveal vaux-story-sec">
         <div className="vaux-story-wrapper">
           <img src="/vaux/story_frame.jpg" alt="" className="vaux-story-bg" />
-          <div className="vaux-story-content">
-            <span className="vaux-story-kicker">حكايتنا</span>
-            <h2 className="vaux-story-heading">بداية حكاية جديدة</h2>
-            <div className="vaux-story-text">{draft.story.split("\n").map((line, index) => <p key={index}>{line}</p>)}</div>
+          <div className="vaux-story-content" style={{ padding: "10% 13%", gap: "0.35rem" }}>
+            <span className="vaux-story-kicker" style={{ fontSize: "clamp(0.62rem, 2.4vw, 0.76rem)", lineHeight: 1.4 }}>حكايتنا</span>
+            <h2 className="vaux-story-heading" style={{ fontSize: "clamp(1.35rem, 5.2vw, 1.85rem)", lineHeight: 1.25, margin: "0.15rem 0 0.3rem" }}>بداية حكاية جديدة</h2>
+            <div className="vaux-story-text" style={{ width: "100%", maxWidth: "100%", fontSize: "clamp(0.72rem, 2.8vw, 0.86rem)", lineHeight: 1.65, fontStyle: "normal" }}>{draft.story.split("\n").filter((line) => line.trim()).map((line, index) => <p key={index} style={{ margin: index ? "0.35rem 0 0" : 0 }}>{line}</p>)}</div>
           </div>
         </div>
       </section> : null}
