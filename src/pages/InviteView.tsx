@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { Link, useParams } from "react-router-dom"
 import { StoryActions } from "../components/StoryActions"
+import { VenueMap } from "../components/VenueMap"
 import { Invitation } from "../components/Invitation"
 import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { getTemplate } from "../data"
@@ -163,7 +164,8 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
           {eventDate && !Number.isNaN(eventDate.getTime()) ? <div className="mt-3 grid grid-cols-4 gap-2" dir="rtl">{[[days,"يوم"],[hours,"ساعة"],[minutes,"دقيقة"],[seconds,"ثانية"]].map(([value,label]) => <div key={String(label)} className="rounded-2xl bg-white px-1 py-3 shadow-sm"><strong className="block font-display text-2xl text-[#a64257]">{String(value).padStart(2,"0")}</strong><span className="mt-1 block text-[10px] text-[#806b70]">{label}</span></div>)}</div> : <p className="mt-3 text-sm">ميعاد المناسبة هيتحدد قريبًا</p>}
         </section>
         {photos.length ? <section className="invite-photo-moments w-full rounded-[26px] border border-white/70 bg-white/80 p-4 shadow-lg"><p className="mb-3 text-center font-bold text-[#4a2d33]">صور من حكايتنا ♡</p><div className="grid grid-cols-2 gap-2">{photos.map((photo, index) => <img key={photo} src={photo} alt={`صورة من المناسبة ${index + 1}`} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />)}</div></section> : null}
-        <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="btn-ghost w-full justify-center bg-white/80">📍 اتجاهات المكان على الخريطة</a>
+        <VenueMap draft={draft} />
+        <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="btn-ghost w-full justify-center bg-white/80">📍 افتح الاتجاهات على Google Maps</a>
           </>
         )}
         {inviteId && !isSite ? <RsvpForm inviteId={inviteId} /> : null}
