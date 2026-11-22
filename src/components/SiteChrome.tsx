@@ -179,6 +179,9 @@ function Footer() {
             <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عندي استفسار عن دعوتنا")}`} target="_blank" rel="noreferrer" dir="ltr" className="mt-0.5 inline-flex min-h-7 w-fit items-center gap-1 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-2 py-1 text-[9px] font-semibold text-[#247747] transition hover:bg-[#e9f7ee] sm:gap-2 sm:px-3 sm:py-2 sm:text-sm">
               <WhatsAppIcon className="h-4 w-4" /> 01276390301
             </a>
+            <a href={"mailto:" + site.email} dir="ltr" className="mt-1 inline-flex min-h-7 w-fit items-center gap-1 rounded-full border border-[#f0dce1] bg-white px-2 py-1 text-[9px] font-semibold text-[#806b70] transition hover:border-[#d9aab5] hover:text-[#a64257] sm:gap-2 sm:px-3 sm:py-2 sm:text-sm">
+              {site.email}
+            </a>
           </div>
         </div>
 
