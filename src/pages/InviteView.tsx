@@ -143,7 +143,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
     {audio}
     <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? "#EFE7D1" : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? "#5E1C2A" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
       <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
-        {isSite ? <SiteInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} /> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
+        {isSite ? <><SiteInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} shareUrl={window.location.href} /><div className="w-full"><StoryActions draft={draft} code={code} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
           <>
         <header className="invite-public-heading text-center">
           <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
