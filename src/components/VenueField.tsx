@@ -25,6 +25,7 @@ type LeafletMarker = {
 }
 type LeafletMap = {
   setView(point: LeafletLatLng, zoom: number): LeafletMap
+  on(event: string, callback: (event: { latlng: LeafletLatLng }) => void): LeafletMap
   remove(): void
 }
 type LeafletNamespace = {
@@ -81,6 +82,18 @@ function featureAddress(feature: PhotonFeature): string {
 }
 const coordinateLink = (lat: number, lng: number) => `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=16/${lat}/${lng}`
 
+function cityCenter(city: string): LeafletLatLng {
+  const normalized = city.trim().toLowerCase()
+  if (/اسكندري|الإسكندرية|alexandria/.test(normalized)) return { lat: 31.2001, lng: 29.9187 }
+  if (/الجيز|giza/.test(normalized)) return { lat: 30.0131, lng: 31.2089 }
+  if (/القاهر|cairo/.test(normalized)) return { lat: 30.0444, lng: 31.2357 }
+  if (/شرم|sharm/.test(normalized)) return { lat: 27.9158, lng: 34.3299 }
+  if (/الغردق|hurghada/.test(normalized)) return { lat: 27.2579, lng: 33.8116 }
+  if (/المنصور|mansoura/.test(normalized)) return { lat: 31.0409, lng: 31.3785 }
+  if (/طنطا|tanta/.test(normalized)) return { lat: 30.7865, lng: 31.0004 }
+  return { lat: 30.0444, lng: 31.2357 }
+}
+
 type Props = {
   value: string
   city: string
@@ -98,6 +111,7 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
   const [error, setError] = useState("")
   const [open, setOpen] = useState(false)
   const [mapError, setMapError] = useState("")
+  const [mapPickerOpen, setMapPickerOpen] = useState(false)
   const requestId = useRef(0)
   const wrapper = useRef<HTMLDivElement>(null)
   const mapElement = useRef<HTMLDivElement>(null)
@@ -132,15 +146,27 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
       setLoading(true)
       setError("")
       try {
-        const params = new URLSearchParams({ q: [search, city.trim(), "مصر"].filter(Boolean).join(" "), limit: "6" })
-        const response = await fetch(`https://photon.komoot.io/api/?${params.toString()}`, { headers: { Accept: "application/json" } })
-        if (!response.ok) throw new Error("خدمة البحث مش متاحة حاليًا. جرّب تاني بعد شوية.")
-        const data = await response.json() as PhotonResponse
+        const queries = [...new Set([
+          [search, city.trim(), "مصر"].filter(Boolean).join(" "),
+          [search, city.trim()].filter(Boolean).join(" "),
+          search,
+        ])]
+        let results: PhotonFeature[] = []
+        let requestFailed = false
+        for (const text of queries) {
+          const params = new URLSearchParams({ q: text, limit: "6" })
+          const response = await fetch(`https://photon.komoot.io/api/?${params.toString()}`, { headers: { Accept: "application/json" } })
+          if (!response.ok) { requestFailed = true; continue }
+          const data = await response.json() as PhotonResponse
+          results = (data.features || []).filter((item) => item.geometry?.coordinates?.length === 2)
+          if (results.length) break
+        }
         if (currentRequest !== requestId.current) return
-        const results = (data.features || []).filter((item) => item.geometry?.coordinates?.length === 2).slice(0, 6)
-        setSuggestions(results)
+        setSuggestions(results.slice(0, 6))
         setOpen(true)
-        if (!results.length) setError("مفيش نتائج مطابقة. جرّب اسم القاعة مع المدينة أو اكتب العنوان يدويًا.")
+        if (!results.length) setError(requestFailed
+          ? "تعذر الوصول لخدمة البحث. تقدر تحدد المكان من الخريطة أو تكتب بياناته يدويًا."
+          : "المكان مش موجود في نتائج البحث. جرّب الاسم بالإنجليزي أو حدده من الخريطة واكتب اسمه يدويًا.")
       } catch (cause) {
         if (currentRequest === requestId.current) setError(cause instanceof Error ? cause.message : "حصلت مشكلة أثناء البحث. حاول تاني.")
       } finally {
@@ -151,8 +177,8 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
   }, [query, city, value, mapUrl])
 
   useEffect(() => {
-    if (latitude == null || longitude == null || !mapElement.current) {
-      if (latitude == null || longitude == null) {
+    if ((!mapPickerOpen && (latitude == null || longitude == null)) || !mapElement.current) {
+      if (!mapPickerOpen && (latitude == null || longitude == null)) {
         mapRef.current?.remove()
         mapRef.current = null
         markerRef.current = null
@@ -165,7 +191,7 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
         await loadLeaflet()
         const L = (window as LeafletWindow).L
         if (cancelled || !L || !mapElement.current) return
-        const point = { lat: latitude!, lng: longitude! }
+        const point = latitude != null && longitude != null ? { lat: latitude, lng: longitude } : cityCenter(city)
         if (!mapRef.current) {
           const map = L.map(mapElement.current, { scrollWheelZoom: false }).setView(point, 16)
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -181,6 +207,12 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
             const lng = Number(moved.lng.toFixed(7))
             onChangeRef.current(latest.current.venue, latest.current.address, lat, lng, coordinateLink(lat, lng))
           })
+          map.on("click", (event) => {
+            const lat = Number(event.latlng.lat.toFixed(7))
+            const lng = Number(event.latlng.lng.toFixed(7))
+            markerRef.current?.setLatLng({ lat, lng })
+            onChangeRef.current(latest.current.venue, latest.current.address, lat, lng, coordinateLink(lat, lng))
+          })
         } else {
           mapRef.current.setView(point, 16)
           markerRef.current?.setLatLng(point)
@@ -192,7 +224,7 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
     }
     void setupMap()
     return () => { cancelled = true }
-  }, [latitude, longitude])
+  }, [latitude, longitude, mapPickerOpen, city])
 
   useEffect(() => () => { mapRef.current?.remove(); mapRef.current = null; markerRef.current = null }, [])
 
@@ -239,12 +271,15 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
         </ul>
       ) : null}
       {error ? <p role="status" className="mt-2 text-xs text-[#b83b50]">{error}</p> : null}
-      <p className="mt-2 text-[11px] leading-6 text-[#90777d]">البحث والخرائط متاحة بدون مفاتيح API. اختار المكان من النتائج، أو اكتب اسمه يدويًا. اسحب العلامة لتعديل الموقع بدقة.</p>
+      <p className="mt-2 text-[11px] leading-6 text-[#90777d]">لو القاعة مش ظاهرة في البحث، اكتب اسمها وافتح الخريطة وحدد مكانها بنفسك. جرّب البحث بالعربي أو الإنجليزي.</p>
+      <button type="button" onClick={() => setMapPickerOpen((current) => !current)} className="mt-3 inline-flex min-h-10 items-center justify-center rounded-full border border-[#d9a3ae] bg-white px-4 text-xs font-bold text-[#a64257] transition hover:bg-[#fff3f5]">
+        {mapPickerOpen || (latitude != null && longitude != null) ? "إخفاء الخريطة" : "📍 تحديد المكان على الخريطة"}
+      </button>
       {address ? <p className="mt-2 text-xs leading-6 text-[#527566]">العنوان: {address}</p> : null}
-      {latitude != null && longitude != null ? (
+      {mapPickerOpen || (latitude != null && longitude != null) ? (
         <div className="mt-3 overflow-hidden rounded-2xl border border-[#efd5dc] bg-[#fffafa]">
-          <div ref={mapElement} className="h-56 w-full" aria-label="خريطة تفاعلية لمكان المناسبة" />
-          <p className="px-3 py-2 text-[11px] leading-5 text-[#806b70]">حرّك العلامة على الخريطة لتعديل مكان القاعة يدويًا.</p>
+          <div ref={mapElement} className="h-64 w-full" aria-label="خريطة تفاعلية لاختيار مكان المناسبة" />
+          <p className="px-3 py-2 text-[11px] leading-5 text-[#806b70]">اضغط على الخريطة لنقل العلامة، أو اسحب العلامة للمكان الصحيح. {latitude == null || longitude == null ? "الخريطة تبدأ من المدينة المكتوبة، أو القاهرة لو المدينة فاضية." : "تم حفظ الإحداثيات تلقائيًا."}</p>
           {mapError ? <p role="status" className="px-3 pb-3 text-xs text-[#b83b50]">{mapError}</p> : null}
         </div>
       ) : null}
