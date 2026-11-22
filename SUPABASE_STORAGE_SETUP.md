@@ -14,7 +14,7 @@ Bucket limits: 12 MiB maximum; JPEG, PNG, WebP, MP3, MP4/M4A, WAV, and AAC only.
 Set these for Production, Preview, and Development:
 
 - `SUPABASE_URL`: Supabase Project URL.
-- `SUPABASE_SERVICE_ROLE_KEY`: server-only Supabase service-role key. Never prefix this with `VITE_`; never put it in client-side code.
+- `SUPABASE_SECRET_KEY`: preferred server-only Supabase Secret API key (`sb_secret_...`), or use `SUPABASE_SERVICE_ROLE_KEY` for the legacy service-role key. Set one of these names only. Never prefix either with `VITE_`; never put it in client-side code.
 - `VITE_SUPABASE_URL`: Project URL (public).
 - `VITE_SUPABASE_ANON_KEY`: publishable/anon key (public; currently retained for compatibility with the client config).
 
