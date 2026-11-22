@@ -2,8 +2,8 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { InviteThumb } from "../components/InviteThumb"
 import { packages } from "../config"
-import { faqs } from "../data"
-import { draftFor, templates } from "../data"
+import { activeTemplates, faqs } from "../data"
+import { draftFor } from "../data"
 import { money } from "../lib/format"
 import { clearDraft, readLast } from "../lib/storage"
 
@@ -45,7 +45,7 @@ export function Home() {
             <span aria-hidden="true" className="absolute right-[10%] top-[15%] z-10 animate-pulse text-3xl text-[#c6a15b]">✧</span>
             <span aria-hidden="true" className="absolute bottom-[14%] left-[9%] z-10 text-3xl text-[#d18d9b]">♡</span>
             <div className="home-hero-invitation relative z-10 w-[min(235px,64vw)] rotate-[1deg] sm:w-[min(300px,58vw)]">
-              <div className="home-invitation-paper overflow-hidden"><InviteThumb draft={draftFor(templates[1])} /></div>
+              <div className="home-invitation-paper overflow-hidden"><InviteThumb draft={draftFor(activeTemplates[1])} /></div>
             </div>
             <div className="absolute right-0 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-2 rounded-2xl border border-[#ead7c5] bg-white/90 px-2 py-3 text-center shadow-lg backdrop-blur sm:flex">
               {[["Aa","الكلام"],["Tt","الخط"],["▧","الصور"],["♫","الموسيقى"],["◉","الألوان"],["◷","الميعاد"]].map(([symbol,label]) => <div key={label} className="w-10"><span className="block font-display text-base text-[#b64b60]">{symbol}</span><span className="block text-[8px] text-[#806b70]">{label}</span></div>)}
@@ -57,7 +57,7 @@ export function Home() {
 
       <section className="border-y border-[#f0dce1] bg-white">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 py-5 text-center sm:grid-cols-4 sm:gap-5 sm:py-7">
-          {[[String(templates.length), "تصميم متنوع"], ["فوري", "معاينة وتعديل"], ["لينك", "للمشاركة مع الضيوف"], [money(packages[0].price), "تبدأ الأسعار من"]].map(([value,label]) => (
+          {[[String(activeTemplates.length), "تصميم متنوع"], ["فوري", "معاينة وتعديل"], ["لينك", "للمشاركة مع الضيوف"], [money(packages[0].price), "تبدأ الأسعار من"]].map(([value,label]) => (
             <div key={label}><p className="font-display text-2xl text-[#a64257] sm:text-3xl">{value}</p><p className="mt-1 text-[11px] text-[#806b70] sm:text-sm">{label}</p></div>
           ))}
         </div>
@@ -69,7 +69,7 @@ export function Home() {
           <Link to="/templates" className="shrink-0 text-xs font-bold text-[#a64257] sm:text-sm">كل التصميمات ←</Link>
         </div>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
-          {templates.slice(0,4).map((template) => (
+          {activeTemplates.slice(0,4).map((template) => (
             <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group min-w-0">
               <div className="home-template-art overflow-hidden">
                 <InviteThumb draft={draftFor(template)} />
