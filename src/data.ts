@@ -107,6 +107,8 @@ export function draftFor(template: Template): InviteDraft {
     story: isSite ? siteDefaults.story : "",
     faq: isSite ? siteDefaults.faq : "",
     dressCode: isSite ? siteDefaults.dressCode : "",
+    arabicFont: "Amiri",
+    englishFont: "Cormorant Garamond",
   }
 }
 
