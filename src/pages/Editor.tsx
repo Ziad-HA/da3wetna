@@ -250,8 +250,6 @@ export function Editor() {
               </div>
               <MediaUploadField label="صورة الدعوة الأولى" kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
               <MediaUploadField label="صورة إضافية" kind="image" value={draft.photoTwo} onChange={(url) => update({ photoTwo: url })} />
-              <NasheedPicker value={draft.musicUrl} onChange={(file) => update({ musicUrl: file })} />
-              <p className="text-[11px] leading-6 text-[#90777d]">ملفات الأناشيد مكانها public/audio داخل المشروع. أسماء الملفات المطلوبة موجودة في README داخل المجلد.</p>
             </div>
             {template.layout === "strip" || template.layout === "site" ? (
               <div className="mt-5 grid gap-4 border-t border-[#f3e6e9] pt-5">
@@ -275,6 +273,7 @@ export function Editor() {
               </div>
             ) : null}
           </details> : null}
+          {step === 2 ? <div className="mt-4"><NasheedPicker value={draft.musicUrl} onChange={(file) => update({ musicUrl: file })} /></div> : null}
           {step === 2 ? <div className="mt-4"><FontPicker arabicFont={draft.arabicFont || "Amiri"} englishFont={draft.englishFont || "Cormorant Garamond"} onArabicChange={(arabicFont) => update({ arabicFont })} onEnglishChange={(englishFont) => update({ englishFont })} /></div> : null}
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
