@@ -75,9 +75,13 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
     return () => window.clearTimeout(timer)
   }, [hasDraft, introSkipped, introStep])
 
+  const MUSIC_START_SECONDS = 75
+  const MUSIC_END_SECONDS = 165
+
   function startMusic() {
     const audio = audioRef.current
     if (!audio) return
+    if (audio.currentTime < MUSIC_START_SECONDS || audio.currentTime >= MUSIC_END_SECONDS) audio.currentTime = MUSIC_START_SECONDS
     audio.volume = 0.7
     audio.play().then(() => setMusicOn(true)).catch(() => setMusicOn(false))
   }
@@ -103,7 +107,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const isStrip = template.layout === "strip"
   const isSite = template.layout === "site"
 
-  const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= 90) { event.currentTarget.pause(); event.currentTarget.currentTime = 90; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
+  const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
   if (!introSkipped && introStep < 3 && template.envelope.zoom) {
     return (
