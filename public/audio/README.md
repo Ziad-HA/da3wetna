@@ -1,19 +1,21 @@
 # ملفات أناشيد الدعوات
 
-ضع ملفات MP3 الأربعة داخل هذا المجلد بالأسماء التالية بالضبط:
+ضع ملفات الصوت الأربعة داخل هذا المجلد بالأسماء التالية بالضبط:
 
-- `baraka-allahu.mp3` — بارك الله لكما
-- `masha-allah.mp3` — ما شاء الله
-- `rabbi-yebarek.mp3` — ربي يبارك
-- `geena-nefrah.mp3` — جينا نفرح
+- `Baraka Allahu Lakuma.mp3` — بارك الله لكما
+- `Masha Allah.mp3` — ما شاء الله
+- `Rabbi Yebarek.mp3` — ربي يبارك
+- `For The Rest Of My Life .wav` — For The Rest Of My Life
 
 المسارات المستخدمة في الموقع:
 
-- `/audio/baraka-allahu.mp3`
-- `/audio/masha-allah.mp3`
-- `/audio/rabbi-yebarek.mp3`
-- `/audio/geena-nefrah.mp3`
+- `/audio/Baraka%20Allahu%20Lakuma.mp3`
+- `/audio/Masha%20Allah.mp3`
+- `/audio/Rabbi%20Yebarek.mp3`
+- `/audio/For%20The%20Rest%20Of%20My%20Life%20.wav`
 
-لا تغيّر أسماء الملفات. بعد إضافتها إلى هذا المجلد، ارفع التغييرات إلى GitHub وسيقوم Vercel بنشرها مع الموقع.
+يشغّل الموقع المقطع من الثانية 75 إلى الثانية 165 (01:15–02:45)، أي دقيقة ونصف، سواء في المعاينة أو داخل الدعوة.
+
+لا تغيّر أسماء الملفات أو امتداداتها. بعد إضافة ملفات الصوت إلى هذا المجلد ورفعها إلى GitHub، سيقوم Vercel بنشرها مع الموقع.
 
 استخدم فقط ملفات صوتية لديك إذن أو ترخيص باستخدامها على موقع تجاري.
