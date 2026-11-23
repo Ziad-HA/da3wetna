@@ -1399,15 +1399,15 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .strip-kicker { font-size: .78rem; color: var(--soft); }
 .strip-orn { display: block; margin: .6rem 0; color: var(--gold); font-size: 1.4rem; }
 .strip-small { font-size: .86rem; color: var(--soft); line-height: 1.8; }
-.strip-names { font-family: var(--font-display, inherit); font-size: clamp(2.1rem, 11vw, 2.9rem); line-height: 1.25; margin: .5rem 0; text-wrap: balance; }
+.strip-names { font-family: var(--invite-font-ar, "Amiri"), serif; font-size: clamp(2.1rem, 11vw, 2.9rem); line-height: 1.25; margin: .5rem 0; text-wrap: balance; }
 .strip-names i { display: block; font-style: normal; color: var(--gold); font-size: .55em; line-height: 1.3; }
 .strip-names-sm { font-size: 1.7rem; }
-.strip-script { font-family: var(--font-display, inherit); color: var(--gold); font-size: 1.35rem; margin-top: .3rem; }
+.strip-script { font-family: var(--invite-font-ar, "Amiri"), serif; color: var(--gold); font-size: 1.35rem; margin-top: .3rem; }
 .strip-arch { margin: 1.6rem auto 1.2rem; width: 82%; aspect-ratio: 3 / 4; padding: 6px; border: 2px solid var(--gold); border-radius: 999px 999px 8px 8px; overflow: hidden; }
 .strip-arch img { width: 100%; height: 100%; object-fit: cover; border-radius: 999px 999px 4px 4px; display: block; }
 .strip-arch-empty { display: grid; place-items: center; background: color-mix(in srgb, var(--gold) 12%, transparent); color: var(--gold); font-size: 3rem; }
 .strip-msg { font-size: 1rem; line-height: 2; color: var(--ink); }
-.strip-title { font-family: var(--font-display, inherit); font-size: 1.7rem; margin-bottom: .6rem; }
+.strip-title { font-family: var(--invite-font-ar, "Amiri"), serif; font-size: 1.7rem; margin-bottom: .6rem; }
 .strip-title::after { content: "♥"; display: block; margin-top: .25rem; color: var(--gold); font-size: .7rem; }
 .strip-date { font-size: 1.25rem; font-weight: 800; color: var(--gold); }
 .strip-cal { margin: 1.2rem auto 0; max-width: 17rem; }
@@ -2114,13 +2114,13 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .vaux-site[dir="rtl"] {
   direction: rtl;
   text-align: center;
-  font-family: "Cairo", "Tajawal", sans-serif;
+  font-family: var(--invite-font-en, "Cormorant Garamond"), var(--invite-font-ar, "Cairo"), sans-serif;
   letter-spacing: 0;
 }
 .vaux-site[dir="rtl"] .vaux-script-title,
 .vaux-site[dir="rtl"] .vaux-story-heading,
 .vaux-site[dir="rtl"] .vaux-count-item strong {
-  font-family: "Aref Ruqaa", "Cairo", serif;
+  font-family: var(--invite-font-ar, "Aref Ruqaa"), serif;
   letter-spacing: 0;
 }
 .vaux-site[dir="rtl"] .vaux-kicker,
