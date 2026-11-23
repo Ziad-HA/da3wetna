@@ -28,6 +28,8 @@ export function encodeDraft(draft: InviteDraft): string {
     story: draft.story.slice(0, 300),
     faq: draft.faq.slice(0, 500),
     dressCode: draft.dressCode.slice(0, 120),
+    arabicFont: draft.arabicFont.slice(0, 40),
+    englishFont: draft.englishFont.slice(0, 40),
   }
 
   const bytes = new TextEncoder().encode(JSON.stringify(slim))
@@ -80,6 +82,8 @@ export function decodeDraft(code: string): InviteDraft | null {
       story: readString("story"),
       faq: readString("faq"),
       dressCode: readString("dressCode"),
+      arabicFont: readString("arabicFont") || "Amiri",
+      englishFont: readString("englishFont") || "Cormorant Garamond",
     }
   } catch {
     return null
