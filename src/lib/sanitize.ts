@@ -4,6 +4,9 @@ import type { InviteDraft } from "../types.js"
 // eslint-disable-next-line no-control-regex
 const CONTROL = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g
 
+const ARABIC_FONTS = ["Amiri", "Aref Ruqaa", "Cairo", "Changa", "El Messiri", "IBM Plex Sans Arabic", "Almarai", "Alexandria", "Reem Kufi", "Tajawal", "Readex Pro", "Lalezar"]
+const ENGLISH_FONTS = ["Cormorant Garamond", "Playfair Display", "Montserrat", "Poppins", "Lora", "Cinzel", "Libre Baskerville", "Great Vibes"]
+
 function text(value: unknown, max: number): string {
   return typeof value === "string" ? value.replace(CONTROL, "").trim().slice(0, max) : ""
 }
@@ -64,6 +67,8 @@ export function sanitizeDraft(raw: unknown): InviteDraft | null {
     story: text(d.story, 300),
     faq: multiline(d.faq, 500, 6),
     dressCode: text(d.dressCode, 120),
+    arabicFont: typeof d.arabicFont === "string" && ARABIC_FONTS.includes(d.arabicFont) ? d.arabicFont : "Amiri",
+    englishFont: typeof d.englishFont === "string" && ENGLISH_FONTS.includes(d.englishFont) ? d.englishFont : "Cormorant Garamond",
   }
   if (!draft.groom || !draft.bride || !draft.date || !draft.venue) return null
   return draft
