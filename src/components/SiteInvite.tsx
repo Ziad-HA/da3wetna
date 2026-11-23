@@ -107,7 +107,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
             <h1 className="vaux-hero-names">
               <span>{draft.groom}</span><span className="vaux-amp">و</span><span>{draft.bride}</span>
             </h1>
-            <p className="vaux-hero-hosts">{draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}</p>
+            <p className="vaux-hero-hosts">{en ? "Together with our families" : (draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف")}</p>
           </div>
         </div>
       </section>
@@ -157,12 +157,12 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         <span className="vaux-kicker">{en ? "SHARE THE JOY" : "شاركوا فرحتنا"}</span>
         <h2 className="vaux-script-title">{en ? "Share with family & friends" : "شارك الدعوة مع الأهل والأصدقاء"}</h2>
         <div className="vaux-share-grid" aria-label="مشاركة الدعوة">
-          <button type="button" onClick={() => shareInvitation("whatsapp")}><b>◉</b><span>واتساب</span></button>
+          <button type="button" onClick={() => shareInvitation("whatsapp")}><b>◉</b><span>{en ? "WhatsApp" : "واتساب"}</span></button>
           <button type="button" onClick={() => shareInvitation("facebook")}><b>f</b><span>Facebook</span></button>
           <button type="button" onClick={() => shareInvitation("x")}><b>𝕏</b><span>X / Twitter</span></button>
           <button type="button" onClick={() => shareInvitation("instagram")}><b>◎</b><span>Instagram</span></button>
           <button type="button" onClick={() => shareInvitation("tiktok")}><b>♪</b><span>TikTok</span></button>
-          <button type="button" onClick={() => shareInvitation("other")}><b>↗</b><span>مشاركة أخرى</span></button>
+          <button type="button" onClick={() => shareInvitation("other")}><b>↗</b><span>{en ? "More" : "مشاركة أخرى"}</span></button>
         </div>
         <p className="vaux-share-note">{en ? "For Instagram and TikTok, the invitation link will be copied automatically." : "في إنستجرام وتيك توك سيتم نسخ رابط الدعوة تلقائيًا."}</p>
         {shareNotice ? <p className="vaux-share-status" role="status" aria-live="polite">{shareNotice}</p> : null}

@@ -179,6 +179,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
         </section>
         <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
       </div>
+      {!isSite && musicUrl ? <button type="button" onClick={toggleMusic} className="invite-music-toggle" aria-pressed={musicOn} aria-label={musicOn ? "إيقاف موسيقى الدعوة" : "تشغيل موسيقى الدعوة"}>{musicOn ? "♫" : "♪"}</button> : null}
     </main>
     </>
   )
