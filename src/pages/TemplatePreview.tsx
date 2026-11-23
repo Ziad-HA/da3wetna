@@ -173,7 +173,9 @@ export function TemplatePreview() {
           }
         >
           <div className={`preview-content mx-auto grid w-full ${isSite ? "preview-content-site max-w-6xl" : "max-w-3xl"} justify-items-center gap-5`}>
-            {isSite ? (
+            {isGarden ? (
+              <GardenInvite draft={draft} />
+            ) : isSite ? (
               <SiteInvite draft={draft} template={template} />
             ) : isStrip ? (
               <StripInvite draft={draft} template={template} autoScroll />
