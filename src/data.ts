@@ -89,7 +89,7 @@ export function draftFor(template: Template): InviteDraft {
     occasion: template.category,
     hosts: "يتشرفان بدعوتكم",
     message: "لمشاركتنا فرحة كتب الكتاب والزفاف",
-    date: template.id === "estate" ? "2026-10-17" : isSite ? "2027-10-02" : "2026-12-18",
+    date: isSite ? "2027-10-02" : "2026-12-18",
     time: template.id === "estate" ? "15:00" : template.time,
     venue: template.venue,
     city: "القاهرة",

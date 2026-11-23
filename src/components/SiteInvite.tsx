@@ -6,6 +6,12 @@ import type { InviteDraft, Template } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
 
+const formatTime = (value: string, locale = "ar-EG") => {
+  const [hour, minute] = value.split(":").map(Number)
+  if (!Number.isFinite(hour) || !Number.isFinite(minute)) return value
+  return new Intl.DateTimeFormat(locale, { hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(2000, 0, 1, hour, minute))
+}
+
 function downloadIcs(draft: InviteDraft) {
   const [y, m, d] = draft.date.split("-").map(Number)
   const [hh, mm] = (draft.time || "18:00").split(":").map(Number)
@@ -126,7 +132,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
 
       <section className="vaux-sec site-reveal vaux-reception-sec">
         <div className="vaux-reception-copy">
-          <span className="vaux-kicker">{en ? "THE WEDDING DETAILS" : "مستنيينكم تشاركونا"}</span><h2 className="vaux-script-title">{en ? "When & where" : "ميعادنا ومكاننا"}</h2>{validDate ? <p className="vaux-body-text">{formatArabicDate(draft.date)} — {en ? "3:00 PM to 7:00 PM" : "من 3 عصرًا إلى 7 مساءً"}</p> : null}<p className="vaux-time-display">{en ? "Starting at 3:00 PM" : "الفرح بيبدأ الساعة 3 عصرًا"}</p>
+          <span className="vaux-kicker">{en ? "THE WEDDING DETAILS" : "مستنيينكم تشاركونا"}</span><h2 className="vaux-script-title">{en ? "When & where" : "ميعادنا ومكاننا"}</h2>{validDate ? <p className="vaux-body-text">{formatArabicDate(draft.date)} — {en ? `${formatTime(draft.time || "15:00", "en-US")} to 7:00 PM` : `من ${formatTime(draft.time || "15:00")} إلى 7 مساءً`}</p> : null}<p className="vaux-time-display">{en ? `The wedding starts at ${formatTime(draft.time || "15:00", "en-US")}` : `الفرح بيبدأ الساعة ${formatTime(draft.time || "15:00")}`}</p>
           <p className="vaux-body-meta">{[draft.venue, draft.city].filter(Boolean).join(" — ")}</p>
           <div className="vaux-location-card">
             <span className="vaux-kicker">{en ? "WEDDING LOCATION" : "مكان الحفل"}</span><h3 className="vaux-venue-name">{draft.venue || (en ? "Wedding venue" : "مكان الحفل")}</h3><p className="vaux-body-text">{en ? "Open the location on Google Maps or share it with family and friends." : "افتحوا المكان مباشرة على خرائط Google أو شاركوا اللوكيشن مع الأهل والأصدقاء."}</p>
