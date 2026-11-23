@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
-import { EstateOpening } from "../components/EstateOpening"\nimport { GardenOpening } from "../components/GardenOpening"\nimport { GardenInvite } from "../components/GardenInvite"
+import { EstateOpening } from "../components/EstateOpening"
+import { GardenOpening } from "../components/GardenOpening"
+import { GardenInvite } from "../components/GardenInvite"
 import { Invitation } from "../components/Invitation"
 import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { SiteInvite } from "../components/SiteInvite"
@@ -52,7 +54,8 @@ export function TemplatePreview() {
   }
 
   const isStrip = template.layout === "strip"
-  const isSite = template.layout === "site"\n  const isGarden = template.id === "garden-classic"
+  const isSite = template.layout === "site"
+  const isGarden = template.id === "garden-classic"
 
   return (
     <div className="preview-page-container relative min-h-dvh">
@@ -88,7 +91,9 @@ export function TemplatePreview() {
       </header>
 
       {/* Opening Envelope Screens */}
-      {!introSkipped && introStep < 3 && isGarden ? (\n        <GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />\n      ) : !introSkipped && introStep < 3 && template.envelope.zoom ? (
+      {!introSkipped && introStep < 3 && isGarden ? (
+        <GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />
+      ) : !introSkipped && introStep < 3 && template.envelope.zoom ? (
         <EstateOpening
           draft={draft}
           step={introStep}
