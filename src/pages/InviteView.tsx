@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
+import { useEffect, useRef, useState, type CSSProperties } from "react"
 import { Link, useParams } from "react-router-dom"
 import { StoryActions } from "../components/StoryActions"
 import { VenueMap } from "../components/VenueMap"
@@ -45,27 +45,15 @@ export function InviteView() {
 
 function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: string | null; code: string }) {
   const template = getTemplate(draft.templateId)
-  const [now, setNow] = useState(() => Date.now())
   const [introStep, setIntroStep] = useState(0)
   const [introSkipped, setIntroSkipped] = useState(false)
   const [musicOn, setMusicOn] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const eventDate = useMemo(() => draft.date ? new Date(`${draft.date}T${draft.time || "00:00"}:00`) : null, [draft.date, draft.time])
-  const remaining = eventDate && !Number.isNaN(eventDate.getTime()) ? Math.max(0, eventDate.getTime() - now) : 0
-  const days = Math.floor(remaining / 86400000)
-  const hours = Math.floor((remaining % 86400000) / 3600000)
-  const minutes = Math.floor((remaining % 3600000) / 60000)
-  const seconds = Math.floor((remaining % 60000) / 1000)
   const safeUrl = (value: string) => { try { const url = new URL(value, window.location.origin); return url.protocol === "https:" || url.protocol === "http:" ? url.href : "" } catch { return "" } }
   const musicUrl = safeUrl(draft.musicUrl)
   const photos = [draft.photoOne, draft.photoTwo].map(safeUrl).filter(Boolean)
   const rsvpNumber = draft.rsvpPhone.replace(/\D/g, "")
   const rsvpLink = rsvpNumber ? `https://wa.me/${rsvpNumber}?text=${encodeURIComponent(`أهلاً، حابب أأكد حضوري لمناسبة ${draft.groom} و${draft.bride}.`)}` : ""
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 1000)
-    return () => window.clearInterval(timer)
-  }, [])
 
   // الظرف بيستنى ضغطة الضيف (step 0). بعد الضغطة: الرفرف يفتح ← الكارت يطلع ← الدعوة تظهر.
   const hasDraft = true
@@ -148,7 +136,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
     {audio}
     <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? "#EFE7D1" : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? "#5E1C2A" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
       <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
-        {isSite ? <><SiteInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} shareUrl={window.location.href} /><div className="w-full"><StoryActions draft={draft} code={code} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
+        {isSite ? <><SiteInvite draft={draft} template={template} rsvp={inviteId ? (language) => <RsvpForm inviteId={inviteId} language={language} /> : undefined} shareUrl={window.location.href} musicOn={musicOn} hasMusic={Boolean(musicUrl)} onToggleMusic={toggleMusic} /><div className="w-full"><StoryActions draft={draft} code={code} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
           <>
         <header className="invite-public-heading text-center">
           <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
@@ -183,11 +171,6 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
         </section>
         <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
       </div>
-      {musicUrl ? (
-        <button type="button" onClick={toggleMusic} className="invite-music-toggle" aria-pressed={musicOn} aria-label={musicOn ? "إيقاف موسيقى الدعوة" : "تشغيل موسيقى الدعوة"}>
-          {musicOn ? "♫" : "♪"}
-        </button>
-      ) : null}
     </main>
     </>
   )
