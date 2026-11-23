@@ -7,7 +7,9 @@ import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
-import { EstateOpening } from "../components/EstateOpening"\nimport { GardenOpening } from "../components/GardenOpening"\nimport { GardenInvite } from "../components/GardenInvite"
+import { EstateOpening } from "../components/EstateOpening"
+import { GardenOpening } from "../components/GardenOpening"
+import { GardenInvite } from "../components/GardenInvite"
 import { SiteInvite } from "../components/SiteInvite"
 import { StripInvite } from "../components/StripInvite"
 import { RsvpForm } from "../components/RsvpForm"
@@ -102,11 +104,16 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
 
   if (!template) return null
   const isStrip = template.layout === "strip"
-  const isSite = template.layout === "site"\n  const isGarden = template.id === "garden-classic"
+  const isSite = template.layout === "site"
+  const isGarden = template.id === "garden-classic"
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
-  if (!introSkipped && introStep < 3 && isGarden) {\n    return <><GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />{audio}</>\n  }\n\n  if (!introSkipped && introStep < 3 && template.envelope.zoom) {
+  if (!introSkipped && introStep < 3 && isGarden) {
+    return <><GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />{audio}</>
+  }
+
+  if (!introSkipped && introStep < 3 && template.envelope.zoom) {
     return (
       <>
         {audio}
