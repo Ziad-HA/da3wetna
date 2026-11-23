@@ -37,7 +37,8 @@ export function Dashboard() {
     const tick = async () => {
       const status = await load()
       if (stop) return
-      if ((status === "pending" || params.get("paid") === "1") && status !== "paid" && status !== "rejected" && tries++ < 60) window.setTimeout(tick, 5000)
+      if (status === "paid") { window.setTimeout(tick, 15000); return }
+      if ((status === "pending" || params.get("paid") === "1") && status !== "rejected" && tries++ < 60) window.setTimeout(tick, 5000)
     }
     void tick()
     return () => { stop = true }
