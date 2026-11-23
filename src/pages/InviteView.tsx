@@ -128,7 +128,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
     return (
       <>
         {audio}
-        <main className={`invite-opening-screen invite-opening-step-${introStep}`} style={{ "--invite-shell": template.vars.shell, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
+        <main className={`invite-opening-screen invite-opening-step-${introStep}`} style={{ "--invite-shell": template.vars.shell, "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
           <div className="invite-opening-glow" aria-hidden="true" />
           <div className="invite-opening-copy">
             <span>بكل الحب ندعوكم لمشاركتنا</span>
@@ -146,7 +146,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   return (
     <>
     {audio}
-    <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? "#EFE7D1" : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? "#5E1C2A" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
+    <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? "#EFE7D1" : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? "#5E1C2A" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
       <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
         {isSite ? <><SiteInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} shareUrl={window.location.href} /><div className="w-full"><StoryActions draft={draft} code={code} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
           <>
