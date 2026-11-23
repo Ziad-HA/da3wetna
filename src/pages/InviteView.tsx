@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react"
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { Link, useParams } from "react-router-dom"
 import { StoryActions } from "../components/StoryActions"
 import { VenueMap } from "../components/VenueMap"
@@ -45,13 +45,21 @@ export function InviteView() {
 
 function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: string | null; code: string }) {
   const template = getTemplate(draft.templateId)
+  const [now, setNow] = useState(() => Date.now())
   const [introStep, setIntroStep] = useState(0)
   const [introSkipped, setIntroSkipped] = useState(false)
   const [musicOn, setMusicOn] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const eventDate = useMemo(() => draft.date ? new Date(`${draft.date}T${draft.time || "00:00"}:00`) : null, [draft.date, draft.time])
+  const remaining = eventDate && !Number.isNaN(eventDate.getTime()) ? Math.max(0, eventDate.getTime() - now) : 0
+  const days = Math.floor(remaining / 86400000)
+  const hours = Math.floor((remaining % 86400000) / 3600000)
+  const minutes = Math.floor((remaining % 3600000) / 60000)
+  const seconds = Math.floor((remaining % 60000) / 1000)
   const safeUrl = (value: string) => { try { const url = new URL(value, window.location.origin); return url.protocol === "https:" || url.protocol === "http:" ? url.href : "" } catch { return "" } }
   const musicUrl = safeUrl(draft.musicUrl)
   const photos = [draft.photoOne, draft.photoTwo].map(safeUrl).filter(Boolean)
+  useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(timer) }, [])
   const rsvpNumber = draft.rsvpPhone.replace(/\D/g, "")
   const rsvpLink = rsvpNumber ? `https://wa.me/${rsvpNumber}?text=${encodeURIComponent(`أهلاً، حابب أأكد حضوري لمناسبة ${draft.groom} و${draft.bride}.`)}` : ""
 
