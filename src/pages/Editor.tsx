@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { MediaUploadField } from "../components/MediaUploadField"
+import { NasheedPicker } from "../components/NasheedPicker"
 import { VenueField } from "../components/VenueField"
 import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
@@ -248,8 +249,8 @@ export function Editor() {
               </div>
               <MediaUploadField label="صورة الدعوة الأولى" kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
               <MediaUploadField label="صورة إضافية" kind="image" value={draft.photoTwo} onChange={(url) => update({ photoTwo: url })} />
-              <MediaUploadField label="موسيقى الدعوة" kind="audio" value={draft.musicUrl} onChange={(url) => update({ musicUrl: url })} />
-              <p className="text-[11px] leading-6 text-[#90777d]">رفع الملفات يحتاج إعداد Supabase Storage مرة واحدة. لو لسه مش مربوط، هتظهر رسالة توضح المطلوب بدل ما يضيع الملف.</p>
+              <NasheedPicker value={draft.musicUrl} onChange={(file) => update({ musicUrl: file })} />
+              <p className="text-[11px] leading-6 text-[#90777d]">ملفات الأناشيد مكانها public/audio داخل المشروع. أسماء الملفات المطلوبة موجودة في README داخل المجلد.</p>
             </div>
             {template.layout === "strip" || template.layout === "site" ? (
               <div className="mt-5 grid gap-4 border-t border-[#f3e6e9] pt-5">
