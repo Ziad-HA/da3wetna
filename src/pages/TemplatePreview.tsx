@@ -167,7 +167,7 @@ export function TemplatePreview() {
             } as CSSProperties
           }
         >
-          <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
+          <div className={`preview-content mx-auto grid w-full ${isSite ? "preview-content-site max-w-6xl" : "max-w-3xl"} justify-items-center gap-5`}>
             {isSite ? (
               <SiteInvite draft={draft} template={template} />
             ) : isStrip ? (

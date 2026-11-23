@@ -31,7 +31,7 @@ export function Home() {
             </p>
             <div className="mt-6 flex flex-col justify-center gap-2.5 sm:flex-row md:justify-start">
               <Link to="/templates" className="btn-gold min-h-12 justify-center px-6 shadow-[0_10px_25px_rgba(166,66,87,.18)]">ابدأوا تصميم دعوتكم <span className="mr-2">←</span></Link>
-              <Link to="/how" className="btn-ghost min-h-12 justify-center border-[#e8cbd1] bg-white/80 px-6 text-[#65434b]">اعرفوا طريقة الاستخدام</Link>
+              <Link to="/preview/estate" className="btn-ghost min-h-12 justify-center border-[#e8cbd1] bg-white/90 px-6 text-[#a64257]">اتفرّج على الدعوة ♡</Link><Link to="/how" className="btn-ghost min-h-12 justify-center border-[#e8cbd1] bg-white/80 px-6 text-[#65434b]">اعرفوا طريقة الاستخدام</Link>
             </div>
             {last ? <Link to={`/done/${last.code}`} className="mt-4 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4 sm:text-sm">الرجوع لآخر دعوة محفوظة</Link> : null}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] font-semibold text-[#806b70] sm:text-sm md:justify-start">
