@@ -84,7 +84,7 @@ export function Editor() {
       return;
     }
     setError("");
-    if (template.id === "garden-classic") { goCheckout(); return; }
+    if (id === "garden-classic") { goCheckout(); return; }
     if (step < 2) setStep((value) => value + 1);
     else goCheckout();
   }
