@@ -33,9 +33,9 @@ function downloadIcs(draft: InviteDraft) {
   URL.revokeObjectURL(url)
 }
 
-type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void }
+type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language: "ar" | "en"; onToggleLanguage: () => void }
 
-export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic }: Props) {
+export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language, onToggleLanguage }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--paper": template.vars.paper,
@@ -46,7 +46,6 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   const date = new Date(draft.date + "T00:00:00")
   const validDate = Boolean(draft.date) && !Number.isNaN(date.getTime())
   const [shareNotice, setShareNotice] = useState("")
-  const [language, setLanguage] = useState<"ar" | "en">("ar")
   const en = language === "en"
   const locationUrl = mapLink(draft)
   const inviteTitle = en ? `Wedding invitation: ${draft.groom} & ${draft.bride}` : `دعوة ${draft.groom} و${draft.bride}`
@@ -104,7 +103,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
 
   return (
     <article ref={root} className={`vaux-site ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
-      <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={() => setLanguage(en ? "ar" : "en")}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div>
+      <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Turn music on" : "♪ تشغيل الموسيقى")}</button></div>
       <section className="vaux-hero-card">
         <div className="vaux-hero-inner">
           <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
