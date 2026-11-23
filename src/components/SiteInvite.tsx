@@ -33,9 +33,9 @@ function downloadIcs(draft: InviteDraft) {
   URL.revokeObjectURL(url)
 }
 
-type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language: "ar" | "en"; onToggleLanguage: () => void }
+type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void }
 
-export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language, onToggleLanguage }: Props) {
+export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--paper": template.vars.paper,
@@ -103,7 +103,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
 
   return (
     <article ref={root} className={`vaux-site ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
-      <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Turn music on" : "♪ تشغيل الموسيقى")}</button></div>
+      <div className="vaux-invite-controls" dir="ltr">{onToggleLanguage ? <button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button> : null}<button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Turn music on" : "♪ تشغيل الموسيقى")}</button></div>
       <section className="vaux-hero-card">
         <div className="vaux-hero-inner">
           <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
