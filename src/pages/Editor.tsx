@@ -37,7 +37,7 @@ export function Editor() {
   const [active, setActive] = useState<FieldKey | null>("groom")
   const [error, setError] = useState("")
   const [step, setStep] = useState(0)
-  const steps = [{ title: "الأسماء", hint: "اكتب اسم العريس والعروسة" }, { title: "الموعد والمكان", hint: "حدد يوم الفرح والقاعة" }, { title: "الصور واللمسات", hint: "ارفع صورك واختار الموسيقى — وكل ده اختياري" }]
+  const steps = template?.id === "garden-classic" ? [{ title: "الأسماء", hint: "اكتب اسم العريس والعروسة فقط — باقي التصميم ثابت." }] : [{ title: "الأسماء", hint: "اكتب اسم العريس والعروسة" }, { title: "الموعد والمكان", hint: "حدد يوم الفرح والقاعة" }, { title: "الصور واللمسات", hint: "ارفع صورك واختار الموسيقى — وكل ده اختياري" }]
   const requiredItems = [
     { label: "اسم العريس", done: Boolean(draft.groom.trim()) },
     { label: "اسم العروسة", done: Boolean(draft.bride.trim()) },
@@ -84,6 +84,7 @@ export function Editor() {
       return;
     }
     setError("");
+    if (template.id === "garden-classic") { goCheckout(); return; }
     if (step < 2) setStep((value) => value + 1);
     else goCheckout();
   }
@@ -275,7 +276,7 @@ export function Editor() {
           <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
             <button type="button" className="text-sm font-bold text-[#a64257]" onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={step === 0}>رجوع</button>
             <p className="text-sm text-[#806b70]">الخطوة {step + 1} من 3</p>
-            <button type="button" className="btn-gold" onClick={nextStep}>{step === 2 ? "كمل للطلب ←" : "التالي ←"}</button>
+            <button type="button" className="btn-gold" onClick={nextStep}>{step === 2 || template.id === "garden-classic" ? "كمل للطلب ←" : "التالي ←"}</button>
           </div>
         </section>
       </div>
