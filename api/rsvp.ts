@@ -14,10 +14,12 @@ export default async function handler(req: Req, res: Res) {
     const b = body(req)
     const id = String(b.inviteId ?? "")
     const name = clean(b.name, 60)
+    const phone = clean(b.phone, 24)
+    const phoneDigits = phone.replace(/\D/g, "")
     const attending = b.attending === true
     const guests = attending ? Math.min(10, Math.max(1, Math.floor(Number(b.guests) || 1))) : 0
     const note = clean(b.note, 200)
-    if (!/^[a-z0-9]{6,12}$/.test(id) || name.length < 2 || typeof b.attending !== "boolean") return send(res, 400, { error: "bad_request" })
+    if (!/^[a-z0-9]{6,12}$/.test(id) || name.length < 2 || phoneDigits.length < 8 || phoneDigits.length > 15 || !/^[0-9+() .-]{8,24}$/.test(phone) || typeof b.attending !== "boolean") return send(res, 400, { error: "bad_request" })
 
     const invites = await db<InviteRow[]>(`invites?id=${eq(id)}&select=id,order_id`)
     const invite = invites[0]
@@ -27,7 +29,7 @@ export default async function handler(req: Req, res: Res) {
     const count = await db<Pick<RsvpRow, "id">[]>(`rsvps?invite_id=${eq(id)}&select=id&limit=1000`)
     if (count.length >= 1000) return send(res, 409, { error: "full" })
 
-    await db("rsvps", { method: "POST", body: { invite_id: id, name, attending, guests, note: note || null }, prefer: "return=minimal" })
+    await db("rsvps", { method: "POST", body: { invite_id: id, name, phone, attending, guests, note: note || null }, prefer: "return=minimal" })
     return send(res, 201, { ok: true })
   } catch (error) {
     console.error("rsvp", error)

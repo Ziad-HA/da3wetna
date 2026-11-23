@@ -7,7 +7,7 @@ import { invitePath } from "../lib/codec"
 
 function csv(invite: DashboardInvite) {
   const esc = (v: string) => `"${v.replace(/"/g, '""')}"`
-  const rows = [["الاسم", "الحضور", "العدد", "ملاحظة"], ...invite.rsvps.map((r) => [r.name, r.attending ? "حاضر" : "معتذر", String(r.attending ? r.guests : 0), r.note ?? ""])]
+  const rows = [["الاسم", "رقم الهاتف", "الحضور", "العدد", "ملاحظة"], ...invite.rsvps.map((r) => [r.name, r.phone ?? "", r.attending ? "حاضر" : "معتذر", String(r.attending ? r.guests : 0), r.note ?? ""])]
   const blob = new Blob(["﻿" + rows.map((r) => r.map(esc).join(",")).join("\n")], { type: "text/csv;charset=utf-8" })
   const a = document.createElement("a")
   a.href = URL.createObjectURL(blob)
@@ -110,7 +110,7 @@ export function Dashboard() {
                 <ul className="mt-4 divide-y divide-[#f3e6e9]">
                   {inv.rsvps.map((r) => (
                     <li key={r.id} className="flex items-center justify-between gap-3 py-3 text-sm">
-                      <div className="min-w-0"><strong className="block truncate text-[#4a2d33]">{r.name}</strong>{r.note ? <span className="block truncate text-xs text-[#806b70]">{r.note}</span> : null}</div>
+                      <div className="min-w-0"><strong className="block truncate text-[#4a2d33]">{r.name}</strong><a href={`tel:${r.phone}`} className="block truncate text-xs text-[#a64257]" dir="ltr">{r.phone}</a>{r.note ? <span className="block truncate text-xs text-[#806b70]">{r.note}</span> : null}</div>
                       <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${r.attending ? "bg-[#edf7ef] text-[#38764a]" : "bg-[#fdeeee] text-[#a33]"}`}>{r.attending ? `حاضر · ${r.guests}` : "معتذر"}</span>
                     </li>
                   ))}

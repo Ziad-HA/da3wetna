@@ -80,7 +80,7 @@ function featureAddress(feature: PhotonFeature): string {
   return [[p.housenumber, p.street].filter(Boolean).join(" "), p.district, p.city, p.state, p.postcode, p.country]
     .filter(Boolean).join("، ")
 }
-const coordinateLink = (lat: number, lng: number) => `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=16/${lat}/${lng}`
+const coordinateLink = (lat: number, lng: number) => `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
 
 function cityCenter(city: string): LeafletLatLng {
   const normalized = city.trim().toLowerCase()

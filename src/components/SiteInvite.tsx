@@ -69,6 +69,45 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "" }: Props) {
   }).filter((item) => item.title)
   const date = new Date(draft.date + "T00:00:00")
   const validDate = Boolean(draft.date) && !Number.isNaN(date.getTime())
+  const [shareNotice, setShareNotice] = useState("")
+  const locationUrl = mapLink(draft)
+  const inviteTitle = `دعوة ${draft.groom} و${draft.bride}`
+
+  async function copyText(value: string, message: string) {
+    try { await navigator.clipboard.writeText(value); setShareNotice(message) }
+    catch { setShareNotice("تعذر النسخ تلقائيًا. انسخ الرابط من المتصفح.") }
+  }
+
+  async function shareInvitation(platform: "whatsapp" | "facebook" | "x" | "instagram" | "tiktok" | "other") {
+    const text = `${inviteTitle}\n${shareUrl}`
+    const encodedUrl = encodeURIComponent(shareUrl)
+    if (platform === "instagram" || platform === "tiktok") {
+      await copyText(shareUrl, `تم نسخ رابط الدعوة. افتح ${platform === "instagram" ? "إنستجرام" : "تيك توك"} والصقه في المكان المناسب.`)
+      return
+    }
+    if (platform === "other") {
+      if (navigator.share) {
+        try { await navigator.share({ title: inviteTitle, text, url: shareUrl }); setShareNotice("تم فتح خيارات المشاركة."); return }
+        catch { /* المستخدم أغلق نافذة المشاركة */ }
+      }
+      await copyText(shareUrl, "تم نسخ رابط الدعوة للمشاركة.")
+      return
+    }
+    const target = platform === "whatsapp"
+      ? `https://wa.me/?text=${encodeURIComponent(text)}`
+      : platform === "facebook"
+        ? `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
+        : `https://twitter.com/intent/tweet?text=${encodeURIComponent(inviteTitle)}&url=${encodedUrl}`
+    window.open(target, "_blank", "noopener,noreferrer")
+  }
+
+  async function shareLocation() {
+    if (navigator.share) {
+      try { await navigator.share({ title: `موقع ${draft.venue}`, url: locationUrl }); setShareNotice("تم فتح مشاركة اللوكيشن."); return }
+      catch { /* النسخ بديل المشاركة */ }
+    }
+    await copyText(locationUrl, "تم نسخ رابط اللوكيشن.")
+  }
 
   useEffect(() => {
     const element = root.current
@@ -132,10 +171,18 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "" }: Props) {
           {validDate ? <p className="vaux-body-text">{formatArabicDate(draft.date)}</p> : null}
           <p className="vaux-time-display">{draft.time ? formatTime(draft.time) : "السادسة مساءً"}</p>
           <p className="vaux-body-meta">{[draft.venue, draft.city].filter(Boolean).join(" — ")}</p>
-          <div className="vaux-btn-row">
-            {draft.mapUrl || draft.venue ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="vaux-btn">الموقع على الخريطة</a> : null}
-            {validDate ? <button type="button" onClick={() => downloadIcs(draft)} className="vaux-btn">أضف الموعد للتقويم</button> : null}
+          <div className="vaux-location-card">
+            <span className="vaux-kicker">لوصول إلى مكان الحفل</span>
+            <h3 className="vaux-venue-name">{draft.venue || "مكان الحفل"}</h3>
+            <p className="vaux-body-text">يمكنك فتح الموقع مباشرة على خرائط Google أو مشاركة اللوكيشن مع الأهل والأصدقاء.</p>
+            {shareNotice ? <p className="vaux-share-status" role="status">{shareNotice}</p> : null}
+            <div className="vaux-btn-row vaux-location-actions">
+              <a href={locationUrl} target="_blank" rel="noreferrer" className="vaux-btn">فتح اللوكيشن ⌖</a>
+              <button type="button" onClick={shareLocation} className="vaux-btn">مشاركة اللوكيشن ↗</button>
+              <button type="button" onClick={() => copyText(locationUrl, "تم نسخ رابط اللوكيشن.")} className="vaux-btn">نسخ رابط اللوكيشن</button>
+            </div>
           </div>
+          {validDate ? <div className="vaux-btn-row"><button type="button" onClick={() => downloadIcs(draft)} className="vaux-btn">أضف الموعد للتقويم</button></div> : null}
           <VenueMap draft={draft} />
         </div>
       </section>
@@ -152,7 +199,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "" }: Props) {
 
       {rsvp ? <section className="vaux-sec site-reveal vaux-rsvp-sec">
         <h2 className="vaux-script-title">تأكيد الحضور</h2>
-        <p className="vaux-body-text">يسعدنا تأكيد حضوركم ومشاركتنا فرحتنا</p>
+        <p className="vaux-body-text">يسعدنا معرفة تأكيد حضوركم</p>
         <div className="vaux-rsvp-wrapper">{rsvp}</div>
       </section> : null}
 
@@ -170,13 +217,21 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "" }: Props) {
       </section>
 
       {shareUrl ? <section className="vaux-sec site-reveal vaux-share-sec">
-        <span className="vaux-kicker">خلي الدعوة معاك</span>
-        <h2 className="vaux-script-title">شارك فرحتنا</h2>
-        <p className="vaux-body-text">امسح رمز QR علشان تفتح الدعوة بسهولة أو تبعتها لحد تحبه.</p>
-        <div style={{ width: 184, margin: "1rem auto 0", padding: 12, borderRadius: 18, background: "#fff", border: "1px solid rgba(94,28,42,.14)", boxShadow: "0 8px 24px rgba(50,20,25,.08)" }}>
-          <img src={"https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=8&data=" + encodeURIComponent(shareUrl)} alt="رمز QR لفتح دعوة الزفاف" width="160" height="160" style={{ display: "block", width: "100%", height: "auto" }} loading="lazy" />
+        <span className="vaux-kicker">شاركوا فرحتنا</span>
+        <h2 className="vaux-script-title">شارك الدعوة مع الأهل والأصدقاء</h2>
+        <div className="vaux-share-grid" aria-label="مشاركة الدعوة">
+          <button type="button" onClick={() => shareInvitation("whatsapp")}><b>◉</b><span>واتساب</span></button>
+          <button type="button" onClick={() => shareInvitation("facebook")}><b>f</b><span>Facebook</span></button>
+          <button type="button" onClick={() => shareInvitation("x")}><b>𝕏</b><span>X / Twitter</span></button>
+          <button type="button" onClick={() => shareInvitation("instagram")}><b>◎</b><span>Instagram</span></button>
+          <button type="button" onClick={() => shareInvitation("tiktok")}><b>♪</b><span>TikTok</span></button>
+          <button type="button" onClick={() => shareInvitation("other")}><b>↗</b><span>مشاركة أخرى</span></button>
         </div>
-        <p dir="ltr" style={{ maxWidth: 320, margin: "0.75rem auto 0", fontSize: "0.68rem", lineHeight: 1.6, overflowWrap: "anywhere", color: "#8B6B3A" }}>{shareUrl}</p>
+        <p className="vaux-share-note">في إنستجرام وتيك توك سيتم نسخ رابط الدعوة تلقائيًا.</p>
+        {shareNotice ? <p className="vaux-share-status" role="status" aria-live="polite">{shareNotice}</p> : null}
+        <div style={{ width: 164, margin: "1.25rem auto 0", padding: 10, borderRadius: 16, background: "#fff", border: "1px solid rgba(94,28,42,.14)" }}>
+          <img src={"https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=8&data=" + encodeURIComponent(shareUrl)} alt="رمز QR لفتح دعوة الزفاف" width="144" height="144" style={{ display: "block", width: "100%", height: "auto" }} loading="lazy" />
+        </div>
       </section> : null}
     </article>
   )

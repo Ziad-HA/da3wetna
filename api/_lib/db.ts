@@ -46,4 +46,4 @@ export type OrderRow = {
   paid_at: string | null
 }
 export type InviteRow = { id: string; order_id: string; draft: unknown; created_at: string }
-export type RsvpRow = { id: number; invite_id: string; name: string; attending: boolean; guests: number; note: string | null; created_at: string }
+export type RsvpRow = { id: number; invite_id: string; name: string; phone: string; attending: boolean; guests: number; note: string | null; created_at: string }
