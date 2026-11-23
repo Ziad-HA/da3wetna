@@ -29,6 +29,8 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     "--gold": template.vars.gold,
     "--soft": template.vars.soft,
     "--shell": template.vars.shell,
+    "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`,
+    "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`,
   } as CSSProperties
 
   if (template.id === "estate") {
