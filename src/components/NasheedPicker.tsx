@@ -7,6 +7,8 @@ type NasheedTrack = {
   file: string
 }
 
+const MAX_NASHEED_SECONDS = 90
+
 const tracks: NasheedTrack[] = [
   { id: "baraka-allahu", title: "بارك الله لكما", artist: "ماهر زين", file: "/audio/baraka-allahu.mp3" },
   { id: "masha-allah", title: "ما شاء الله", artist: "ماهر زين", file: "/audio/masha-allah.mp3" },
@@ -81,7 +83,7 @@ export function NasheedPicker({ value, onChange }: Props) {
         </button>
         {selected ? <span className="text-[11px] text-[#806b70]">المختار: {selected.title}</span> : <span className="text-[11px] text-[#90777d]">لم يتم اختيار نشيد</span>}
       </div>
-      {selected ? <audio ref={audioRef} src={selected.file} preload="none" onEnded={() => setPreviewing(false)} onError={() => { setPreviewing(false); setPreviewError("ملف النشيد لسه مش موجود. ضيفه في مجلد public/audio بنفس اسم الملف الموضح في تعليمات المشروع.") }} /> : null}
+      {selected ? <audio ref={audioRef} src={selected.file} preload="none" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MAX_NASHEED_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MAX_NASHEED_SECONDS; setPreviewing(false) } }} onEnded={() => setPreviewing(false)} onError={() => { setPreviewing(false); setPreviewError("ملف النشيد لسه مش موجود. ضيفه في مجلد public/audio بنفس اسم الملف الموضح في تعليمات المشروع.") }} /> : null}
       {previewError ? <p role="alert" className="mt-2 text-xs leading-6 text-[#a64257]">{previewError}</p> : null}
       <button type="button" onClick={() => onChange("")} disabled={!value} className="mt-3 text-[11px] font-bold text-[#90777d] underline underline-offset-4 disabled:opacity-40">إزالة النشيد من الدعوة</button>
     </section>
