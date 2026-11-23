@@ -256,13 +256,8 @@ export function Editor() {
             {template.layout === "strip" || template.layout === "site" ? (
               <div className="mt-5 grid gap-4 border-t border-[#f3e6e9] pt-5">
                 <p className="text-xs font-bold text-[#a64257]">خاص بالقالب ده</p>
-                <label className="field">
-                  <span>برنامج الحفل — كل سطر: الساعة | النشاط (لحد ٨ أسطر)</span>
-                  <textarea rows={5} maxLength={400} value={draft.program} placeholder={"17:00 | استقبال الضيوف\n19:00 | حفل العشاء"} onFocus={() => setActive("program")} onChange={(event) => update({ program: event.target.value })} />
-                </label>
                 {template.layout === "site" ? (
                   <>
-                    <label className="field"><span>حكايتكم</span><textarea rows={4} maxLength={300} value={draft.story} onFocus={() => setActive("story")} onChange={(event) => update({ story: event.target.value })} /></label>
                     <label className="field"><span>أسئلة وأجوبة — كل سطر: السؤال | الجواب (لحد ٦)</span><textarea rows={5} maxLength={500} value={draft.faq} onFocus={() => setActive("faq")} onChange={(event) => update({ faq: event.target.value })} /></label>
                     <label className="field"><span>كود اللبس</span><input maxLength={120} value={draft.dressCode} onFocus={() => setActive("dressCode")} onChange={(event) => update({ dressCode: event.target.value })} /></label>
                   </>

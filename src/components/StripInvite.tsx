@@ -3,17 +3,9 @@ import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import type { InviteDraft, Template } from "../types"
 
-const icons = ["◎", "♡", "✦", "❦", "☾", "✿", "❖", "★"]
 const weekdays = ["س", "ح", "ن", "ث", "ر", "خ", "ج"] // السبت أول الأسبوع
 const num = (n: number | string) => Number(n).toLocaleString("ar-EG", { useGrouping: false })
 const clean = (value: string) => { try { const u = new URL(value); return u.protocol === "https:" || u.protocol === "http:" ? u.href : "" } catch { return "" } }
-
-function parseProgram(raw: string) {
-  return raw.split("\n").map((line) => line.trim()).filter(Boolean).slice(0, 8).map((line) => {
-    const i = line.indexOf("|")
-    return i < 0 ? { time: "", label: line } : { time: line.slice(0, i).trim(), label: line.slice(i + 1).trim() }
-  })
-}
 
 function Calendar({ iso }: { iso: string }) {
   const date = new Date(`${iso}T00:00:00`)
@@ -39,7 +31,6 @@ export function StripInvite({ draft, template, autoScroll }: Props) {
   const ref = useRef<HTMLElement>(null)
   const photo = clean(draft.photoOne)
   const gallery = [clean(draft.photoTwo), ...draft.gallery.split(/\s+/).map(clean)].filter(Boolean).slice(0, 6)
-  const program = parseProgram(draft.program)
   const place = [draft.venue, draft.city].filter(Boolean).join(" · ")
   const style = { "--paper": template.vars.paper, "--ink": template.vars.ink, "--gold": template.vars.gold, "--soft": template.vars.soft } as CSSProperties
 
@@ -85,19 +76,7 @@ export function StripInvite({ draft, template, autoScroll }: Props) {
         {draft.time ? <p className="strip-small">الساعة {draft.time}</p> : null}
         <Calendar iso={draft.date} />
       </section>
-
-      {program.length ? (
-        <section className="strip-sec strip-dark">
-          <h2 className="strip-title">برنامج الحفل</h2>
-          <ol className="strip-program">
-            {program.map((p, i) => (
-              <li key={i}><span className="strip-dot" aria-hidden="true">{icons[i % icons.length]}</span><div>{p.time ? <strong>{p.time}</strong> : null}<span>{p.label}</span></div></li>
-            ))}
-          </ol>
-        </section>
-      ) : null}
-
-      <section className="strip-sec">
+<section className="strip-sec">
         <h2 className="strip-title">المكان</h2>
         <p className="strip-venue">{place}</p>
         <a className="strip-btn" href={mapLink(draft)} target="_blank" rel="noreferrer">📍 اتجاهات المكان</a>
