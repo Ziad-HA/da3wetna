@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { MediaUploadField } from "../components/MediaUploadField"
 import { NasheedPicker } from "../components/NasheedPicker"
+import { FontPicker } from "../components/FontPicker"
 import { VenueField } from "../components/VenueField"
 import { PhonePreview } from "../components/PhonePreview"
 import { getPackage } from "../config"
@@ -250,6 +251,7 @@ export function Editor() {
               <MediaUploadField label="صورة الدعوة الأولى" kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
               <MediaUploadField label="صورة إضافية" kind="image" value={draft.photoTwo} onChange={(url) => update({ photoTwo: url })} />
               <NasheedPicker value={draft.musicUrl} onChange={(file) => update({ musicUrl: file })} />
+              <FontPicker arabicFont={draft.arabicFont || "Amiri"} englishFont={draft.englishFont || "Cormorant Garamond"} onArabicChange={(arabicFont) => update({ arabicFont })} onEnglishChange={(englishFont) => update({ englishFont })} />
               <p className="text-[11px] leading-6 text-[#90777d]">ملفات الأناشيد مكانها public/audio داخل المشروع. أسماء الملفات المطلوبة موجودة في README داخل المجلد.</p>
             </div>
             {template.layout === "strip" || template.layout === "site" ? (
