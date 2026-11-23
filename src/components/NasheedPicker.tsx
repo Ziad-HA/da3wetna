@@ -7,13 +7,14 @@ type NasheedTrack = {
   file: string
 }
 
-const MAX_NASHEED_SECONDS = 90
+const NASHEED_START_SECONDS = 75
+const NASHEED_END_SECONDS = 165
 
 const tracks: NasheedTrack[] = [
-  { id: "baraka-allahu", title: "بارك الله لكما", artist: "ماهر زين", file: "/audio/baraka-allahu.mp3" },
-  { id: "masha-allah", title: "ما شاء الله", artist: "ماهر زين", file: "/audio/masha-allah.mp3" },
-  { id: "rabbi-yebarek", title: "ربي يبارك", artist: "ماهر زين", file: "/audio/rabbi-yebarek.mp3" },
-  { id: "geena-nefrah", title: "جينا نفرح", artist: "يحيى بصل", file: "/audio/geena-nefrah.mp3" },
+  { id: "baraka-allahu", title: "بارك الله لكما", artist: "ماهر زين", file: "/audio/Baraka%20Allahu%20Lakuma.mp3" },
+  { id: "masha-allah", title: "ما شاء الله", artist: "ماهر زين", file: "/audio/Masha%20Allah.mp3" },
+  { id: "rabbi-yebarek", title: "ربي يبارك", artist: "ماهر زين", file: "/audio/Rabbi%20Yebarek.mp3" },
+  { id: "geena-nefrah", title: "For The Rest Of My Life", artist: "ماهر زين", file: "/audio/For%20The%20Rest%20Of%20My%20Life%20.wav" },
 ]
 
 type Props = {
@@ -46,6 +47,7 @@ export function NasheedPicker({ value, onChange }: Props) {
       return
     }
     try {
+      if (audio.currentTime < NASHEED_START_SECONDS || audio.currentTime >= NASHEED_END_SECONDS) audio.currentTime = NASHEED_START_SECONDS
       await audio.play()
       setPreviewing(true)
     } catch {
@@ -58,7 +60,7 @@ export function NasheedPicker({ value, onChange }: Props) {
     <section className="rounded-2xl border border-[#f0dce1] bg-white p-4" aria-label="اختيار نشيد الدعوة">
       <div className="mb-3">
         <p className="text-sm font-bold text-[#4a2d33]">اختار نشيد الدعوة</p>
-        <p className="mt-1 text-[11px] leading-6 text-[#90777d]">اختار نشيد واحد، واسمع معاينة قبل ما تكمل. تقدر كمان تسيب الدعوة من غير موسيقى.</p>
+        <p className="mt-1 text-[11px] leading-6 text-[#90777d]">اختار نشيد واحد، واسمع معاينة من منتصفه لمدة دقيقة ونصف. تقدر كمان تسيب الدعوة من غير موسيقى.</p>
       </div>
       <div className="grid gap-2">
         {tracks.map((track, index) => {
@@ -83,7 +85,7 @@ export function NasheedPicker({ value, onChange }: Props) {
         </button>
         {selected ? <span className="text-[11px] text-[#806b70]">المختار: {selected.title}</span> : <span className="text-[11px] text-[#90777d]">لم يتم اختيار نشيد</span>}
       </div>
-      {selected ? <audio ref={audioRef} src={selected.file} preload="none" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MAX_NASHEED_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MAX_NASHEED_SECONDS; setPreviewing(false) } }} onEnded={() => setPreviewing(false)} onError={() => { setPreviewing(false); setPreviewError("ملف النشيد لسه مش موجود. ضيفه في مجلد public/audio بنفس اسم الملف الموضح في تعليمات المشروع.") }} /> : null}
+      {selected ? <audio ref={audioRef} src={selected.file} preload="none" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= NASHEED_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = NASHEED_START_SECONDS; setPreviewing(false) } }} onEnded={() => setPreviewing(false)} onError={() => { setPreviewing(false); setPreviewError("ملف النشيد لسه مش موجود. ضيفه في مجلد public/audio بنفس اسم الملف الموضح في تعليمات المشروع.") }} /> : null}
       {previewError ? <p role="alert" className="mt-2 text-xs leading-6 text-[#a64257]">{previewError}</p> : null}
       <button type="button" onClick={() => onChange("")} disabled={!value} className="mt-3 text-[11px] font-bold text-[#90777d] underline underline-offset-4 disabled:opacity-40">إزالة النشيد من الدعوة</button>
     </section>
