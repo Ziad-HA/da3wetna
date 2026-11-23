@@ -97,6 +97,8 @@ export type InviteDraft = {
   faq: string
   /** كود اللبس (لقالب الموقع) */
   dressCode: string
+  arabicFont: string
+  englishFont: string
 }
 
 export type PayMethod = "vodafone" | "instapay" | "paymob"
