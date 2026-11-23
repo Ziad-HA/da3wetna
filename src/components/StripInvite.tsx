@@ -76,8 +76,7 @@ export function StripInvite({ draft, template, autoScroll }: Props) {
         {draft.time ? <p className="strip-small">الساعة {draft.time}</p> : null}
         <Calendar iso={draft.date} />
       </section>
-
-      <section className="strip-sec">
+<section className="strip-sec">
         <h2 className="strip-title">المكان</h2>
         <p className="strip-venue">{place}</p>
         <a className="strip-btn" href={mapLink(draft)} target="_blank" rel="noreferrer">📍 اتجاهات المكان</a>
