@@ -103,7 +103,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const isStrip = template.layout === "strip"
   const isSite = template.layout === "site"
 
-  const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} loop preload="auto" /> : null
+  const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= 90) { event.currentTarget.pause(); event.currentTarget.currentTime = 90; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
   if (!introSkipped && introStep < 3 && template.envelope.zoom) {
     return (
