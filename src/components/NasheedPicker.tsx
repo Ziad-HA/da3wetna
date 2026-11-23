@@ -14,7 +14,7 @@ const tracks: NasheedTrack[] = [
   { id: "baraka-allahu", title: "بارك الله لكما", artist: "ماهر زين", file: "/audio/Baraka%20Allahu%20Lakuma.mp3" },
   { id: "masha-allah", title: "ما شاء الله", artist: "ماهر زين", file: "/audio/Masha%20Allah.mp3" },
   { id: "rabbi-yebarek", title: "ربي يبارك", artist: "ماهر زين", file: "/audio/Rabbi%20Yebarek.mp3" },
-  { id: "geena-nefrah", title: "جينا نفرح", artist: "يحيى بصل", file: "/audio/For%20The%20Rest%20Of%20My%20Life%20.wav" },
+  { id: "geena-nefrah", title: "For The Rest Of My Life", artist: "ماهر زين", file: "/audio/For%20The%20Rest%20Of%20My%20Life%20.wav" },
 ]
 
 type Props = {
