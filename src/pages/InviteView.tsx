@@ -56,7 +56,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const hours = Math.floor((remaining % 86400000) / 3600000)
   const minutes = Math.floor((remaining % 3600000) / 60000)
   const seconds = Math.floor((remaining % 60000) / 1000)
-  const safeUrl = (value: string) => { try { const url = new URL(value); return url.protocol === "https:" || url.protocol === "http:" ? url.href : "" } catch { return "" } }
+  const safeUrl = (value: string) => { try { const url = new URL(value, window.location.origin); return url.protocol === "https:" || url.protocol === "http:" ? url.href : "" } catch { return "" } }
   const musicUrl = safeUrl(draft.musicUrl)
   const photos = [draft.photoOne, draft.photoTwo].map(safeUrl).filter(Boolean)
   const rsvpNumber = draft.rsvpPhone.replace(/\D/g, "")
