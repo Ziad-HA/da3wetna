@@ -31,7 +31,7 @@ export function Home() {
             </p>
             <div className="mt-6 flex flex-col justify-center gap-2.5 sm:flex-row md:justify-start">
               <Link to="/templates" className="btn-gold min-h-12 justify-center px-6 shadow-[0_10px_25px_rgba(166,66,87,.18)]">ابدأوا تصميم دعوتكم <span className="mr-2">←</span></Link>
-              <Link to="/preview/estate" className="btn-ghost min-h-12 justify-center border-[#e8cbd1] bg-white/90 px-6 text-[#a64257]">اتفرّج على الدعوة ♡</Link><Link to="/how" className="btn-ghost min-h-12 justify-center border-[#e8cbd1] bg-white/80 px-6 text-[#65434b]">اعرفوا طريقة الاستخدام</Link>
+              <Link to="/how" className="btn-ghost min-h-12 justify-center border-[#e8cbd1] bg-white/80 px-6 text-[#65434b]">اعرفوا طريقة الاستخدام</Link>
             </div>
             {last ? <Link to={`/done/${last.code}`} className="mt-4 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4 sm:text-sm">الرجوع لآخر دعوة محفوظة</Link> : null}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] font-semibold text-[#806b70] sm:text-sm md:justify-start">
@@ -79,6 +79,11 @@ export function Home() {
               <span className="mt-2 inline-flex text-[10px] font-bold text-[#a64257] sm:text-xs">اختار التصميم ←</span>
             </Link>
           ))}
+        </div>
+        <div className="mt-6 flex justify-center">
+          <Link to="/preview/estate" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#d9b8a0] bg-white/90 px-7 text-sm font-extrabold text-[#a64257] shadow-[0_8px_24px_rgba(94,28,42,.08)] transition hover:-translate-y-0.5 hover:border-[#b88b65] hover:bg-[#fff8f5]">
+            اتفرّج على الدعوة <span aria-hidden="true">♡</span>
+          </Link>
         </div>
       </section>
 

@@ -2261,3 +2261,37 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .vaux-calendar-card { padding: .9rem; border-radius: 18px; }
   .vaux-rsvp-wrapper { width: 100%; }
 }
+
+
+/* Romantic stationery preview frame — no device mockup */
+.romantic-preview { max-width: 390px; padding: 12px; }
+.romantic-preview-shadow { position:absolute; inset:24px 22px 38px; border-radius: 46% 46% 18px 18px; background: rgba(139,75,91,.15); filter: blur(22px); }
+.romantic-preview-frame { position:relative; padding: 13px; border:1px solid #d6b98d; border-radius: 10px; background:linear-gradient(135deg,#fffdf8,#f7eee5 45%,#fffaf5); box-shadow:0 18px 42px rgba(80,42,51,.14), inset 0 0 0 4px rgba(255,255,255,.8), inset 0 0 0 5px rgba(198,161,91,.22); }
+.romantic-preview-frame:before,.romantic-preview-frame:after { content:""; position:absolute; inset:7px; border:1px solid rgba(177,135,94,.48); border-radius:5px; pointer-events:none; }
+.romantic-preview-paper { position:relative; overflow:hidden; background:#fffaf5; border:1px solid rgba(163,121,91,.18); }
+.romantic-preview-inner { width:100%; }
+.romantic-preview-inner > .invite { width:100%; }
+.romantic-preview-ornament { position:absolute; z-index:3; left:50%; transform:translateX(-50%); color:#b88c68; font-family:Georgia,serif; line-height:1; text-shadow:0 1px #fff; }
+.romantic-preview-ornament-top { top:-4px; font-size:25px; }
+.romantic-preview-ornament-bottom { bottom:-5px; font-size:25px; transform:translateX(-50%) rotate(180deg); }
+.vaux-coded-paper { display:grid; place-items:center; overflow:hidden; background: radial-gradient(ellipse at 50% 24%,#fffefa 0%,#f9f2e7 52%,#eee1cf 100%); }
+.vaux-coded-paper:before { content:""; position:absolute; inset:3.2%; border:1px solid rgba(139,107,58,.72); outline:1px solid rgba(139,107,58,.22); outline-offset:5px; pointer-events:none; }
+.vaux-coded-paper:after { content:""; position:absolute; inset:7% 9%; border-top:1px solid rgba(139,107,58,.25); border-bottom:1px solid rgba(139,107,58,.25); pointer-events:none; }
+.vaux-coded-paper > span { color:rgba(139,107,58,.24); font-family:Georgia,serif; font-size:clamp(4rem,12vw,7rem); }
+.vaux-coded-paper > i { position:absolute; top:7%; color:#b88c68; font-style:normal; font-size:1.25rem; }
+.vaux-coded-monogram { display:grid; place-items:center; border:1px solid #b88c68; border-radius:50%; color:#8b6b3a; font-family:Georgia,serif; font-size:clamp(1.4rem,4vw,2.2rem); background:rgba(255,252,245,.7); }
+.vaux-hero-card { border-radius:3px; box-shadow:0 18px 48px rgba(50,35,20,.13); }
+.vaux-hero-inner { background:#f8f0e5; }
+.vaux-hero-bg { position:absolute; inset:0; }
+.vaux-hero-content { z-index:1; }
+.vaux-hero-monogram { aspect-ratio:1; }
+.vaux-footer-monogram.vaux-coded-footer-mark { display:grid; place-items:center; color:#8b6b3a; font-family:Georgia,serif; font-size:2.4rem; }
+.vaux-coded-divider { color:#b88c68; font-family:Georgia,serif; font-size:2rem; letter-spacing:.35em; }
+.vaux-thumb-wrapper { background:#f8f0e5; }
+.vaux-thumb-bg { position:absolute; inset:0; width:100%; height:100%; }
+.vaux-thumb-content { z-index:1; }
+.vaux-thumb-monogram.vaux-coded-monogram { width:13%; aspect-ratio:1; max-width:90px; position:absolute; top:14%; left:50%; transform:translateX(-50%); }
+@media(max-width:640px) {
+ .romantic-preview { max-width:100%; padding:8px; }
+ .romantic-preview-frame { padding:9px; }
+}

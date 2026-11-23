@@ -112,9 +112,9 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
       <div className="vaux-invite-controls" dir="ltr">{onToggleLanguage ? <button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button> : null}<button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Turn music off" : "♫ إيقاف الموسيقى") : (en ? "♪ Turn music on" : "♪ تشغيل الموسيقى")}</button></div>
       <section className="vaux-hero-card">
         <div className="vaux-hero-inner">
-          <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
+          <div className="vaux-hero-bg vaux-coded-paper" aria-hidden="true"><span>❦</span><i>✧</i></div>
           <div className="vaux-hero-content">
-            <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
+            <span className="vaux-hero-monogram vaux-coded-monogram" aria-hidden="true">❦</span>
             <h1 className="vaux-hero-names">
               <span>{draft.groom}</span><span className="vaux-amp">و</span><span>{draft.bride}</span>
             </h1>
@@ -160,8 +160,8 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
 
 
       <section className="vaux-sec site-reveal vaux-contact-sec">
-        <div className="vaux-divider-wrapper"><img src="/vaux/flower_divider.jpg" alt="" className="vaux-flower-divider" /></div>
-        <h2 className="vaux-script-title">{en ? "See you there!" : "مستنيينكم بالحب"}</h2><p className="vaux-body-text">{en ? "Your presence is the best gift." : "وجودكم وسطنا هو أجمل هدية لينا"}</p><div className="vaux-footer-monogram"><img src="/vaux/monogram_rose.png" alt="" /></div><p className="vaux-footer-couple">{draft.groom} <span>♡</span> {draft.bride}</p>{validDate ? <p className="vaux-footer-date">{formatArabicDate(draft.date)} — {en ? `from ${formatTime(draft.time || "15:00", "en-US")} to 7:00 PM` : `من ${formatArabicStartTime(draft.time || "15:00")} إلى 7 مساءً`}</p> : null}<p className="vaux-footer-wish">{en ? "From Nobi to the newlyweds: wishing you a life full of joy and love." : "من Nobi إلى العروسين: مع أطيب الأمنيات بحياة مليئة بالفرح والمحبة."}</p><p className="vaux-footer-credit">{en ? "Designed by" : "صُمم بواسطة"} <strong>Nobi</strong></p><a className="vaux-footer-whatsapp" href="https://wa.me/201012081177" target="_blank" rel="noreferrer">{en ? "WhatsApp" : "واتساب"}: 01276390301</a>
+        <div className="vaux-divider-wrapper vaux-coded-divider" aria-hidden="true">❦</div>
+        <h2 className="vaux-script-title">{en ? "See you there!" : "مستنيينكم بالحب"}</h2><p className="vaux-body-text">{en ? "Your presence is the best gift." : "وجودكم وسطنا هو أجمل هدية لينا"}</p><div className="vaux-footer-monogram vaux-coded-footer-mark" aria-hidden="true">❦</div><p className="vaux-footer-couple">{draft.groom} <span>♡</span> {draft.bride}</p>{validDate ? <p className="vaux-footer-date">{formatArabicDate(draft.date)} — {en ? `from ${formatTime(draft.time || "15:00", "en-US")} to 7:00 PM` : `من ${formatArabicStartTime(draft.time || "15:00")} إلى 7 مساءً`}</p> : null}<p className="vaux-footer-wish">{en ? "From Nobi to the newlyweds: wishing you a life full of joy and love." : "من Nobi إلى العروسين: مع أطيب الأمنيات بحياة مليئة بالفرح والمحبة."}</p><p className="vaux-footer-credit">{en ? "Designed by" : "صُمم بواسطة"} <strong>Nobi</strong></p><a className="vaux-footer-whatsapp" href="https://wa.me/201012081177" target="_blank" rel="noreferrer">{en ? "WhatsApp" : "واتساب"}: 01276390301</a>
       </section>
 
       {shareUrl ? <section className="vaux-sec site-reveal vaux-share-sec">
