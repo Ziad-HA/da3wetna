@@ -69,7 +69,7 @@ export function Home() {
           <Link to="/templates" className="shrink-0 text-xs font-bold text-[#a64257] sm:text-sm">كل التصميمات ←</Link>
         </div>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
-          {activeTemplates.slice(0,4).map((template) => (
+          {activeTemplates.slice(0,5).map((template) => (
             <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group min-w-0">
               <div className="home-template-art overflow-hidden">
                 <InviteThumb draft={draftFor(template)} />

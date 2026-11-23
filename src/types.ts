@@ -1,5 +1,6 @@
 export const templateIds = [
   "estate",
+  "estate-classic",
   "calla",
   "envelope",
   "estate-rose",
