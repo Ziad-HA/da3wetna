@@ -3,7 +3,6 @@ import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import type { InviteDraft, Template } from "../types"
 
-const icons = ["◎", "♡", "✦", "❦", "☾", "✿", "❖", "★"]
 const weekdays = ["س", "ح", "ن", "ث", "ر", "خ", "ج"] // السبت أول الأسبوع
 const num = (n: number | string) => Number(n).toLocaleString("ar-EG", { useGrouping: false })
 const clean = (value: string) => { try { const u = new URL(value); return u.protocol === "https:" || u.protocol === "http:" ? u.href : "" } catch { return "" } }
