@@ -2191,3 +2191,24 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   font-size: clamp(8px, 2.5vw, 13px);
   font-weight: 900;
 }
+
+
+/* Final editor + music picker mobile pass */
+#nasheed-picker { min-width: 0; scroll-margin-top: 1rem; }
+#nasheed-picker * { min-width: 0; }
+@media (max-width: 767px) {
+  #nasheed-picker { border-radius: 1.25rem; padding: 1rem; }
+  #nasheed-picker .nasheed-picker-track { align-items: stretch; }
+  #nasheed-picker button { touch-action: manipulation; }
+  main#main .grid > *,
+  main#main section,
+  main#main details { min-width: 0; }
+  main#main input,
+  main#main select,
+  main#main textarea { max-width: 100%; }
+}
+@media (max-width: 380px) {
+  #nasheed-picker { padding: .85rem; }
+  #nasheed-picker .nasheed-picker-track { padding: .7rem; }
+  main#main[aria-label="خطوات تجهيز الدعوة"] button { padding-inline: .35rem; }
+}

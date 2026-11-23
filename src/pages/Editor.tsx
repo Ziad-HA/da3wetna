@@ -226,9 +226,11 @@ export function Editor() {
             </div>
           </div>
 
+          {step === 2 ? <div className="mt-4"><NasheedPicker value={draft.musicUrl} onChange={(file) => update({ musicUrl: file })} /></div> : null}
+
           {step === 2 ? <details className="mt-4 rounded-[22px] border border-[#f0dce1] bg-white p-4 transition open:bg-[#fffdfd]">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-bold text-[#a64257]"><span className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#fff0f2]">＋</span> إضافات اختيارية لو حابب</span><span className="text-xs font-normal text-[#9a8187]">اضغط للفتح</span></summary>
-            <p className="mt-2 text-xs leading-6 text-[#806b70]">ارفع الصور والموسيقى من موبايلك مباشرة. وممكن تسيب أي إضافة مش محتاجها.</p>
+            <p className="mt-2 text-xs leading-6 text-[#806b70]">ارفع صورك وأضف التفاصيل الاختيارية. تقدر تسيب أي إضافة مش محتاجها.</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               {fields.filter((field) => ["opening", "hosts", "message", "rsvpPhone"].includes(field.key)).map((field) => (
                 <label key={field.key} className={`field ${["message", "hosts", "opening", "rsvpPhone"].includes(field.key) ? "sm:col-span-2" : ""}`}>
@@ -273,8 +275,7 @@ export function Editor() {
               </div>
             ) : null}
           </details> : null}
-          {step === 2 ? <div className="mt-4"><NasheedPicker value={draft.musicUrl} onChange={(file) => update({ musicUrl: file })} /></div> : null}
-          {step === 2 ? <div className="mt-4"><FontPicker arabicFont={draft.arabicFont || "Amiri"} englishFont={draft.englishFont || "Cormorant Garamond"} onArabicChange={(arabicFont) => update({ arabicFont })} onEnglishChange={(englishFont) => update({ englishFont })} /></div> : null}
+                    {step === 2 ? <div className="mt-4"><FontPicker arabicFont={draft.arabicFont || "Amiri"} englishFont={draft.englishFont || "Cormorant Garamond"} onArabicChange={(arabicFont) => update({ arabicFont })} onEnglishChange={(englishFont) => update({ englishFont })} /></div> : null}
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
             <button type="button" className="text-sm font-bold text-[#a64257]" onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={step === 0}>رجوع</button>
