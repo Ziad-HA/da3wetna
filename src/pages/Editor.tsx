@@ -15,7 +15,7 @@ import { draftReady, initDraft, readSelectedPackage, writeDraft } from "../lib/s
 import type { FieldKey, InviteDraft } from "../types"
 
 const fields: { key: FieldKey; label: string; kind: "text" | "select" | "date" | "time"; max?: number }[] = [
-  { key: "opening", label: "جملة الافتتاح", kind: "text", max: 60 },
+  { key: "opening", label: "الآية الكريمة", kind: "text", max: 120 },
   { key: "occasion", label: "المناسبة", kind: "select" },
   { key: "hosts", label: "سطر الدعوة", kind: "text", max: 80 },
   { key: "groom", label: "اسم العريس", kind: "text", max: 40 },
