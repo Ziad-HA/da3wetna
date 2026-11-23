@@ -2295,3 +2295,12 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
  .romantic-preview { max-width:100%; padding:8px; }
  .romantic-preview-frame { padding:9px; }
 }
+
+.garden-thumb{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:radial-gradient(ellipse at 50% 30%,#fffdf6,#eeeadd);color:#35523f;overflow:hidden}
+.garden-thumb:before{content:"";position:absolute;inset:14px;border:1px solid #c7c4ac}
+.garden-thumb-branches{position:absolute;top:8px;font-size:42px;color:#a2ad91}
+.garden-thumb-seal{font-size:30px;color:#819174}
+.garden-thumb-names{display:flex;flex-direction:column;align-items:center;font-family:"Amiri",serif;font-size:35px;line-height:1.1}
+.garden-thumb-names i{font-style:normal;font-size:17px;color:#9d9c7b}
+.garden-thumb small{font-size:10px;color:#83836f}
+.garden-thumb-palace{position:absolute;bottom:24px;font-size:100px;color:#aab49a;opacity:.7}

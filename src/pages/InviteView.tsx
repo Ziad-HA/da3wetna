@@ -7,7 +7,7 @@ import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
-import { EstateOpening } from "../components/EstateOpening"
+import { EstateOpening } from "../components/EstateOpening"\nimport { GardenOpening } from "../components/GardenOpening"\nimport { GardenInvite } from "../components/GardenInvite"
 import { SiteInvite } from "../components/SiteInvite"
 import { StripInvite } from "../components/StripInvite"
 import { RsvpForm } from "../components/RsvpForm"
@@ -102,11 +102,11 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
 
   if (!template) return null
   const isStrip = template.layout === "strip"
-  const isSite = template.layout === "site"
+  const isSite = template.layout === "site"\n  const isGarden = template.id === "garden-classic"
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
-  if (!introSkipped && introStep < 3 && template.envelope.zoom) {
+  if (!introSkipped && introStep < 3 && isGarden) {\n    return <><GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />{audio}</>\n  }\n\n  if (!introSkipped && introStep < 3 && template.envelope.zoom) {
     return (
       <>
         {audio}
@@ -145,7 +145,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
     {audio}
     <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? "#EFE7D1" : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? "#5E1C2A" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
       <div className={`mx-auto grid w-full ${isSite ? "max-w-6xl" : "max-w-md"} justify-items-center gap-5`}>
-        {isSite ? <><SiteInvite draft={draft} template={template} rsvp={inviteId ? (language) => <RsvpForm inviteId={inviteId} language={language} /> : undefined} shareUrl={window.location.href} musicOn={musicOn} hasMusic={Boolean(musicUrl)} onToggleMusic={toggleMusic} language={language} onToggleLanguage={() => setLanguage((current) => current === "ar" ? "en" : "ar")} /><div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
+        {isGarden ? <GardenInvite draft={draft} rsvp={inviteId ? <RsvpForm inviteId={inviteId} language="ar" /> : undefined} shareUrl={window.location.href} /> : isSite ? <><SiteInvite draft={draft} template={template} rsvp={inviteId ? (language) => <RsvpForm inviteId={inviteId} language={language} /> : undefined} shareUrl={window.location.href} musicOn={musicOn} hasMusic={Boolean(musicUrl)} onToggleMusic={toggleMusic} language={language} onToggleLanguage={() => setLanguage((current) => current === "ar" ? "en" : "ar")} /><div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
           <>
         <header className="invite-public-heading text-center">
           <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>

@@ -33,7 +33,7 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`,
   } as CSSProperties
 
-  if (template.layout === "site" && template.frame === "arch") {
+  if (template.id === "garden-classic") {\n    return (\n      <article className="invite garden-thumb" style={vars}>\n        <div className="garden-thumb-branches">❦</div>\n        <span className="garden-thumb-seal">✿</span>\n        <div className="garden-thumb-names"><strong>{draft.groom}</strong><i>و</i><strong>{draft.bride}</strong></div>\n        <small>يتشرفان بدعوتكم</small>\n        <div className="garden-thumb-palace">⌂</div>\n      </article>\n    )\n  }\n\n  if (template.layout === "site" && template.frame === "arch") {
     return (
       <article className="invite vaux-thumb-invite" style={vars}>
         <div className="vaux-thumb-wrapper">
