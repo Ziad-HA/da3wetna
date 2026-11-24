@@ -62,6 +62,22 @@ export const templates: Template[] = [
     vars: { paper: "#FFF8F6", ink: "#673744", gold: "#B98A61", soft: "#9A7480", shell: "#F2E4E6" },
     envelope: { body: ["#B76C7E", "#8D3D52"], flap: ["#CA8795", "#9E4E63"], liner: "#FFF8F2", linerPattern: "plain", seal: "#762B3D", sealKind: "flower", flapShape: "deep" },
   },
+  {
+    id: "chateau",
+    name: "شاتو ده فاليري",
+    blurb: "دعوة زفاف رومانسية بظرف أبيض وختم أخضر وصفحة تفاصيل فرنسية أنيقة",
+    category: "فرح",
+    isNew: true,
+    layout: "site",
+    frame: "arch",
+    ornament: "sprig",
+    groom: "محمد",
+    bride: "سارة",
+    venue: "قصر الشاتو",
+    time: "15:00",
+    vars: { paper: "#F5F2EA", ink: "#1E4030", gold: "#8A7542", soft: "#5A7A60", shell: "#2D5A40" },
+    envelope: { body: ["#F0EDE0", "#D8D3BE"], flap: ["#FAFAF5", "#E5E0CC"], liner: "#F0EDE0", linerPattern: "plain", seal: "#4A7855", sealKind: "initials", flapShape: "deep", zoom: true },
+  },
 ]
 
 // القوالب الموجودة في الموقع حاليًا فقط.

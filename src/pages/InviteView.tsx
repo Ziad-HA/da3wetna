@@ -8,7 +8,9 @@ import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
 import { EstateOpening } from "../components/EstateOpening"
+import { ChateauOpening } from "../components/ChateauOpening"
 import { SiteInvite } from "../components/SiteInvite"
+import { ChateauInvite } from "../components/ChateauInvite"
 import { StripInvite } from "../components/StripInvite"
 import { RsvpForm } from "../components/RsvpForm"
 import { useInvite } from "../lib/useInvite"
@@ -110,6 +112,21 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
   if (!introSkipped && introStep < 3 && template.envelope.zoom) {
+    // For chateau template: use ChateauOpening
+    if (draft.templateId === "chateau") {
+      return (
+        <>
+          {audio}
+          <ChateauOpening
+            draft={draft}
+            step={introStep}
+            onOpen={openEnvelope}
+            onComplete={() => setIntroStep(3)}
+            onSkip={() => { startMusic(); setIntroSkipped(true); setIntroStep(3) }}
+          />
+        </>
+      )
+    }
     return (
       <>
         {audio}
@@ -148,7 +165,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
     {audio}
     <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? "#EFE7D1" : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? "#5E1C2A" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
       <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
-        {isSite ? <><SiteInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} shareUrl={window.location.href} /><div className="w-full"><StoryActions draft={draft} code={code} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
+        {isSite ? <>{draft.templateId === "chateau" ? <ChateauInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} shareUrl={window.location.href} /> : <SiteInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} shareUrl={window.location.href} />}<div className="w-full"><StoryActions draft={draft} code={code} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
           <>
         <header className="invite-public-heading text-center">
           <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
