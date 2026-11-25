@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import { VenueMap } from "./VenueMap"
-import type { InviteDraft, Template } from "../types"
+import type { InviteDraft } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
 
@@ -53,9 +53,9 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   ))}</div>
 }
 
-type Props = { draft: InviteDraft; template: Template; rsvp?: ReactNode; shareUrl?: string }
+type Props = { draft: InviteDraft; rsvp?: ReactNode; shareUrl?: string }
 
-export function ChateauInvite({ draft, template, rsvp, shareUrl = "" }: Props) {
+export function ChateauInvite({ draft, rsvp, shareUrl = "" }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--chx-paper": "#F5F2EA",
