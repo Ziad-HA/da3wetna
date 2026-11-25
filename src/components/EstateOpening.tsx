@@ -7,6 +7,7 @@ type Props = {
   onOpen: () => void
   onComplete?: () => void
   onSkip?: () => void
+  colorway?: "blush" | "burgundy" | "sage"
 }
 
 const TOTAL_FRAMES = 36
@@ -96,6 +97,7 @@ export function EstateOpening({ draft, step, onOpen, onComplete, onSkip }: Props
           width={720}
           height={1280}
           className="vaux-open-canvas"
+          style={{ filter: colorway === "blush" ? "hue-rotate(250deg) saturate(.78)" : colorway === "burgundy" ? "hue-rotate(265deg) saturate(1.2)" : colorway === "sage" ? "hue-rotate(12deg) saturate(.65)" : undefined }}
         />
 
         {/* Dynamic couple names overlay on final frame */}
