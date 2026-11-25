@@ -16,7 +16,7 @@ const FRAME_PATHS = Array.from(
   (_, i) => `/vaux/opening/frame_${String(i).padStart(2, "0")}.jpg`
 )
 
-export function EstateOpening({ draft, step, onOpen, onComplete, onSkip }: Props) {
+export function EstateOpening({ draft, step, onOpen, onComplete, onSkip, colorway }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showNames, setShowNames] = useState(false)
