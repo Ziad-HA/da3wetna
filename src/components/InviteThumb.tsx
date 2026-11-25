@@ -47,15 +47,15 @@ export function InviteThumb({ draft }: { draft: InviteDraft }) {
         <article className="vaux-site" dir="rtl" lang="ar">
           <section className="vaux-hero-card">
             <div className="vaux-hero-inner">
-              <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
+              <img src="/vaux/hero_card_clean_all.jpg" alt="" className="vaux-hero-bg" />
               <div className="vaux-hero-content">
                 <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
-                <h1 className="vaux-hero-names">
+                <h1 className="vaux-hero-names" style={{ fontFamily: "'Aref Ruqaa', 'Amiri', serif", letterSpacing: 0, textTransform: "none", fontWeight: 700 }}>
                   <span>{draft.groom}</span>
                   <span className="vaux-amp">و</span>
                   <span>{draft.bride}</span>
                 </h1>
-                <p className="vaux-hero-hosts">{draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}</p>
+                <p className="vaux-hero-hosts" style={{ letterSpacing: 0, textTransform: "none" }}>{draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}</p>
               </div>
             </div>
           </section>
