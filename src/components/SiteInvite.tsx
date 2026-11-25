@@ -54,7 +54,7 @@ function Countdown({ draft, language }: { draft: InviteDraft; language: "ar" | "
     [Math.floor((left % 3600000) / 60000), "دقيقة"],
     [Math.floor((left % 60000) / 1000), "ثانية"]
   ]
-  return <div className="vaux-count" dir="rtl">{cells.map(([value, label]) => (
+  return <div className="vaux-count" dir={language === "en" ? "ltr" : "rtl"}>{cells.map(([value, label]) => (
     <div key={label} className="vaux-count-item"><strong>{language === "ar" ? arabicDigits(value) : value}</strong><span>{label}</span></div>
   ))}</div>
 }
