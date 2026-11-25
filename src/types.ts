@@ -4,11 +4,8 @@ export const templateIds = [
   "calla",
   "envelope",
   "estate-rose",
-<<<<<<< HEAD
   "chateau",
-=======
   "garden-classic",
->>>>>>> 39b8e0c6208fe35f559e2d1fbe761ada06be45bb
 ] as const
 
 export type TemplateId = (typeof templateIds)[number]
