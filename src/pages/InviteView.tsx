@@ -8,8 +8,6 @@ import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
 import { EstateOpening } from "../components/EstateOpening"
-import { ChateauOpening } from "../components/ChateauOpening"
-import { GardenOpening } from "../components/GardenOpening"
 import { GardenInvite } from "../components/GardenInvite"
 import { SiteInvite } from "../components/SiteInvite"
 import { ChateauInvite } from "../components/ChateauInvite"
@@ -111,55 +109,28 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
-  if (!introSkipped && introStep < 3 && isGarden) {
-    return <><GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />{audio}</>
-  }
+  if (!introSkipped && introStep < 3) {
+    // قصر الدير يحتفظ بفتحته الأصلية دون أي تغيير.
+    const isQasrElDeir = draft.templateId === "estate" || draft.templateId === "estate-classic"
+    const colorway = isQasrElDeir
+      ? undefined
+      : draft.templateId === "garden-classic"
+        ? "sage"
+        : draft.templateId === "envelope" || draft.templateId === "chateau"
+          ? "burgundy"
+          : "blush"
 
-  if (!introSkipped && introStep < 3 && template.envelope.zoom) {
-    // For chateau template: use ChateauOpening
-    if (draft.templateId === "chateau") {
-      return (
-        <>
-          {audio}
-          <ChateauOpening
-            draft={draft}
-            step={introStep}
-            onOpen={openEnvelope}
-            onComplete={() => setIntroStep(3)}
-            onSkip={() => { startMusic(); setIntroSkipped(true); setIntroStep(3) }}
-          />
-        </>
-      )
-    }
     return (
       <>
         {audio}
         <EstateOpening
           draft={draft}
           step={introStep}
+          colorway={colorway}
           onOpen={openEnvelope}
           onComplete={() => setIntroStep(3)}
           onSkip={() => { startMusic(); setIntroSkipped(true); setIntroStep(3) }}
         />
-      </>
-    )
-  }
-
-  if (!introSkipped && introStep < 3) {
-    return (
-      <>
-        {audio}
-        <main className={`invite-opening-screen invite-opening-step-${introStep}`} style={{ "--invite-shell": template.vars.shell, "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
-          <div className="invite-opening-glow" aria-hidden="true" />
-          <div className="invite-opening-copy">
-            <span>بكل الحب ندعوكم لمشاركتنا</span>
-            <h1>{draft.groom} <i>و</i> {draft.bride}</h1>
-            <p>{draft.occasion} · {draft.venue}</p>
-          </div>
-          <OpeningEnvelope template={template} draft={draft} photo={photos[0]} step={introStep} onOpen={openEnvelope} />
-          <p className="invite-opening-hint" data-step={introStep}>{introStep === 0 ? "اضغط على الظرف لفتح الدعوة" : introStep === 1 ? "بنفتح الظرف…" : "دعوتكم وصلت ♡"}</p>
-          <button type="button" className="invite-skip-opening" onClick={() => { startMusic(); setIntroSkipped(true); setIntroStep(3) }}>تخطي المقدمة ←</button>
-        </main>
       </>
     )
   }
