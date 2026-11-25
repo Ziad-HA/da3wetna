@@ -105,7 +105,6 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   if (!template) return null
   const isStrip = template.layout === "strip"
   const isSite = template.layout === "site"
-  const isGarden = template.id === "garden-classic"
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
