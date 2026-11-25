@@ -33,13 +33,25 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`,
   } as CSSProperties
 
-  if (template.id === "estate") {
+  if (template.id === "garden-classic") {
+    return (
+      <article className="invite garden-thumb" style={vars}>
+        <div className="garden-thumb-branches">❦</div>
+        <span className="garden-thumb-seal">✿</span>
+        <div className="garden-thumb-names"><strong>{draft.groom}</strong><i>و</i><strong>{draft.bride}</strong></div>
+        <small>يتشرفان بدعوتكم</small>
+        <div className="garden-thumb-palace">⌂</div>
+      </article>
+    )
+  }
+
+  if (template.layout === "site" && template.frame === "arch") {
     return (
       <article className="invite vaux-thumb-invite" style={vars}>
         <div className="vaux-thumb-wrapper">
-          <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-thumb-bg" />
+          <div className="vaux-thumb-bg vaux-coded-paper" aria-hidden="true"><span>❦</span><i>✧</i></div>
           <div className="vaux-thumb-content">
-            <img src="/vaux/monogram_rose.png" alt="" className="vaux-thumb-monogram" />
+            <span className="vaux-thumb-monogram vaux-coded-monogram" aria-hidden="true">❦</span>
             <div className="vaux-thumb-names">
               <Line field="groom" className="vaux-name" active={activeField} onSelect={onSelect}>
                 {draft.groom || "اسم العريس"}

@@ -53,7 +53,7 @@ export function sanitizeDraft(raw: unknown): InviteDraft | null {
     time: /^\d{2}:\d{2}$/.test(String(d.time ?? "")) ? String(d.time) : "",
     venue: text(d.venue, 80),
     city: text(d.city, 40),
-    opening: text(d.opening, 60),
+    opening: text(d.opening, 120),
     rsvpPhone: text(d.rsvpPhone, 20),
     mapUrl: url(d.mapUrl, 300),
     venueAddress: text(d.venueAddress, 240),

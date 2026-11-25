@@ -5,7 +5,8 @@ import { mapLink } from "../lib/maps"
 import type { InviteDraft } from "../types"
 import { Invitation } from "./Invitation"
 
-export function StoryActions({ draft, code }: { draft: InviteDraft; code: string }) {
+export function StoryActions({ draft, code, language = "ar" }: { draft: InviteDraft; code: string; language?: "ar" | "en" }) {
+  const en = language === "en"
   const sheet = useRef<HTMLDivElement>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
@@ -19,14 +20,14 @@ export function StoryActions({ draft, code }: { draft: InviteDraft; code: string
     try {
       await downloadStory(sheet.current, fileName(draft.groom, draft.bride))
     } catch {
-      setError("التحميل متعطل في المتصفح ده. افتح الدعوة من كروم، أو صوّر الشاشة.")
+      setError(en ? "Download is unavailable in this browser. Try Chrome or take a screenshot." : "التحميل متعطل في المتصفح ده. افتح الدعوة من كروم، أو صوّر الشاشة.")
     } finally {
       setBusy(false)
     }
   }
 
   async function share() {
-    const text = `دعوة ${draft.groom} و${draft.bride}\n${link}`
+    const text = en ? `Wedding invitation: ${draft.groom} & ${draft.bride}\n${link}` : `دعوة ${draft.groom} و${draft.bride}\n${link}`
     if (navigator.share) {
       try {
         await navigator.share({ title: `دعوة ${draft.groom} و${draft.bride}`, text, url: link })
@@ -50,13 +51,13 @@ export function StoryActions({ draft, code }: { draft: InviteDraft; code: string
         </div>
       </div>
       <button type="button" className="btn-gold w-full" onClick={save} disabled={busy}>
-        {busy ? "بنجهّز الصورة..." : "حمّل ستوري واتساب"}
+        {busy ? (en ? "Preparing image..." : "بنجهّز الصورة...") : (en ? "Download invitation story" : "حمّل ستوري واتساب")}
       </button>
       <button type="button" className="btn-dark w-full" onClick={share}>
-        {copied ? "اللينك اتنسخ" : "ابعت الدعوة"}
+        {copied ? (en ? "Link copied" : "اللينك اتنسخ") : (en ? "Share invitation" : "ابعت الدعوة")}
       </button>
       <a className="btn-ghost w-full" href={mapHref} target="_blank" rel="noreferrer">
-        افتح المكان على الخريطة
+        {en ? "Open venue map" : "افتح المكان على الخريطة"}
       </a>
       {error ? (
         <p className="text-sm text-red-800" role="alert">

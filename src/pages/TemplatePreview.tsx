@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { EstateOpening } from "../components/EstateOpening"
+import { GardenOpening } from "../components/GardenOpening"
+import { GardenInvite } from "../components/GardenInvite"
 import { Invitation } from "../components/Invitation"
 import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { SiteInvite } from "../components/SiteInvite"
@@ -53,6 +55,7 @@ export function TemplatePreview() {
 
   const isStrip = template.layout === "strip"
   const isSite = template.layout === "site"
+  const isGarden = template.id === "garden-classic"
 
   return (
     <div className="preview-page-container relative min-h-dvh">
@@ -88,7 +91,9 @@ export function TemplatePreview() {
       </header>
 
       {/* Opening Envelope Screens */}
-      {!introSkipped && introStep < 3 && template.envelope.zoom ? (
+      {!introSkipped && introStep < 3 && isGarden ? (
+        <GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />
+      ) : !introSkipped && introStep < 3 && template.envelope.zoom ? (
         <EstateOpening
           draft={draft}
           step={introStep}
@@ -167,8 +172,10 @@ export function TemplatePreview() {
             } as CSSProperties
           }
         >
-          <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
-            {isSite ? (
+          <div className={`preview-content mx-auto grid w-full ${isSite ? "preview-content-site max-w-6xl" : "max-w-3xl"} justify-items-center gap-5`}>
+            {isGarden ? (
+              <GardenInvite draft={draft} />
+            ) : isSite ? (
               <SiteInvite draft={draft} template={template} />
             ) : isStrip ? (
               <StripInvite draft={draft} template={template} autoScroll />

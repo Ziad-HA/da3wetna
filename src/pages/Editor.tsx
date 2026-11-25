@@ -15,7 +15,7 @@ import { draftReady, initDraft, readSelectedPackage, writeDraft } from "../lib/s
 import type { FieldKey, InviteDraft } from "../types"
 
 const fields: { key: FieldKey; label: string; kind: "text" | "select" | "date" | "time"; max?: number }[] = [
-  { key: "opening", label: "جملة الافتتاح", kind: "text", max: 60 },
+  { key: "opening", label: "الآية الكريمة", kind: "text", max: 120 },
   { key: "occasion", label: "المناسبة", kind: "select" },
   { key: "hosts", label: "سطر الدعوة", kind: "text", max: 80 },
   { key: "groom", label: "اسم العريس", kind: "text", max: 40 },
@@ -37,7 +37,7 @@ export function Editor() {
   const [active, setActive] = useState<FieldKey | null>("groom")
   const [error, setError] = useState("")
   const [step, setStep] = useState(0)
-  const steps = [{ title: "الأسماء", hint: "اكتب اسم العريس والعروسة" }, { title: "الموعد والمكان", hint: "حدد يوم الفرح والقاعة" }, { title: "الصور واللمسات", hint: "ارفع صورك واختار الموسيقى — وكل ده اختياري" }]
+  const steps = template?.id === "garden-classic" ? [{ title: "الأسماء", hint: "اكتب اسم العريس والعروسة فقط — باقي التصميم ثابت." }] : [{ title: "الأسماء", hint: "اكتب اسم العريس والعروسة" }, { title: "الموعد والمكان", hint: "حدد يوم الفرح والقاعة" }, { title: "الصور واللمسات", hint: "ارفع صورك واختار الموسيقى — وكل ده اختياري" }]
   const requiredItems = [
     { label: "اسم العريس", done: Boolean(draft.groom.trim()) },
     { label: "اسم العروسة", done: Boolean(draft.bride.trim()) },
@@ -84,6 +84,7 @@ export function Editor() {
       return;
     }
     setError("");
+    if (id === "garden-classic") { goCheckout(); return; }
     if (step < 2) setStep((value) => value + 1);
     else goCheckout();
   }
@@ -156,7 +157,7 @@ export function Editor() {
             <div><p className="text-sm font-extrabold text-[#4a2d33]">معاينة حية</p><p className="mt-0.5 text-[11px] text-[#9a8187]">كل تعديل هيظهر هنا</p></div>
             <span className="rounded-full bg-[#fff0f2] px-3 py-1.5 text-[11px] font-bold text-[#a64257]">مباشر ✦</span>
           </div>
-          <div className="relative mx-auto w-[min(100%,270px)] sm:w-[min(100%,310px)]">
+          <div className="relative mx-auto w-[min(100%,300px)] sm:w-[min(100%,330px)]">
             {template.layout === "site" ? <a href={`/i/${encodeDraft(draft)}`} target="_blank" rel="noreferrer" className="mb-3 flex min-h-10 items-center justify-center rounded-full bg-[#a64257] px-4 text-xs font-bold text-white shadow-sm">افتح معاينة الدعوة كاملة بالظرف ↗</a> : null}
             <PhonePreview><Invitation draft={draft} activeField={active} onSelect={setActive} /></PhonePreview>
           </div>
@@ -189,7 +190,7 @@ export function Editor() {
             <h3 className="font-bold text-[#4a2d33]">البيانات الأساسية</h3>
             <p className="mt-1 text-xs leading-6 text-[#806b70]">{step === 0 ? "اكتب اسم العريس والعروسة زي ما تحب يظهروا في الدعوة." : step === 1 ? "اختار التاريخ من التقويم واكتب اسم القاعة أو المكان." : "مش لازم تملأ أي خانة هنا. الإضافات دي اختيارية وتقدر تتخطاها."}</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {fields.filter((field) => (step === 0 && ["occasion", "groom", "bride"].includes(field.key)) || (step === 1 && ["date", "time", "venue", "city"].includes(field.key))).map((field) => (
+              {fields.filter((field) => template.id === "garden-classic" ? (step === 0 && ["groom", "bride"].includes(field.key)) : (step === 0 && ["occasion", "groom", "bride"].includes(field.key)) || (step === 1 && ["date", "time", "venue", "city"].includes(field.key))).map((field) => (
                 <label key={field.key} className="field">
                   <span>{field.label}{["groom", "bride", "date", "venue"].includes(field.key) ? " *" : ""}</span>
                   {field.kind === "select" ? (
@@ -226,9 +227,9 @@ export function Editor() {
             </div>
           </div>
 
-          {step === 2 ? <div className="mt-4"><NasheedPicker value={draft.musicUrl} onChange={(file) => update({ musicUrl: file })} /></div> : null}
+          {step === 2 && template.id !== "garden-classic" ? <div className="mt-4"><NasheedPicker value={draft.musicUrl} onChange={(file) => update({ musicUrl: file })} /></div> : null}
 
-          {step === 2 ? <details className="mt-4 rounded-[22px] border border-[#f0dce1] bg-white p-4 transition open:bg-[#fffdfd]">
+          {step === 2 && template.id !== "garden-classic" ? <details className="mt-4 rounded-[22px] border border-[#f0dce1] bg-white p-4 transition open:bg-[#fffdfd]">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-bold text-[#a64257]"><span className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#fff0f2]">＋</span> إضافات اختيارية لو حابب</span><span className="text-xs font-normal text-[#9a8187]">اضغط للفتح</span></summary>
             <p className="mt-2 text-xs leading-6 text-[#806b70]">ارفع صورك وأضف التفاصيل الاختيارية. تقدر تسيب أي إضافة مش محتاجها.</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -256,13 +257,8 @@ export function Editor() {
             {template.layout === "strip" || template.layout === "site" ? (
               <div className="mt-5 grid gap-4 border-t border-[#f3e6e9] pt-5">
                 <p className="text-xs font-bold text-[#a64257]">خاص بالقالب ده</p>
-                <label className="field">
-                  <span>برنامج الحفل — كل سطر: الساعة | النشاط (لحد ٨ أسطر)</span>
-                  <textarea rows={5} maxLength={400} value={draft.program} placeholder={"17:00 | استقبال الضيوف\n19:00 | حفل العشاء"} onFocus={() => setActive("program")} onChange={(event) => update({ program: event.target.value })} />
-                </label>
                 {template.layout === "site" ? (
                   <>
-                    <label className="field"><span>حكايتكم</span><textarea rows={4} maxLength={300} value={draft.story} onFocus={() => setActive("story")} onChange={(event) => update({ story: event.target.value })} /></label>
                     <label className="field"><span>أسئلة وأجوبة — كل سطر: السؤال | الجواب (لحد ٦)</span><textarea rows={5} maxLength={500} value={draft.faq} onFocus={() => setActive("faq")} onChange={(event) => update({ faq: event.target.value })} /></label>
                     <label className="field"><span>كود اللبس</span><input maxLength={120} value={draft.dressCode} onFocus={() => setActive("dressCode")} onChange={(event) => update({ dressCode: event.target.value })} /></label>
                   </>
@@ -275,12 +271,12 @@ export function Editor() {
               </div>
             ) : null}
           </details> : null}
-                    {step === 2 ? <div className="mt-4"><FontPicker arabicFont={draft.arabicFont || "Amiri"} englishFont={draft.englishFont || "Cormorant Garamond"} onArabicChange={(arabicFont) => update({ arabicFont })} onEnglishChange={(englishFont) => update({ englishFont })} /></div> : null}
+                    {step === 2 && template.id !== "garden-classic" ? <div className="mt-4"><FontPicker arabicFont={draft.arabicFont || "Amiri"} englishFont={draft.englishFont || "Cormorant Garamond"} onArabicChange={(arabicFont) => update({ arabicFont })} onEnglishChange={(englishFont) => update({ englishFont })} /></div> : null}
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           <div className="mt-7 hidden items-center justify-between border-t border-[#f3e6e9] pt-5 lg:flex">
             <button type="button" className="text-sm font-bold text-[#a64257]" onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={step === 0}>رجوع</button>
             <p className="text-sm text-[#806b70]">الخطوة {step + 1} من 3</p>
-            <button type="button" className="btn-gold" onClick={nextStep}>{step === 2 ? "كمل للطلب ←" : "التالي ←"}</button>
+            <button type="button" className="btn-gold" onClick={nextStep}>{step === 2 || template.id === "garden-classic" ? "كمل للطلب ←" : "التالي ←"}</button>
           </div>
         </section>
       </div>

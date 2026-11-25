@@ -2,7 +2,7 @@ import type { InviteDraft } from "../types"
 
 export type Health = { db: boolean; paymob: boolean }
 
-export type Rsvp = { id: number; name: string; attending: boolean; guests: number; note: string | null; createdAt: string }
+export type Rsvp = { id: number; name: string; phone: string; attending: boolean; guests: number; note: string | null; createdAt: string }
 export type DashboardInvite = {
   id: string
   draft: InviteDraft
@@ -55,7 +55,7 @@ export const addInvite = (token: string, draft: InviteDraft) =>
 export const fetchInvite = (id: string) =>
   call<{ status: "ready" | "pending"; inviteId?: string; draft?: InviteDraft }>(`/api/invites?id=${encodeURIComponent(id)}`)
 
-export const submitRsvp = (payload: { inviteId: string; name: string; attending: boolean; guests: number; note: string }) =>
+export const submitRsvp = (payload: { inviteId: string; name: string; phone: string; attending: boolean; guests: number; note: string }) =>
   call<{ ok?: boolean; error?: string }>("/api/rsvp", { method: "POST", json: payload })
 
 export const startPayment = (token: string) =>

@@ -69,7 +69,7 @@ export function Home() {
           <Link to="/templates" className="shrink-0 text-xs font-bold text-[#a64257] sm:text-sm">كل التصميمات ←</Link>
         </div>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
-          {activeTemplates.slice(0,4).map((template) => (
+          {activeTemplates.slice(0,5).map((template) => (
             <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group min-w-0">
               <div className="home-template-art overflow-hidden">
                 <InviteThumb draft={draftFor(template)} />
@@ -79,6 +79,11 @@ export function Home() {
               <span className="mt-2 inline-flex text-[10px] font-bold text-[#a64257] sm:text-xs">اختار التصميم ←</span>
             </Link>
           ))}
+        </div>
+        <div className="mt-6 flex justify-center">
+          <Link to="/preview/estate" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#d9b8a0] bg-white/90 px-7 text-sm font-extrabold text-[#a64257] shadow-[0_8px_24px_rgba(94,28,42,.08)] transition hover:-translate-y-0.5 hover:border-[#b88b65] hover:bg-[#fff8f5]">
+            اتفرّج على الدعوة <span aria-hidden="true">♡</span>
+          </Link>
         </div>
       </section>
 

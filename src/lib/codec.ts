@@ -14,7 +14,7 @@ export function encodeDraft(draft: InviteDraft): string {
     time: draft.time.slice(0, 5),
     venue: draft.venue.slice(0, 80),
     city: draft.city.slice(0, 40),
-    opening: draft.opening.slice(0, 60),
+    opening: draft.opening.slice(0, 120),
     rsvpPhone: draft.rsvpPhone.slice(0, 20),
     mapUrl: draft.mapUrl.slice(0, 500),
     venueAddress: draft.venueAddress.slice(0, 240),

@@ -76,7 +76,7 @@ async function dashboard(req: Req, res: Res) {
         draft: invite.draft,
         createdAt: invite.created_at,
         summary: { replies: mine.length, attending: yes.length, declined: mine.length - yes.length, guests: yes.reduce((n, r) => n + r.guests, 0) },
-        rsvps: mine.map((r) => ({ id: r.id, name: r.name, attending: r.attending, guests: r.guests, note: r.note, createdAt: r.created_at })),
+        rsvps: mine.map((r) => ({ id: r.id, name: r.name, phone: r.phone ?? "", attending: r.attending, guests: r.guests, note: r.note, createdAt: r.created_at })),
       }
     }),
   })

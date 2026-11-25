@@ -8,7 +8,12 @@ import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
 import { EstateOpening } from "../components/EstateOpening"
+<<<<<<< HEAD
 import { ChateauOpening } from "../components/ChateauOpening"
+=======
+import { GardenOpening } from "../components/GardenOpening"
+import { GardenInvite } from "../components/GardenInvite"
+>>>>>>> 39b8e0c6208fe35f559e2d1fbe761ada06be45bb
 import { SiteInvite } from "../components/SiteInvite"
 import { ChateauInvite } from "../components/ChateauInvite"
 import { StripInvite } from "../components/StripInvite"
@@ -51,6 +56,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const [introStep, setIntroStep] = useState(0)
   const [introSkipped, setIntroSkipped] = useState(false)
   const [musicOn, setMusicOn] = useState(false)
+  const [language, setLanguage] = useState<"ar" | "en">("ar")
   const audioRef = useRef<HTMLAudioElement>(null)
   const eventDate = useMemo(() => draft.date ? new Date(`${draft.date}T${draft.time || "00:00"}:00`) : null, [draft.date, draft.time])
   const remaining = eventDate && !Number.isNaN(eventDate.getTime()) ? Math.max(0, eventDate.getTime() - now) : 0
@@ -61,13 +67,9 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const safeUrl = (value: string) => { try { const url = new URL(value, window.location.origin); return url.protocol === "https:" || url.protocol === "http:" ? url.href : "" } catch { return "" } }
   const musicUrl = safeUrl(draft.musicUrl)
   const photos = [draft.photoOne, draft.photoTwo].map(safeUrl).filter(Boolean)
+  useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(timer) }, [])
   const rsvpNumber = draft.rsvpPhone.replace(/\D/g, "")
   const rsvpLink = rsvpNumber ? `https://wa.me/${rsvpNumber}?text=${encodeURIComponent(`أهلاً، حابب أأكد حضوري لمناسبة ${draft.groom} و${draft.bride}.`)}` : ""
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 1000)
-    return () => window.clearInterval(timer)
-  }, [])
 
   // الظرف بيستنى ضغطة الضيف (step 0). بعد الضغطة: الرفرف يفتح ← الكارت يطلع ← الدعوة تظهر.
   const hasDraft = true
@@ -108,8 +110,13 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   if (!template) return null
   const isStrip = template.layout === "strip"
   const isSite = template.layout === "site"
+  const isGarden = template.id === "garden-classic"
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
+
+  if (!introSkipped && introStep < 3 && isGarden) {
+    return <><GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />{audio}</>
+  }
 
   if (!introSkipped && introStep < 3 && template.envelope.zoom) {
     // For chateau template: use ChateauOpening
@@ -164,8 +171,13 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
     <>
     {audio}
     <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? "#EFE7D1" : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? "#5E1C2A" : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
+<<<<<<< HEAD
       <div className="mx-auto grid w-full max-w-md justify-items-center gap-5">
         {isSite ? <>{draft.templateId === "chateau" ? <ChateauInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} shareUrl={window.location.href} /> : <SiteInvite draft={draft} template={template} rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null} shareUrl={window.location.href} />}<div className="w-full"><StoryActions draft={draft} code={code} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
+=======
+      <div className={`mx-auto grid w-full ${isSite ? "max-w-6xl" : "max-w-md"} justify-items-center gap-5`}>
+        {isGarden ? <GardenInvite draft={draft} rsvp={inviteId ? <RsvpForm inviteId={inviteId} language="ar" /> : undefined} shareUrl={window.location.href} /> : isSite ? <><SiteInvite draft={draft} template={template} rsvp={inviteId ? (language) => <RsvpForm inviteId={inviteId} language={language} /> : undefined} shareUrl={window.location.href} musicOn={musicOn} hasMusic={Boolean(musicUrl)} onToggleMusic={toggleMusic} language={language} onToggleLanguage={() => setLanguage((current) => current === "ar" ? "en" : "ar")} /><div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div></> : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
+>>>>>>> 39b8e0c6208fe35f559e2d1fbe761ada06be45bb
           <>
         <header className="invite-public-heading text-center">
           <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
@@ -200,11 +212,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
         </section>
         <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
       </div>
-      {musicUrl ? (
-        <button type="button" onClick={toggleMusic} className="invite-music-toggle" aria-pressed={musicOn} aria-label={musicOn ? "إيقاف موسيقى الدعوة" : "تشغيل موسيقى الدعوة"}>
-          {musicOn ? "♫" : "♪"}
-        </button>
-      ) : null}
+      {!isSite && musicUrl ? <button type="button" onClick={toggleMusic} className="invite-music-toggle" aria-pressed={musicOn} aria-label={musicOn ? "إيقاف موسيقى الدعوة" : "تشغيل موسيقى الدعوة"}>{musicOn ? "♫" : "♪"}</button> : null}
     </main>
     </>
   )
