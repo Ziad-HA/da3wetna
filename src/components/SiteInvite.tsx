@@ -34,7 +34,7 @@ function downloadIcs(draft: InviteDraft) {
   URL.revokeObjectURL(url)
 }
 
-function Countdown({ draft }: { draft: InviteDraft }) {
+function Countdown({ draft, language }: { draft: InviteDraft; language: "ar" | "en" }) {
   const [now, setNow] = useState(() => Date.now())
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
@@ -43,14 +43,19 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   const target = new Date(draft.date + "T" + (draft.time || "00:00") + ":00").getTime()
   if (!draft.date || Number.isNaN(target)) return null
   const left = Math.max(0, target - now)
-  const cells: [number, string][] = [
+  const cells: [number, string][] = language === "en" ? [
+    [Math.floor(left / 86400000), "Days"],
+    [Math.floor((left % 86400000) / 3600000), "Hours"],
+    [Math.floor((left % 3600000) / 60000), "Minutes"],
+    [Math.floor((left % 60000) / 1000), "Seconds"]
+  ] : [
     [Math.floor(left / 86400000), "يوم"],
     [Math.floor((left % 86400000) / 3600000), "ساعة"],
     [Math.floor((left % 3600000) / 60000), "دقيقة"],
     [Math.floor((left % 60000) / 1000), "ثانية"]
   ]
   return <div className="vaux-count" dir="rtl">{cells.map(([value, label]) => (
-    <div key={label} className="vaux-count-item"><strong>{arabicDigits(value)}</strong><span>{label}</span></div>
+    <div key={label} className="vaux-count-item"><strong>{language === "ar" ? arabicDigits(value) : value}</strong><span>{label}</span></div>
   ))}</div>
 }
 
@@ -145,7 +150,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
       <section className="vaux-sec site-reveal">
         <span className="vaux-kicker">{en ? "SAVE THE DATE" : "فرحتنا تكمل بوجودكم"}</span>
         <h2 className="vaux-script-title">{en ? "Countdown to our day" : "باقي على فرحتنا"}</h2>
-        {validDate ? <><p className="vaux-subhead">{formatArabicDate(draft.date)}</p><Countdown draft={draft} /></> : <p className="vaux-body-text">{en ? "We are looking forward to celebrating with you." : "مستنيين اليوم اللي يجمعنا بيكم"}</p>}
+        {validDate ? <><p className="vaux-subhead">{en ? date.toLocaleDateString("en-US", { dateStyle: "long" }) : formatArabicDate(draft.date)}</p><Countdown draft={draft} language={language} /></> : <p className="vaux-body-text">{en ? "We are looking forward to celebrating with you." : "مستنيين اليوم اللي يجمعنا بيكم"}</p>}
       </section>
 
       {draft.story ? <section className="vaux-sec site-reveal vaux-story-sec">
@@ -195,7 +200,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         <h2 className="vaux-script-title">{en ? "Wedding program" : "برنامج الحفل"}</h2>
         <ol className="vaux-program-list">{program.map((item, index) => (
           <li key={index} className="vaux-program-item">
-            {item.time ? <time>{item.time.replace(/\d/g, (digit) => arabicDigits(digit))}</time> : null}<span>{item.title}</span>
+            {item.time ? <time>{language === "ar" ? item.time.replace(/\d/g, (digit) => arabicDigits(digit)) : item.time}</time> : null}<span>{item.title}</span>
           </li>
         ))}</ol>
       </section> : null}
