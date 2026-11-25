@@ -113,7 +113,8 @@ export const templates: Template[] = [
 ]
 
 // القوالب الموجودة في الموقع حاليًا فقط.
-export const activeTemplates = templates.filter((template) => ["estate", "calla", "envelope", "estate-rose"].includes(template.id))
+const activeTemplateIds = new Set<TemplateId>(["estate", "calla", "envelope", "estate-rose"])
+export const activeTemplates = templates.filter((template) => activeTemplateIds.has(template.id))
 
 export function getTemplate(id: string | undefined): Template | undefined {
   return templates.find((item) => item.id === id)
