@@ -71,7 +71,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   const date = new Date(draft.date + "T00:00:00")
   const validDate = Boolean(draft.date) && !Number.isNaN(date.getTime())
   const [shareNotice, setShareNotice] = useState("")
-  const en = false
+  const en = language === "en"
   const locationUrl = mapLink(draft)
   const inviteTitle = en ? `Wedding invitation: ${draft.groom} & ${draft.bride}` : `دعوة ${draft.groom} و${draft.bride}`
 
@@ -127,11 +127,11 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   }, [])
 
   return (
-    <article ref={root} className="vaux-site" style={style} dir="rtl" lang="ar">
-      <div className="vaux-invite-controls" dir="rtl"><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? "♫ الموسيقى تعمل" : "♪ تشغيل الموسيقى"}</button></div>
+    <article ref={root} className={`vaux-site ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
+      <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ تشغيل الموسيقى")}</button></div>
       <section className="vaux-hero-card">
         <div className="vaux-hero-inner">
-          <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
+          <img src="/vaux/hero_card_clean_all.jpg" alt="" className="vaux-hero-bg" />
           <div className="vaux-hero-content">
             <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
             <h1 className="vaux-hero-names" style={{ fontFamily: "'Aref Ruqaa', 'Amiri', serif", letterSpacing: 0, textTransform: "none", fontWeight: 700 }}>
@@ -203,7 +203,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
       {rsvp ? <section className="vaux-sec site-reveal vaux-rsvp-sec">
         <h2 className="vaux-script-title">{en ? "RSVP" : "تأكيد الحضور"}</h2>
         <p className="vaux-body-text">{en ? "Let us know if you can make it." : "يسعدنا معرفة تأكيد حضوركم"}</p>
-        <div className="vaux-rsvp-wrapper">{rsvp?.("ar")}</div>
+        <div className="vaux-rsvp-wrapper">{rsvp?.(language)}</div>
       </section> : null}
 
       {draft.dressCode ? <section className="vaux-sec site-reveal">
