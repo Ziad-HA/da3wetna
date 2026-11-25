@@ -15,9 +15,9 @@ export const packages = [
     id: "single",
     name: "باقة الدعوة الواحدة",
     quantity: 1,
-    price: 200,
-    oldPrice: 350,
-    discount: "خصم 43%",
+    price: 250,
+    oldPrice: 400,
+    discount: "خصم 38%",
     description: "لمناسبة واحدة — دعوة واحدة بالمحرر الكامل، تفضل معاك مدى الحياة.",
     features: [
       "أكتر من 10 خطوط عربي وإنجليزي",
