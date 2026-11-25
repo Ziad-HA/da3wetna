@@ -2304,3 +2304,371 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .garden-thumb-names i{font-style:normal;font-size:17px;color:#9d9c7b}
 .garden-thumb small{font-size:10px;color:#83836f}
 .garden-thumb-palace{position:absolute;bottom:24px;font-size:100px;color:#aab49a;opacity:.7}
+
+/* Restored Qasr El-Deir invitation styling */
+/* ===== الصفحة الكاملة لقالب قصر الدير ===== */
+.vaux-site {
+  max-width: 480px;
+  margin: 0 auto;
+  color: #5E1C2A;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.vaux-hero-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 720 / 1280;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(50, 35, 20, 0.15);
+}
+
+.vaux-hero-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.vaux-hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vaux-hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vaux-hero-monogram {
+  position: absolute;
+  top: 14%;
+  width: 13%;
+  max-width: 90px;
+}
+
+.vaux-hero-names {
+  position: absolute;
+  top: 23%;
+  text-align: center;
+  color: #5E1C2A;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.4rem, 4.8vw, 2.2rem);
+  letter-spacing: 0.16em;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.vaux-amp {
+  font-style: italic;
+  font-size: 0.75em;
+  opacity: 0.85;
+}
+
+.vaux-hero-hosts {
+  position: absolute;
+  top: 38%;
+  text-align: center;
+  color: #7A6A55;
+  font-size: clamp(0.6rem, 1.9vw, 0.78rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  max-width: 80%;
+}
+
+.vaux-sec {
+  text-align: center;
+  padding: 3rem 1.25rem;
+}
+
+.vaux-script-title {
+  font-family: 'Alex Brush', cursive, 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: #5E1C2A;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.vaux-subhead {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #8B6B3A;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.vaux-count {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-content: center;
+  gap: clamp(0.45rem, 3vw, 1.25rem);
+  width: min(100%, 390px);
+  margin: 1rem auto 0;
+}
+.vaux-count-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.vaux-count-item strong {
+  font-family: 'Alex Brush', cursive, 'Playfair Display', serif;
+  font-size: clamp(1.45rem, 6vw, 2.35rem);
+  font-weight: 400;
+  color: #5E1C2A;
+  line-height: 1;
+}
+.vaux-count-item span {
+  font-size: 0.65rem;
+  letter-spacing:  0.08em;
+  text-transform: uppercase;
+  color: #8B6B3A;
+  margin-top: 0.4rem;
+  font-weight: 600;
+}
+
+/* Story inside Frame */
+.vaux-story-sec {
+  padding: 1rem 0;
+}
+.vaux-story-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.vaux-story-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.vaux-story-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18% 18%;
+  text-align: center;
+}
+.vaux-story-kicker {
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8B6B3A;
+  font-weight: 600;
+}
+.vaux-story-heading {
+  font-family: 'Alex Brush', cursive, serif;
+  font-size: 2.2rem;
+  color: #5E1C2A;
+  margin: 0.4rem 0 1rem;
+}
+.vaux-story-text {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: #5E1C2A;
+  font-style: italic;
+}
+
+/* Reception */
+.vaux-reception-sec {
+  padding: 2.5rem 1rem;
+}
+.vaux-reception-img-wrapper {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+.vaux-reception-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.vaux-kicker {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8B6B3A;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.vaux-body-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #5E1C2A;
+  margin-bottom: 0.4rem;
+}
+.vaux-body-meta {
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+.vaux-time-display {
+  font-size: 1.6rem;
+  color: #5E1C2A;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+.vaux-btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.vaux-btn {
+  display: inline-block;
+  padding: 0.55rem 1.6rem;
+  border: 1px solid #5E1C2A;
+  background: transparent;
+  color: #5E1C2A;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.vaux-btn:hover {
+  background: #5E1C2A;
+  color: #FAF6EE;
+}
+
+/* Menu */
+.vaux-wines-wrapper {
+  width: 140px;
+  margin: 0 auto 1.5rem;
+}
+.vaux-wines-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.vaux-menu-note {
+  max-width: 340px;
+  margin: 0 auto 1.5rem;
+  font-style: italic;
+  font-size: 0.88rem;
+  opacity: 0.85;
+}
+.vaux-program-list {
+  max-width: 340px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  text-align: right;
+}
+.vaux-program-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(94, 28, 42, 0.15);
+  font-size: 0.9rem;
+}
+.vaux-program-item time {
+  font-weight: 600;
+  color: #8B6B3A;
+}
+
+/* Places & Car */
+.vaux-places-list {
+  max-width: 360px;
+  margin: 1.5rem auto 2.5rem;
+  list-style: none;
+  padding: 0;
+}
+.vaux-place-item {
+  border-bottom: 1px solid rgba(94, 28, 42, 0.15);
+}
+.vaux-place-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 0;
+  background: none;
+  border: none;
+  font-size: 1.05rem;
+  color: #5E1C2A;
+  cursor: pointer;
+  text-align: left;
+}
+.vaux-place-desc {
+  padding-bottom: 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  text-align: left;
+}
+.vaux-car-wrapper {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.vaux-car-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* RSVP */
+.vaux-seal-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  display: block;
+}
+.vaux-rsvp-wrapper {
+  max-width: 380px;
+  margin: 1.5rem auto 0;
+}
+
+/* Contact & Footer */
+.vaux-divider-wrapper {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 1.5rem;
+}
+.vaux-flower-divider {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.vaux-footer-monogram {
+  width: 70px;
+  margin: 2.5rem auto 0;
+}
+.vaux-footer-monogram img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Venue and social sharing sections for the wedding invitation */
+.vaux-location-card { margin: 1.5rem auto 0; padding: 1.25rem 1rem; border: 1px solid rgba(94,28,42,.16); border-radius: 18px; background: rgba(255,255,255,.52); }
+.vaux-venue-name { margin: .4rem 0 .65rem; color: var(--ink); font-size: 1.25rem; font-weight: 700; line-height: 1.7; }
+.vaux-location-actions { flex-wrap: wrap; gap: .55rem; }
+.vaux-location-actions .vaux-btn { flex: 1 1 135px; padding-inline: .8rem; letter-spacing: 0; text-transform: none; font-size: .78rem; }
+.vaux-share-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .65rem; max-width: 370px; margin: 1.25rem auto 0; }
+.vaux-share-grid button { min-height: 82px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25rem; border: 1px solid rgba(94,28,42,.18); border-radius: 15px; background: rgba(255,255,255,.76); color: var(--ink); font: inherit; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+.vaux-share-grid button:hover { transform: translateY(-2px); background: #fff; }
+.vaux-share-grid b { font-size: 1.55rem; line-height: 1.1; }
+.vaux-share-grid span { font-size: .72rem; }
+.vaux-share-note,.vaux-share-status { max-width: 330px; margin: .9rem auto 0; color: var(--soft); font-size: .78rem; line-height: 1.8; }
+.vaux-share-status { padding: .65rem .8rem; border-radius: 12px; background: rgba(255,255,255,.78); color: var(--ink); }
+@media (max-width: 360px) { .vaux-share-grid { gap: .4rem; } .vaux-share-grid button { min-height: 74px; } .vaux-location-actions .vaux-btn { flex-basis: 100%; } }
