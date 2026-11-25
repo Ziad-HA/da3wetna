@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom"
 import { StoryActions } from "../components/StoryActions"
 import { VenueMap } from "../components/VenueMap"
 import { Invitation } from "../components/Invitation"
-import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
@@ -105,6 +104,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   if (!template) return null
   const isStrip = template.layout === "strip"
   const isSite = template.layout === "site"
+  const isGarden = draft.templateId === "garden-classic"
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
@@ -150,7 +150,6 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
             {draft.templateId === "chateau" ? (
               <ChateauInvite
                 draft={draft}
-                template={template}
                 rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null}
                 shareUrl={window.location.href}
               />
