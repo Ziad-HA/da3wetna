@@ -5,6 +5,7 @@ import { VenueMap } from "./VenueMap"
 import type { InviteDraft, Template } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
+const arabicDigits = (value: string | number) => new Intl.NumberFormat("ar-EG", { useGrouping: false }).format(Number(value))
 
 const formatTime = (value: string, locale = "ar-EG") => {
   const [hour, minute] = value.split(":").map(Number)
@@ -49,7 +50,7 @@ function Countdown({ draft }: { draft: InviteDraft }) {
     [Math.floor((left % 60000) / 1000), "ثانية"]
   ]
   return <div className="vaux-count" dir="rtl">{cells.map(([value, label]) => (
-    <div key={label} className="vaux-count-item"><strong>{value}</strong><span>{label}</span></div>
+    <div key={label} className="vaux-count-item"><strong>{arabicDigits(value)}</strong><span>{label}</span></div>
   ))}</div>
 }
 
@@ -70,7 +71,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   const date = new Date(draft.date + "T00:00:00")
   const validDate = Boolean(draft.date) && !Number.isNaN(date.getTime())
   const [shareNotice, setShareNotice] = useState("")
-  const en = language === "en"
+  const en = false
   const locationUrl = mapLink(draft)
   const inviteTitle = en ? `Wedding invitation: ${draft.groom} & ${draft.bride}` : `دعوة ${draft.groom} و${draft.bride}`
 
@@ -126,17 +127,17 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   }, [])
 
   return (
-    <article ref={root} className={`vaux-site ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
-      <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div>
+    <article ref={root} className="vaux-site" style={style} dir="rtl" lang="ar">
+      <div className="vaux-invite-controls" dir="rtl"><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? "♫ الموسيقى تعمل" : "♪ تشغيل الموسيقى"}</button></div>
       <section className="vaux-hero-card">
         <div className="vaux-hero-inner">
           <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
           <div className="vaux-hero-content">
             <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
-            <h1 className="vaux-hero-names">
+            <h1 className="vaux-hero-names" style={{ fontFamily: "'Aref Ruqaa', 'Amiri', serif", letterSpacing: 0, textTransform: "none", fontWeight: 700 }}>
               <span>{draft.groom}</span><span className="vaux-amp">و</span><span>{draft.bride}</span>
             </h1>
-            <p className="vaux-hero-hosts">{draft.hosts || (en ? "Together with our families" : "يتشرف الأهل بدعوتكم لحضور حفل الزفاف")}</p>
+            <p className="vaux-hero-hosts" style={{ letterSpacing: 0, textTransform: "none" }}>{draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}</p>
           </div>
         </div>
       </section>
@@ -194,7 +195,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         <h2 className="vaux-script-title">{en ? "Wedding program" : "برنامج الحفل"}</h2>
         <ol className="vaux-program-list">{program.map((item, index) => (
           <li key={index} className="vaux-program-item">
-            {item.time ? <time>{item.time}</time> : null}<span>{item.title}</span>
+            {item.time ? <time>{item.time.replace(/\d/g, (digit) => arabicDigits(digit))}</time> : null}<span>{item.title}</span>
           </li>
         ))}</ol>
       </section> : null}
@@ -202,7 +203,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
       {rsvp ? <section className="vaux-sec site-reveal vaux-rsvp-sec">
         <h2 className="vaux-script-title">{en ? "RSVP" : "تأكيد الحضور"}</h2>
         <p className="vaux-body-text">{en ? "Let us know if you can make it." : "يسعدنا معرفة تأكيد حضوركم"}</p>
-        <div className="vaux-rsvp-wrapper">{rsvp?.(language)}</div>
+        <div className="vaux-rsvp-wrapper">{rsvp?.("ar")}</div>
       </section> : null}
 
       {draft.dressCode ? <section className="vaux-sec site-reveal">
@@ -223,10 +224,10 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         <h2 className="vaux-script-title">{en ? "Share with family & friends" : "شارك الدعوة مع الأهل والأصدقاء"}</h2>
         <div className="vaux-share-grid" aria-label="مشاركة الدعوة">
           <button type="button" onClick={() => shareInvitation("whatsapp")}><b>◉</b><span>{en ? "WhatsApp" : "واتساب"}</span></button>
-          <button type="button" onClick={() => shareInvitation("facebook")}><b>f</b><span>Facebook</span></button>
-          <button type="button" onClick={() => shareInvitation("x")}><b>𝕏</b><span>X / Twitter</span></button>
-          <button type="button" onClick={() => shareInvitation("instagram")}><b>◎</b><span>Instagram</span></button>
-          <button type="button" onClick={() => shareInvitation("tiktok")}><b>♪</b><span>TikTok</span></button>
+          <button type="button" onClick={() => shareInvitation("facebook")}><b>f</b><span>فيسبوك</span></button>
+          <button type="button" onClick={() => shareInvitation("x")}><b>𝕏</b><span>إكس</span></button>
+          <button type="button" onClick={() => shareInvitation("instagram")}><b>◎</b><span>إنستجرام</span></button>
+          <button type="button" onClick={() => shareInvitation("tiktok")}><b>♪</b><span>تيك توك</span></button>
           <button type="button" onClick={() => shareInvitation("other")}><b>↗</b><span>{en ? "More" : "مشاركة أخرى"}</span></button>
         </div>
         <p className="vaux-share-note">{en ? "For Instagram and TikTok, the invitation link will be copied automatically." : "في إنستجرام وتيك توك سيتم نسخ رابط الدعوة تلقائيًا."}</p>
