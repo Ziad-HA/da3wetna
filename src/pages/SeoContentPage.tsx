@@ -85,7 +85,7 @@ export function SeoContentPage({ pageKey }: { pageKey: string }) {
     canonical.setAttribute("href", window.location.origin + encodeURI(page.path))
   }, [page])
 
-  const filtered = templates.filter((item) => page.path.includes("خطوبة") ? item.category === "خطوبة" : page.path.includes("كتب-كتاب") ? item.category === "كتب كتاب" : item.category === "فرح").slice(0, 3)
+  const filtered = templates.filter((item) => page.path.includes("خطوبة") ? item.category === "خطوبة" : item.category === "فرح").slice(0, 3)
   return (
     <main id="main" className="bg-[#fffdfc]">
       <section className="border-b border-[#f0dce1] bg-[#fff5f6] px-4 py-16 text-center md:py-20">
