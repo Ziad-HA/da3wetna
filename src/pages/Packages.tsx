@@ -40,6 +40,12 @@ export function Packages() {
                   </div>
 
                 </div>
+                <div className="mt-2 flex items-baseline gap-2 sm:mt-3">
+                  <span className="font-display text-2xl font-bold text-[#a64257] sm:text-3xl">{item.price} <span className="font-sans text-xs font-bold">ج.م</span></span>
+                  {item.oldPrice ? <span className="text-xs text-[#a99599] line-through">{item.oldPrice} ج.م</span> : null}
+                  {item.discount ? <span className="rounded-full bg-[#fff0f2] px-2 py-1 text-[9px] font-bold text-[#a64257]">{item.discount}</span> : null}
+                </div>
+                <p className="mt-1 text-[10px] text-[#806b70]">دفعة واحدة — بدون اشتراك</p>
                 <div className="mt-2.5 flex items-center justify-start rounded-xl bg-[#fff7f8] px-3 py-2 sm:mt-4 sm:rounded-2xl sm:p-4">
                   <div>
                     <p className="text-xs font-extrabold text-[#4a2d33] sm:text-base">{item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات مختلفة"}</p>
