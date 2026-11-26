@@ -17,7 +17,7 @@ export function Gallery() {
   const [favoritesOnly, setFavoritesOnly] = useState(false)
   const [favorites, setFavorites] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem("da3wetna-favorites") || "[]") as string[] } catch { return [] } })
   const selected = hasUnusedInvites && activeOrder ? activeOrder.packageId : readSelectedPackage()
-  const visible = useMemo(() => activeTemplates.filter((item) => (filter === "الكل" || item.category === (filter as Occasion)) && (!favoritesOnly || favorites.includes(item.id)) && (!query.trim() || `${item.name} ${item.blurb} ${item.category}`.toLowerCase().includes(query.trim().toLowerCase()))), [filter, favoritesOnly, favorites, query])
+  const visible = useMemo(() => activeTemplates.filter((item) => (item.category === "فرح" || item.category === "خطوبة") && (filter === "الكل" || item.category === (filter as Occasion)) && (!favoritesOnly || favorites.includes(item.id)) && (!query.trim() || `${item.name} ${item.blurb} ${item.category}`.toLowerCase().includes(query.trim().toLowerCase()))), [filter, favoritesOnly, favorites, query])
 
   function toggleFavorite(id: string) {
     setFavorites((current) => {
