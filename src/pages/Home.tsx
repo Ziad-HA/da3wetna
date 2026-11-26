@@ -8,7 +8,7 @@ export function Home() {
   const last = readLast()
 
   useEffect(() => {
-    document.title = "دعوتنا — دعوات الفرح والخطوبة وكتب الكتاب"
+    document.title = "دعوتنا — دعوات الفرح والخطوبة"
   }, [])
 
   return (
@@ -24,10 +24,10 @@ export function Home() {
               <span className="block text-[#b64b60]">ولكل حكاية دعوة</span>
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-8 text-[#806b70] sm:text-base md:mx-0">
-              اختاروا دعوة للفرح أو الخطوبة أو كتب الكتاب، اكتبوا تفاصيل مناسبتكم، وشوفوا المعاينة قبل ما تشاركوها مع كل اللي بتحبوهم.
+              اختاروا دعوة للفرح أو الخطوبة، اكتبوا تفاصيل مناسبتكم، وشوفوا المعاينة قبل ما تشاركوها مع كل اللي بتحبوهم.
             </p>
             <div className="mt-6 flex flex-col justify-center gap-2.5 sm:flex-row md:justify-start">
-              <Link to="/templates" className="btn-gold min-h-12 justify-center px-6 shadow-[0_10px_25px_rgba(166,66,87,.18)]">اختاروا دعوتكم <span className="mr-2">←</span></Link>
+              <Link to="/templates" className="btn-gold min-h-12 justify-center px-6 shadow-[0_10px_25px_rgba(166,66,87,.18)]">اتفرج على الدعوات <span className="mr-2">←</span></Link>
               <Link to="/how" className="btn-ghost min-h-12 justify-center border-[#e8cbd1] bg-white/80 px-6 text-[#65434b]">طريقة الاستخدام</Link>
             </div>
             {last ? <Link to={`/done/${last.code}`} className="mt-4 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4 sm:text-sm">الرجوع لآخر دعوة محفوظة</Link> : null}
@@ -53,7 +53,7 @@ export function Home() {
           <p className="text-xs font-bold text-[#b83b50] sm:text-sm">اختاروا مناسبتكم</p>
           <h2 className="mt-1 font-display text-2xl text-[#4a2d33] sm:text-3xl">دعوات لكل خطوة في حكايتكم</h2>
         </div>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
           <Link to="/templates?occasion=فرح" className="group rounded-2xl border border-[#f0dce1] bg-white p-5 text-center transition hover:-translate-y-1 hover:border-[#d9a3ae]">
             <span className="mx-auto grid h-11 w-11 place-items-center rounded-full bg-[#fff0f2] text-xl text-[#a64257]">💍</span>
             <h3 className="mt-3 font-display text-xl font-bold text-[#4a2d33]">فرح</h3>
@@ -66,12 +66,7 @@ export function Home() {
             <p className="mt-1 text-xs text-[#806b70]">احتفلوا ببداية الحكاية</p>
             <span className="mt-3 inline-flex text-xs font-bold text-[#a64257]">شوف التصميمات ←</span>
           </Link>
-          <Link to="/templates?occasion=كتب%20كتاب" className="group rounded-2xl border border-[#f0dce1] bg-white p-5 text-center transition hover:-translate-y-1 hover:border-[#d9a3ae]">
-            <span className="mx-auto grid h-11 w-11 place-items-center rounded-full bg-[#fff0f2] text-xl text-[#a64257]">✦</span>
-            <h3 className="mt-3 font-display text-xl font-bold text-[#4a2d33]">كتب كتاب</h3>
-            <p className="mt-1 text-xs text-[#806b70]">شاركوا فرحة كتب الكتاب</p>
-            <span className="mt-3 inline-flex text-xs font-bold text-[#a64257]">شوف التصميمات ←</span>
-          </Link>
+
         </div>
       </section>
 
