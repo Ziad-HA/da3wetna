@@ -1,18 +1,20 @@
 import { useEffect, useMemo, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { InviteThumb } from "../components/InviteThumb"
 import { packages } from "../config"
 import { activeTemplates, draftFor } from "../data"
 import { clearDraft, readActivePackage, readSelectedPackage } from "../lib/storage"
 import type { Occasion } from "../types"
 
-const filters = ["الكل", "فرح", "خطوبة", "كتب كتاب", "حنة"] as const
+const filters = ["الكل", "فرح", "خطوبة", "كتب كتاب"] as const
 
 export function Gallery() {
   const activeOrder = readActivePackage()
   const activeBundle = activeOrder ? packages.find((item) => item.id === activeOrder.packageId) : undefined
   const hasUnusedInvites = Boolean(activeOrder && activeBundle && activeOrder.used < activeBundle.quantity)
-  const [filter, setFilter] = useState<(typeof filters)[number]>("الكل")
+  const [searchParams] = useSearchParams()
+  const initialFilter = filters.find((item) => item === searchParams.get("occasion")) ?? "الكل"
+  const [filter, setFilter] = useState<(typeof filters)[number]>(initialFilter)
   const [query, setQuery] = useState("")
   const [favoritesOnly, setFavoritesOnly] = useState(false)
   const [favorites, setFavorites] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem("da3wetna-favorites") || "[]") as string[] } catch { return [] } })
@@ -41,7 +43,7 @@ export function Gallery() {
             <p className="text-[10px] font-extrabold tracking-[.2em] text-[#a64257] sm:text-xs">DA3WETNA • INVITATION STUDIO</p>
             <h1 className="mt-2 font-display text-[1.45rem] leading-[1.45] text-[#4a2d33] sm:text-5xl lg:text-6xl">كل فرحة وليها<br className="hidden md:block" /> تصميم يشبهها</h1>
             <p className="mt-2 max-w-xl text-[11px] leading-6 text-[#806b70] sm:text-base sm:leading-8 md:mx-0">
-              اختار من مجموعة تصميماتنا، وشوف شكل دعوتك قبل ما تبدأ تضيف تفاصيل فرحتك.
+              اختار تصميم للفرح أو الخطوبة أو كتب الكتاب، واعمل معاينة كاملة قبل ما تبدأ تخصّص دعوتك.
             </p>
             <div className="mt-3 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center md:justify-start">
               <a href="#designs" className="inline-flex min-h-9 items-center justify-center rounded-full bg-[#a64257] px-3 text-[11px] font-bold text-white shadow-[0_7px_18px_rgba(166,66,87,.18)] transition hover:-translate-y-0.5 hover:bg-[#91384b]">تصفح التصميمات <span className="mr-2">↓</span></a>
@@ -104,7 +106,7 @@ export function Gallery() {
               <div className="relative overflow-hidden rounded-[11px] bg-[#fff5f6] sm:rounded-[19px]">
                 <Link to={`/preview/${template.id}`} className="block" aria-label={`اتفرج على دعوة ${template.name}`}>
                 <div className="gallery-design-frame"><div className="invite-frame"><InviteThumb draft={draftFor(template)} /></div></div>
-                <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[9px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">اتفرج على الدعوة</span>
+                <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[9px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">معاينة الدعوة</span>
                 {template.isNew ? <span className="absolute right-2 top-2 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] shadow-sm sm:right-3 sm:top-3 sm:text-[10px]">جديد</span> : null}
                 </Link>
                 <button type="button" onClick={() => toggleFavorite(template.id)} aria-label={favorites.includes(template.id) ? "إزالة من المفضلة" : "إضافة للمفضلة"} aria-pressed={favorites.includes(template.id)} className={`absolute left-2 top-2 grid h-9 w-9 place-items-center rounded-full border border-white/80 text-xl shadow-md backdrop-blur transition active:scale-90 sm:left-3 sm:top-3 ${favorites.includes(template.id) ? "bg-[#a64257] text-white" : "bg-white/90 text-[#a64257]"}`}>{favorites.includes(template.id) ? "♥" : "♡"}</button>
@@ -113,7 +115,7 @@ export function Gallery() {
                 <h3 className="truncate text-[11px] font-extrabold text-[#4a2d33] sm:text-base">{template.name}</h3>
                 <p className="mt-1 line-clamp-2 min-h-8 text-[9px] leading-[1.45] text-[#90777d] sm:min-h-10 sm:text-xs sm:leading-5">{template.blurb}</p>
                 <Link to={`/preview/${template.id}`} className="mt-2 flex min-h-10 items-center justify-center rounded-xl border border-[#f0dce1] bg-white px-1.5 text-[10px] font-extrabold text-[#806b70] transition hover:border-[#d9aab5] hover:text-[#a64257] active:scale-[.98] sm:mt-4 sm:min-h-11 sm:rounded-full sm:text-sm">اتفرج على الدعوة <span className="mr-1">↗</span></Link>
-                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="mt-2 flex min-h-10 items-center justify-center rounded-xl bg-[#fff0f2] px-1.5 text-[10px] font-extrabold text-[#a64257] transition hover:bg-[#a64257] hover:text-white active:scale-[.98] sm:rounded-full sm:text-sm">اختار التصميم <span className="mr-1">←</span></Link>
+                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="mt-2 flex min-h-10 items-center justify-center rounded-xl bg-[#fff0f2] px-1.5 text-[10px] font-extrabold text-[#a64257] transition hover:bg-[#a64257] hover:text-white active:scale-[.98] sm:rounded-full sm:text-sm">صمّم الآن <span className="mr-1">←</span></Link>
               </div>
             </article>
           ))}
@@ -122,7 +124,9 @@ export function Gallery() {
         {visible.length === 0 ? (
           <div className="mt-6 rounded-3xl border border-dashed border-[#e8c8cf] bg-white/70 px-5 py-12 text-center">
             <span className="text-3xl text-[#c68b98]">♡</span>
-            <p className="mt-3 font-bold text-[#4a2d33]">مفيش تصميمات مطابقة للبحث أو الفلتر ده</p>
+            <p className="mt-3 font-bold text-[#4a2d33]">{filter === "كتب كتاب" ? "تصميمات كتب الكتاب هتضاف قريبًا" : "مفيش تصميمات مطابقة للبحث أو المناسبة دي حاليًا"}</p>
+            {filter === "كتب كتاب" ? <p className="mt-2 text-sm leading-7 text-[#806b70]">تقدر تتواصل معانا لو محتاج مساعدة بخصوص دعوة كتب الكتاب.</p> : null}
+            {filter === "كتب كتاب" ? <Link to="/contact" className="mt-4 inline-flex rounded-full bg-[#a64257] px-5 py-3 text-sm font-bold text-white shadow-sm">تواصل معانا</Link> : null}
             <button type="button" onClick={() => { setFilter("الكل"); setQuery(""); setFavoritesOnly(false) }} className="mt-4 rounded-full bg-[#a64257] px-5 py-3 text-sm font-bold text-white shadow-sm">عرض كل التصميمات</button>
           </div>
         ) : null}
