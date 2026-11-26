@@ -79,13 +79,13 @@ export function Home() {
           <p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">إزاي بتشتغل</p>
           <h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">تلات خطوات بسيطة، من الفكرة لحد ليلة العمر.</h2>
         </div>
-        <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-3 sm:gap-6">
+        <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 sm:mt-14 sm:grid-cols-3 sm:gap-6">
           {[
             ["01", "صمم دعوتك", "ارفع صورتكم، اكتب التاريخ والمكان، وضيف كلمتين من القلب. وشوف الدعوة بتتركب قدامك في المعاينة."],
             ["02", "ابعت لكل ضيف لينك خاص", "كل ضيف بيفتح دعوة بترحب بيه باسمه. اتشارك على واتساب بضغطة واحدة — من غير أبليكيشن."],
             ["03", "تابع مين جاي", "شوف اللي فاتح الدعوة واللي رد لحظة بلحظة. وعدد المؤكدين بيزيد كل ما حد يقول حاضر."],
-          ].map(([number,title,description]) => (
-            <article key={number} className="border-t border-[#dfc5c9] px-1 pb-3 pt-5 sm:pt-6">
+          ].map(([number,title,description], index) => (
+            <article key={number} className={`border-t border-[#dfc5c9] px-1 pb-3 pt-4 sm:pt-6 ${index === 2 ? "col-span-2 mx-auto w-full max-w-[calc(50%-0.5rem)] sm:col-span-1 sm:max-w-none" : ""}`}>
               <p className="font-latin text-4xl text-[#bd8792]">{number}</p>
               <h3 className="mt-4 text-base font-extrabold text-[#493139] sm:text-lg">{title}</h3>
               <p className="mt-3 text-xs leading-8 text-[#806b70] sm:text-sm">{description}</p>
