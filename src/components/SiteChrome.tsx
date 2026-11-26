@@ -11,8 +11,6 @@ const links = [
   { href: "/packages", label: "الباقات" },
   { href: "/faq", label: "الأسئلة الشائعة" },
   { href: "/partners", label: "شراكات" },
-  { href: "/custom", label: "طلبات خاصة" },
-  { href: "/contact", label: "تواصل معنا" },
 ]
 
 export function SiteChrome() {
