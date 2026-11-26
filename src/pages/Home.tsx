@@ -153,13 +153,6 @@ export function Home() {
         </div>
       </section>
 
-      <section className="bg-[#faf3f1] py-16 sm:py-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 md:grid-cols-[1fr_auto]">
-          <div><p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">جاهزين نبدأ؟</p><h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">خلي دعوتكم بداية حكاية حلوة.</h2><p className="mt-3 max-w-2xl text-xs leading-8 text-[#806b70] sm:text-sm">صمّم دعوتك وشوف المعاينة براحتك. اختار التصميم اللي يشبهكم وابدأ تجهيز تفاصيل يومكم.</p></div>
-          <Link to="/templates" className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#a94e62] px-8 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#913e52]">اعمل دعوتك ←</Link>
-        </div>
-      </section>
-
       <section className="mx-auto max-w-4xl px-4 py-16 sm:py-24">
         <div className="text-center"><p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">محتاج تعرف أكتر؟</p><h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">أسئلة بتتكرر.</h2><p className="mt-3 text-xs leading-7 text-[#806b70] sm:text-sm">إجابات سريعة عن تصميم الدعوات والتعديل والدفع والمشاركة.</p></div>
         <div className="mt-8 grid gap-3 sm:mt-10">
