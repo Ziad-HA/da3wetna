@@ -37,9 +37,9 @@ export function Home() {
             </div>
           </div>
 
-          <div className="relative order-1 mx-auto flex min-h-[205px] w-full max-w-[330px] sm:min-h-[440px] sm:max-w-[390px] items-center justify-center sm:min-h-[440px] md:order-2 md:min-h-[520px]">
-            <div aria-hidden="true" className="absolute h-[205px] w-[205px] rounded-full sm:h-[250px] sm:w-[250px] bg-[radial-gradient(circle,#f0d2d9_0%,rgba(240,210,217,.45)_55%,transparent_75%)] sm:h-[390px] sm:w-[390px]" />
-            <div aria-hidden="true" className="absolute h-[205px] w-[205px] rounded-[48%] sm:h-[250px] sm:w-[250px] border border-[#c6a15b]/55 bg-white/25 shadow-[inset_0_0_45px_rgba(255,255,255,.8)] sm:h-[390px] sm:w-[390px]" />
+          <div className="relative order-1 mx-auto flex min-h-[205px] w-full max-w-[330px] items-center justify-center sm:min-h-[440px] sm:max-w-[390px] md:order-2 md:min-h-[520px]">
+            <div aria-hidden="true" className="absolute h-[205px] w-[205px] rounded-full bg-[radial-gradient(circle,#f0d2d9_0%,rgba(240,210,217,.45)_55%,transparent_75%)] sm:h-[390px] sm:w-[390px]" />
+            <div aria-hidden="true" className="absolute h-[205px] w-[205px] rounded-[48%] border border-[#c6a15b]/55 bg-white/25 shadow-[inset_0_0_45px_rgba(255,255,255,.8)] sm:h-[390px] sm:w-[390px]" />
             <span aria-hidden="true" className="absolute right-[10%] top-[15%] z-10 animate-pulse text-3xl text-[#c6a15b]">✧</span>
             <span aria-hidden="true" className="absolute bottom-[14%] left-[9%] z-10 text-3xl text-[#d18d9b]">♡</span>
             <div className="home-hero-invitation relative z-10 w-[min(190px,54vw)] rotate-[1deg] sm:w-[min(300px,58vw)]">
@@ -54,7 +54,7 @@ export function Home() {
       </section>
 
       <section className="border-y border-[#f0dce1] bg-white">
-        <div className="mx-auto grid max-w-6xl grid-cols-3 gap-2 px-3 py-4 text-center sm:grid-cols-3 sm:gap-5 sm:px-4 sm:py-7 sm:gap-5 sm:py-7">
+        <div className="mx-auto grid max-w-6xl grid-cols-3 gap-2 px-3 py-4 text-center sm:grid-cols-3 sm:gap-5 sm:px-4 sm:py-7">
           {[[String(activeTemplates.length), "تصميم متنوع"], ["فوري", "معاينة وتعديل"], ["لينك", "للمشاركة مع الضيوف"]].map(([value,label]) => (
             <div key={label}><p className="font-display text-2xl text-[#a64257] sm:text-3xl">{value}</p><p className="mt-1 text-[11px] text-[#806b70] sm:text-sm">{label}</p></div>
           ))}
@@ -179,7 +179,7 @@ export function Home() {
       <section className="mx-3 mb-9 overflow-hidden rounded-[24px] border border-[#efd9df] bg-[linear-gradient(120deg,#fff2f4_0%,#fffdfa_55%,#f8efe5_100%)] sm:mx-auto sm:mb-14 sm:max-w-6xl sm:rounded-[32px]">
         <div className="flex flex-col items-center justify-between gap-4 px-5 py-6 text-center sm:flex-row sm:px-9 sm:py-8 sm:text-right">
           <div><p className="text-xs font-bold text-[#a64257] sm:text-sm">باقات تناسب احتياجك</p><h2 className="mt-1 font-display text-2xl text-[#4a2d33] sm:text-3xl">اختار الباقة المناسبة لفرحتك</h2><p className="mt-1 text-xs leading-6 text-[#806b70] sm:text-sm">اختار عدد الدعوات المناسب، وكل دعوة ليها تصميمها ورابطها.</p></div>
-          <Link to="/packages" className="btn-gold min-h-11 shrink-0 justify-center px-6">شوف الباقات والأسعار ←</Link>
+          <Link to="/packages" className="btn-gold min-h-11 shrink-0 justify-center px-6">شوف الباقات ←</Link>
         </div>
       </section>
     </main>
