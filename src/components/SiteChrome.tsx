@@ -153,7 +153,7 @@ function Footer() {
             <p className="mb-1 flex items-center gap-1.5 font-bold text-[11px] text-[#4a2d33] sm:mb-1 sm:text-sm"><span className="h-1.5 w-1.5 rounded-full bg-[#c66d7d]" />روابط سريعة</p>
             <Link className="text-[9px] leading-4 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/templates">كل الدعوات</Link>
             <Link className="text-[9px] leading-4 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/how">طريقة الاستخدام</Link>
-            <Link className="text-[10px] leading-5 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/packages">الباقات والأسعار</Link>
+            <Link className="text-[10px] leading-5 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/packages">الباقات</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/partners">شراكات دعوتنا</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/privacy">سياسة الخصوصية</Link>
