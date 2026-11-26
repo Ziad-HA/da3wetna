@@ -68,12 +68,6 @@ export function Home() {
         </div>
       </section>
 
-      <section className="border-y border-[#f0e3e3] bg-white">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-4 py-5 text-[10px] font-semibold text-[#8a7479] sm:gap-x-12 sm:py-6 sm:text-xs">
-          <span>مصممة للأفراح المصرية</span><span>القاهرة والإسكندرية</span><span>الساحل الشمالي</span><span>عربي وإنجليزي</span><span>مشاركة سهلة على واتساب</span>
-        </div>
-      </section>
-
       <section id="how-it-works" className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">إزاي بتشتغل</p>
