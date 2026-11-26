@@ -2,9 +2,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Cairo", sans-serif;
-  --font-display: "Amiri", serif;
-  --font-latin: "Cormorant Garamond", serif;
+  --font-sans: "Alexandria", sans-serif;
+  --font-display: "Alexandria", sans-serif;
+  --font-latin: "Alexandria", sans-serif;
   --color-cream: #FFFCFA;
   --color-ink: #4A2D33;
   --color-forest: #4A2D33;
@@ -22,7 +22,7 @@ body {
   min-height: 100vh;
   background: #FFFCFA;
   color: var(--color-ink);
-  font-family: var(--font-sans);
+  font-family: "Alexandria", sans-serif;
   text-rendering: optimizeLegibility;
 }
 
