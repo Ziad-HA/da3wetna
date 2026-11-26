@@ -6,7 +6,7 @@ import { activeTemplates, draftFor } from "../data"
 import { clearDraft, readActivePackage, readSelectedPackage } from "../lib/storage"
 import type { Occasion } from "../types"
 
-const filters = ["الكل", "فرح", "خطوبة", "كتب كتاب", "حنة"] as const
+const filters = ["الكل", "فرح", "خطوبة"] as const
 
 export function Gallery() {
   const activeOrder = readActivePackage()
