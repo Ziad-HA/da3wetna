@@ -165,7 +165,6 @@ function Footer() {
               <Link className="text-[10px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
               <Link className="text-[10px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/دعوة-فرح">دعوة فرح</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-خطوبة">دعوة خطوبة</Link>
-              <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-كتب-كتاب">دعوة كتب كتاب</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوات-الكترونية">دعوات إلكترونية</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/كروت-افراح">كروت أفراح</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/صيغ-دعوة-زفاف">صيغ دعوة زفاف</Link>
