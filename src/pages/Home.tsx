@@ -8,7 +8,7 @@ export function Home() {
   const last = readLast()
 
   useEffect(() => {
-    document.title = "دعوتنا — دعوات أفراح رقمية"
+    document.title = "دعوتنا — دعوات الفرح والخطوبة وكتب الكتاب"
   }, [])
 
   return (
@@ -24,7 +24,7 @@ export function Home() {
               <span className="block text-[#b64b60]">ولكل حكاية دعوة</span>
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-8 text-[#806b70] sm:text-base md:mx-0">
-              اختاروا تصميم يشبهكم، اكتبوا تفاصيل يومكم، وشوفوا دعوتكم بتتكوّن قدامكم. وبعدها شاركوها مع كل اللي بتحبوهم.
+              اختاروا دعوة للفرح أو الخطوبة أو كتب الكتاب، اكتبوا تفاصيل مناسبتكم، وشوفوا المعاينة قبل ما تشاركوها مع كل اللي بتحبوهم.
             </p>
             <div className="mt-6 flex flex-col justify-center gap-2.5 sm:flex-row md:justify-start">
               <Link to="/templates" className="btn-gold min-h-12 justify-center px-6 shadow-[0_10px_25px_rgba(166,66,87,.18)]">اختاروا دعوتكم <span className="mr-2">←</span></Link>
@@ -48,6 +48,33 @@ export function Home() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-4 pt-8 sm:pt-10">
+        <div className="text-center">
+          <p className="text-xs font-bold text-[#b83b50] sm:text-sm">اختاروا مناسبتكم</p>
+          <h2 className="mt-1 font-display text-2xl text-[#4a2d33] sm:text-3xl">دعوات لكل خطوة في حكايتكم</h2>
+        </div>
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <Link to="/templates?occasion=فرح" className="group rounded-2xl border border-[#f0dce1] bg-white p-5 text-center transition hover:-translate-y-1 hover:border-[#d9a3ae]">
+            <span className="mx-auto grid h-11 w-11 place-items-center rounded-full bg-[#fff0f2] text-xl text-[#a64257]">💍</span>
+            <h3 className="mt-3 font-display text-xl font-bold text-[#4a2d33]">فرح</h3>
+            <p className="mt-1 text-xs text-[#806b70]">دعوة تليق بيوم العمر</p>
+            <span className="mt-3 inline-flex text-xs font-bold text-[#a64257]">شوف التصميمات ←</span>
+          </Link>
+          <Link to="/templates?occasion=خطوبة" className="group rounded-2xl border border-[#f0dce1] bg-white p-5 text-center transition hover:-translate-y-1 hover:border-[#d9a3ae]">
+            <span className="mx-auto grid h-11 w-11 place-items-center rounded-full bg-[#fff0f2] text-xl text-[#a64257]">♡</span>
+            <h3 className="mt-3 font-display text-xl font-bold text-[#4a2d33]">خطوبة</h3>
+            <p className="mt-1 text-xs text-[#806b70]">احتفلوا ببداية الحكاية</p>
+            <span className="mt-3 inline-flex text-xs font-bold text-[#a64257]">شوف التصميمات ←</span>
+          </Link>
+          <Link to="/templates?occasion=كتب%20كتاب" className="group rounded-2xl border border-[#f0dce1] bg-white p-5 text-center transition hover:-translate-y-1 hover:border-[#d9a3ae]">
+            <span className="mx-auto grid h-11 w-11 place-items-center rounded-full bg-[#fff0f2] text-xl text-[#a64257]">✦</span>
+            <h3 className="mt-3 font-display text-xl font-bold text-[#4a2d33]">كتب كتاب</h3>
+            <p className="mt-1 text-xs text-[#806b70]">شاركوا فرحة كتب الكتاب</p>
+            <span className="mt-3 inline-flex text-xs font-bold text-[#a64257]">شوف التصميمات ←</span>
+          </Link>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-4 py-9 sm:py-12">
         <div className="flex items-end justify-between gap-3">
           <div><p className="text-xs font-bold text-[#b83b50] sm:text-sm">اختيارات من مجموعتنا</p><h2 className="mt-1 font-display text-2xl text-[#4a2d33] sm:text-4xl">تصميمات تستاهل فرحتكم</h2></div>
@@ -55,12 +82,17 @@ export function Home() {
         </div>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
           {activeTemplates.slice(0,4).map((template) => (
-            <Link key={template.id} to={`/editor/${template.id}`} onClick={clearDraft} className="group min-w-0">
-              <div className="home-template-art overflow-hidden"><InviteThumb draft={draftFor(template)} /></div>
+            <article key={template.id} className="group min-w-0">
+              <Link to={`/preview/${template.id}`} className="block" aria-label={`معاينة ${template.name}`}>
+                <div className="home-template-art overflow-hidden"><InviteThumb draft={draftFor(template)} /></div>
+              </Link>
               <h3 className="mt-2 truncate text-xs font-extrabold text-[#4a2d33] sm:text-sm">{template.name}</h3>
               <p className="mt-1 line-clamp-2 text-[10px] leading-5 text-[#806b70] sm:text-xs">{template.blurb}</p>
-              <span className="mt-2 inline-flex text-[10px] font-bold text-[#a64257] sm:text-xs">اختار التصميم ←</span>
-            </Link>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                <Link to={`/preview/${template.id}`} className="inline-flex min-h-9 items-center justify-center rounded-full border border-[#f0dce1] bg-white px-2 text-[10px] font-bold text-[#806b70] transition hover:border-[#d9aab5] hover:text-[#a64257] sm:text-xs">معاينة</Link>
+                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="inline-flex min-h-9 items-center justify-center rounded-full bg-[#fff0f2] px-2 text-[10px] font-bold text-[#a64257] transition hover:bg-[#a64257] hover:text-white sm:text-xs">صمّم الآن</Link>
+              </div>
+            </article>
           ))}
         </div>
         <div className="mt-7 text-center"><Link to="/templates" className="btn-gold inline-flex min-h-11 justify-center px-7">شوف كل الدعوات</Link></div>
