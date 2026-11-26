@@ -81,8 +81,8 @@ export function Home() {
           ))}
         </div>
         <div className="mt-6 flex justify-center">
-          <Link to="/preview/estate" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#d9b8a0] bg-white/90 px-7 text-sm font-extrabold text-[#a64257] shadow-[0_8px_24px_rgba(94,28,42,.08)] transition hover:-translate-y-0.5 hover:border-[#b88b65] hover:bg-[#fff8f5]">
-            اتفرّج على الدعوة <span aria-hidden="true">♡</span>
+          <Link to="/templates" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#d9b8a0] bg-white/90 px-7 text-sm font-extrabold text-[#a64257] shadow-[0_8px_24px_rgba(94,28,42,.08)] transition hover:-translate-y-0.5 hover:border-[#b88b65] hover:bg-[#fff8f5]">
+            شوف الدعوات كلها <span aria-hidden="true">♡</span>
           </Link>
         </div>
       </section>
