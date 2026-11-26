@@ -54,9 +54,17 @@ export function Home() {
       </section>
 
       <section className="border-y border-[#f0dce1] bg-white">
-        <div className="mx-auto grid max-w-6xl grid-cols-3 gap-2 px-3 py-4 text-center sm:grid-cols-3 sm:gap-5 sm:px-4 sm:py-7">
-          {[[String(activeTemplates.length), "تصميم متنوع"], ["فوري", "معاينة وتعديل"], ["لينك", "للمشاركة مع الضيوف"]].map(([value,label]) => (
-            <div key={label}><p className="font-display text-2xl text-[#a64257] sm:text-3xl">{value}</p><p className="mt-1 text-[11px] text-[#806b70] sm:text-sm">{label}</p></div>
+        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:grid-cols-3 sm:gap-7 sm:py-12">
+          {[
+            ["01", "صمم دعوتك", "ارفع صورتكم، اكتب التاريخ والمكان، وضيف كلمتين من القلب. وشوف الدعوة بتتركب قدامك في المعاينة."],
+            ["02", "ابعت لكل ضيف لينك خاص", "كل ضيف بيفتح دعوة بترحب بيه باسمه. اتشارك على واتساب بضغطة واحدة — من غير أبليكيشن."],
+            ["03", "تابع مين جاي", "شوف اللي فاتح الدعوة واللي رد لحظة بلحظة. وعدد المؤكدين بيزيد كل ما حد يقول حاضر."],
+          ].map(([number, title, description]) => (
+            <article key={number} className="rounded-2xl border border-[#f0dce1] bg-[#fffafa] p-5 text-right shadow-[0_8px_24px_rgba(115,65,77,.04)] sm:p-6">
+              <p className="font-display text-3xl font-bold text-[#b64b60]">{number}</p>
+              <h2 className="mt-3 text-base font-extrabold text-[#4a2d33] sm:text-lg">{title}</h2>
+              <p className="mt-2 text-xs leading-7 text-[#806b70] sm:text-sm sm:leading-8">{description}</p>
+            </article>
           ))}
         </div>
       </section>
