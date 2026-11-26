@@ -47,7 +47,7 @@ export function InviteThumb({ draft }: { draft: InviteDraft }) {
         <article className="vaux-site" dir="rtl" lang="ar">
           <section className="vaux-hero-card">
             <div className="vaux-hero-inner">
-              <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
+              <img src="/vaux/hero_card_full.jpg" alt="" className="vaux-hero-bg" />
               <div className="vaux-hero-content">
                 <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
                 <h1 className="vaux-hero-names">
