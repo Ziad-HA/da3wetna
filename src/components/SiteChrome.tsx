@@ -156,6 +156,8 @@ function Footer() {
             <Link className="text-[10px] leading-5 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/packages">الباقات والأسعار</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/partners">شراكات دعوتنا</Link>
+            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/custom">طلبات التصميم المخصص</Link>
+            <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/contact">تواصل معنا</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/privacy">سياسة الخصوصية</Link>
           </div>
 

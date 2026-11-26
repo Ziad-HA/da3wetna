@@ -8,6 +8,8 @@ import { Gallery } from "./pages/Gallery"
 import { Home } from "./pages/Home"
 import { Packages } from "./pages/Packages"
 import { Partners } from "./pages/Partners"
+import { Custom } from "./pages/Custom"
+import { Contact } from "./pages/Contact"
 import { How } from "./pages/How"
 import { FAQ } from "./pages/FAQ"
 import { InviteView } from "./pages/InviteView"
@@ -70,6 +72,8 @@ export function App() {
           <Route path="/templates" element={<Gallery />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/partners" element={<Partners />} />
+          <Route path="/custom" element={<Custom />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/how" element={<How />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/account" element={<Account />} />
