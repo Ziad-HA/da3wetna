@@ -127,7 +127,7 @@ function Footer() {
         <div className="mb-5 flex flex-col gap-3 rounded-[20px] border border-[#f0dce1] bg-white/75 p-4 shadow-[0_8px_24px_rgba(115,65,77,0.045)] sm:mb-10 sm:gap-6 sm:rounded-[28px] sm:p-8">
           <div className="max-w-xl">
             <p className="mb-1 text-[9px] font-bold tracking-[0.18em] sm:mb-2 sm:text-xs text-[#b36a78]">YOUR MOMENT, YOUR INVITATION</p>
-            <h2 className="font-display text-xl leading-tight text-[#4a2d33] sm:text-4xl">خلي دعوتك بداية حكاية حلوة</h2>
+            
             <p className="mt-1 text-xs leading-5 text-[#806b70] sm:mt-2 sm:text-sm sm:leading-7">اختار التصميم اللي يشبه فرحتك وشارك دعوتك مع كل اللي بتحبهم.</p>
           </div>
           <Link to="/templates" className="btn-gold min-h-10 shrink-0 px-5 text-xs sm:px-7 sm:text-sm">اكتشف الدعوات <span className="mr-2" aria-hidden="true">←</span></Link>
