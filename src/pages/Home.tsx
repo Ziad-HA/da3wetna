@@ -116,22 +116,6 @@ export function Home() {
       </section>
 
 
-      <section className="mx-auto max-w-6xl px-4 pb-10 sm:pb-14">
-        <div className="grid gap-5 overflow-hidden rounded-[28px] border border-[#e9cbd1] bg-[linear-gradient(125deg,#fff0f3_0%,#fffaf8_55%,#f7eee5_100%)] p-5 sm:rounded-[34px] sm:p-9 md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:p-11">
-          <div>
-            <p className="text-xs font-extrabold text-[#b36a78] sm:text-sm">DA3WETNA PARTNERS</p>
-            <h2 className="mt-2 font-display text-2xl leading-relaxed text-[#4a2d33] sm:text-4xl">بتشتغل في مجال الأفراح؟ خلّينا نكبر سوا</h2>
-            <p className="mt-2 max-w-2xl text-xs leading-7 text-[#806b70] sm:text-sm sm:leading-8">لو أنت مصور، Wedding Planner، أو مسؤول في قاعة أفراح، رشّح الدعوات الرقمية لعملائك وخلي تفاصيل فرحتهم أسهل وأجمل.</p>
-            <div className="mt-4 flex flex-wrap gap-2 text-[10px] font-bold text-[#806b70] sm:text-xs">
-              <span className="rounded-full border border-[#ead2d6] bg-white/80 px-3 py-2">للمصورين</span>
-              <span className="rounded-full border border-[#ead2d6] bg-white/80 px-3 py-2">لقاعات الأفراح</span>
-              <span className="rounded-full border border-[#ead2d6] bg-white/80 px-3 py-2">لمنظمي المناسبات</span>
-            </div>
-          </div>
-          <Link to="/partners" className="btn-gold min-h-12 justify-center px-6">اعرف تفاصيل الشراكة ←</Link>
-        </div>
-      </section>
-
       <section className="mx-auto max-w-6xl px-4 pb-9 sm:pb-14">
         <div className="grid gap-5 overflow-hidden rounded-[26px] border border-[#efd9df] bg-[linear-gradient(125deg,#fff7f7_0%,#fff 52%,#f8edf0_100%)] p-5 sm:rounded-[34px] sm:p-9 md:grid-cols-[1fr_220px] md:items-center md:p-11">
           <div>
@@ -182,6 +166,22 @@ export function Home() {
           <Link to="/packages" className="btn-gold min-h-11 shrink-0 justify-center px-6">شوف الباقات ←</Link>
         </div>
       </section>
+      <section className="mx-auto max-w-6xl px-4 pb-10 sm:pb-14">
+        <div className="grid gap-5 overflow-hidden rounded-[28px] border border-[#e9cbd1] bg-[linear-gradient(125deg,#fff0f3_0%,#fffaf8_55%,#f7eee5_100%)] p-5 sm:rounded-[34px] sm:p-9 md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:p-11">
+          <div>
+            <p className="text-xs font-extrabold text-[#b36a78] sm:text-sm">DA3WETNA PARTNERS</p>
+            <h2 className="mt-2 font-display text-2xl leading-relaxed text-[#4a2d33] sm:text-4xl">بتشتغل في مجال الأفراح؟ خلّينا نكبر سوا</h2>
+            <p className="mt-2 max-w-2xl text-xs leading-7 text-[#806b70] sm:text-sm sm:leading-8">لو أنت مصور، Wedding Planner، أو مسؤول في قاعة أفراح، رشّح الدعوات الرقمية لعملائك وخلي تفاصيل فرحتهم أسهل وأجمل.</p>
+            <div className="mt-4 flex flex-wrap gap-2 text-[10px] font-bold text-[#806b70] sm:text-xs">
+              <span className="rounded-full border border-[#ead2d6] bg-white/80 px-3 py-2">للمصورين</span>
+              <span className="rounded-full border border-[#ead2d6] bg-white/80 px-3 py-2">لقاعات الأفراح</span>
+              <span className="rounded-full border border-[#ead2d6] bg-white/80 px-3 py-2">لمنظمي المناسبات</span>
+            </div>
+          </div>
+          <Link to="/partners" className="btn-gold min-h-12 justify-center px-6">اعرف تفاصيل الشراكة ←</Link>
+        </div>
+      </section>
+
     </main>
   )
 }
