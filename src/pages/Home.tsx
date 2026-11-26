@@ -121,7 +121,7 @@ export function Home() {
                 <p className="text-[9px] text-[#a67a7e]">أنت مدعو</p><p className="mt-2 font-display text-2xl text-[#87475a]">صالح & ندى</p><p className="mt-2 text-[9px] text-[#9a7c80]">إلى خالد</p><p className="mt-3 border-t border-[#eadcda] pt-3 text-[9px] text-[#9a7c80]">اضغط لفتح الدعوة</p>
               </div>
             </div>
-            <p className="text-[10px] font-bold text-[#b36a78]">01 · دعوة لكل ضيف</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">متخصصة لكل ضيف.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">دعوة خاصة، لكل ضيف لوحده. رحّب بضيوفك بطريقة شخصية وخلي مشاركة الدعوة سهلة من أول رسالة.</p>
+            <p className="text-[10px] font-bold text-[#b36a78]">1 · دعوة لكل ضيف</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">متخصصة لكل ضيف.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">دعوة خاصة، لكل ضيف لوحده. رحّب بضيوفك بطريقة شخصية وخلي مشاركة الدعوة سهلة من أول رسالة.</p>
           </article>
           <article className="rounded-[1.7rem] bg-[#faf3f1] p-6 sm:p-8">
             <div className="mb-7 flex min-h-40 items-center justify-center rounded-2xl border border-[#eadcda] bg-white p-5">
@@ -132,7 +132,7 @@ export function Home() {
                 <p className="mt-2 text-[8px] text-[#9a7c80]">مثال توضيحي لشكل متابعة الردود</p>
               </div>
             </div>
-            <p className="text-[10px] font-bold text-[#b36a78]">02 · متابعة الردود</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">تابع الردود لحظة بلحظة.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">تابع مين أكد حضوره ومين لسه مستني، واعرف عدد الضيوف اللي هيشاركوك فرحتك.</p>
+            <p className="text-[10px] font-bold text-[#b36a78]">2 · متابعة الردود</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">تابع الردود لحظة بلحظة.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">تابع مين أكد حضوره ومين لسه مستني، واعرف عدد الضيوف اللي هيشاركوك فرحتك.</p>
           </article>
           <article className="rounded-[1.7rem] bg-[#faf3f1] p-6 sm:p-8">
             <div className="mb-7 flex min-h-40 items-center justify-center rounded-2xl border border-[#eadcda] bg-white p-5">
@@ -140,7 +140,7 @@ export function Home() {
                 <span className="text-2xl text-[#b36a78]">⌖</span><p className="mt-2 text-xs font-extrabold text-[#493139]">مكان الاحتفال</p><p className="mt-1 text-[9px] text-[#9a7c80]">العنوان والاتجاهات في دعوتك</p><span className="mt-3 inline-flex rounded-full border border-[#e5cfd0] px-4 py-2 text-[9px] font-bold text-[#a94e62]">افتح المكان على الخريطة</span>
               </div>
             </div>
-            <p className="text-[10px] font-bold text-[#b36a78]">03 · المكان والاتجاهات</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">مكان الفرح على بُعد ضغطة.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">ضيف مكان الاحتفال في الدعوة، وخلي الوصول ليه أسهل على كل ضيوفك.</p>
+            <p className="text-[10px] font-bold text-[#b36a78]">3 · المكان والاتجاهات</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">مكان الفرح على بُعد ضغطة.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">ضيف مكان الاحتفال في الدعوة، وخلي الوصول ليه أسهل على كل ضيوفك.</p>
           </article>
           <article className="rounded-[1.7rem] bg-[#faf3f1] p-6 sm:p-8">
             <div className="mb-7 flex min-h-40 items-center justify-center rounded-2xl border border-[#eadcda] bg-white p-5">
@@ -148,7 +148,7 @@ export function Home() {
                 <span className="text-3xl text-[#b36a78]">♫</span><p className="mt-2 text-xs font-extrabold text-[#493139]">موسيقى خلفية</p><p className="mt-1 text-[9px] text-[#9a7c80]">اختار المقطع اللي يعبّر عنكم</p><div className="mx-auto mt-4 h-1 w-4/5 rounded-full bg-[#eadcda]"><div className="h-full w-1/3 rounded-full bg-[#b66d7c]" /></div><p className="mt-3 text-[9px] text-[#9a7c80]">تشغيل وإيقاف الموسيقى</p>
               </div>
             </div>
-            <p className="text-[10px] font-bold text-[#b36a78]">04 · موسيقى خلفية</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">خلي للمناسبة صوتها.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">اختار موسيقى تناسب أجواء فرحكم، وخلي ضيوفك يعيشوا تفاصيل الدعوة بطريقتكم.</p>
+            <p className="text-[10px] font-bold text-[#b36a78]">4 · موسيقى خلفية</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">خلي للمناسبة صوتها.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">اختار موسيقى تناسب أجواء فرحكم، وخلي ضيوفك يعيشوا تفاصيل الدعوة بطريقتكم.</p>
           </article>
         </div>
       </section>
