@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import { packages } from "../config"
-import { money } from "../lib/format"
 import { selectPackage } from "../lib/storage"
 
 export function Packages() {
@@ -9,7 +8,7 @@ export function Packages() {
   const requestedReturn = searchParams.get("return")
   const returnTo = requestedReturn?.startsWith("/") && !requestedReturn.startsWith("//") ? requestedReturn : "/templates"
 
-  useEffect(() => { document.title = "الباقات والأسعار — دعوتنا" }, [])
+  useEffect(() => { document.title = "الباقات — دعوتنا" }, [])
 
   return (
     <main id="main" className="da3-packages min-h-[70vh] bg-[#fffafb]">
@@ -21,7 +20,7 @@ export function Packages() {
       <section className="mx-auto max-w-6xl px-3 py-5 sm:px-4 sm:py-12 md:py-16">
         <div className="mx-auto mb-4 max-w-3xl rounded-2xl border border-[#f0dce1] bg-white/90 px-4 py-3 text-center shadow-[0_6px_20px_rgba(91,48,60,.04)] sm:mb-7 sm:rounded-3xl sm:px-6 sm:py-4">
           <p className="text-xs font-extrabold text-[#a64257] sm:text-sm">اختيارك بسيط وواضح</p>
-          <p className="mt-1 text-[11px] leading-6 text-[#806b70] sm:text-sm">كل الأسعار دفعة واحدة، ومفيش اشتراك شهري. اختار عدد الدعوات اللي محتاجها، وبعدها كمل تصميمك.</p>
+          <p className="mt-1 text-[11px] leading-6 text-[#806b70] sm:text-sm">اختار الباقة اللي تناسب عدد الدعوات اللي محتاجها، وبعدها كمل تصميمك.</p>
         </div>
         <div className="mx-auto grid max-w-md items-stretch gap-2.5 sm:max-w-none sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {packages.map((item) => {
@@ -31,7 +30,7 @@ export function Packages() {
             return (
               <article key={item.id} className={"da3-package-card relative flex flex-col overflow-hidden rounded-2xl border bg-white p-3 shadow-[0_5px_18px_rgba(91,48,60,0.045)] sm:rounded-[26px] sm:p-5 " + (featured ? "border-[#d9a3ae] ring-1 ring-[#f4e2e6] sm:shadow-[0_10px_28px_rgba(166,66,87,0.08)]" : "border-[#f0dce1]")}>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="rounded-full bg-[#fff0f2] px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] sm:px-3 sm:py-1.5 sm:text-xs">{item.id === "single" ? item.discount : item.label || "باقة مرنة"}</span>
+                  <span className="rounded-full bg-[#fff0f2] px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] sm:px-3 sm:py-1.5 sm:text-xs">{item.label || "باقة مرنة"}</span>
                   {featured ? <span className="rounded-full bg-[#a64257] px-2.5 py-1 text-[9px] font-bold text-white">الأكثر تميزًا</span> : null}
                 </div>
                 <div className="mt-2 flex items-center justify-between gap-3 sm:mt-4 sm:block">
@@ -39,21 +38,14 @@ export function Packages() {
                     <h2 className="text-base font-extrabold text-[#4a2d33] sm:text-xl">{item.name}</h2>
                     <p className="mt-0.5 text-[10px] leading-4 text-[#806b70] sm:mt-2 sm:text-sm sm:leading-6">{item.description}</p>
                   </div>
-                  <div className="shrink-0 text-left sm:mt-5 sm:border-b sm:border-[#f3e7e9] sm:pb-5">
-                    <div className="flex items-baseline justify-end gap-1.5 sm:justify-start">
-                      <strong className="font-display text-[27px] leading-none text-[#a64257] sm:text-4xl">{money(item.price)}</strong>
-                      <span className="text-[9px] text-[#806b70] sm:text-xs">ج.م</span>
-                    </div>
-                    {item.oldPrice ? <p className="mt-1 text-[10px] text-[#a99599] line-through sm:text-sm">{money(item.oldPrice)}</p> : null}
-                    <p className="mt-1 text-[9px] text-[#806b70] sm:text-xs">دفعة واحدة</p>
-                  </div>
+
                 </div>
-                <div className="mt-2.5 flex items-center justify-between rounded-xl bg-[#fff7f8] px-3 py-2 sm:mt-4 sm:rounded-2xl sm:p-4">
+                <div className="mt-2.5 flex items-center justify-start rounded-xl bg-[#fff7f8] px-3 py-2 sm:mt-4 sm:rounded-2xl sm:p-4">
                   <div>
                     <p className="text-xs font-extrabold text-[#4a2d33] sm:text-base">{item.quantity} {item.quantity === 1 ? "دعوة" : "دعوات مختلفة"}</p>
                     <p className="mt-0.5 text-[9px] text-[#806b70] sm:mt-1 sm:text-xs">تبعتها لعدد لا نهائي من الناس</p>
                   </div>
-                  <p className="text-left text-[10px] font-bold text-[#a64257] sm:text-sm">{money(Math.round(item.price / item.quantity))} ج.م <span className="block text-[9px] font-normal text-[#806b70]">للدعوة</span></p>
+
                 </div>
                 <details className="group mt-2.5 rounded-xl border border-[#f3e4e8] px-3 py-2 sm:hidden">
                   <summary className="flex cursor-pointer list-none items-center justify-between text-xs font-bold text-[#a64257] [&::-webkit-details-marker]:hidden">
