@@ -6,7 +6,7 @@ import { activeTemplates, draftFor } from "../data"
 import { clearDraft, readActivePackage, readSelectedPackage } from "../lib/storage"
 import type { Occasion } from "../types"
 
-const filters = ["الكل", "فرح", "خطوبة", "كتب كتاب"] as const
+const filters = ["الكل", "فرح", "خطوبة"] as const
 
 export function Gallery() {
   const activeOrder = readActivePackage()
@@ -43,7 +43,7 @@ export function Gallery() {
             <p className="text-[10px] font-extrabold tracking-[.2em] text-[#a64257] sm:text-xs">DA3WETNA • INVITATION STUDIO</p>
             <h1 className="mt-2 font-display text-[1.45rem] leading-[1.45] text-[#4a2d33] sm:text-5xl lg:text-6xl">كل فرحة وليها<br className="hidden md:block" /> تصميم يشبهها</h1>
             <p className="mt-2 max-w-xl text-[11px] leading-6 text-[#806b70] sm:text-base sm:leading-8 md:mx-0">
-              اختار تصميم للفرح أو الخطوبة أو كتب الكتاب، واعمل معاينة كاملة قبل ما تبدأ تخصّص دعوتك.
+              اختار تصميم للفرح أو الخطوبة، واعمل معاينة كاملة قبل ما تبدأ تخصّص دعوتك.
             </p>
             <div className="mt-3 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center md:justify-start">
               <a href="#designs" className="inline-flex min-h-9 items-center justify-center rounded-full bg-[#a64257] px-3 text-[11px] font-bold text-white shadow-[0_7px_18px_rgba(166,66,87,.18)] transition hover:-translate-y-0.5 hover:bg-[#91384b]">تصفح التصميمات <span className="mr-2">↓</span></a>
@@ -124,9 +124,9 @@ export function Gallery() {
         {visible.length === 0 ? (
           <div className="mt-6 rounded-3xl border border-dashed border-[#e8c8cf] bg-white/70 px-5 py-12 text-center">
             <span className="text-3xl text-[#c68b98]">♡</span>
-            <p className="mt-3 font-bold text-[#4a2d33]">{filter === "كتب كتاب" ? "تصميمات كتب الكتاب هتضاف قريبًا" : "مفيش تصميمات مطابقة للبحث أو المناسبة دي حاليًا"}</p>
-            {filter === "كتب كتاب" ? <p className="mt-2 text-sm leading-7 text-[#806b70]">تقدر تتواصل معانا لو محتاج مساعدة بخصوص دعوة كتب الكتاب.</p> : null}
-            {filter === "كتب كتاب" ? <Link to="/contact" className="mt-4 inline-flex rounded-full bg-[#a64257] px-5 py-3 text-sm font-bold text-white shadow-sm">تواصل معانا</Link> : null}
+            <p className="mt-3 font-bold text-[#4a2d33]">مفيش تصميمات مطابقة للبحث أو المناسبة دي حاليًا</p>
+            
+            
             <button type="button" onClick={() => { setFilter("الكل"); setQuery(""); setFavoritesOnly(false) }} className="mt-4 rounded-full bg-[#a64257] px-5 py-3 text-sm font-bold text-white shadow-sm">عرض كل التصميمات</button>
           </div>
         ) : null}
