@@ -3922,7 +3922,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   margin: 0 auto;
   padding: clamp(.5rem, 2vw, 1rem);
   color: #102b4a;
-  background: radial-gradient(ellipse at 10% 5%, rgba(89,137,184,.16), transparent 32%), radial-gradient(ellipse at 90% 95%, rgba(185,150,85,.14), transparent 34%), linear-gradient(145deg, #f9fcff, #e9f1f9 55%, #fbfcff);
+  background: radial-gradient(ellipse at 10% 5%, rgba(72,126,181,.22), transparent 34%), radial-gradient(ellipse at 90% 95%, rgba(72,126,181,.14), transparent 36%), linear-gradient(145deg, #EAF2FA, #DCE8F5 55%, #F2F7FC);
   border: 1px solid rgba(185,150,85,.55);
   border-radius: 22px;
   box-shadow: 0 20px 55px rgba(19,48,78,.12), inset 0 0 0 4px rgba(255,255,255,.72);
@@ -4046,3 +4046,15 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 
 .royal-map-link { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:.7rem 1.4rem; border:1px solid rgba(23,59,96,.35); border-radius:999px; background:#fff; color:#173B60; font-weight:800; text-decoration:none; box-shadow:0 8px 20px rgba(23,59,96,.08); }
 .royal-map-link:hover { background:#eaf1f9; border-color:#B99655; }
+
+
+/* Royal blue invitation: remove the warm beige paper tint completely */
+.royal-invite .lavender-card {
+  background: #EAF2FA;
+}
+.royal-invite .lavender-bg {
+  filter: hue-rotate(165deg) saturate(.72);
+}
+.royal-invite .royal-invite-card {
+  background: #EAF2FA;
+}
