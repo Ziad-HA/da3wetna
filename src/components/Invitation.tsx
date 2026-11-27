@@ -45,6 +45,31 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     )
   }
 
+  if (template.id === "chateau") {
+    return (
+      <article className="invite chx-thumb-invite" style={vars}>
+        <div className="chx-thumb-wrapper">
+          <img src="/chateau/hero_card_blank.jpg" alt="" className="chx-thumb-bg" />
+          <div className="chx-thumb-content">
+            <img src="/chateau/wax_seal_crop.jpg" alt="" className="chx-thumb-monogram" />
+            <div className="chx-thumb-names">
+              <Line field="groom" className="chx-name" active={activeField} onSelect={onSelect}>
+                {draft.groom || "اسم العريس"}
+              </Line>
+              <i className="chx-amp">و</i>
+              <Line field="bride" className="chx-name" active={activeField} onSelect={onSelect}>
+                {draft.bride || "اسم العروسة"}
+              </Line>
+            </div>
+            <Line field="hosts" className="chx-hosts" active={activeField} onSelect={onSelect}>
+              {draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}
+            </Line>
+          </div>
+        </div>
+      </article>
+    )
+  }
+
   if (template.layout === "site" && template.frame === "arch") {
     return (
       <article className="invite vaux-thumb-invite" style={vars}>

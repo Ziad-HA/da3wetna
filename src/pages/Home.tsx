@@ -9,7 +9,7 @@ export function Home() {
   const last = readLast()
 
   useEffect(() => {
-    document.title = "دعوتنا — دعوات أفراح رقمية"
+    document.title = "دعوتنا — da3wetna"
   }, [])
 
   return (

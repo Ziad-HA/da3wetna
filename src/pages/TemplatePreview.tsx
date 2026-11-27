@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { EstateOpening } from "../components/EstateOpening"
+import { ChateauOpening } from "../components/ChateauOpening"
 import { GardenOpening } from "../components/GardenOpening"
 import { GardenInvite } from "../components/GardenInvite"
 import { Invitation } from "../components/Invitation"
 import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { SiteInvite } from "../components/SiteInvite"
+import { ChateauInvite } from "../components/ChateauInvite"
 import { StripInvite } from "../components/StripInvite"
 import { draftFor, getTemplate } from "../data"
 import { isLight } from "../lib/color"
@@ -94,17 +96,31 @@ export function TemplatePreview() {
       {!introSkipped && introStep < 3 && isGarden ? (
         <GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />
       ) : !introSkipped && introStep < 3 && template.envelope.zoom ? (
-        <EstateOpening
-          draft={draft}
-          step={introStep}
-          onOpen={openEnvelope}
-          onComplete={() => setIntroStep(3)}
-          onSkip={() => {
-            startMusic()
-            setIntroSkipped(true)
-            setIntroStep(3)
-          }}
-        />
+        template.id === "chateau" ? (
+          <ChateauOpening
+            draft={draft}
+            step={introStep}
+            onOpen={openEnvelope}
+            onComplete={() => setIntroStep(3)}
+            onSkip={() => {
+              startMusic()
+              setIntroSkipped(true)
+              setIntroStep(3)
+            }}
+          />
+        ) : (
+          <EstateOpening
+            draft={draft}
+            step={introStep}
+            onOpen={openEnvelope}
+            onComplete={() => setIntroStep(3)}
+            onSkip={() => {
+              startMusic()
+              setIntroSkipped(true)
+              setIntroStep(3)
+            }}
+          />
+        )
       ) : !introSkipped && introStep < 3 ? (
         <main
           className={`invite-opening-screen invite-opening-step-${introStep}`}
@@ -159,11 +175,11 @@ export function TemplatePreview() {
           }${isSite ? " site-page" : ""}`}
           style={
             {
-              background: isStrip ? "#4b4e30" : isSite ? "#FAF6EE" : template.vars.shell,
+              background: isStrip ? "#4b4e30" : isSite ? (template.id === "chateau" ? "#F5F2EA" : "#FAF6EE") : template.vars.shell,
               color: isStrip
                 ? "#f4efe2"
                 : isSite
-                ? "#5E1C2A"
+                ? (template.id === "chateau" ? "#1E4030" : "#5E1C2A")
                 : isLight(template.vars.shell)
                 ? template.vars.ink
                 : "#fff6ea",
@@ -176,7 +192,11 @@ export function TemplatePreview() {
             {isGarden ? (
               <GardenInvite draft={draft} />
             ) : isSite ? (
-              <SiteInvite draft={draft} template={template} />
+              template.id === "chateau" ? (
+                <ChateauInvite draft={draft} />
+              ) : (
+                <SiteInvite draft={draft} template={template} />
+              )
             ) : isStrip ? (
               <StripInvite draft={draft} template={template} autoScroll />
             ) : (
