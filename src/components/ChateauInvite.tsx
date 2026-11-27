@@ -185,16 +185,6 @@ export function ChateauInvite({ draft, rsvp }: Props) {
         </section>
       ) : null}
 
-      <section className="chx-sec chx-reveal chx-footer-sec">
-        <div className="chx-floral-divider">
-          <img src="/chateau/floral_divider.jpg" alt="" className="chx-divider-img" />
-        </div>
-        <div className="chx-footer-monogram">
-          <img src="/chateau/monogram_gj.jpg" alt="" />
-        </div>
-        <p className="chx-script-title" style={{ marginTop: "1rem" }}>{draft.groom} و{draft.bride}</p>
-        <p className="chx-body-text">في انتظاركم ♡</p>
-      </section>
     </article>
   )
 }
