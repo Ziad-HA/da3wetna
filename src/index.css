@@ -4243,3 +4243,11 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .lavender-parent-inline span { font-size: clamp(.48rem, 2.1vw, .66rem); }
   .lavender-parent-inline strong { font-size: clamp(.72rem, 3vw, .95rem); }
 }
+
+
+/* Match the shared floral parent ornament to each envelope's color identity. */
+.invite-additions-estate img,
+.invite-additions-emerald-fern img { filter: hue-rotate(75deg) saturate(.82) drop-shadow(0 3px 7px rgba(25,70,45,.12)); }
+.invite-additions-burgundy-velvet img { filter: hue-rotate(285deg) saturate(.78) drop-shadow(0 3px 7px rgba(70,20,40,.12)); }
+.invite-additions-magnolia-ivory img { filter: grayscale(.55) sepia(.18) saturate(.7) drop-shadow(0 3px 7px rgba(100,80,50,.10)); }
+.invite-additions-chateau img { filter: hue-rotate(80deg) saturate(.72) drop-shadow(0 3px 7px rgba(35,75,50,.12)); }
