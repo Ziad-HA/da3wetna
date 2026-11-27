@@ -30,8 +30,11 @@ export function TemplatePreview() {
   const draft = useMemo(() => {
     if (!template) return null
     const previewDraft = draftFor(template)
+    previewDraft.groom = "محمد"
+    previewDraft.bride = "سلمى"
     previewDraft.groomFather = "أحمد"
     previewDraft.brideFather = "محمد"
+    previewDraft.date = "2027-01-10"
     return previewDraft
   }, [template])
 
