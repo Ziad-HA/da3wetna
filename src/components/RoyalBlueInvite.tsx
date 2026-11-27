@@ -48,6 +48,7 @@ export function RoyalBlueInvite({ draft, preview = false }: { draft: InviteDraft
         <Invitation draft={draft} />
       </div>
       <div className="royal-flower-divider" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
+      </div>
       {(draft.photoOne || preview) ? (
         <section className="royal-photo-section" aria-label="صورة العروسين" style={{ width: "min(100%, 680px)", margin: "1rem auto 1.5rem", padding: "clamp(12px, 3vw, 22px)", position: "relative", border: "1px solid rgba(185,150,85,.72)", borderRadius: "24px", background: "linear-gradient(145deg,#fff 0%,#edf4fb 55%,#fff 100%)", boxShadow: "0 14px 34px rgba(23,59,96,.12), inset 0 0 0 5px rgba(255,255,255,.8)" }}>
           <div aria-hidden="true" style={{ position: "absolute", inset: "7px", border: "1px solid rgba(185,150,85,.32)", borderRadius: "17px", pointerEvents: "none" }} />
@@ -74,7 +75,6 @@ export function RoyalBlueInvite({ draft, preview = false }: { draft: InviteDraft
           </div>
           <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" />
         </section> : null}
-      </div>
       <section className="royal-countdown-section">
         <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
         <p className="royal-count-eyebrow">موعد يجمعنا على الفرح</p>
