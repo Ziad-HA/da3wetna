@@ -237,7 +237,7 @@ export function TemplatePreview() {
               draft={draft}
               preview
               shareUrl={window.location.href}
-              palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }}
+              palette={template.id === "royal-blue" ? { paper: "#F1F6FC", ink: "#173B60", gold: "#B99655", soft: "#526A85" } : { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }}
             />
           </div>
         </main>
