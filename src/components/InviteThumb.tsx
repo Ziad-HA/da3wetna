@@ -50,8 +50,17 @@ export function InviteThumb({ draft }: { draft: InviteDraft }) {
     return () => observer.disconnect()
   }, [])
 
+  if (draft.templateId === "royal-blue") {
+    return (
+      <div ref={box} className="invite-thumb">
+        <div className="invite-thumb-inner" style={{ width: BASE_W, height: BASE_H, transform: `scale(${scale})` }}>
+          <Invitation draft={draft} />
+        </div>
+      </div>
+    )
+  }
+
   if (
-    draft.templateId === "royal-blue" ||
     draft.templateId === "emerald-fern" ||
     draft.templateId === "burgundy-velvet" ||
     draft.templateId === "magnolia-ivory"
