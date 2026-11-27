@@ -4046,15 +4046,3 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 
 .royal-map-link { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:.7rem 1.4rem; border:1px solid rgba(23,59,96,.35); border-radius:999px; background:#fff; color:#173B60; font-weight:800; text-decoration:none; box-shadow:0 8px 20px rgba(23,59,96,.08); }
 .royal-map-link:hover { background:#eaf1f9; border-color:#B99655; }
-
-
-/* Royal blue invitation: remove the warm beige paper tint completely */
-.royal-invite .lavender-card {
-  background: #EAF2FA;
-}
-.royal-invite .lavender-bg {
-  filter: hue-rotate(165deg) saturate(.72);
-}
-.royal-invite .royal-invite-card {
-  background: #EAF2FA;
-}
