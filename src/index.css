@@ -4043,3 +4043,6 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .royal-details-section iframe { width:100%; max-width:560px; border-radius:14px; }
 .royal-invite + .invite-additions { --add-paper:#F1F6FC; --add-ink:#173B60; --add-gold:#B99655; --add-soft:#526A85; }
 @media(max-width:480px) { .royal-invite { padding:.55rem; border-radius:18px; } .royal-count-cell { min-height:88px; } .royal-count-cell strong { font-size:clamp(1.8rem,8vw,2.5rem); } .royal-details-section { padding:1.2rem .8rem; } }
+
+.royal-map-link { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:.7rem 1.4rem; border:1px solid rgba(23,59,96,.35); border-radius:999px; background:#fff; color:#173B60; font-weight:800; text-decoration:none; box-shadow:0 8px 20px rgba(23,59,96,.08); }
+.royal-map-link:hover { background:#eaf1f9; border-color:#B99655; }
