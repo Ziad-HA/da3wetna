@@ -173,8 +173,8 @@ export function ChateauInvite({ draft, rsvp }: Props) {
         <section className="chx-sec chx-reveal chx-reception-sec">
           <img src="/chateau/orangerie_illustration.jpg" alt="" className="chx-venue-illustration" />
           <div className="chx-reception-copy">
-            <span className="chx-kicker">تفاصيل المكان</span>
-            <h2 className="chx-script-title">مكان الحفل</h2>
+            <span className="chx-kicker">مستنيينكم تشاركونا</span>
+            <h2 className="chx-script-title">ميعادنا ومكاننا</h2>
             {validDate ? <p className="chx-body-text">{formatArabicDate(draft.date)}</p> : null}
             {draft.time ? <p className="chx-time-display">{formatTime(draft.time)}</p> : null}
             <p className="chx-body-meta">
