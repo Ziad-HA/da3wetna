@@ -35,6 +35,15 @@ export function TemplatePreview() {
     }
   }, [template])
 
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio || !draft.musicUrl) return
+    audio.volume = 0.7
+    audio.currentTime = 75
+    // Try autoplay on preview entry; browsers may require the envelope click first.
+    audio.play().catch(() => {})
+  }, [template?.id, draft.musicUrl])
+
   if (!template || !draft) {
     return <Navigate to="/templates" replace />
   }
@@ -42,6 +51,7 @@ export function TemplatePreview() {
   function startMusic() {
     const audio = audioRef.current
     if (!audio) return
+    if (audio.currentTime < 75 || audio.currentTime >= 165) audio.currentTime = 75
     audio.volume = 0.7
     audio.play().catch(() => {})
   }
@@ -64,6 +74,7 @@ export function TemplatePreview() {
 
   return (
     <div className="preview-page-container relative min-h-dvh">
+      <audio ref={audioRef} src={draft.musicUrl || undefined} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= 165) { event.currentTarget.pause(); event.currentTarget.currentTime = 75 } }} />
       {/* Top Floating Bar */}
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/20 bg-black/40 px-3 py-2.5 backdrop-blur-md sm:px-6 sm:py-3">
         <div className="flex items-center gap-2 sm:gap-3">
