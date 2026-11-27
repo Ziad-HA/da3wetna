@@ -36,7 +36,7 @@ function RoyalCountdown({ draft }: { draft: InviteDraft }) {
   )
 }
 
-export function RoyalBlueInvite({ draft }: { draft: InviteDraft }) {
+export function RoyalBlueInvite({ draft, preview = false }: { draft: InviteDraft; preview?: boolean }) {
   const validDate = Boolean(draft.date) && !Number.isNaN(new Date(`${draft.date}T00:00:00`).getTime())
   const calendarUrl = validDate ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`فرح ${draft.groom} و${draft.bride}`)}&dates=${draft.date.replaceAll("-", "")}T${(draft.time || "18:00").replace(":", "")}00/${draft.date.replaceAll("-", "")}T${String(Number((draft.time || "18:00").slice(0, 2)) + 3).padStart(2, "0")}${(draft.time || "18:00").slice(3, 5)}00&details=${encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا")}&location=${encodeURIComponent([draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" - "))}` : ""
 
@@ -48,6 +48,17 @@ export function RoyalBlueInvite({ draft }: { draft: InviteDraft }) {
         <Invitation draft={draft} />
       </div>
       <div className="royal-flower-divider" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
+      {(draft.photoOne || preview) ? (
+        <section className="royal-photo-section" aria-label="صورة العروسين" style={{ width: "min(100%, 680px)", margin: "1rem auto 1.5rem", padding: "clamp(12px, 3vw, 22px)", position: "relative", border: "1px solid rgba(185,150,85,.72)", borderRadius: "24px", background: "linear-gradient(145deg,#fff 0%,#edf4fb 55%,#fff 100%)", boxShadow: "0 14px 34px rgba(23,59,96,.12), inset 0 0 0 5px rgba(255,255,255,.8)" }}>
+          <div aria-hidden="true" style={{ position: "absolute", inset: "7px", border: "1px solid rgba(185,150,85,.32)", borderRadius: "17px", pointerEvents: "none" }} />
+          <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" style={{ display: "block", width: "min(72%, 290px)", height: "clamp(34px, 8vw, 58px)", objectFit: "contain", margin: "0 auto .65rem", filter: "hue-rotate(165deg) saturate(1.12)" }} />
+          <div style={{ position: "relative", padding: "7px", border: "1px solid rgba(185,150,85,.55)", borderRadius: "15px", background: "#fff", boxShadow: "0 5px 16px rgba(23,59,96,.08)" }}>
+            <img src={draft.photoOne || "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=85"} alt="صورة تجريبية للعروسين — يمكن استبدالها بصورة خاصة" style={{ display: "block", width: "100%", aspectRatio: "16 / 10", objectFit: "cover", borderRadius: "10px" }} />
+          </div>
+          <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" style={{ display: "block", width: "min(72%, 290px)", height: "clamp(34px, 8vw, 58px)", objectFit: "contain", margin: ".65rem auto 0", transform: "rotate(180deg)", filter: "hue-rotate(165deg) saturate(1.12)" }} />
+          {preview ? <p style={{ margin: ".25rem 0 0", textAlign: "center", color: "#607b99", fontSize: ".75rem", fontWeight: 700 }}>صورة للمعاينة فقط — تقدر ترفع صورتك أو تحذفها من التعديل</p> : null}
+        </section>
+      ) : null}
       <div className="invite-additions" dir="rtl" lang="ar" style={{ "--add-paper": "#F1F6FC", "--add-ink": "#173B60", "--add-gold": "#B99655", "--add-soft": "#526A85" } as CSSProperties}>
         {(draft.groomFather?.trim() || draft.brideFather?.trim()) ? <section className="invite-additions-parents" aria-label="والدا العروسين">
           <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" />
