@@ -103,20 +103,6 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
               </Line>
             </div>
 
-            {template.id === "royal-blue" && (draft.groomFather?.trim() || draft.brideFather?.trim()) ? (
-              <div className="lavender-parents-inline" aria-label="والدا العروسين">
-                <div className="lavender-parent-inline">
-                  <span>والد العريس الأستاذ</span>
-                  <strong>{draft.groomFather}</strong>
-                </div>
-                <span className="lavender-parents-inline-heart" aria-hidden="true">♡</span>
-                <div className="lavender-parent-inline">
-                  <span>والد العروسة الأستاذ</span>
-                  <strong>{draft.brideFather}</strong>
-                </div>
-              </div>
-            ) : null}
-
             {/* Date line: Day | Date | Time */}
             <div className="lavender-date-row">
               <span className="lavender-date-col day">
