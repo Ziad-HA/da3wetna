@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { InviteThumb } from "../components/InviteThumb"
 import { activeTemplates, faqs } from "../data"
 import { draftFor } from "../data"
-import { clearDraft, readLast } from "../lib/storage"
+import { readLast } from "../lib/storage"
 
 export function Home() {
   const last = readLast()
@@ -156,7 +156,7 @@ export function Home() {
       <section className="mx-auto max-w-4xl px-4 py-16 sm:py-24">
         <div className="text-center"><p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">محتاج تعرف أكتر؟</p><h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">أسئلة بتتكرر.</h2><p className="mt-3 text-xs leading-7 text-[#806b70] sm:text-sm">إجابات سريعة عن تصميم الدعوات والتعديل والدفع والمشاركة.</p></div>
         <div className="mt-8 grid gap-3 sm:mt-10">
-          {faqs.slice(0,6).map((item,index) => (
+          {faqs.slice(0,6).map((item) => (
             <details key={item.q} className="group border-b border-[#eadcda] py-2">
               <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 text-right text-xs font-bold text-[#493139] [&::-webkit-details-marker]:hidden sm:text-sm"><span>{item.q}</span><span className="text-lg text-[#b36a78] transition group-open:rotate-45">＋</span></summary>
               <p className="pb-4 pt-1 text-[11px] leading-7 text-[#806b70] sm:text-sm sm:leading-8">{item.a}</p>

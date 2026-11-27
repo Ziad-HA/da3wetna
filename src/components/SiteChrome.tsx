@@ -124,15 +124,6 @@ function Footer() {
       <div className="pointer-events-none absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-[#f4e8d5]/45 blur-3xl" />
 
       <div className="relative mx-auto max-w-6xl px-4 pb-5 pt-7 sm:pb-7 sm:pt-16">
-        <div className="mb-5 flex flex-col gap-3 rounded-[20px] border border-[#f0dce1] bg-white/75 p-4 shadow-[0_8px_24px_rgba(115,65,77,0.045)] sm:mb-10 sm:gap-6 sm:rounded-[28px] sm:p-8">
-          <div className="max-w-xl">
-            <p className="mb-1 text-[9px] font-bold tracking-[0.18em] sm:mb-2 sm:text-xs text-[#b36a78]">YOUR MOMENT, YOUR INVITATION</p>
-            
-            <p className="mt-1 text-xs leading-5 text-[#806b70] sm:mt-2 sm:text-sm sm:leading-7">اختار التصميم اللي يشبه فرحتك وشارك دعوتك مع كل اللي بتحبهم.</p>
-          </div>
-          <Link to="/templates" className="btn-gold min-h-10 shrink-0 px-5 text-xs sm:px-7 sm:text-sm">اكتشف الدعوات <span className="mr-2" aria-hidden="true">←</span></Link>
-        </div>
-
         <div className="grid grid-cols-2 gap-2.5 border-b border-[#efdde1] pb-4 sm:grid-cols-2 sm:gap-9 sm:pb-10 lg:grid-cols-[1.35fr_0.8fr_1.25fr_0.8fr] lg:gap-8">
           <div>
             <Link to="/" className="inline-flex items-center gap-2 sm:gap-3" aria-label="دعوتنا، الصفحة الرئيسية">
