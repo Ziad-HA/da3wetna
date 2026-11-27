@@ -280,9 +280,18 @@ export function TemplatePreview() {
               template.id === "chateau" ? (
                 <ChateauInvite draft={draft} />
               ) : template.id === "royal-blue" ? (
-                <RoyalBlueInvite draft={draft} preview />
+                <RoyalBlueInvite
+                  draft={draft}
+                  preview
+                  endingAdditions={<InviteAdditions draft={draft} preview shareUrl={window.location.href} palette={{ paper: "#F1F6FC", ink: "#173B60", gold: "#B99655", soft: "#526A85" }} showParents={false} />}
+                />
               ) : (
-                <SiteInvite draft={draft} template={template} preview={template.id === "estate" || template.id === "estate-classic"} />
+                <SiteInvite
+                  draft={draft}
+                  template={template}
+                  preview={template.id === "estate" || template.id === "estate-classic"}
+                  endingAdditions={(template.id === "estate" || template.id === "estate-classic") ? <InviteAdditions draft={draft} preview shareUrl={window.location.href} palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }} showParents={false} /> : undefined}
+                />
               )
             ) : isStrip ? (
               <StripInvite draft={draft} template={template} autoScroll />
@@ -302,13 +311,14 @@ export function TemplatePreview() {
                 </div>
               </>
             )}
-            <InviteAdditions
-              draft={draft}
-              preview
-              shareUrl={window.location.href}
-              palette={template.id === "royal-blue" ? { paper: "#F1F6FC", ink: "#173B60", gold: "#B99655", soft: "#526A85" } : { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }}
-              showParents={template.id !== "estate" && template.id !== "estate-classic"}
-            />
+            {template.id !== "royal-blue" && template.id !== "estate" && template.id !== "estate-classic" ? (
+              <InviteAdditions
+                draft={draft}
+                preview
+                shareUrl={window.location.href}
+                palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }}
+              />
+            ) : null}
           </div>
         </main>
       )}
