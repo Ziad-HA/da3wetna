@@ -3961,3 +3961,60 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .royal-count-cell { min-height: 82px; padding: .55rem .1rem; }
   .royal-count-cell span { font-size: .68rem; }
 }
+
+/* Shared RSVP and social-sharing additions for every invitation family */
+.invite-additions {
+  --add-paper: #fffaf5;
+  --add-ink: #633c47;
+  --add-gold: #b88b58;
+  --add-soft: #927b7f;
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  margin: 1.15rem auto 0;
+  color: var(--add-ink);
+}
+.invite-additions-rsvp,
+.invite-additions-share {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.2rem,4vw,2rem);
+  border: 1px solid color-mix(in srgb,var(--add-gold) 42%,transparent);
+  border-radius: 22px;
+  background: linear-gradient(145deg,color-mix(in srgb,var(--add-paper) 98%,white),color-mix(in srgb,var(--add-paper) 86%,var(--add-gold)));
+  box-shadow: 0 12px 32px rgba(40,30,30,.075),inset 0 0 0 3px rgba(255,255,255,.62);
+  text-align: center;
+}
+.invite-additions-rsvp::before,
+.invite-additions-share::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid color-mix(in srgb,var(--add-gold) 24%,transparent);
+  border-radius: 15px;
+  pointer-events: none;
+}
+.invite-additions-ornament { display:block; color:var(--add-gold); font-family:Georgia,serif; font-size:1.35rem; letter-spacing:.35rem; }
+.invite-additions-kicker { margin:.35rem 0 .15rem; color:var(--add-gold); font-size:.8rem; font-weight:800; }
+.invite-additions h2 { margin:.2rem 0; color:var(--add-ink); font-family:var(--invite-font-ar,"Amiri"),serif; font-size:clamp(1.45rem,4vw,2rem); font-weight:700; }
+.invite-additions-description { margin:.3rem auto 1rem; max-width:34rem; color:var(--add-soft); font-size:.88rem; line-height:1.9; }
+.invite-additions-rsvp > *:not(.invite-additions-ornament) { position:relative; z-index:1; }
+.invite-additions-rsvp form:not(.invite-additions-preview-form) { max-width:540px; margin:1rem auto 0; }
+.invite-additions-preview-form { display:grid; gap:.8rem; max-width:540px; margin:1rem auto 0; text-align:right; }
+.invite-additions-preview-form label { display:grid; gap:.35rem; color:var(--add-ink); font-size:.82rem; font-weight:700; }
+.invite-additions-preview-form input,
+.invite-additions-preview-form textarea { width:100%; min-height:44px; padding:.7rem .85rem; border:1px solid color-mix(in srgb,var(--add-gold) 35%,#ddd); border-radius:11px; background:rgba(255,255,255,.8); color:var(--add-soft); }
+.invite-additions-preview-form textarea { min-height:76px; resize:none; }
+.invite-additions-choice { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+.invite-additions-choice span { padding:.7rem .35rem; border:1px solid color-mix(in srgb,var(--add-gold) 40%,transparent); border-radius:11px; background:rgba(255,255,255,.75); font-size:.76rem; font-weight:700; }
+.invite-additions-preview-form button { min-height:46px; border:0; border-radius:999px; background:var(--add-ink); color:white; font-weight:800; opacity:.8; }
+.invite-additions-preview-form small { color:var(--add-soft); text-align:center; font-size:.7rem; }
+.invite-additions-share { padding-bottom:1.5rem; }
+.invite-additions-socials { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.6rem; max-width:560px; margin:1.1rem auto .6rem; }
+.invite-additions-socials button { display:flex; min-height:76px; flex-direction:column; align-items:center; justify-content:center; gap:.3rem; padding:.6rem .25rem; border:1px solid color-mix(in srgb,var(--add-gold) 38%,transparent); border-radius:14px; background:rgba(255,255,255,.72); color:var(--add-ink); transition:transform .2s,background .2s; }
+.invite-additions-socials button:hover { transform:translateY(-2px); background:white; }
+.invite-additions-socials b { color:var(--add-gold); font-size:1.35rem; line-height:1; }
+.invite-additions-socials span { font-size:.72rem; font-weight:800; }
+.invite-additions-note,.invite-additions-status { margin:.55rem 0 0; color:var(--add-soft); font-size:.76rem; line-height:1.8; }
+.invite-additions-status { color:var(--add-ink); font-weight:800; }
+@media(max-width:380px){.invite-additions-socials{gap:.35rem}.invite-additions-socials button{min-height:68px}.invite-additions-socials span{font-size:.66rem}}
