@@ -4129,21 +4129,21 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   margin: 0 auto .15rem;
   padding: clamp(1.4rem, 4.5vw, 2.25rem) clamp(1rem, 4vw, 2rem);
   overflow: hidden;
-  border: 1px solid rgba(73, 119, 166, .34);
+  border: 1px solid color-mix(in srgb, var(--add-gold) 42%, transparent);
   border-radius: 24px;
-  color: #173b60;
+  color: var(--add-ink);
   text-align: center;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.98), transparent 68%),
-    linear-gradient(150deg, #f8fbff 0%, #eaf2fb 58%, #f5f9fe 100%);
-  box-shadow: 0 14px 34px rgba(28, 66, 105, .09), inset 0 0 0 4px rgba(255,255,255,.72);
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--add-paper) 98%, white), transparent 68%),
+    linear-gradient(150deg, color-mix(in srgb, var(--add-paper) 96%, white) 0%, color-mix(in srgb, var(--add-paper) 82%, var(--add-gold)) 58%, color-mix(in srgb, var(--add-paper) 94%, white) 100%);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--add-ink) 10%, transparent), inset 0 0 0 4px rgba(255,255,255,.72);
 }
 .invite-additions-parents::before {
   content: "";
   position: absolute;
   inset: 9px;
   z-index: -1;
-  border: 1px solid rgba(185, 150, 85, .34);
+  border: 1px solid color-mix(in srgb, var(--add-gold) 38%, transparent);
   border-radius: 17px;
   pointer-events: none;
 }
@@ -4154,12 +4154,12 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   height: clamp(30px, 7vw, 54px);
   object-fit: contain;
   opacity: .88;
-  filter: hue-rotate(165deg) saturate(1.12) drop-shadow(0 3px 7px rgba(28,75,125,.12));
+  filter: drop-shadow(0 3px 7px color-mix(in srgb, var(--add-ink) 14%, transparent));
 }
 .invite-additions-parents-intro {
   flex: 0 0 100%;
   margin: .15rem 0 .65rem;
-  color: #315f8d;
+  color: var(--add-ink);
   font-family: var(--invite-font-ar, "Amiri"), serif;
   font-size: clamp(1.15rem, 3.5vw, 1.65rem);
   font-weight: 700;
@@ -4172,12 +4172,12 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   gap: .12rem;
 }
 .invite-additions-parent span {
-  color: #5e7894;
+  color: var(--add-soft);
   font-size: clamp(.88rem, 2.5vw, 1.05rem);
   font-weight: 700;
 }
 .invite-additions-parent strong {
-  color: #173b60;
+  color: var(--add-ink);
   font-family: var(--invite-font-ar, "Amiri"), serif;
   font-size: clamp(1.65rem, 5vw, 2.35rem);
   font-weight: 800;
@@ -4186,7 +4186,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .invite-additions-parents-heart {
   flex: 0 0 auto;
   margin: .05rem 0;
-  color: #7899bb;
+  color: var(--add-gold);
   font-family: Georgia, serif;
   font-size: 1.65rem;
   line-height: 1;
