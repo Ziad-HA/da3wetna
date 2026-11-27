@@ -59,7 +59,7 @@ export function ChateauOpening({ draft, step, onOpen, onComplete, onSkip }: Prop
     }
 
     let frame = 0
-    const fps = 22
+    const fps = 30
     const interval = 1000 / fps
     let lastTime = performance.now()
 
@@ -81,7 +81,7 @@ export function ChateauOpening({ draft, step, onOpen, onComplete, onSkip }: Prop
         setShowNames(true)
         window.setTimeout(() => {
           onComplete?.()
-        }, 900)
+        }, 300)
       }
     }
 

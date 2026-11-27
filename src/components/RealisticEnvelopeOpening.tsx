@@ -50,17 +50,16 @@ export function RealisticEnvelopeOpening({
     setPhase("opening")
     onOpen?.()
 
-    // Step 1: Flap flips open slowly (0s -> 1.3s)
-    // Step 2: Light burst and card rises out of pocket in slow motion (1.2s -> 3.3s)
+    // Step 1: Flap opens quickly, then the card rises smoothly.
     window.setTimeout(() => {
       setPhase("rising")
-    }, 1100)
+    }, 650)
 
-    // Step 3: Complete transition to full invite (3.6s)
+    // Complete the opening sequence in about 2.1 seconds.
     window.setTimeout(() => {
       setPhase("done")
       onComplete?.()
-    }, 3600)
+    }, 2100)
   }
 
   const isFlapOpen = phase === "opening" || phase === "rising" || phase === "done"

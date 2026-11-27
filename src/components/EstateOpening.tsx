@@ -60,7 +60,7 @@ export function EstateOpening({ draft, step, onOpen, onComplete, onSkip, colorwa
     }
 
     let frame = 0
-    const fps = 22
+    const fps = 30
     const interval = 1000 / fps
     let lastTime = performance.now()
 
@@ -82,7 +82,7 @@ export function EstateOpening({ draft, step, onOpen, onComplete, onSkip, colorwa
         setShowNames(true)
         window.setTimeout(() => {
           onComplete?.()
-        }, 900)
+        }, 300)
       }
     }
 

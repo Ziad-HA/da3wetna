@@ -70,9 +70,11 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const hasDraft = true
   useEffect(() => {
     if (!hasDraft || introSkipped || introStep < 1 || introStep >= 3) return
-    const timer = window.setTimeout(() => setIntroStep((step) => Math.min(3, step + 1)), introStep === 1 ? 950 : 1250)
+    // Realistic envelopes manage their own shorter animation timeline.
+    if (["royal-blue", "emerald-fern", "burgundy-velvet", "magnolia-ivory"].includes(draft.templateId)) return
+    const timer = window.setTimeout(() => setIntroStep((step) => Math.min(3, step + 1)), introStep === 1 ? 500 : 650)
     return () => window.clearTimeout(timer)
-  }, [hasDraft, introSkipped, introStep])
+  }, [hasDraft, introSkipped, introStep, draft.templateId])
 
   const MUSIC_START_SECONDS = 75
   const MUSIC_END_SECONDS = 165
