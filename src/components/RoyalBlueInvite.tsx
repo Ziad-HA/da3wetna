@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react"
-import { formatArabicDate } from "../lib/format"
+import { formatArabicDate, formatArabicTime } from "../lib/format"
 import { Invitation } from "./Invitation"
 import { VenueMap } from "./VenueMap"
 import { mapLink } from "../lib/maps"
@@ -37,6 +37,20 @@ function RoyalCountdown({ draft }: { draft: InviteDraft }) {
 }
 
 export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { draft: InviteDraft; preview?: boolean; endingAdditions?: ReactNode }) {
+  const [locationNotice, setLocationNotice] = useState("")
+  const locationUrl = mapLink(draft)
+  async function shareLocation() {
+    if (navigator.share) {
+      try { await navigator.share({ title: `موقع ${draft.venue}`, url: locationUrl }); setLocationNotice("تم فتح مشاركة اللوكيشن."); return }
+      catch { /* النسخ بديل المشاركة */ }
+    }
+    try { await navigator.clipboard.writeText(locationUrl); setLocationNotice("تم نسخ رابط اللوكيشن.") }
+    catch { setLocationNotice("تعذر النسخ تلقائيًا. افتح رابط اللوكيشن وانسخه.") }
+  }
+  async function copyLocation() {
+    try { await navigator.clipboard.writeText(locationUrl); setLocationNotice("تم نسخ رابط اللوكيشن.") }
+    catch { setLocationNotice("تعذر النسخ تلقائيًا. افتح رابط اللوكيشن وانسخه.") }
+  }
   const validDate = Boolean(draft.date) && !Number.isNaN(new Date(`${draft.date}T00:00:00`).getTime())
   const calendarUrl = validDate ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`فرح ${draft.groom} و${draft.bride}`)}&dates=${draft.date.replaceAll("-", "")}T${(draft.time || "18:00").replace(":", "")}00/${draft.date.replaceAll("-", "")}T${String(Number((draft.time || "18:00").slice(0, 2)) + 3).padStart(2, "0")}${(draft.time || "18:00").slice(3, 5)}00&details=${encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا")}&location=${encodeURIComponent([draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" - "))}` : ""
 
@@ -74,6 +88,11 @@ export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { d
           {preview ? <p style={{ margin: ".25rem 0 0", textAlign: "center", color: "#607b99", fontSize: ".75rem", fontWeight: 700 }}>صورة للمعاينة فقط — تقدر ترفع صورتك أو تحذفها من التعديل</p> : null}
         </section>
       ) : null}
+      <section className="royal-details-section royal-opening-section">
+        <span className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</span>
+        <p className="royal-count-eyebrow">بداية فرحتنا</p>
+        <p className="royal-opening-text">{draft.opening || "ومن آياته أن خلق لكم من أنفسكم أزواجًا لتسكنوا إليها وجعل بينكم مودة ورحمة"}</p>
+      </section>
       <section className="royal-countdown-section">
         <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
         <p className="royal-count-eyebrow">موعد يجمعنا على الفرح</p>
@@ -92,8 +111,12 @@ export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { d
         <span className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</span>
         <p className="royal-count-eyebrow">كل التفاصيل في انتظاركم</p>
         <h2>مكان وموعد فرحتنا</h2>
+        {validDate ? <p className="royal-count-date">{formatArabicDate(draft.date)} · {formatArabicTime(draft.time)}</p> : null}
         <div className="royal-detail-card"><span>⌖</span><strong>{draft.venue || "مكان المناسبة"}</strong>{draft.venueAddress ? <p>{draft.venueAddress}</p> : null}{draft.city ? <small>{draft.city}</small> : null}</div>
-        <a className="royal-map-link" href={mapLink(draft)} target="_blank" rel="noreferrer">⌖ افتح موقع المناسبة</a>
+        {locationNotice ? <p className="royal-location-notice" role="status">{locationNotice}</p> : null}
+        <a className="royal-map-link" href={locationUrl} target="_blank" rel="noreferrer">⌖ فتح اللوكيشن</a>
+        <button type="button" className="royal-map-link" onClick={shareLocation}>مشاركة اللوكيشن ↗</button>
+        <button type="button" className="royal-map-link" onClick={copyLocation}>نسخ رابط اللوكيشن</button>
         {validDate ? <a className="royal-calendar-link" href={calendarUrl} target="_blank" rel="noreferrer">＋ أضف الموعد إلى التقويم</a> : null}
         <VenueMap draft={draft} />
       </section>
