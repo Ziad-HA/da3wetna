@@ -4204,7 +4204,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 /* Royal-blue parents sit inside the invitation artwork, directly above its date. */
 .lavender-parents-inline {
   position: absolute;
-  top: 45.2%;
+  top: 40.5%;
   left: 12%;
   right: 12%;
   display: flex;
@@ -4239,7 +4239,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   font-size: clamp(.9rem, 2.7vw, 1.2rem);
 }
 @media (max-width: 480px) {
-  .lavender-parents-inline { top: 46.2%; left: 10%; right: 10%; gap: .2rem; }
+  .lavender-parents-inline { top: 41.5%; left: 10%; right: 10%; gap: .2rem; }
   .lavender-parent-inline span { font-size: clamp(.48rem, 2.1vw, .66rem); }
   .lavender-parent-inline strong { font-size: clamp(.72rem, 3vw, .95rem); }
 }
