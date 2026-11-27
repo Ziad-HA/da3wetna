@@ -55,9 +55,9 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   ))}</div>
 }
 
-type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void; showRsvpSection?: boolean; showShareSection?: boolean; preview?: boolean }
+type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void; showRsvpSection?: boolean; showShareSection?: boolean; preview?: boolean; endingAdditions?: ReactNode }
 
-export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage, showRsvpSection = true, showShareSection = true, preview = false }: Props) {
+export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage, showRsvpSection = true, showShareSection = true, preview = false, endingAdditions }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--paper": template.vars.paper,
@@ -235,18 +235,18 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         <div className="vaux-rsvp-wrapper">{rsvp?.(language)}</div>
       </section> : null}
 
-      {draft.dressCode ? <section className="vaux-sec site-reveal">
+      {!(draft.templateId === "estate" || draft.templateId === "estate-classic") && draft.dressCode ? <section className="vaux-sec site-reveal">
         <span className="vaux-kicker">{en ? "WITH LOVE" : "بكل حب"}</span>
         <h2 className="vaux-script-title">{en ? "See you there" : "مستنيين نشوفكم"}</h2>
         <p className="vaux-body-text">{draft.dressCode}</p>
       </section> : null}
 
-      <section className="vaux-sec site-reveal vaux-contact-sec">
+      {!(draft.templateId === "estate" || draft.templateId === "estate-classic") ? <section className="vaux-sec site-reveal vaux-contact-sec">
         <div className="vaux-divider-wrapper"><img src="/vaux/flower_divider.jpg" alt="" className="vaux-flower-divider" /></div>
         <h2 className="vaux-script-title">{en ? "See you there!" : "في انتظاركم"}</h2>
         <p className="vaux-body-text">{en ? "Your presence is the best gift." : "وجودكم وسطنا هو أجمل هدية لينا"}</p>
         <div className="vaux-footer-monogram"><img src="/vaux/monogram_rose.png" alt="" /></div>
-      </section>
+      </section> : null}
 
       {showShareSection && shareUrl ? <section className="vaux-sec site-reveal vaux-share-sec">
         <span className="vaux-kicker">{en ? "SHARE THE JOY" : "شاركوا فرحتنا"}</span>
@@ -265,6 +265,22 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
           <img src={"https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=8&data=" + encodeURIComponent(shareUrl)} alt="رمز QR لفتح دعوة الزفاف" width="144" height="144" style={{ display: "block", width: "100%", height: "auto" }} loading="lazy" />
         </div>
       </section> : null}
+
+      {endingAdditions}
+
+      {(draft.templateId === "estate" || draft.templateId === "estate-classic") ? <>
+        {draft.dressCode ? <section className="vaux-sec site-reveal">
+          <span className="vaux-kicker">{en ? "WITH LOVE" : "بكل حب"}</span>
+          <h2 className="vaux-script-title">{en ? "See you there" : "مستنيين نشوفكم"}</h2>
+          <p className="vaux-body-text">{draft.dressCode}</p>
+        </section> : null}
+        <section className="vaux-sec site-reveal vaux-contact-sec">
+          <div className="vaux-divider-wrapper"><img src="/vaux/flower_divider.jpg" alt="" className="vaux-flower-divider" /></div>
+          <h2 className="vaux-script-title">{en ? "See you there!" : "في انتظاركم"}</h2>
+          <p className="vaux-body-text">{en ? "Your presence is the best gift." : "وجودكم وسطنا هو أجمل هدية لينا"}</p>
+          <div className="vaux-footer-monogram"><img src="/vaux/monogram_rose.png" alt="" /></div>
+        </section>
+      </> : null}
     </article>
   )
 }
