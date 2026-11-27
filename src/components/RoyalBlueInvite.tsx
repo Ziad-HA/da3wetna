@@ -39,7 +39,7 @@ function RoyalCountdown({ draft }: { draft: InviteDraft }) {
 export function RoyalBlueInvite({ draft }: { draft: InviteDraft }) {
   const validDate = Boolean(draft.date) && !Number.isNaN(new Date(`${draft.date}T00:00:00`).getTime())
   const calendarUrl = validDate ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`فرح ${draft.groom} و${draft.bride}`)}&dates=${draft.date.replaceAll("-", "")}T${(draft.time || "18:00").replace(":", "")}00/${draft.date.replaceAll("-", "")}T${String(Number((draft.time || "18:00").slice(0, 2)) + 3).padStart(2, "0")}${(draft.time || "18:00").slice(3, 5)}00&details=${encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا")}&location=${encodeURIComponent([draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" - "))}` : ""
-  const calendarUrl = validDate ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`فرح ${draft.groom} و${draft.bride}`)}&dates=${draft.date.replaceAll("-", "")}T${(draft.time || "18:00").replace(":", "")}00/${draft.date.replaceAll("-", "")}T${String(Number((draft.time || "18:00").slice(0, 2)) + 3).padStart(2, "0")}${(draft.time || "18:00").slice(3, 5)}00&details=${encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا")}&location=${encodeURIComponent([draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" - "))}` : ""
+
 
   return (
     <article className="royal-invite" dir="rtl" lang="ar">
