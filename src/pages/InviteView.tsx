@@ -197,6 +197,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
               <SiteInvite
                 draft={draft}
                 template={template}
+                preview={false}
                 rsvp={inviteId ? (formLanguage) => <RsvpForm inviteId={inviteId} language={formLanguage} /> : undefined}
                 shareUrl={window.location.href}
                 showRsvpSection={false}
@@ -209,7 +210,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
               />
             )}
             {["estate", "emerald-fern", "burgundy-velvet", "magnolia-ivory"].includes(draft.templateId) ? (
-              <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} />
+              <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} showParents={draft.templateId !== "estate" && draft.templateId !== "estate-classic"} />
             ) : null}
             <div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div>
           </>
