@@ -4097,8 +4097,10 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .invite-additions-parents {
   position: relative;
   isolation: isolate;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: .45rem;
   width: 100%;
   max-width: 720px;
@@ -4125,6 +4127,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 }
 .invite-additions-parents img {
   display: block;
+  flex: 0 0 100%;
   width: min(100%, 245px);
   height: clamp(30px, 7vw, 54px);
   object-fit: contain;
@@ -4132,6 +4135,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   filter: hue-rotate(165deg) saturate(1.12) drop-shadow(0 3px 7px rgba(28,75,125,.12));
 }
 .invite-additions-parents-intro {
+  flex: 0 0 100%;
   margin: .15rem 0 .65rem;
   color: #315f8d;
   font-family: var(--invite-font-ar, "Amiri"), serif;
@@ -4140,6 +4144,8 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 }
 .invite-additions-parent {
   display: grid;
+  flex: 1 1 0;
+  min-width: 0;
   justify-items: center;
   gap: .12rem;
 }
@@ -4156,6 +4162,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   line-height: 1.3;
 }
 .invite-additions-parents-heart {
+  flex: 0 0 auto;
   margin: .05rem 0;
   color: #7899bb;
   font-family: Georgia, serif;
@@ -4166,4 +4173,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .invite-additions-parents { border-radius: 19px; padding: 1.25rem .8rem; }
   .invite-additions-parents::before { inset: 7px; }
   .invite-additions-parents img { width: min(100%, 190px); }
+  .invite-additions-parent strong { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+  .invite-additions-parent span { font-size: clamp(.7rem, 2.8vw, .9rem); }
+  .invite-additions-parents-heart { font-size: 1.25rem; }
 }
