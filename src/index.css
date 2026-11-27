@@ -4093,27 +4093,77 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 }
 
 
-/* Parent names shown consistently in every template demo preview. */
-.preview-parents-card {
-  width: min(100%, 620px);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem 1rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid color-mix(in srgb, var(--preview-parents-gold) 48%, transparent);
-  border-radius: 18px;
-  background: var(--preview-parents-paper);
-  color: var(--preview-parents-ink);
+/* Parent names are a shared section in the invitation additions, directly below the card. */
+.invite-additions-parents {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  gap: .45rem;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto .15rem;
+  padding: clamp(1.4rem, 4.5vw, 2.25rem) clamp(1rem, 4vw, 2rem);
+  overflow: hidden;
+  border: 1px solid rgba(73, 119, 166, .34);
+  border-radius: 24px;
+  color: #173b60;
   text-align: center;
-  box-shadow: 0 8px 24px rgba(20, 25, 35, 0.06);
-  font-family: inherit;
-  font-size: clamp(0.9rem, 2.4vw, 1.05rem);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.98), transparent 68%),
+    linear-gradient(150deg, #f8fbff 0%, #eaf2fb 58%, #f5f9fe 100%);
+  box-shadow: 0 14px 34px rgba(28, 66, 105, .09), inset 0 0 0 4px rgba(255,255,255,.72);
 }
-.preview-parents-card p { margin: 0; }
-.preview-parents-card strong { font-weight: 800; }
-.preview-parents-card > span { color: var(--preview-parents-gold); font-size: 0.8rem; }
+.invite-additions-parents::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  z-index: -1;
+  border: 1px solid rgba(185, 150, 85, .34);
+  border-radius: 17px;
+  pointer-events: none;
+}
+.invite-additions-parents img {
+  display: block;
+  width: min(100%, 245px);
+  height: clamp(30px, 7vw, 54px);
+  object-fit: contain;
+  opacity: .88;
+  filter: hue-rotate(165deg) saturate(1.12) drop-shadow(0 3px 7px rgba(28,75,125,.12));
+}
+.invite-additions-parents-intro {
+  margin: .15rem 0 .65rem;
+  color: #315f8d;
+  font-family: var(--invite-font-ar, "Amiri"), serif;
+  font-size: clamp(1.15rem, 3.5vw, 1.65rem);
+  font-weight: 700;
+}
+.invite-additions-parent {
+  display: grid;
+  justify-items: center;
+  gap: .12rem;
+}
+.invite-additions-parent span {
+  color: #5e7894;
+  font-size: clamp(.88rem, 2.5vw, 1.05rem);
+  font-weight: 700;
+}
+.invite-additions-parent strong {
+  color: #173b60;
+  font-family: var(--invite-font-ar, "Amiri"), serif;
+  font-size: clamp(1.65rem, 5vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1.3;
+}
+.invite-additions-parents-heart {
+  margin: .05rem 0;
+  color: #7899bb;
+  font-family: Georgia, serif;
+  font-size: 1.65rem;
+  line-height: 1;
+}
 @media (max-width: 420px) {
-  .preview-parents-card { gap: 0.35rem 0.7rem; padding: 0.85rem 0.75rem; }
+  .invite-additions-parents { border-radius: 19px; padding: 1.25rem .8rem; }
+  .invite-additions-parents::before { inset: 7px; }
+  .invite-additions-parents img { width: min(100%, 190px); }
 }
