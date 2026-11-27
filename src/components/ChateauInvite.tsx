@@ -92,6 +92,20 @@ export function ChateauInvite({ draft, rsvp }: Props) {
   const validDate = Boolean(draft.date) && !Number.isNaN(date.getTime())
   const hasVenue = Boolean(draft.venue || draft.venueAddress || draft.city)
   const hasMap = Boolean(draft.mapUrl || draft.venueLat != null || draft.venueLng != null || draft.venue || draft.venueAddress)
+  const locationUrl = mapLink(draft)
+  const [locationNotice, setLocationNotice] = useState("")
+  async function shareLocation() {
+    if (navigator.share) {
+      try { await navigator.share({ title: `موقع ${draft.venue}`, url: locationUrl }); setLocationNotice("تم فتح مشاركة اللوكيشن."); return }
+      catch { /* النسخ بديل المشاركة */ }
+    }
+    try { await navigator.clipboard.writeText(locationUrl); setLocationNotice("تم نسخ رابط اللوكيشن.") }
+    catch { setLocationNotice("تعذر النسخ تلقائيًا. افتح رابط اللوكيشن وانسخه.") }
+  }
+  async function copyLocation() {
+    try { await navigator.clipboard.writeText(locationUrl); setLocationNotice("تم نسخ رابط اللوكيشن.") }
+    catch { setLocationNotice("تعذر النسخ تلقائيًا. افتح رابط اللوكيشن وانسخه.") }
+  }
 
   useEffect(() => {
     const element = root.current
@@ -148,6 +162,13 @@ export function ChateauInvite({ draft, rsvp }: Props) {
         </div>
       </section>
 
+      <section className="chx-sec chx-reveal chx-reception-sec chx-opening-sec">
+        <div className="chx-reception-copy">
+          <span className="chx-kicker">بداية فرحتنا</span>
+          <p className="chx-body-text">{draft.opening || "ومن آياته أن خلق لكم من أنفسكم أزواجًا لتسكنوا إليها وجعل بينكم مودة ورحمة"}</p>
+        </div>
+      </section>
+
       {hasVenue ? (
         <section className="chx-sec chx-reveal chx-reception-sec">
           <img src="/chateau/orangerie_illustration.jpg" alt="" className="chx-venue-illustration" />
@@ -159,16 +180,17 @@ export function ChateauInvite({ draft, rsvp }: Props) {
             <p className="chx-body-meta">
               {[draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" — ")}
             </p>
+            {locationNotice ? <p className="chx-body-text" role="status">{locationNotice}</p> : null}
             <div className="chx-btn-row">
               {hasMap ? (
-                <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="chx-btn">
-                  افتح المكان على الخريطة
-                </a>
+                <>
+                  <a href={locationUrl} target="_blank" rel="noreferrer" className="chx-btn">فتح اللوكيشن ⌖</a>
+                  <button type="button" onClick={shareLocation} className="chx-btn">مشاركة اللوكيشن ↗</button>
+                  <button type="button" onClick={copyLocation} className="chx-btn">نسخ رابط اللوكيشن</button>
+                </>
               ) : null}
               {validDate ? (
-                <button type="button" onClick={() => downloadIcs(draft)} className="chx-btn">
-                  أضف الموعد للتقويم
-                </button>
+                <button type="button" onClick={() => downloadIcs(draft)} className="chx-btn">＋ أضف الموعد إلى التقويم</button>
               ) : null}
             </div>
             {hasMap ? <VenueMap draft={draft} /> : null}
