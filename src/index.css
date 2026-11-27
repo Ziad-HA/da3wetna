@@ -886,7 +886,7 @@ main section > div { min-width: 0; }
   background: linear-gradient(160deg, var(--env-flap-a), var(--env-flap-b));
   clip-path: polygon(0 0, 100% 0, 50% var(--tip));
   transform-origin: 50% 0;
-  transition: transform .85s cubic-bezier(.2,.75,.2,1), z-index 0s .38s;
+  transition: transform .55s cubic-bezier(.2,.75,.2,1), z-index 0s .25s;
 }
 .opening-envelope[data-flap="deep"] .env-flap { clip-path: polygon(0 0, 100% 0, 50% 72%); }
 .opening-envelope[data-flap="wing"] .env-flap { clip-path: polygon(0 0, 100% 0, 100% 20%, 50% 62%, 0 20%); }
@@ -1441,7 +1441,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 @media (prefers-reduced-motion: reduce) { .strip { animation: none; } .env-band i, .env-seal { transition: none !important; } }
 
 /* ===== حكاية الحديقة: الظرف الزيتي ===== */
-.opening-envelope[data-zoom] { animation-fill-mode: backwards; transition: transform 1.25s cubic-bezier(.5,0,.9,.4), opacity .9s ease .35s; }
+.opening-envelope[data-zoom] { animation-fill-mode: backwards; transition: transform .8s cubic-bezier(.5,0,.9,.4), opacity .55s ease .2s; }
 .opening-envelope[data-zoom][data-step="2"] { transform: scale(2.7); opacity: 0; }
 .opening-envelope[data-zoom] .opening-letter { opacity: 0; }
 .opening-envelope[data-zoom] .env-pocket,
@@ -3385,7 +3385,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   position: absolute;
   inset: 5% 7% 5% 7%;
   z-index: 2;
-  transition: transform 1.9s cubic-bezier(0.16, 0.88, 0.25, 1), box-shadow 1.2s ease;
+  transition: transform 1.1s cubic-bezier(0.16, 0.88, 0.25, 1), box-shadow .7s ease;
   transform: translateY(0);
 }
 .real-env-card-slot.card-raised {
@@ -3480,7 +3480,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   z-index: 4;
   transform-origin: top center;
   transform-style: preserve-3d;
-  transition: transform 1.25s cubic-bezier(0.25, 1, 0.35, 1);
+  transition: transform .75s cubic-bezier(0.25, 1, 0.35, 1);
 }
 .real-env-flap.flap-open {
   transform: rotateX(180deg);
