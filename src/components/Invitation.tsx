@@ -70,7 +70,7 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     )
   }
 
-  if (template.id === "royal-blue" || template.id === "burgundy-velvet") {
+  if (template.id === "burgundy-velvet") {
     const eventDate = draft.date ? new Date(`${draft.date}T00:00:00`) : null
     const dayName = eventDate && !isNaN(eventDate.getTime())
       ? new Intl.DateTimeFormat("ar-EG", { weekday: "long" }).format(eventDate)
