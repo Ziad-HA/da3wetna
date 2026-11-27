@@ -4523,3 +4523,13 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 /* الكارت الطويل جوه الظرف: نصغره على قد ارتفاع الشاشة عشان ما يتقصش */
 .real-env-card-slot:has(.fern-card) { aspect-ratio: 1240 / 2687; width: min(66%, calc((94dvh - 24px) * .4615)); }
 .real-env-card-slot.card-raised:has(.fern-card) { transform: translate(-50%, -52%) scale(1.04); }
+/* من غير فريم: الصفحة بلون ورق الصورة والكارت سايح فيها */
+.invite-public-page:has(.fern-full) { background: #f4f0e5 !important; color: #122a1e !important; }
+.fern-full .invite.fern-card { border-radius: 0; box-shadow: none; }
+/* تدريج خفيف على الأطراف عشان مفيش حد فاصل بين الصورة والصفحة */
+.fern-full .fern-bg {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 2%, #000 97%, transparent), linear-gradient(to right, transparent, #000 2%, #000 98%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 2%, #000 97%, transparent), linear-gradient(to right, transparent, #000 2%, #000 98%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
