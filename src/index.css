@@ -4354,3 +4354,152 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .vaux-estate-royal .vaux-count-item strong { font-size:clamp(1.8rem,8vw,2.5rem); }
   .vaux-estate-royal .royal-details-section { padding:1.2rem .8rem; }
 }
+
+
+/* Estate red romance palette: remove the beige/olive direction completely. */
+.site-page:has(.vaux-estate-royal),
+.preview-content-site:has(.vaux-estate-royal) {
+  color: #54182a !important;
+}
+.site-page:has(.vaux-estate-royal) {
+  background: radial-gradient(ellipse at 50% 0%, #7b263d 0%, #4a1428 48%, #2e0d1b 100%) !important;
+}
+.vaux-estate-royal {
+  --paper: #f8e8ec !important;
+  --ink: #641b32 !important;
+  --gold: #b64a62 !important;
+  --soft: #985568 !important;
+  --estate-ink: #641b32;
+  --estate-gold: #b64a62;
+  --estate-soft: #985568;
+  color: #641b32;
+}
+.vaux-estate-royal .vaux-hero-card,
+.vaux-estate-royal .vaux-hero-inner {
+  background: #f7e2e8;
+  border-color: rgba(145,35,66,.48);
+}
+.vaux-estate-royal .vaux-hero-bg,
+.vaux-estate-royal .vaux-story-bg {
+  filter: sepia(.18) saturate(1.45) hue-rotate(295deg) brightness(.96);
+}
+.vaux-estate-royal .vaux-hero-monogram,
+.vaux-estate-royal .vaux-footer-monogram img,
+.vaux-estate-royal .vaux-flower-divider {
+  filter: hue-rotate(285deg) saturate(1.05) drop-shadow(0 3px 7px rgba(100,20,48,.14));
+}
+.vaux-estate-royal .vaux-sec {
+  color: #641b32;
+}
+.vaux-estate-royal .vaux-kicker,
+.vaux-estate-royal .royal-count-ornament,
+.vaux-estate-royal .vaux-story-kicker {
+  color: #b33c5a !important;
+}
+.vaux-estate-royal .vaux-script-title,
+.vaux-estate-royal .vaux-story-heading,
+.vaux-estate-royal .vaux-venue-name {
+  color: #641b32 !important;
+}
+.vaux-estate-royal .vaux-body-text,
+.vaux-estate-royal .vaux-body-meta,
+.vaux-estate-royal .vaux-time-display,
+.vaux-estate-royal .vaux-story-text {
+  color: #8c4b5e;
+}
+.vaux-estate-royal .royal-countdown-section {
+  border: 1px solid rgba(182,74,98,.58);
+  background: radial-gradient(circle at 50% 0%, rgba(220,133,153,.2), transparent 54%), linear-gradient(150deg,#f9e9ed,#f3dce3 58%,#f8e7eb);
+  box-shadow: 0 12px 30px rgba(76,16,37,.13), inset 0 0 0 3px rgba(255,255,255,.58);
+}
+.vaux-estate-royal .vaux-count-item {
+  border-color: rgba(182,74,98,.58);
+  background: linear-gradient(155deg,#fff5f7,#f0d3dc);
+  box-shadow: 0 8px 20px rgba(100,27,50,.12), inset 0 1px 0 rgba(255,255,255,.9);
+}
+.vaux-estate-royal .vaux-count-item strong { color:#641b32; }
+.vaux-estate-royal .vaux-count-item span,
+.vaux-estate-royal .royal-count-date { color:#a83d59; }
+.vaux-estate-royal .royal-count-empty { color:#985568; }
+.vaux-estate-royal .royal-details-section {
+  border-color: rgba(182,74,98,.58);
+  color: #641b32;
+  background: linear-gradient(150deg,#fae9ed,#f1d9e0 60%,#f8e7eb);
+  box-shadow: 0 12px 30px rgba(76,16,37,.12), inset 0 0 0 3px rgba(255,255,255,.58);
+}
+.vaux-estate-royal .royal-details-section h2 { color:#641b32; }
+.vaux-estate-royal .vaux-location-card {
+  border-color: rgba(182,74,98,.45);
+  background: rgba(255,246,248,.88);
+  box-shadow: 0 8px 20px rgba(100,27,50,.07);
+}
+.vaux-estate-royal .royal-calendar-link,
+.vaux-estate-royal .royal-details-section .vaux-btn {
+  border-color: #7d203c;
+  background: #7d203c;
+  color: #fff4f6;
+  box-shadow: 0 8px 20px rgba(100,27,50,.16);
+}
+.vaux-estate-royal .royal-calendar-link:hover,
+.vaux-estate-royal .royal-details-section .vaux-btn:hover {
+  border-color: #b33c5a;
+  background: #b33c5a;
+  color: #fff;
+}
+.vaux-estate-royal .vaux-opening-verse,
+.vaux-estate-royal .vaux-gallery-sec,
+.vaux-estate-royal .vaux-menu-sec,
+.vaux-estate-royal .vaux-faq-sec,
+.vaux-estate-royal .vaux-rsvp-sec,
+.vaux-estate-royal .vaux-contact-sec {
+  border-color: rgba(182,74,98,.32);
+  background: linear-gradient(145deg,rgba(250,232,237,.96),rgba(239,211,220,.94));
+  border-radius: 22px;
+  box-shadow: 0 10px 26px rgba(55,10,28,.1);
+}
+.vaux-estate-royal .vaux-faq-item {
+  border-color: rgba(182,74,98,.35);
+  background: rgba(255,246,248,.82);
+  color: #641b32;
+}
+.vaux-estate-royal .vaux-program-item {
+  border-color: rgba(182,74,98,.34);
+  color: #641b32;
+}
+.vaux-estate-royal .vaux-share-grid button {
+  border-color: rgba(182,74,98,.4);
+  background: #f8e8ec;
+  color: #641b32;
+}
+.vaux-estate-royal .vaux-share-grid button b { color:#b33c5a; }
+.vaux-estate-royal .invite-additions {
+  --add-paper: #f6dfe6 !important;
+  --add-ink: #641b32 !important;
+  --add-gold: #b64a62 !important;
+  --add-soft: #985568 !important;
+}
+.vaux-estate-royal .invite-additions-rsvp,
+.vaux-estate-royal .invite-additions-share,
+.vaux-estate-royal .invite-additions-parents {
+  background: linear-gradient(145deg,#fae9ed,#f0d5de 58%,#f8e6eb) !important;
+  border-color: rgba(182,74,98,.52) !important;
+  box-shadow: 0 12px 30px rgba(76,16,37,.11), inset 0 0 0 3px rgba(255,255,255,.52) !important;
+}
+.vaux-estate-royal .invite-additions-parents::before,
+.vaux-estate-royal .invite-additions-rsvp::before,
+.vaux-estate-royal .invite-additions-share::before {
+  border-color: rgba(182,74,98,.38) !important;
+}
+.vaux-estate-royal .invite-additions-preview-form input,
+.vaux-estate-royal .invite-additions-preview-form textarea,
+.vaux-estate-royal .invite-additions-choice span,
+.vaux-estate-royal .invite-additions-socials button {
+  border-color: rgba(182,74,98,.35);
+  background: rgba(255,246,248,.88);
+  color: #641b32;
+}
+.vaux-estate-royal .invite-additions-preview-form button { background:#7d203c; }
+@media(max-width:480px) {
+  .vaux-estate-royal .royal-countdown-section,
+  .vaux-estate-royal .royal-details-section { background:linear-gradient(150deg,#f8e6eb,#efd3dc); }
+}
