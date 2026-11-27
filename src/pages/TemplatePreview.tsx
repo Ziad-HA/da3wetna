@@ -258,16 +258,16 @@ export function TemplatePreview() {
       ) : (
         /* Full Invitation View once envelope is opened */
         <main
-          className={`invite-public-page min-h-dvh px-4 pb-36 pt-16 sm:pb-32 sm:pt-20${
+          className={`invite-public-page min-h-dvh px-4 pb-36 pt-16 sm:pb-32 sm:pt-20${template.id === "emerald-fern" ? " emerald-fern-page" : ""}${
             isStrip ? " strip-page" : ""
           }${isSite ? " site-page" : ""}${template.id === "royal-blue" ? " royal-blue-page" : ""}`}
           style={
             {
-              background: isStrip ? "#4b4e30" : isSite ? (template.id === "chateau" ? "#F5F2EA" : template.id === "royal-blue" ? "#EAF0F7" : "#FAF6EE") : template.vars.shell,
+              background: template.id === "emerald-fern" ? "#10291D" : isStrip ? "#4b4e30" : isSite ? (template.id === "chateau" ? "#F5F2EA" : template.id === "royal-blue" ? "#EAF0F7" : "#FAF6EE") : template.vars.shell,
               color: isStrip
                 ? "#f4efe2"
                 : isSite
-                ? (template.id === "chateau" ? "#1E4030" : "#5E1C2A")
+                ? (template.id === "chateau" ? "#1E4030" : template.id === "emerald-fern" ? "#F4F0E4" : "#5E1C2A")
                 : isLight(template.vars.shell)
                 ? template.vars.ink
                 : "#fff6ea",
