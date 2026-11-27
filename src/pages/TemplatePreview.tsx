@@ -9,6 +9,7 @@ import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { SiteInvite } from "../components/SiteInvite"
 import { ChateauInvite } from "../components/ChateauInvite"
 import { RoyalBlueInvite } from "../components/RoyalBlueInvite"
+import { InviteAdditions } from "../components/InviteAdditions"
 import { RealisticEnvelopeOpening } from "../components/RealisticEnvelopeOpening"
 import { StripInvite } from "../components/StripInvite"
 import { draftFor, getTemplate } from "../data"
@@ -232,6 +233,12 @@ export function TemplatePreview() {
                 </div>
               </>
             )}
+            <InviteAdditions
+              draft={draft}
+              preview
+              shareUrl={window.location.href}
+              palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }}
+            />
           </div>
         </main>
       )}
