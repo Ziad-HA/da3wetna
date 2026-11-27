@@ -131,7 +131,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   }, [])
 
   return (
-    <article ref={root} className={`vaux-site ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
+    <article ref={root} className={`vaux-site ${draft.templateId === "royal-blue" ? "vaux-royal-blue" : ""} ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
       <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div>
       {draft.templateId === "royal-blue" ? (
         <section className="vaux-hero-card vaux-lavender-hero" aria-label={inviteTitle}>
