@@ -5,7 +5,7 @@ import type { InviteDraft } from "../types"
 
 type Props = { draft: InviteDraft; rsvp?: ReactNode; shareUrl?: string }
 
-export function GardenInvite({ draft, rsvp, shareUrl = "" }: Props) {
+export function GardenInvite({ draft, rsvp }: Props) {
   const [now, setNow] = useState(Date.now())
   useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(timer) }, [])
   const target = new Date(`${draft.date}T${draft.time || "18:00"}:00`).getTime()
