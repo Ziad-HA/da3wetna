@@ -52,6 +52,8 @@ export function sanitizeDraft(raw: unknown): InviteDraft | null {
     templateId: d.templateId,
     groom: text(d.groom, 40),
     bride: text(d.bride, 40),
+    groomFather: text(d.groomFather, 40),
+    brideFather: text(d.brideFather, 40),
     occasion: text(d.occasion, 24),
     hosts: text(d.hosts, 80),
     message: text(d.message, 140),

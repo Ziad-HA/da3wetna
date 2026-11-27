@@ -43,7 +43,7 @@ export function TemplatePreview() {
 
   function playFrom75() {
     const audio = audioRef.current
-    if (!audio || !draft.musicUrl) return
+    if (!audio || !draft?.musicUrl) return
     setMusicError("")
     audio.volume = 0.7
 
@@ -84,10 +84,10 @@ export function TemplatePreview() {
 
   useEffect(() => {
     const audio = audioRef.current
-    if (!audio || !draft.musicUrl) return
+    if (!audio || !draft?.musicUrl) return
     audio.volume = 0.7
     playFrom75()
-  }, [template?.id, draft.musicUrl])
+  }, [template?.id, draft?.musicUrl])
 
   if (!template || !draft) {
     return <Navigate to="/templates" replace />
@@ -309,6 +309,11 @@ export function TemplatePreview() {
                 <div className="invite-public-card w-full max-w-[390px] overflow-hidden rounded-[24px] shadow-2xl">
                   <Invitation draft={draft} />
                 </div>
+                {draft.templateId === "emerald-fern" ? (
+                  <div className="invite-public-card w-full max-w-[390px] overflow-hidden rounded-[24px] shadow-2xl">
+                    <Invitation draft={draft} side="back" />
+                  </div>
+                ) : null}
               </>
             )}
             {template.id !== "royal-blue" && template.id !== "estate" && template.id !== "estate-classic" ? (
