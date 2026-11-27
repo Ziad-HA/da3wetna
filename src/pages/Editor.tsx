@@ -253,8 +253,8 @@ export function Editor() {
                 <p className="text-xs leading-6 text-[#806b70]">اختيار القاعة من نتائج البحث بيحفظ اسمها وعنوانها وإحداثياتها تلقائيًا. وتقدر تحرك العلامة على الخريطة لتصحيح المكان.</p>
                 {draft.mapUrl ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs font-bold text-[#a64257] underline underline-offset-4">راجع المكان المختار على الخريطة ↗</a> : null}
               </div>
-              <MediaUploadField label="صورة الدعوة الأولى" kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
-              <MediaUploadField label="صورة إضافية" kind="image" value={draft.photoTwo} onChange={(url) => update({ photoTwo: url })} />
+              <MediaUploadField label={template.id === "royal-blue" ? "صورة العروسين داخل الإطار الزهري (اختياري)" : "صورة الدعوة الأولى"} kind="image" value={draft.photoOne} onChange={(url) => update({ photoOne: url })} />
+              <MediaUploadField label={template.id === "royal-blue" ? "صورة إضافية (اختياري)" : "صورة إضافية"} kind="image" value={draft.photoTwo} onChange={(url) => update({ photoTwo: url })} />
             </div>
             {template.layout === "strip" || template.layout === "site" ? (
               <div className="mt-5 grid gap-4 border-t border-[#f3e6e9] pt-5">
