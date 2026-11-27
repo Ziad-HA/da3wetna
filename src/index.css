@@ -3867,3 +3867,40 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 @media (max-width: 480px) {
   .vaux-royal-blue { border-radius: 20px; padding: .55rem; }
 }
+
+/* Royal blue ornamental accents for the additions below the invitation */
+.vaux-royal-blue .vaux-sec {
+  position: relative;
+  isolation: isolate;
+}
+.vaux-royal-blue .vaux-sec::before,
+.vaux-royal-blue .vaux-sec::after {
+  position: absolute;
+  top: 1.15rem;
+  z-index: -1;
+  color: rgba(23, 54, 83, .20);
+  font-family: Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+}
+.vaux-royal-blue .vaux-sec::before {
+  content: "❧";
+  right: .85rem;
+  font-size: 2rem;
+  transform: rotate(-18deg);
+}
+.vaux-royal-blue .vaux-sec::after {
+  content: "✧";
+  left: .95rem;
+  top: 1.35rem;
+  font-size: 1.25rem;
+  color: rgba(185, 150, 85, .52);
+}
+.vaux-royal-blue .vaux-sec > * {
+  position: relative;
+}
+@media (max-width: 480px) {
+  .vaux-royal-blue .vaux-sec::before { right: .5rem; font-size: 1.55rem; }
+  .vaux-royal-blue .vaux-sec::after { left: .55rem; font-size: 1rem; }
+}
+
