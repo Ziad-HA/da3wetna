@@ -4157,3 +4157,10 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .chx-site.chx-royal-blue .chx-sec::after { font-size: 1.05rem; }
   .chx-site.chx-royal-blue .chx-footer-monogram { width: 64px; height: 64px; }
 }
+
+
+/* Royal envelope: recolor the original Vaux flower divider to royal blue */
+.vaux-royal-blue .vaux-flower-divider {
+  filter: hue-rotate(165deg) saturate(1.12) contrast(1.04)
+    drop-shadow(0 3px 7px rgba(28, 75, 125, .20));
+}
