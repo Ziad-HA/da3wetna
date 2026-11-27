@@ -54,9 +54,9 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   ))}</div>
 }
 
-type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void }
+type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void; showRsvpSection?: boolean; showShareSection?: boolean }
 
-export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage }: Props) {
+export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage, showRsvpSection = true, showShareSection = true }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--paper": template.vars.paper,
@@ -226,7 +226,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         </div>
       </section> : null}
 
-      {rsvp ? <section className="vaux-sec site-reveal vaux-rsvp-sec">
+      {showRsvpSection && rsvp ? <section className="vaux-sec site-reveal vaux-rsvp-sec">
         <h2 className="vaux-script-title">{en ? "RSVP" : "تأكيد الحضور"}</h2>
         <p className="vaux-body-text">{en ? "Let us know if you can make it." : "يسعدنا معرفة تأكيد حضوركم"}</p>
         <div className="vaux-rsvp-wrapper">{rsvp?.(language)}</div>
@@ -245,7 +245,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         <div className="vaux-footer-monogram"><img src="/vaux/monogram_rose.png" alt="" /></div>
       </section>
 
-      {shareUrl ? <section className="vaux-sec site-reveal vaux-share-sec">
+      {showShareSection && shareUrl ? <section className="vaux-sec site-reveal vaux-share-sec">
         <span className="vaux-kicker">{en ? "SHARE THE JOY" : "شاركوا فرحتنا"}</span>
         <h2 className="vaux-script-title">{en ? "Share with family & friends" : "شارك الدعوة مع الأهل والأصدقاء"}</h2>
         <div className="vaux-share-grid" aria-label="مشاركة الدعوة">
