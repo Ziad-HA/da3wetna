@@ -208,7 +208,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
                 onToggleLanguage={() => setLanguage((current) => current === "ar" ? "en" : "ar")}
               />
             )}
-            {["emerald-fern", "burgundy-velvet", "magnolia-ivory"].includes(draft.templateId) ? (
+            {["estate", "emerald-fern", "burgundy-velvet", "magnolia-ivory"].includes(draft.templateId) ? (
               <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} />
             ) : null}
             <div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div>
