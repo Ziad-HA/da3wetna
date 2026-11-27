@@ -90,7 +90,6 @@ export function ChateauInvite({ draft, rsvp }: Props) {
 
   const date = new Date(`${draft.date}T00:00:00`)
   const validDate = Boolean(draft.date) && !Number.isNaN(date.getTime())
-  const hasVenue = Boolean(draft.venue || draft.venueAddress || draft.city)
   const hasMap = Boolean(draft.mapUrl || draft.venueLat != null || draft.venueLng != null || draft.venue || draft.venueAddress)
   const locationUrl = mapLink(draft)
   const [locationNotice, setLocationNotice] = useState("")
@@ -169,8 +168,7 @@ export function ChateauInvite({ draft, rsvp }: Props) {
         </div>
       </section>
 
-      {hasVenue ? (
-        <section className="chx-sec chx-reveal chx-reception-sec">
+      <section className="chx-sec chx-reveal chx-reception-sec">
           <img src="/chateau/orangerie_illustration.jpg" alt="" className="chx-venue-illustration" />
           <div className="chx-reception-copy">
             <span className="chx-kicker">مستنيينكم تشاركونا</span>
@@ -178,7 +176,7 @@ export function ChateauInvite({ draft, rsvp }: Props) {
             {validDate ? <p className="chx-body-text">{formatArabicDate(draft.date)}</p> : null}
             {draft.time ? <p className="chx-time-display">{formatTime(draft.time)}</p> : null}
             <p className="chx-body-meta">
-              {[draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" — ")}
+              {[draft.venue || "مكان الحفل", draft.venueAddress, draft.city].filter(Boolean).join(" — ")}
             </p>
             {locationNotice ? <p className="chx-body-text" role="status">{locationNotice}</p> : null}
             <div className="chx-btn-row">
@@ -195,8 +193,7 @@ export function ChateauInvite({ draft, rsvp }: Props) {
             </div>
             {hasMap ? <VenueMap draft={draft} /> : null}
           </div>
-        </section>
-      ) : null}
+      </section>
 
       {rsvp ? (
         <section className="chx-sec chx-reveal chx-rsvp-sec">
