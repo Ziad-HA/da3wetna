@@ -54,7 +54,7 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
   }
 
   return (
-    <div className="invite-additions" style={style} dir="rtl" lang="ar">
+    <div className={`invite-additions invite-additions-${draft.templateId}`} style={style} dir="rtl" lang="ar">
       {showParents && (preview || draft.groomFather?.trim() || draft.brideFather?.trim()) ? <section className="invite-additions-parents" aria-label="والدا العروسين">
         <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" />
         <p className="invite-additions-parents-intro">بكل الحب يتشرفان بدعوتكم</p>
