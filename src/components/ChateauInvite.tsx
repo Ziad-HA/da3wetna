@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import { VenueMap } from "./VenueMap"
+import { Invitation } from "./Invitation"
 import type { InviteDraft } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -80,12 +81,13 @@ type Props = { draft: InviteDraft; rsvp?: ReactNode; shareUrl?: string }
 
 export function ChateauInvite({ draft, rsvp }: Props) {
   const root = useRef<HTMLElement>(null)
+  const isRoyal = draft.templateId === "royal-blue"
   const style = {
-    "--chx-paper": "#F5F2EA",
-    "--chx-ink": "#1E4030",
-    "--chx-green": "#2D5A40",
-    "--chx-soft": "#5A7A60",
-    "--chx-gold": "#8A7542",
+    "--chx-paper": isRoyal ? "#F8FAFC" : "#F5F2EA",
+    "--chx-ink": isRoyal ? "#10243D" : "#1E4030",
+    "--chx-green": isRoyal ? "#173653" : "#2D5A40",
+    "--chx-soft": isRoyal ? "#526A85" : "#5A7A60",
+    "--chx-gold": isRoyal ? "#B99655" : "#8A7542",
   } as CSSProperties
 
   const date = new Date(`${draft.date}T00:00:00`)
@@ -111,20 +113,22 @@ export function ChateauInvite({ draft, rsvp }: Props) {
   }, [])
 
   return (
-    <article ref={root} className="chx-site" style={style} dir="rtl" lang="ar">
-      <section className="chx-hero-card">
-        <div className="chx-hero-inner">
-          <img src="/chateau/hero_card_blank.jpg" alt="" className="chx-hero-bg" />
-          <div className="chx-hero-content">
-            <img src="/chateau/wax_seal_crop.jpg" alt="" className="chx-hero-monogram" />
-            <h1 className="chx-hero-names">
-              <span>{draft.groom}</span>
-              <span className="chx-amp">و</span>
-              <span>{draft.bride}</span>
-            </h1>
-            <p className="chx-hero-hosts">{draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}</p>
+    <article ref={root} className={`chx-site ${isRoyal ? "chx-royal-blue" : ""}`} style={style} dir="rtl" lang="ar">
+      <section className={`chx-hero-card ${isRoyal ? "chx-royal-hero" : ""}`}>
+        {isRoyal ? <Invitation draft={draft} /> : (
+          <div className="chx-hero-inner">
+            <img src="/chateau/hero_card_blank.jpg" alt="" className="chx-hero-bg" />
+            <div className="chx-hero-content">
+              <img src="/chateau/wax_seal_crop.jpg" alt="" className="chx-hero-monogram" />
+              <h1 className="chx-hero-names">
+                <span>{draft.groom}</span>
+                <span className="chx-amp">و</span>
+                <span>{draft.bride}</span>
+              </h1>
+              <p className="chx-hero-hosts">{draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}</p>
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       <section className="chx-sec chx-reveal chx-countdown-sec">
