@@ -248,20 +248,6 @@ export function TemplatePreview() {
                 </div>
               </>
             )}
-            <section
-              className="preview-parents-card"
-              style={{
-                "--preview-parents-paper": template.vars.paper,
-                "--preview-parents-ink": template.vars.ink,
-                "--preview-parents-gold": template.vars.gold,
-              } as CSSProperties}
-              dir="rtl"
-              aria-label="أسماء والدي العروسين"
-            >
-              <p>والد العريس: <strong>{draft.groomFather}</strong></p>
-              <span aria-hidden="true">✦</span>
-              <p>والد العروسة: <strong>{draft.brideFather}</strong></p>
-            </section>
             <InviteAdditions
               draft={draft}
               preview
