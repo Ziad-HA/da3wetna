@@ -4091,3 +4091,29 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .lavender-names-row { font-size: clamp(1.35rem, 5.8vw, 1.8rem); }
   .lavender-parents-row { font-size: clamp(.62rem, 2.7vw, .8rem); }
 }
+
+
+/* Parent names shown consistently in every template demo preview. */
+.preview-parents-card {
+  width: min(100%, 620px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--preview-parents-gold) 48%, transparent);
+  border-radius: 18px;
+  background: var(--preview-parents-paper);
+  color: var(--preview-parents-ink);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(20, 25, 35, 0.06);
+  font-family: inherit;
+  font-size: clamp(0.9rem, 2.4vw, 1.05rem);
+}
+.preview-parents-card p { margin: 0; }
+.preview-parents-card strong { font-weight: 800; }
+.preview-parents-card > span { color: var(--preview-parents-gold); font-size: 0.8rem; }
+@media (max-width: 420px) {
+  .preview-parents-card { gap: 0.35rem 0.7rem; padding: 0.85rem 0.75rem; }
+}
