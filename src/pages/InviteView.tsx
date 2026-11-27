@@ -190,8 +190,13 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
               </>
             ) : draft.templateId === "royal-blue" ? (
               <>
-                <RoyalBlueInvite draft={draft} />
-                <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} showParents={false} />
+                <RoyalBlueInvite
+                  draft={draft}
+                  endingAdditions={<>
+                    <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} showParents={false} />
+                    <div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div>
+                  </>}
+                />
               </>
             ) : (
               <SiteInvite
@@ -207,12 +212,14 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
                 onToggleMusic={toggleMusic}
                 language={language}
                 onToggleLanguage={() => setLanguage((current) => current === "ar" ? "en" : "ar")}
+                endingAdditions={<>
+                  {["estate", "emerald-fern", "burgundy-velvet", "magnolia-ivory"].includes(draft.templateId) ? (
+                    <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} showParents={draft.templateId !== "estate" && draft.templateId !== "estate-classic"} />
+                  ) : null}
+                  <div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div>
+                </>}
               />
             )}
-            {["estate", "emerald-fern", "burgundy-velvet", "magnolia-ivory"].includes(draft.templateId) ? (
-              <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} showParents={draft.templateId !== "estate" && draft.templateId !== "estate-classic"} />
-            ) : null}
-            <div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div>
           </>
         ) : isStrip ? (
           <>
