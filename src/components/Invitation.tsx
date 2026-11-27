@@ -103,13 +103,6 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
               </Line>
             </div>
 
-            {(draft.groomFather || draft.brideFather) ? (
-              <div className="lavender-parents-row">
-                {draft.groomFather ? <p>نجل الأستاذ {draft.groomFather}</p> : null}
-                {draft.brideFather ? <p>وكريمة الأستاذ {draft.brideFather}</p> : null}
-              </div>
-            ) : null}
-
             {/* Date line: Day | Date | Time */}
             <div className="lavender-date-row">
               <span className="lavender-date-col day">
