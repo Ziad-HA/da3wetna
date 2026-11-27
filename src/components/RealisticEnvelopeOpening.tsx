@@ -67,7 +67,7 @@ export function RealisticEnvelopeOpening({
 
   return (
     <main
-      className="real-env-screen"
+      className={`real-env-screen ${themeId === "royal-blue" ? "royal-blue-opening" : ""}`}
       style={{ backgroundColor: config.bg }}
       aria-label="شاشة فتح الظرف التفاعلي"
     >
