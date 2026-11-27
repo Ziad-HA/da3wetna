@@ -126,13 +126,13 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   }, [])
 
   return (
-    <article ref={root} className={`vaux-site ${en ? "vaux-en" : ""} ${template.id === "royal-blue" ? "vaux-royal" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
+    <article ref={root} className={`vaux-site ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
       <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div>
       <section className="vaux-hero-card">
         <div className="vaux-hero-inner">
-          <img src={template.id === "royal-blue" ? "/chateau/hero_card_blank.jpg" : "/vaux/hero_card_blank.jpg"} alt="" className="vaux-hero-bg" />
+          <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
           <div className="vaux-hero-content">
-            <img src={template.id === "royal-blue" ? "/chateau/monogram_gj.jpg" : "/vaux/monogram_rose.png"} alt="" className="vaux-hero-monogram" />
+            <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
             <h1 className="vaux-hero-names">
               <span>{draft.groom}</span><span className="vaux-amp">و</span><span>{draft.bride}</span>
             </h1>
