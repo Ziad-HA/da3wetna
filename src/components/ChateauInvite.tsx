@@ -21,7 +21,7 @@ function downloadIcs(draft: InviteDraft) {
   const [hour, minute] = (draft.time || "18:00").split(":").map(Number)
   const start = `${year}${pad(month)}${pad(day)}T${pad(hour)}${pad(minute)}00`
   const end = `${year}${pad(month)}${pad(day)}T${pad(Math.min(23, hour + 4))}${pad(minute)}00`
-  const clean = (value: string) => value.replace(/[,;\\\\]/g, " ").replace(/\\n/g, " ")
+  const clean = (value: string) => value.replace(/[,;\\]/g, " ").replace(/\n/g, " ")
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
@@ -35,7 +35,7 @@ function downloadIcs(draft: InviteDraft) {
     `LOCATION:${clean([draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" - "))}`,
     "END:VEVENT",
     "END:VCALENDAR",
-  ].join("\\r\\n")
+  ].join("\r\n")
 
   const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }))
   const link = document.createElement("a")
