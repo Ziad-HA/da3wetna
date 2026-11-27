@@ -14,7 +14,7 @@ type Props = {
 const themeData: Record<Props["themeId"], { name: string; bg: string; sealTop: string }> = {
   "royal-blue": {
     name: "أزرق ملكي وذهبي",
-    bg: "#26143D",
+    bg: "#0d1b2a",
     sealTop: "47.5%",
   },
   "emerald-fern": {
@@ -68,7 +68,7 @@ export function RealisticEnvelopeOpening({
 
   return (
     <main
-      className={`real-env-screen ${themeId === "royal-blue" ? "real-env-royal-purple" : ""}`}
+      className="real-env-screen"
       style={{ backgroundColor: config.bg }}
       aria-label="شاشة فتح الظرف التفاعلي"
     >
