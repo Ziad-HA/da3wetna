@@ -8,9 +8,11 @@ type Props = {
   shareUrl?: string
   preview?: boolean
   palette?: { paper?: string; ink?: string; gold?: string; soft?: string }
+  showRsvp?: boolean
+  showShare?: boolean
 }
 
-export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = false, palette }: Props) {
+export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = false, palette, showRsvp = true, showShare = true }: Props) {
   const [notice, setNotice] = useState("")
   const url = shareUrl || (typeof window !== "undefined" ? window.location.href : "")
   const title = `دعوة ${draft.groom} و${draft.bride}`
@@ -52,7 +54,7 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
 
   return (
     <div className="invite-additions" style={style} dir="rtl" lang="ar">
-      <section className="invite-additions-rsvp">
+      {showRsvp ? <section className="invite-additions-rsvp">
         <span className="invite-additions-ornament" aria-hidden="true">✦ ❦ ✦</span>
         <p className="invite-additions-kicker">تأكيد الحضور</p>
         <h2>يسعدنا معرفة تأكيد حضوركم</h2>
@@ -72,9 +74,9 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
         ) : (
           <p className="invite-additions-description">سيظهر نموذج تأكيد الحضور عند نشر الدعوة.</p>
         )}
-      </section>
+      </section> : null}
 
-      <section className="invite-additions-share">
+      {showShare ? <section className="invite-additions-share">
         <span className="invite-additions-ornament" aria-hidden="true">❦</span>
         <p className="invite-additions-kicker">شاركوا فرحتنا</p>
         <h2>شارك الدعوة مع الأهل والأصدقاء</h2>
@@ -88,7 +90,7 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
         </div>
         <p className="invite-additions-note">في إنستجرام وتيك توك سيتم نسخ رابط الدعوة تلقائيًا.</p>
         {notice ? <p className="invite-additions-status" role="status" aria-live="polite">{notice}</p> : null}
-      </section>
+      </section> : null}
     </div>
   )
 }
