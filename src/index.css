@@ -4740,3 +4740,159 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .emerald-fern-page .vaux-emerald-fern .vaux-sec { border-radius: 15px; }
 }
 
+/* Unified invitation canvas: softly blended sections and botanical flourishes.
+   Flower artwork: Wikimedia Commons, Rose Flower (PSF), public domain.
+   https://commons.wikimedia.org/wiki/File:Rose_Flower_(PSF).png */
+.invite-floral-flow {
+  --flow-paper: #f8f5ed;
+  --flow-ink: #344d3d;
+  --flow-gold: #ad9562;
+  --flow-shell: #e8e1d3;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--flow-ink) !important;
+  background:
+    radial-gradient(ellipse at 50% 8%, color-mix(in srgb, var(--flow-paper) 88%, white), transparent 58rem),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--flow-paper) 94%, var(--flow-shell)) 0%,
+      color-mix(in srgb, var(--flow-paper) 91%, var(--flow-shell)) 48%,
+      color-mix(in srgb, var(--flow-paper) 96%, var(--flow-gold)) 100%) !important;
+}
+.invite-floral-flow::before,
+.invite-floral-flow::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: clamp(145px, 28vw, 310px);
+  height: clamp(210px, 40vw, 430px);
+  pointer-events: none;
+  background-image: url("https://commons.wikimedia.org/wiki/Special:FilePath/Rose_Flower_%28PSF%29.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: .105;
+  filter: sepia(.32) saturate(.62);
+}
+.invite-floral-flow::before {
+  top: 5.5rem;
+  left: max(-5rem, calc((100vw - 1180px) / 2 - 5rem));
+  transform: rotate(-17deg);
+}
+.invite-floral-flow::after {
+  top: min(62rem, 58%);
+  right: max(-5rem, calc((100vw - 1180px) / 2 - 5rem));
+  transform: rotate(19deg) scaleX(-1);
+}
+.invite-floral-flow > * {
+  position: relative;
+  z-index: 1;
+}
+.invite-floral-flow .preview-content,
+.invite-floral-flow > div.mx-auto.grid {
+  gap: 0 !important;
+  align-content: start;
+}
+.invite-floral-flow .vaux-site,
+.invite-floral-flow .chx-site,
+.invite-floral-flow .royal-invite {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 760px);
+  max-width: 760px;
+  margin-inline: auto;
+  background: transparent !important;
+  color: var(--flow-ink);
+}
+.invite-floral-flow .vaux-sec,
+.invite-floral-flow .chx-sec {
+  margin: 0 auto !important;
+  padding: clamp(2rem, 6vw, 3.4rem) clamp(.9rem, 4vw, 1.6rem) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.invite-floral-flow .vaux-sec + .vaux-sec,
+.invite-floral-flow .chx-sec + .chx-sec {
+  border-top: 1px solid color-mix(in srgb, var(--flow-gold) 23%, transparent) !important;
+}
+.invite-floral-flow .invite-additions {
+  gap: 0 !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+.invite-floral-flow .invite-additions-parents,
+.invite-floral-flow .invite-additions-rsvp,
+.invite-floral-flow .invite-additions-share,
+.invite-floral-flow .invite-additions-closing {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.invite-floral-flow .invite-additions-parents::before,
+.invite-floral-flow .invite-additions-rsvp::before,
+.invite-floral-flow .invite-additions-share::before,
+.invite-floral-flow .invite-additions-closing::before {
+  display: none !important;
+}
+.invite-floral-flow .invite-additions-parents,
+.invite-floral-flow .invite-additions-rsvp,
+.invite-floral-flow .invite-additions-share,
+.invite-floral-flow .invite-additions-closing {
+  padding: clamp(2rem, 6vw, 3.25rem) clamp(.9rem, 4vw, 1.6rem) !important;
+}
+.invite-floral-flow .invite-additions-rsvp,
+.invite-floral-flow .invite-additions-share,
+.invite-floral-flow .invite-additions-closing + .invite-additions-closing {
+  border-top: 1px solid color-mix(in srgb, var(--flow-gold) 23%, transparent) !important;
+}
+.invite-floral-flow .invite-additions h2,
+.invite-floral-flow .invite-additions-closing h2,
+.invite-floral-flow .vaux-script-title,
+.invite-floral-flow .chx-script-title,
+.invite-floral-flow .royal-countdown-section h2 {
+  color: var(--flow-ink) !important;
+}
+.invite-floral-flow .invite-additions-kicker,
+.invite-floral-flow .invite-additions-closing-kicker,
+.invite-floral-flow .vaux-kicker,
+.invite-floral-flow .chx-kicker {
+  color: color-mix(in srgb, var(--flow-gold) 82%, var(--flow-ink)) !important;
+}
+.invite-floral-flow .royal-countdown-section,
+.invite-floral-flow .chx-countdown-sec {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.invite-floral-flow .royal-count-cell,
+.invite-floral-flow .chx-count-item {
+  background: color-mix(in srgb, var(--flow-paper) 72%, transparent);
+  border-color: color-mix(in srgb, var(--flow-gold) 30%, transparent);
+  box-shadow: none;
+}
+.invite-floral-flow .fern-full,
+.invite-floral-flow .vaux-hero-card,
+.invite-floral-flow .chx-hero-card {
+  box-shadow: 0 16px 42px color-mix(in srgb, var(--flow-ink) 13%, transparent);
+}
+.invite-floral-flow .invite-additions-socials button,
+.invite-floral-flow .invite-additions-preview-form input,
+.invite-floral-flow .invite-additions-preview-form textarea {
+  background: color-mix(in srgb, var(--flow-paper) 84%, white) !important;
+  border-color: color-mix(in srgb, var(--flow-gold) 30%, transparent) !important;
+  color: var(--flow-ink) !important;
+}
+@media (max-width: 640px) {
+  .invite-floral-flow::before,
+  .invite-floral-flow::after { width: 150px; height: 220px; opacity: .075; }
+  .invite-floral-flow::before { left: -4.5rem; }
+  .invite-floral-flow::after { right: -4.5rem; }
+  .invite-floral-flow .vaux-sec,
+  .invite-floral-flow .chx-sec { padding-block: 1.8rem !important; }
+}
+
