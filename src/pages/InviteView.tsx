@@ -11,6 +11,7 @@ import { RealisticEnvelopeOpening } from "../components/RealisticEnvelopeOpening
 import { GardenInvite } from "../components/GardenInvite"
 import { SiteInvite } from "../components/SiteInvite"
 import { ChateauInvite } from "../components/ChateauInvite"
+import { RoyalBlueInvite } from "../components/RoyalBlueInvite"
 import { StripInvite } from "../components/StripInvite"
 import { RsvpForm } from "../components/RsvpForm"
 import { useInvite } from "../lib/useInvite"
@@ -171,12 +172,14 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
           />
         ) : isSite ? (
           <>
-            {draft.templateId === "chateau" || draft.templateId === "royal-blue" ? (
+            {draft.templateId === "chateau" ? (
               <ChateauInvite
                 draft={draft}
                 rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null}
                 shareUrl={window.location.href}
               />
+            ) : draft.templateId === "royal-blue" ? (
+              <RoyalBlueInvite draft={draft} />
             ) : (
               <SiteInvite
                 draft={draft}
