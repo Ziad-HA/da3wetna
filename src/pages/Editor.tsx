@@ -192,7 +192,7 @@ export function Editor() {
             <h3 className="font-bold text-[#4a2d33]">البيانات الأساسية</h3>
             <p className="mt-1 text-xs leading-6 text-[#806b70]">{step === 0 ? "اكتب اسم العريس والعروسة زي ما تحب يظهروا في الدعوة." : step === 1 ? "اختار التاريخ من التقويم واكتب اسم القاعة أو المكان." : "مش لازم تملأ أي خانة هنا. الإضافات دي اختيارية وتقدر تتخطاها."}</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {fields.filter((field) => template.id === "garden-classic" ? (step === 0 && ["groom", "bride"].includes(field.key)) : (step === 0 && (["occasion", "groom", "bride"].includes(field.key) || (template.id === "royal-blue" && ["groomFather", "brideFather"].includes(field.key)))) || (step === 1 && ["date", "time", "venue", "city"].includes(field.key))).map((field) => (
+              {fields.filter((field) => template.id === "garden-classic" ? (step === 0 && ["groom", "bride", "groomFather", "brideFather"].includes(field.key)) : (step === 0 && ["occasion", "groom", "bride", "groomFather", "brideFather"].includes(field.key)) || (step === 1 && ["date", "time", "venue", "city"].includes(field.key))).map((field) => (
                 <label key={field.key} className="field">
                   <span>{field.label}{["groom", "bride", "date", "venue"].includes(field.key) ? " *" : ""}</span>
                   {field.kind === "select" ? (
