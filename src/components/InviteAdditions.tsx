@@ -11,10 +11,9 @@ type Props = {
   showRsvp?: boolean
   showShare?: boolean
   showParents?: boolean
-  showClosing?: boolean
 }
 
-export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = false, palette, showRsvp = true, showShare = true, showParents = true, showClosing = true }: Props) {
+export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = false, palette, showRsvp = true, showShare = true, showParents = true }: Props) {
   const [notice, setNotice] = useState("")
   const url = shareUrl || (typeof window !== "undefined" ? window.location.href : "")
   const title = `دعوة ${draft.groom} و${draft.bride}`
@@ -108,22 +107,33 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
         {notice ? <p className="invite-additions-status" role="status" aria-live="polite">{notice}</p> : null}
       </section> : null}
 
-      {showClosing ? <>
+
+    </div>
+  )
+}
+
+
+export function InviteClosingSections({ palette }: { palette?: { paper?: string; ink?: string; gold?: string; soft?: string } }) {
+  const style = {
+    "--add-paper": palette?.paper || "#fffaf5",
+    "--add-ink": palette?.ink || "#633c47",
+    "--add-gold": palette?.gold || "#b88b58",
+    "--add-soft": palette?.soft || "#927b7f",
+  } as CSSProperties
+  return (
+    <div className="invite-additions invite-closing-only" style={style} dir="rtl" lang="ar">
       <section className="invite-additions-closing invite-additions-waiting" aria-label="في انتظاركم">
         <div className="invite-additions-floral" aria-hidden="true">❦ ✦ ❦</div>
         <h2>في انتظاركم</h2>
         <p>وجودكم وسطنا هو أجمل هدية لينا</p>
         <span className="invite-additions-monogram" aria-hidden="true">♡</span>
       </section>
-
       <section className="invite-additions-closing invite-additions-love" aria-label="بكل حب">
         <span className="invite-additions-closing-kicker">بكل حب</span>
         <h2>مستنيين نشوفكم</h2>
         <p>يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا.</p>
         <div className="invite-additions-floral" aria-hidden="true">✦ ❦ ✦</div>
       </section>
-      </> : null}
-
     </div>
   )
 }
