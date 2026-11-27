@@ -70,7 +70,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const hasDraft = true
   useEffect(() => {
     if (!hasDraft || introSkipped || introStep < 1 || introStep >= 3) return
-    const timer = window.setTimeout(() => setIntroStep((step) => Math.min(3, step + 1)), introStep === 1 ? 950 : 1250)
+    const timer = window.setTimeout(() => setIntroStep((step) => Math.min(3, step + 1)), introStep === 1 ? 500 : 650)
     return () => window.clearTimeout(timer)
   }, [hasDraft, introSkipped, introStep])
 
