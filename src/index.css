@@ -4003,3 +4003,157 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .chx-site.chx-royal-blue .chx-sec::before { right: .45rem; font-size: 1.5rem; }
   .chx-site.chx-royal-blue .chx-sec::after { left: .5rem; font-size: 1rem; }
 }
+
+
+/* Royal Blue — lush floral celebration, blue-tinted ornaments and layered details */
+.chx-site.chx-royal-blue {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 8% 8%, rgba(93,145,194,.18), transparent 34%),
+    radial-gradient(ellipse at 92% 22%, rgba(185,150,85,.13), transparent 30%),
+    radial-gradient(ellipse at 12% 76%, rgba(115,159,199,.15), transparent 32%),
+    linear-gradient(145deg, #F8FBFF 0%, #EAF1F8 48%, #F9FBFE 100%);
+  border: 1px solid rgba(185,150,85,.48);
+  box-shadow: 0 24px 70px rgba(16,36,61,.12), inset 0 0 0 5px rgba(255,255,255,.72), inset 0 0 0 7px rgba(185,150,85,.18);
+}
+.chx-site.chx-royal-blue::before,
+.chx-site.chx-royal-blue::after {
+  content: "✿  ❀  ❁";
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  color: rgba(35,83,129,.52);
+  font-family: Georgia, serif;
+  font-size: clamp(1.25rem, 4vw, 2.4rem);
+  letter-spacing: .35rem;
+  text-shadow: 0 2px 8px rgba(23,54,83,.12);
+}
+.chx-site.chx-royal-blue::before { top: .55rem; right: .7rem; transform: rotate(-12deg); }
+.chx-site.chx-royal-blue::after { bottom: .55rem; left: .7rem; transform: rotate(168deg); color: rgba(185,150,85,.72); }
+.chx-site.chx-royal-blue .chx-sec {
+  overflow: hidden;
+  border-top: 1px solid rgba(185,150,85,.30);
+  background-image:
+    radial-gradient(circle at 3% 12%, rgba(55,105,154,.10) 0 2px, transparent 3px),
+    radial-gradient(circle at 97% 84%, rgba(185,150,85,.13) 0 2px, transparent 3px),
+    radial-gradient(ellipse at 0% 100%, rgba(107,151,190,.10), transparent 35%),
+    radial-gradient(ellipse at 100% 0%, rgba(185,150,85,.09), transparent 32%);
+}
+.chx-site.chx-royal-blue .chx-sec::before {
+  content: "❀\A  ❦\A ❁";
+  white-space: pre;
+  top: .6rem;
+  right: .7rem;
+  color: rgba(34,83,132,.58);
+  font-size: 1.65rem;
+  line-height: 1.05;
+  letter-spacing: .05rem;
+  text-shadow: 0 2px 9px rgba(35,83,129,.16);
+}
+.chx-site.chx-royal-blue .chx-sec::after {
+  content: "✧\A ❀\A ✧";
+  white-space: pre;
+  top: .65rem;
+  left: .75rem;
+  color: rgba(185,150,85,.78);
+  font-size: 1.35rem;
+  line-height: 1.25;
+  text-shadow: 0 2px 8px rgba(185,150,85,.16);
+}
+.chx-site.chx-royal-blue .chx-hero-card,
+.chx-site.chx-royal-blue .chx-countdown-sec,
+.chx-site.chx-royal-blue .chx-reception-sec,
+.chx-site.chx-royal-blue .chx-rsvp-sec,
+.chx-site.chx-royal-blue .chx-footer-sec {
+  position: relative;
+  border: 1px solid rgba(185,150,85,.30);
+  box-shadow: 0 12px 32px rgba(16,36,61,.07), inset 0 0 0 1px rgba(255,255,255,.7);
+}
+.chx-site.chx-royal-blue .chx-countdown-sec {
+  background:
+    radial-gradient(ellipse at 5% 5%, rgba(82,132,179,.18), transparent 42%),
+    radial-gradient(ellipse at 95% 95%, rgba(185,150,85,.15), transparent 40%),
+    linear-gradient(135deg, #FDFEFF, #E8F0F8 55%, #F9FBFE);
+}
+.chx-site.chx-royal-blue .chx-reception-sec,
+.chx-site.chx-royal-blue .chx-rsvp-sec,
+.chx-site.chx-royal-blue .chx-footer-sec {
+  background:
+    radial-gradient(ellipse at 0% 100%, rgba(86,137,184,.12), transparent 42%),
+    radial-gradient(ellipse at 100% 0%, rgba(185,150,85,.12), transparent 40%),
+    rgba(255,255,255,.78);
+}
+.chx-site.chx-royal-blue .chx-count-item {
+  border-color: rgba(185,150,85,.48);
+  background: linear-gradient(145deg, #FFFFFF, #E6EFF8);
+  box-shadow: 0 8px 24px rgba(23,54,83,.09), inset 0 1px 0 #fff;
+}
+.chx-site.chx-royal-blue .chx-script-title::before,
+.chx-site.chx-royal-blue .chx-script-title::after {
+  content: "❀";
+  display: inline-block;
+  margin-inline: .7rem;
+  color: #B99655;
+  font-size: .75em;
+  vertical-align: middle;
+}
+.chx-site.chx-royal-blue .chx-countdown-bg,
+.chx-site.chx-royal-blue .chx-lights-divider,
+.chx-site.chx-royal-blue .chx-venue-illustration,
+.chx-site.chx-royal-blue .chx-dove-img,
+.chx-site.chx-royal-blue .chx-floral-divider,
+.chx-site.chx-royal-blue .chx-footer-monogram {
+  display: block;
+}
+.chx-site.chx-royal-blue .chx-countdown-bg,
+.chx-site.chx-royal-blue .chx-lights-divider,
+.chx-site.chx-royal-blue .chx-venue-illustration,
+.chx-site.chx-royal-blue .chx-dove-img,
+.chx-site.chx-royal-blue .chx-floral-divider img,
+.chx-site.chx-royal-blue .chx-footer-monogram img {
+  filter: hue-rotate(165deg) saturate(.88) contrast(1.03);
+}
+.chx-site.chx-royal-blue .chx-floral-divider {
+  width: min(78%, 390px);
+  margin: 0 auto 1.1rem;
+  opacity: .92;
+}
+.chx-site.chx-royal-blue .chx-divider-img {
+  width: 100%;
+  max-height: 100px;
+  object-fit: contain;
+}
+.chx-site.chx-royal-blue .chx-footer-monogram {
+  width: 76px;
+  height: 76px;
+  margin: .5rem auto;
+  overflow: hidden;
+  border: 1px solid rgba(185,150,85,.65);
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(255,255,255,.7), 0 0 0 6px rgba(185,150,85,.22);
+}
+.chx-site.chx-royal-blue .chx-footer-monogram img { width: 100%; height: 100%; object-fit: cover; }
+.chx-site.chx-royal-blue .chx-footer-sec::before { content: "❀  ❦  ❀"; }
+.chx-site.chx-royal-blue .chx-footer-sec::after { content: "✧  ❁  ✧"; }
+.chx-site.chx-royal-blue .chx-royal-hero {
+  border: 1px solid rgba(185,150,85,.65);
+  box-shadow: 0 18px 40px rgba(16,36,61,.16), 0 0 0 5px rgba(255,255,255,.8), 0 0 0 7px rgba(185,150,85,.28);
+}
+.chx-site.chx-royal-blue .chx-royal-hero::before,
+.chx-site.chx-royal-blue .chx-royal-hero::after {
+  z-index: 5;
+  top: .5rem;
+  color: #B99655;
+  font-size: clamp(1.2rem, 5vw, 2.1rem);
+  text-shadow: 0 2px 8px rgba(16,36,61,.35);
+}
+.chx-site.chx-royal-blue .chx-royal-hero::before { content: "❦  ✿"; right: .5rem; }
+.chx-site.chx-royal-blue .chx-royal-hero::after { content: "✿  ❦"; left: .5rem; }
+@media (max-width: 480px) {
+  .chx-site.chx-royal-blue::before,
+  .chx-site.chx-royal-blue::after { font-size: 1.25rem; letter-spacing: .12rem; }
+  .chx-site.chx-royal-blue .chx-sec::before { font-size: 1.25rem; }
+  .chx-site.chx-royal-blue .chx-sec::after { font-size: 1.05rem; }
+  .chx-site.chx-royal-blue .chx-footer-monogram { width: 64px; height: 64px; }
+}
