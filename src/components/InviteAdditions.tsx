@@ -11,9 +11,10 @@ type Props = {
   showRsvp?: boolean
   showShare?: boolean
   showParents?: boolean
+  showClosing?: boolean
 }
 
-export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = false, palette, showRsvp = true, showShare = true, showParents = true }: Props) {
+export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = false, palette, showRsvp = true, showShare = true, showParents = true, showClosing = true }: Props) {
   const [notice, setNotice] = useState("")
   const url = shareUrl || (typeof window !== "undefined" ? window.location.href : "")
   const title = `دعوة ${draft.groom} و${draft.bride}`
@@ -107,6 +108,7 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
         {notice ? <p className="invite-additions-status" role="status" aria-live="polite">{notice}</p> : null}
       </section> : null}
 
+      {showClosing ? <>
       <section className="invite-additions-closing invite-additions-waiting" aria-label="في انتظاركم">
         <div className="invite-additions-floral" aria-hidden="true">❦ ✦ ❦</div>
         <h2>في انتظاركم</h2>
@@ -120,6 +122,8 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
         <p>يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا.</p>
         <div className="invite-additions-floral" aria-hidden="true">✦ ❦ ✦</div>
       </section>
+      </> : null}
+
     </div>
   )
 }
