@@ -26,7 +26,13 @@ export function TemplatePreview() {
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const draft = useMemo(() => {
-    return template ? draftFor(template) : null
+    if (!template) return null
+    const previewDraft = draftFor(template)
+    if (template.id === "royal-blue") {
+      previewDraft.groomFather = "أحمد"
+      previewDraft.brideFather = "محمد"
+    }
+    return previewDraft
   }, [template])
 
   useEffect(() => {
