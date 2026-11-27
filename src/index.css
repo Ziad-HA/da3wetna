@@ -4199,3 +4199,47 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .invite-additions-parent span { font-size: clamp(.7rem, 2.8vw, .9rem); }
   .invite-additions-parents-heart { font-size: 1.25rem; }
 }
+
+
+/* Royal-blue parents sit inside the invitation artwork, directly above its date. */
+.lavender-parents-inline {
+  position: absolute;
+  top: 45.2%;
+  left: 12%;
+  right: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .35rem;
+  color: #403244;
+  text-align: center;
+  line-height: 1.35;
+}
+.lavender-parent-inline {
+  display: grid;
+  flex: 1 1 0;
+  min-width: 0;
+  justify-items: center;
+  gap: .08rem;
+}
+.lavender-parent-inline span {
+  color: #5e7894;
+  font-size: clamp(.52rem, 1.8vw, .76rem);
+  font-weight: 700;
+}
+.lavender-parent-inline strong {
+  color: #173b60;
+  font-family: var(--invite-font-ar, "Amiri"), serif;
+  font-size: clamp(.82rem, 2.8vw, 1.12rem);
+  font-weight: 800;
+}
+.lavender-parents-inline-heart {
+  flex: 0 0 auto;
+  color: #7899bb;
+  font-size: clamp(.9rem, 2.7vw, 1.2rem);
+}
+@media (max-width: 480px) {
+  .lavender-parents-inline { top: 46.2%; left: 10%; right: 10%; gap: .2rem; }
+  .lavender-parent-inline span { font-size: clamp(.48rem, 2.1vw, .66rem); }
+  .lavender-parent-inline strong { font-size: clamp(.72rem, 3vw, .95rem); }
+}
