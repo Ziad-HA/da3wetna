@@ -67,7 +67,7 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
           <span>والد العروسة الأستاذ</span>
           <strong>{draft.brideFather || "—"}</strong>
         </div>
-        <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" />
+        <img src={draft.templateId === "estate" || draft.templateId === "estate-classic" ? "/vaux/flower_divider.jpg" : "/chateau/royal-blue-floral.webp"} alt="" aria-hidden="true" />
       </section> : null}
       {showRsvp ? <section className="invite-additions-rsvp">
         <span className="invite-additions-ornament" aria-hidden="true">✦ ❦ ✦</span>
