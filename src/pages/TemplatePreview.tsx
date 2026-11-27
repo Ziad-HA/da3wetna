@@ -41,19 +41,52 @@ export function TemplatePreview() {
     }
   }, [template])
 
+  function playFrom75() {
+    const audio = audioRef.current
+    if (!audio || !draft.musicUrl) return
+    setMusicError("")
+    audio.volume = 0.7
+
+    const seekToStart = () => {
+      if (audio.duration && audio.duration <= 75) {
+        setMusicError("ملف الأغنية أقصر من 75 ثانية، اختار ملف أطول.")
+        return
+      }
+      try {
+        audio.currentTime = 75
+      } catch {
+        setMusicError("تعذر الانتقال إلى الثانية 75 في ملف الأغنية.")
+      }
+    }
+
+    // Keep the seek tied to the metadata event when the file is not ready yet.
+    if (audio.readyState >= HTMLMediaElement.HAVE_METADATA) {
+      seekToStart()
+      audio.play().then(() => setMusicPlaying(true)).catch(() => {
+        setMusicPlaying(false)
+        setMusicError("مش قادرين نشغّل النشيد. جرّب زر التشغيل مرة تانية.")
+      })
+      return
+    }
+
+    const onMetadata = () => {
+      audio.removeEventListener("loadedmetadata", onMetadata)
+      seekToStart()
+    }
+    audio.addEventListener("loadedmetadata", onMetadata, { once: true })
+    const playback = audio.play()
+    playback.then(() => setMusicPlaying(true)).catch(() => {
+      audio.removeEventListener("loadedmetadata", onMetadata)
+      setMusicPlaying(false)
+      setMusicError("مش قادرين نشغّل النشيد. جرّب زر التشغيل مرة تانية.")
+    })
+  }
+
   useEffect(() => {
     const audio = audioRef.current
     if (!audio || !draft.musicUrl) return
     audio.volume = 0.7
-    // Try autoplay on entering preview; if the browser blocks it, the visible
-    // player button remains available and the envelope click retries playback.
-    audio.play().then(() => {
-      setMusicPlaying(true)
-      setMusicError("")
-    }).catch(() => {
-      setMusicPlaying(false)
-      setMusicError("لو الأغنية ما اشتغلتش تلقائيًا، اضغط زر تشغيل الأغنية بالأعلى.")
-    })
+    playFrom75()
   }, [template?.id, draft.musicUrl])
 
   if (!template || !draft) {
@@ -61,18 +94,7 @@ export function TemplatePreview() {
   }
 
   function startMusic() {
-    const audio = audioRef.current
-    if (!audio || !draft.musicUrl) return
-    setMusicError("")
-    audio.volume = 0.7
-    // Start immediately from the user's envelope click; seeking before metadata
-    // loads was causing some browsers to reject or silently stop playback.
-    if (audio.ended) audio.currentTime = 0
-    const playback = audio.play()
-    playback.then(() => setMusicPlaying(true)).catch(() => {
-      setMusicPlaying(false)
-      setMusicError("مش قادرين نشغّل النشيد. جرّب زر التشغيل مرة تانية.")
-    })
+    playFrom75()
   }
 
   function toggleMusic() {
@@ -104,7 +126,7 @@ export function TemplatePreview() {
 
   return (
     <div className="preview-page-container relative min-h-dvh">
-      <audio ref={audioRef} src={draft.musicUrl || undefined} preload="auto" onPlay={() => setMusicPlaying(true)} onPause={() => setMusicPlaying(false)} onEnded={() => setMusicPlaying(false)} onError={() => { setMusicPlaying(false); setMusicError("ملف النشيد مش متاح حاليًا. تقدر تختار نشيد تاني من التعديل.") }} />
+      <audio ref={audioRef} src={draft.musicUrl || undefined} preload="auto" onPlay={() => setMusicPlaying(true)} onPause={() => setMusicPlaying(false)} onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= 165) { event.currentTarget.pause(); setMusicPlaying(false) } }} onEnded={() => setMusicPlaying(false)} onError={() => { setMusicPlaying(false); setMusicError("ملف النشيد مش متاح حاليًا. تقدر تختار نشيد تاني من التعديل.") }} />
       {/* Top Floating Bar */}
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/20 bg-black/40 px-3 py-2.5 backdrop-blur-md sm:px-6 sm:py-3">
         <div className="flex items-center gap-2 sm:gap-3">
