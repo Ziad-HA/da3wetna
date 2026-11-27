@@ -99,19 +99,6 @@ export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { d
       </section>
       <div className="royal-flower-bottom" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
       {endingAdditions}
-      <div className="vaux-site vaux-royal-blue royal-closing-sections" dir="rtl" lang="ar">
-        <section className="vaux-sec site-reveal">
-          <span className="vaux-kicker">بكل حب</span>
-          <h2 className="vaux-script-title">مستنيين نشوفكم</h2>
-          <p className="vaux-body-text">يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا.</p>
-        </section>
-        <section className="vaux-sec site-reveal vaux-contact-sec">
-          <div className="vaux-divider-wrapper"><img src="/vaux/flower_divider.jpg" alt="" className="vaux-flower-divider" /></div>
-          <h2 className="vaux-script-title">في انتظاركم</h2>
-          <p className="vaux-body-text">وجودكم وسطنا هو أجمل هدية لينا</p>
-          <div className="vaux-footer-monogram"><img src="/vaux/monogram_rose.png" alt="" /></div>
-        </section>
-      </div>
     </article>
   )
 }
