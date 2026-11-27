@@ -206,7 +206,7 @@ export function TemplatePreview() {
             {isGarden ? (
               <GardenInvite draft={draft} />
             ) : isSite ? (
-              template.id === "chateau" ? (
+              (template.id === "chateau" || template.id === "royal-blue") ? (
                 <ChateauInvite draft={draft} />
               ) : (
                 <SiteInvite draft={draft} template={template} />
