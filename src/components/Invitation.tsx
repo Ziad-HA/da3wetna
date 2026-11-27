@@ -70,6 +70,80 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     )
   }
 
+  if (template.id === "royal-blue" || template.id === "burgundy-velvet") {
+    const eventDate = draft.date ? new Date(`${draft.date}T00:00:00`) : null
+    const dayName = eventDate && !isNaN(eventDate.getTime())
+      ? new Intl.DateTimeFormat("ar-EG", { weekday: "long" }).format(eventDate)
+      : "الجمعة"
+    const dateFormatted = draft.date
+      ? draft.date.split("-").slice(1).reverse().join("-")
+      : "18-12"
+    const timeFormatted = draft.time ? formatArabicTime(draft.time) : "9:00 م"
+
+    return (
+      <article className="invite lavender-card" style={vars} dir="rtl">
+        <div className="lavender-wrapper">
+          <img src="/cards/lavender_blank.jpg" alt="" className="lavender-bg" />
+          <div className="lavender-content">
+            {/* Top message */}
+            <div className="lavender-header">
+              <Line field="hosts" className="lavender-hosts" active={activeField} onSelect={onSelect}>
+                {draft.hosts || "في ليلة يتكللها الفرح والسرور\nنتشرف بدعوتكم لحضور حفل زفاف"}
+              </Line>
+            </div>
+
+            {/* Couple names */}
+            <div className="lavender-names-row">
+              <Line field="groom" className="lavender-name groom" active={activeField} onSelect={onSelect}>
+                {draft.groom || "محمد"}
+              </Line>
+              <span className="lavender-amp-space" aria-hidden="true" />
+              <Line field="bride" className="lavender-name bride" active={activeField} onSelect={onSelect}>
+                {draft.bride || "ليلى"}
+              </Line>
+            </div>
+
+            {/* Date line: Day | Date | Time */}
+            <div className="lavender-date-row">
+              <span className="lavender-date-col day">
+                {dayName}
+              </span>
+              <span className="lavender-date-col date">
+                <Line field="date" className="lavender-date-val" active={activeField} onSelect={onSelect}>
+                  {dateFormatted}
+                </Line>
+              </span>
+              <span className="lavender-date-col time">
+                <Line field="time" className="lavender-time-val" active={activeField} onSelect={onSelect}>
+                  {timeFormatted}
+                </Line>
+              </span>
+            </div>
+
+            {/* Venue & Location */}
+            <div className="lavender-venue-box">
+              <Line field="venue" className="lavender-venue" active={activeField} onSelect={onSelect}>
+                {draft.venue || "فندق سوفيتيل الجزيرة"}
+              </Line>
+              {draft.venueAddress ? (
+                <Line field="venueAddress" className="lavender-address" active={activeField} onSelect={onSelect}>
+                  {draft.venueAddress}
+                </Line>
+              ) : null}
+            </div>
+
+            {/* Footer */}
+            <div className="lavender-footer">
+              <Line field="message" className="lavender-msg" active={activeField} onSelect={onSelect}>
+                {draft.message || "بحضوركم تكتمل فرحتنا"}
+              </Line>
+            </div>
+          </div>
+        </div>
+      </article>
+    )
+  }
+
   if (template.layout === "site" && template.frame === "arch") {
     return (
       <article className="invite vaux-thumb-invite" style={vars}>

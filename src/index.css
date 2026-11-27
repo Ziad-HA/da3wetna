@@ -966,7 +966,15 @@ main section > div { min-width: 0; }
 }
 .invite-music-toggle[aria-pressed="true"] { background: #a64257; color: #fff; }
 .invite-public-heading { animation: invite-copy-in .8s .12s both; }
-.invite-public-card { animation: invite-card-reveal 1s .18s cubic-bezier(.2,.75,.2,1) both; transform-origin: 50% 15%; }
+.invite-public-card {
+  width: min(100%, 390px);
+  margin-inline: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  animation: invite-card-reveal 1s .18s cubic-bezier(.2,.75,.2,1) both;
+  transform-origin: 50% 15%;
+}
 .invite-welcome-message, .invite-photo-moments { animation: invite-section-reveal .8s .3s both; }
 @keyframes invite-opening-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes envelope-arrive { from { opacity: 0; transform: translateY(24px) scale(.92); } to { opacity: 1; transform: translateY(0) scale(1); } }
@@ -3377,11 +3385,11 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   position: absolute;
   inset: 5% 7% 5% 7%;
   z-index: 2;
-  transition: transform 1s cubic-bezier(0.18, 0.9, 0.3, 1), box-shadow 0.8s ease;
+  transition: transform 1.9s cubic-bezier(0.16, 0.88, 0.25, 1), box-shadow 1.2s ease;
   transform: translateY(0);
 }
 .real-env-card-slot.card-raised {
-  transform: translateY(-50%) scale(1.05);
+  transform: translateY(-56%) scale(1.08);
   z-index: 6;
 }
 .real-env-card-inner {
@@ -3390,6 +3398,64 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Light beam & golden glow burst emanating from inside envelope */
+.real-env-glow-burst {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.4);
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 240, 180, 0.95) 0%, rgba(240, 200, 80, 0.6) 35%, rgba(212, 175, 55, 0.25) 55%, transparent 75%);
+  filter: blur(12px);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 1.1s ease, transform 1.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.real-env-glow-burst.is-active {
+  opacity: 1;
+  transform: translate(-50%, -55%) scale(1.35);
+}
+
+.real-env-light-beam {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: bottom center;
+  width: 290px;
+  height: 420px;
+  background: linear-gradient(to top, rgba(255, 245, 200, 0.75) 0%, rgba(255, 225, 140, 0.35) 45%, transparent 100%);
+  clip-path: polygon(30% 100%, 70% 100%, 100% 0%, 0% 0%);
+  filter: blur(8px);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 1s 0.2s ease, transform 1.9s 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.real-env-light-beam.is-active {
+  opacity: 0.95;
+  transform: translateX(-50%) scaleY(1);
+}
+
+.real-env-card-shimmer {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.6) 45%, rgba(255, 245, 200, 0.75) 50%, rgba(255, 255, 255, 0.6) 55%, transparent 80%);
+  transform: translateX(-100%);
+  opacity: 0;
+  z-index: 7;
+}
+.real-env-card-shimmer.shimmer-run {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: transform 1.9s 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
 }
 
 .real-env-pocket {
@@ -3414,7 +3480,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   z-index: 4;
   transform-origin: top center;
   transform-style: preserve-3d;
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 1.25s cubic-bezier(0.25, 1, 0.35, 1);
 }
 .real-env-flap.flap-open {
   transform: rotateX(180deg);
@@ -3523,4 +3589,119 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 }
 .real-env-skip-btn:hover {
   background: rgba(0, 0, 0, 0.85);
+}
+
+
+/* ===== Lavender Floral Card (الظرف العنابي المخملي - كارت الورد البنفسجي) ===== */
+.lavender-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 726 / 1024;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.lavender-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.lavender-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lavender-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #3b2f3d;
+  font-family: var(--invite-font-ar, "Cairo", sans-serif);
+  pointer-events: auto;
+  user-select: text;
+}
+
+.lavender-header {
+  position: absolute;
+  top: 27.5%;
+  left: 14%;
+  right: 14%;
+  font-size: clamp(0.6rem, 2.3vw, 0.9rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: #4b3d4f;
+  white-space: pre-line;
+}
+
+.lavender-names-row {
+  position: absolute;
+  top: 35.6%;
+  left: 17%;
+  right: 17%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--invite-font-ar, "Aref Ruqaa"), "Amiri", serif;
+  font-size: clamp(1.15rem, 4.4vw, 1.85rem);
+  font-weight: 700;
+  color: #2b1f2e;
+}
+
+.lavender-name {
+  flex: 1;
+  text-align: center;
+}
+
+.lavender-amp-space {
+  width: clamp(24px, 7vw, 44px);
+  flex-shrink: 0;
+}
+
+.lavender-date-row {
+  position: absolute;
+  top: 59.1%;
+  left: 19%;
+  right: 19%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: clamp(0.65rem, 2.2vw, 0.88rem);
+  font-weight: 700;
+  color: #403244;
+}
+
+.lavender-date-col {
+  flex: 1;
+  text-align: center;
+}
+
+.lavender-venue-box {
+  position: absolute;
+  top: 72.2%;
+  left: 15%;
+  right: 15%;
+  font-size: clamp(0.65rem, 2.2vw, 0.85rem);
+  font-weight: 600;
+  color: #4e3f52;
+  line-height: 1.35;
+}
+
+.lavender-footer {
+  position: absolute;
+  top: 80.2%;
+  left: 18%;
+  right: 18%;
+  font-size: clamp(0.68rem, 2.4vw, 0.92rem);
+  font-weight: 600;
+  color: #453648;
 }

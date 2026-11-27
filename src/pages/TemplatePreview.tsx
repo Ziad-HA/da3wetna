@@ -224,7 +224,7 @@ export function TemplatePreview() {
                     يسعدنا وجودكم ومشاركتنا أجمل لحظاتنا ♡
                   </p>
                 </header>
-                <div className="invite-public-card">
+                <div className="invite-public-card w-full max-w-[390px] overflow-hidden rounded-[24px] shadow-2xl">
                   <Invitation draft={draft} />
                 </div>
               </>

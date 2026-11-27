@@ -50,17 +50,17 @@ export function RealisticEnvelopeOpening({
     setPhase("opening")
     onOpen?.()
 
-    // Step 1: Flap flips open (0s -> 0.7s)
-    // Step 2: Card rises out of pocket (0.7s -> 1.6s)
+    // Step 1: Flap flips open slowly (0s -> 1.3s)
+    // Step 2: Light burst and card rises out of pocket in slow motion (1.2s -> 3.3s)
     window.setTimeout(() => {
       setPhase("rising")
-    }, 600)
+    }, 1100)
 
-    // Step 3: Complete transition to full invite (2.2s)
+    // Step 3: Complete transition to full invite (3.6s)
     window.setTimeout(() => {
       setPhase("done")
       onComplete?.()
-    }, 2200)
+    }, 3600)
   }
 
   const isFlapOpen = phase === "opening" || phase === "rising" || phase === "done"
@@ -82,11 +82,17 @@ export function RealisticEnvelopeOpening({
             <img src={`${assetBase}/liner.jpg`} alt="" className="real-env-liner-img" />
           </div>
 
+          {/* Light Burst & Aura emanating from inside the envelope */}
+          <div className={`real-env-glow-burst ${isFlapOpen ? "is-active" : ""}`} aria-hidden="true" />
+          <div className={`real-env-light-beam ${isFlapOpen ? "is-active" : ""}`} aria-hidden="true" />
+
           {/* 2. Invitation Card inside the pocket */}
           <div className={`real-env-card-slot ${isCardRising ? "card-raised" : ""}`}>
             <div className="real-env-card-inner">
               <Invitation draft={draft} />
             </div>
+            {/* Shimmer light pass across the card */}
+            <div className={`real-env-card-shimmer ${isCardRising ? "shimmer-run" : ""}`} aria-hidden="true" />
           </div>
 
           {/* 3. Front Pocket (covers the bottom part of the card) */}
