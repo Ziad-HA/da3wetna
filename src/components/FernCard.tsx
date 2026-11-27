@@ -14,9 +14,9 @@ const fit = (text: string, size: number, maxChars: number): CSSProperties => ({
   fontSize: `${(size * Math.min(1, maxChars / Math.max(text.length, 1))) / 12.4}cqw`,
 })
 
-/** y = منتصف السطر، x/w = المنتصف والعرض، كلهم على مقاس الصورة 1240×2687. */
+/** y = منتصف السطر، x/w = المنتصف والعرض، كلهم على مقاس الصورة 1240×2216. */
 const at = (y: number, x = 620, w = 700): CSSProperties => ({
-  top: `${(y / 2687) * 100}%`,
+  top: `${(y / 2216) * 100}%`,
   left: `${(x / 1240) * 100}%`,
   width: `${(w / 1240) * 100}%`,
 })
@@ -44,22 +44,22 @@ export function FernCard({ draft, vars, activeField, onSelect }: Props) {
 
       <div className="fern-slot" style={at(218)}>{text("occasion", `دعوة ${occasion}`, 48, 20, "fern-title")}</div>
 
-      <div className="fern-slot fern-intro" style={at(640, 620, 740)}>
+      <div className="fern-slot fern-intro" style={at(515, 620, 740)}>
         <p className="fern-text" style={fit("", 48, 1)}>بسم الله الرحمن الرحيم</p>
         {draft.hosts ? text("hosts", draft.hosts, 46, 70) : null}
         {draft.message ? text("message", draft.message, 46, 70) : null}
       </div>
 
-      {draft.opening ? <div className="fern-slot" style={at(1420, 620, 660)}>{text("opening", draft.opening, 44, 90)}</div> : null}
+      {draft.opening ? <div className="fern-slot" style={at(1062, 620, 660)}>{text("opening", draft.opening, 44, 90)}</div> : null}
 
       {/* الـ & مرسومة في الصورة: العريس على يمينها والعروسة على شمالها */}
-      <div className="fern-slot" style={at(1048, 835, 330)}>{text("groom", groom, 100, 6, "fern-name")}</div>
-      <div className="fern-slot" style={at(1048, 390, 330)}>{text("bride", bride, 100, 6, "fern-name")}</div>
+      <div className="fern-slot" style={at(812, 835, 330)}>{text("groom", groom, 100, 6, "fern-name")}</div>
+      <div className="fern-slot" style={at(812, 390, 330)}>{text("bride", bride, 100, 6, "fern-name")}</div>
 
-      <div className="fern-slot" style={at(1687, 620, 480)}>{text("date", date, 36, 26)}</div>
-      <div className="fern-slot" style={at(1758, 620, 480)}>{text("time", time, 36, 26)}</div>
-      <div className="fern-slot" style={at(1828, 620, 480)}>{text("venue", venue, 36, 26)}</div>
-      <div className="fern-slot" style={at(1909)}><p className="fern-text fern-title" style={fit("", 38, 1)}>حضوركم يتمم فرحتنا</p></div>
+      <div className="fern-slot" style={at(1216, 620, 480)}>{text("date", date, 36, 26)}</div>
+      <div className="fern-slot" style={at(1287, 620, 480)}>{text("time", time, 36, 26)}</div>
+      <div className="fern-slot" style={at(1358, 620, 480)}>{text("venue", venue, 36, 26)}</div>
+      <div className="fern-slot" style={at(1439)}><p className="fern-text fern-title" style={fit("", 38, 1)}>حضوركم يتمم فرحتنا</p></div>
     </article>
   )
 }
