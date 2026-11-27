@@ -106,6 +106,20 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
         <p className="invite-additions-note">في إنستجرام وتيك توك سيتم نسخ رابط الدعوة تلقائيًا.</p>
         {notice ? <p className="invite-additions-status" role="status" aria-live="polite">{notice}</p> : null}
       </section> : null}
+
+      <section className="invite-additions-closing invite-additions-waiting" aria-label="في انتظاركم">
+        <div className="invite-additions-floral" aria-hidden="true">❦ ✦ ❦</div>
+        <h2>في انتظاركم</h2>
+        <p>وجودكم وسطنا هو أجمل هدية لينا</p>
+        <span className="invite-additions-monogram" aria-hidden="true">♡</span>
+      </section>
+
+      <section className="invite-additions-closing invite-additions-love" aria-label="بكل حب">
+        <span className="invite-additions-closing-kicker">بكل حب</span>
+        <h2>مستنيين نشوفكم</h2>
+        <p>يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا.</p>
+        <div className="invite-additions-floral" aria-hidden="true">✦ ❦ ✦</div>
+      </section>
     </div>
   )
 }
