@@ -14,7 +14,7 @@ import { ChateauInvite } from "../components/ChateauInvite"
 import { RoyalBlueInvite } from "../components/RoyalBlueInvite"
 import { StripInvite } from "../components/StripInvite"
 import { RsvpForm } from "../components/RsvpForm"
-import { InviteAdditions } from "../components/InviteAdditions"
+import { InviteAdditions, InviteClosingSections } from "../components/InviteAdditions"
 import { useInvite } from "../lib/useInvite"
 import type { InviteDraft } from "../types"
 
@@ -267,6 +267,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
           <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
         </> : null}
       </div>
+      <InviteClosingSections palette={additionsPalette} />
       {!isSite && musicUrl ? <button type="button" onClick={toggleMusic} className="invite-music-toggle" aria-pressed={musicOn} aria-label={musicOn ? "إيقاف موسيقى الدعوة" : "تشغيل موسيقى الدعوة"}>{musicOn ? "♫" : "♪"}</button> : null}
     </main>
     </>
