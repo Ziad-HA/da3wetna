@@ -3,7 +3,7 @@ import type { InviteDraft } from "../types"
 
 export function GardenOpening({ draft, onOpen }: { draft: InviteDraft; onOpen: () => void }) {
   const [opening, setOpening] = useState(false)
-  const start = () => { if (opening) return; setOpening(true); window.setTimeout(onOpen, 1250) }
+  const start = () => { if (opening) return; setOpening(true); window.setTimeout(onOpen, 750) }
   return <main className={`garden-opening ${opening ? "is-opening" : ""}`} onClick={start}>
     <div className="garden-envelope">
       <div className="garden-envelope-lid" />
