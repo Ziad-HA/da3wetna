@@ -314,6 +314,7 @@ export function TemplatePreview() {
                 <div className={draft.templateId === "emerald-fern" ? "fern-full" : "invite-public-card w-full max-w-[390px] overflow-hidden rounded-[24px] shadow-2xl"}>
                   <Invitation draft={draft} />
                 </div>
+                {draft.templateId === "emerald-fern" ? <SiteInvite draft={draft} template={template} preview sectionsOnly /> : null}
               </>
             )}
             {template.id !== "royal-blue" && template.id !== "estate" && template.id !== "estate-classic" ? (
