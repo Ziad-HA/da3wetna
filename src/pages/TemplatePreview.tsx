@@ -215,7 +215,7 @@ export function TemplatePreview() {
             } as CSSProperties
           }
         >
-          <div className={`preview-content mx-auto grid w-full ${isSite ? (template.id === "royal-blue" ? "preview-content-site max-w-4xl" : "preview-content-site max-w-6xl") : "max-w-3xl"} justify-items-center gap-5` }>
+          <div className={`preview-content mx-auto grid w-full ${isSite ? (template.id === "royal-blue" ? "preview-content-site max-w-5xl" : "preview-content-site max-w-6xl") : "max-w-3xl"} justify-items-center gap-5` }>
             {isGarden ? (
               <GardenInvite draft={draft} />
             ) : isSite ? (
