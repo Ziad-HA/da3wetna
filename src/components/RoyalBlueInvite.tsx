@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, type CSSProperties } from "react"
 import { formatArabicDate } from "../lib/format"
 import { Invitation } from "./Invitation"
 import { VenueMap } from "./VenueMap"
@@ -48,6 +48,22 @@ export function RoyalBlueInvite({ draft }: { draft: InviteDraft }) {
         <Invitation draft={draft} />
       </div>
       <div className="royal-flower-divider" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
+      <div className="invite-additions" dir="rtl" lang="ar" style={{ "--add-paper": "#F1F6FC", "--add-ink": "#173B60", "--add-gold": "#B99655", "--add-soft": "#526A85" } as CSSProperties}>
+        {(draft.groomFather?.trim() || draft.brideFather?.trim()) ? <section className="invite-additions-parents" aria-label="والدا العروسين">
+          <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" />
+          <p className="invite-additions-parents-intro">بكل الحب يتشرفان بدعوتكم</p>
+          <div className="invite-additions-parent">
+            <span>والد العريس الأستاذ</span>
+            <strong>{draft.groomFather || "—"}</strong>
+          </div>
+          <span className="invite-additions-parents-heart" aria-hidden="true">♡</span>
+          <div className="invite-additions-parent">
+            <span>والد العروسة الأستاذ</span>
+            <strong>{draft.brideFather || "—"}</strong>
+          </div>
+          <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" />
+        </section> : null}
+      </div>
       <section className="royal-countdown-section">
         <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
         <p className="royal-count-eyebrow">موعد يجمعنا على الفرح</p>
