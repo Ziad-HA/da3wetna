@@ -3904,3 +3904,102 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .vaux-royal-blue .vaux-sec::after { left: .55rem; font-size: 1rem; }
 }
 
+
+
+/* Royal Blue uses the same invitation additions and order as Chateau */
+.chx-site.chx-royal-blue {
+  color: #10243D;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.98), transparent 58%),
+    linear-gradient(180deg, #EAF0F7 0%, #F8FAFC 48%, #E8EEF5 100%);
+  border: 1px solid rgba(23,54,83,.08);
+  border-radius: 26px;
+  padding: clamp(.65rem, 2.6vw, 1rem);
+  overflow: hidden;
+}
+.chx-site.chx-royal-blue .chx-sec {
+  position: relative;
+  border-top: 1px solid rgba(16,36,61,.10);
+}
+.chx-site.chx-royal-blue .chx-sec::before,
+.chx-site.chx-royal-blue .chx-sec::after {
+  content: "❧";
+  position: absolute;
+  top: 1rem;
+  color: rgba(23,54,83,.22);
+  font-family: Georgia, serif;
+  font-size: 1.9rem;
+  pointer-events: none;
+}
+.chx-site.chx-royal-blue .chx-sec::before { right: .8rem; transform: rotate(-18deg); }
+.chx-site.chx-royal-blue .chx-sec::after {
+  content: "✧";
+  left: .9rem;
+  top: 1.2rem;
+  color: rgba(185,150,85,.58);
+  font-size: 1.25rem;
+}
+.chx-site.chx-royal-blue .chx-kicker,
+.chx-site.chx-royal-blue .chx-subhead,
+.chx-site.chx-royal-blue .chx-count-item span { color: #9A7840; }
+.chx-site.chx-royal-blue .chx-script-title,
+.chx-site.chx-royal-blue .chx-count-item strong,
+.chx-site.chx-royal-blue .chx-time-display { color: #10243D; }
+.chx-site.chx-royal-blue .chx-body-text { color: #243B57; }
+.chx-site.chx-royal-blue .chx-body-meta { color: #526A85; }
+.chx-site.chx-royal-blue .chx-count-item {
+  min-height: 76px;
+  justify-content: center;
+  border: 1px solid rgba(16,36,61,.11);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #fff, #E8EEF5);
+  box-shadow: 0 8px 22px rgba(16,36,61,.06);
+}
+.chx-site.chx-royal-blue .chx-btn {
+  border-color: #173653;
+  background: #173653;
+  color: #F8FAFC;
+  border-radius: 999px;
+}
+.chx-site.chx-royal-blue .chx-btn:hover {
+  border-color: #B99655;
+  background: #B99655;
+  color: #10243D;
+}
+.chx-site.chx-royal-blue .chx-rsvp-wrapper { color: #173653; }
+.chx-site.chx-royal-blue .chx-countdown-bg,
+.chx-site.chx-royal-blue .chx-lights-divider,
+.chx-site.chx-royal-blue .chx-venue-illustration,
+.chx-site.chx-royal-blue .chx-dove-img,
+.chx-site.chx-royal-blue .chx-floral-divider,
+.chx-site.chx-royal-blue .chx-footer-monogram { display: none; }
+.chx-site.chx-royal-blue .chx-countdown-sec {
+  margin-top: .5rem;
+  padding-top: 3rem;
+  background: linear-gradient(135deg, rgba(255,255,255,.62), rgba(230,237,246,.55));
+  border-radius: 18px;
+}
+.chx-site.chx-royal-blue .chx-reception-sec,
+.chx-site.chx-royal-blue .chx-rsvp-sec,
+.chx-site.chx-royal-blue .chx-footer-sec {
+  background: rgba(255,255,255,.42);
+  border-radius: 18px;
+  margin-top: 1rem;
+}
+.chx-site.chx-royal-blue .chx-footer-sec::before { content: "✦"; }
+.chx-site.chx-royal-blue .chx-royal-hero {
+  padding: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 726 / 1024;
+}
+.chx-site.chx-royal-blue .chx-royal-hero > .lavender-card {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 726 / 1024;
+}
+@media (max-width: 480px) {
+  .chx-site.chx-royal-blue { border-radius: 20px; padding: .55rem; }
+  .chx-site.chx-royal-blue .chx-sec::before { right: .45rem; font-size: 1.5rem; }
+  .chx-site.chx-royal-blue .chx-sec::after { left: .5rem; font-size: 1rem; }
+}
