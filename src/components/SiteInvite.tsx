@@ -55,9 +55,9 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   ))}</div>
 }
 
-type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void; showRsvpSection?: boolean; showShareSection?: boolean; preview?: boolean; endingAdditions?: ReactNode }
+type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void; showRsvpSection?: boolean; showShareSection?: boolean; preview?: boolean; endingAdditions?: ReactNode; sectionsOnly?: boolean }
 
-export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage, showRsvpSection = true, showShareSection = true, preview = false, endingAdditions }: Props) {
+export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage, showRsvpSection = true, showShareSection = true, preview = false, endingAdditions, sectionsOnly = false }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--paper": template.vars.paper,
@@ -133,8 +133,8 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
 
   return (
     <article ref={root} className={`vaux-site ${draft.templateId === "royal-blue" ? "vaux-royal-blue" : ""} ${draft.templateId === "estate" || draft.templateId === "estate-classic" ? "vaux-estate-royal" : ""} ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
-      <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div>
-      {draft.templateId === "royal-blue" ? (
+      {!sectionsOnly ? <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div> : null}
+      {!sectionsOnly ? (draft.templateId === "royal-blue" ? (
         <section className="vaux-hero-card vaux-lavender-hero" aria-label={inviteTitle}>
           <Invitation draft={draft} />
         </section>
@@ -151,9 +151,9 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
             </div>
           </div>
         </section>
-      )}
+      )) : null}
 
-      {(draft.templateId === "estate" || draft.templateId === "estate-classic") ? <InviteAdditions draft={draft} preview={preview} palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }} showRsvp={false} showShare={false} /> : null}
+      {!sectionsOnly && (draft.templateId === "estate" || draft.templateId === "estate-classic") ? <InviteAdditions draft={draft} preview={preview} palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }} showRsvp={false} showShare={false} /> : null}
 
       <section className="vaux-sec site-reveal royal-countdown-section">
         <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
