@@ -14,6 +14,7 @@ import { ChateauInvite } from "../components/ChateauInvite"
 import { RoyalBlueInvite } from "../components/RoyalBlueInvite"
 import { StripInvite } from "../components/StripInvite"
 import { RsvpForm } from "../components/RsvpForm"
+import { InviteAdditions } from "../components/InviteAdditions"
 import { useInvite } from "../lib/useInvite"
 import type { InviteDraft } from "../types"
 
@@ -109,6 +110,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const isStrip = template.layout === "strip"
   const isSite = template.layout === "site"
   const isGarden = draft.templateId === "garden-classic"
+  const additionsPalette = { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
@@ -170,6 +172,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
             rsvp={inviteId ? <RsvpForm inviteId={inviteId} language="ar" /> : undefined}
             shareUrl={window.location.href}
           />
+          <InviteAdditions draft={draft} shareUrl={window.location.href} palette={additionsPalette} showRsvp={false} />
         ) : isSite ? (
           <>
             {draft.templateId === "chateau" ? (
@@ -178,8 +181,12 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
                 rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null}
                 shareUrl={window.location.href}
               />
+              <InviteAdditions draft={draft} shareUrl={window.location.href} palette={additionsPalette} showRsvp={false} />
             ) : draft.templateId === "royal-blue" ? (
-              <RoyalBlueInvite draft={draft} />
+              <>
+                <RoyalBlueInvite draft={draft} />
+                <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} />
+              </>
             ) : (
               <SiteInvite
                 draft={draft}
@@ -195,7 +202,12 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
             )}
             <div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div>
           </>
-        ) : isStrip ? <StripInvite draft={draft} template={template} autoScroll /> : (
+        ) : isStrip ? (
+          <>
+            <StripInvite draft={draft} template={template} autoScroll />
+            <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} />
+          </>
+        ) : (
           <>
         <header className="invite-public-heading text-center">
           <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
@@ -215,6 +227,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
           {eventDate && !Number.isNaN(eventDate.getTime()) ? <div className="mt-3 grid grid-cols-4 gap-2" dir="rtl">{[[days,"يوم"],[hours,"ساعة"],[minutes,"دقيقة"],[seconds,"ثانية"]].map(([value,label]) => <div key={String(label)} className="rounded-2xl bg-white px-1 py-3 shadow-sm"><strong className="block font-display text-2xl text-[#a64257]">{String(value).padStart(2,"0")}</strong><span className="mt-1 block text-[10px] text-[#806b70]">{label}</span></div>)}</div> : <p className="mt-3 text-sm">ميعاد المناسبة هيتحدد قريبًا</p>}
         </section>
         {photos.length ? <section className="invite-photo-moments w-full rounded-[26px] border border-white/70 bg-white/80 p-4 shadow-lg"><p className="mb-3 text-center font-bold text-[#4a2d33]">صور من حكايتنا ♡</p><div className="grid grid-cols-2 gap-2">{photos.map((photo, index) => <img key={photo} src={photo} alt={`صورة من المناسبة ${index + 1}`} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />)}</div></section> : null}
+            <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} />
           </>
         )}
         {!isSite ? <VenueMap draft={draft} /> : null}
