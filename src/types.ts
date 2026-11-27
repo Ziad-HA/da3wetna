@@ -77,6 +77,8 @@ export type InviteDraft = {
   templateId: TemplateId
   groom: string
   bride: string
+  groomFather: string
+  brideFather: string
   occasion: string
   hosts: string
   message: string
