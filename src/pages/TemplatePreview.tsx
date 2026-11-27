@@ -258,9 +258,9 @@ export function TemplatePreview() {
               dir="rtl"
               aria-label="أسماء والدي العروسين"
             >
-              <p>نجل الأستاذ <strong>{draft.groomFather}</strong></p>
+              <p>والد العريس: <strong>{draft.groomFather}</strong></p>
               <span aria-hidden="true">✦</span>
-              <p>وكريمة الأستاذ <strong>{draft.brideFather}</strong></p>
+              <p>والد العروسة: <strong>{draft.brideFather}</strong></p>
             </section>
             <InviteAdditions
               draft={draft}
