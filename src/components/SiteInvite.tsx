@@ -269,11 +269,11 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
       {endingAdditions}
 
       {(draft.templateId === "estate" || draft.templateId === "estate-classic") ? <>
-        {draft.dressCode ? <section className="vaux-sec site-reveal">
+        {<section className="vaux-sec site-reveal">
           <span className="vaux-kicker">{en ? "WITH LOVE" : "بكل حب"}</span>
           <h2 className="vaux-script-title">{en ? "See you there" : "مستنيين نشوفكم"}</h2>
-          <p className="vaux-body-text">{draft.dressCode}</p>
-        </section> : null}
+          <p className="vaux-body-text">{draft.dressCode || "يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا."}</p>
+        </section>}
         <section className="vaux-sec site-reveal vaux-contact-sec">
           <div className="vaux-divider-wrapper"><img src="/vaux/flower_divider.jpg" alt="" className="vaux-flower-divider" /></div>
           <h2 className="vaux-script-title">{en ? "See you there!" : "في انتظاركم"}</h2>
