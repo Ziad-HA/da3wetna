@@ -167,7 +167,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
     <>
     {audio}
     <main className={`invite-public-page min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}${draft.templateId === "royal-blue" ? " royal-blue-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? (draft.templateId === "chateau" ? "#F5F2EA" : draft.templateId === "royal-blue" ? "#EAF0F7" : "#EFE7D1") : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? (draft.templateId === "chateau" ? "#1E4030" : "#5E1C2A") : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
-      <div className={`mx-auto grid w-full ${isSite ? (draft.templateId === "royal-blue" ? "max-w-4xl" : "max-w-6xl") : "max-w-md"} justify-items-center gap-5`}>
+      <div className={`mx-auto grid w-full ${isSite ? (draft.templateId === "royal-blue" ? "max-w-5xl" : "max-w-6xl") : "max-w-md"} justify-items-center gap-5`}>
         {isGarden ? (
           <>
           <GardenInvite
