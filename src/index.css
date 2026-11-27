@@ -4018,3 +4018,28 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .invite-additions-note,.invite-additions-status { margin:.55rem 0 0; color:var(--add-soft); font-size:.76rem; line-height:1.8; }
 .invite-additions-status { color:var(--add-ink); font-weight:800; }
 @media(max-width:380px){.invite-additions-socials{gap:.35rem}.invite-additions-socials button{min-height:68px}.invite-additions-socials span{font-size:.66rem}}
+
+
+/* Royal blue: restore floral artwork and extend the invitation into a complete event page */
+.royal-invite { max-width:860px; padding:clamp(.75rem,3vw,1.5rem); border-radius:26px; }
+.royal-flower-top,.royal-flower-divider,.royal-flower-bottom { display:flex; justify-content:center; align-items:center; width:100%; overflow:hidden; pointer-events:none; }
+.royal-flower-top { height:clamp(74px,15vw,138px); margin:-.35rem auto .7rem; }
+.royal-flower-divider { height:clamp(58px,12vw,100px); margin:.6rem auto -.15rem; }
+.royal-flower-bottom { height:clamp(72px,14vw,120px); margin:.25rem auto -.5rem; }
+.royal-flower-top img,.royal-flower-divider img,.royal-flower-bottom img { display:block; width:min(100%,520px); height:100%; object-fit:contain; filter:hue-rotate(165deg) saturate(1.1) drop-shadow(0 5px 10px rgba(24,59,96,.12)); }
+.royal-flower-divider img { transform:rotate(180deg); }
+.royal-countdown-section { padding:clamp(2rem,6vw,3.5rem) clamp(1rem,5vw,2.5rem); }
+.royal-count-grid { width:min(100%,660px); gap:clamp(.55rem,2.5vw,1rem); }
+.royal-count-cell { min-height:clamp(108px,15vw,145px); border-radius:18px; }
+.royal-count-cell strong { font-size:clamp(2.2rem,7vw,3.6rem); }
+.royal-details-section { display:grid; justify-items:center; gap:.8rem; margin-top:1rem; padding:clamp(1.5rem,5vw,2.8rem); text-align:center; border:1px solid rgba(185,150,85,.55); border-radius:20px; color:#173B60; background:linear-gradient(150deg,#fff,#edf3fa 60%,#f9fbfe); box-shadow:0 12px 30px rgba(16,36,61,.08),inset 0 0 0 3px rgba(255,255,255,.8); }
+.royal-details-section h2 { margin:0; color:#173B60; font-family:var(--invite-font-ar,"Amiri"),serif; font-size:clamp(1.7rem,5vw,2.35rem); }
+.royal-detail-card { display:grid; gap:.35rem; width:min(100%,560px); padding:1.25rem; border:1px solid rgba(185,150,85,.45); border-radius:16px; background:rgba(255,255,255,.8); }
+.royal-detail-card>span { color:#B99655; font-size:1.7rem; }
+.royal-detail-card strong { color:#173B60; font-size:1.15rem; }
+.royal-detail-card p,.royal-detail-card small { margin:0; color:#526A85; }
+.royal-calendar-link { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:.7rem 1.4rem; border:1px solid #173B60; border-radius:999px; background:#173B60; color:#fff; font-weight:800; text-decoration:none; box-shadow:0 8px 20px rgba(23,59,96,.14); transition:background .2s,transform .2s; }
+.royal-calendar-link:hover { background:#B99655; border-color:#B99655; color:#10243D; transform:translateY(-2px); }
+.royal-details-section iframe { width:100%; max-width:560px; border-radius:14px; }
+.royal-invite + .invite-additions { --add-paper:#F1F6FC; --add-ink:#173B60; --add-gold:#B99655; --add-soft:#526A85; }
+@media(max-width:480px) { .royal-invite { padding:.55rem; border-radius:18px; } .royal-count-cell { min-height:88px; } .royal-count-cell strong { font-size:clamp(1.8rem,8vw,2.5rem); } .royal-details-section { padding:1.2rem .8rem; } }
