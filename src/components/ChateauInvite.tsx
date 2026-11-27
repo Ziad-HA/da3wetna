@@ -133,7 +133,11 @@ export function ChateauInvite({ draft, rsvp }: Props) {
 
       <section className="chx-sec chx-reveal chx-countdown-sec">
         <div className="chx-countdown-bg">
-          <img src="/chateau/roses_top.jpg" alt="" className="chx-roses-bg" />
+          {isRoyal ? (
+            <img src="/chateau/royal-blue-moon.png" alt="" className="chx-royal-moon-art" />
+          ) : (
+            <img src="/chateau/roses_top.jpg" alt="" className="chx-roses-bg" />
+          )}
         </div>
         <div className="chx-countdown-content">
           <span className="chx-kicker">فرحتنا تكمل بوجودكم</span>
@@ -191,7 +195,7 @@ export function ChateauInvite({ draft, rsvp }: Props) {
 
       <section className="chx-sec chx-reveal chx-footer-sec">
         <div className="chx-floral-divider">
-          <img src="/chateau/floral_divider.jpg" alt="" className="chx-divider-img" />
+          <img src={isRoyal ? "/chateau/royal-blue-floral.webp" : "/chateau/floral_divider.jpg"} alt="" className="chx-divider-img" />
         </div>
         <div className="chx-footer-monogram">
           <img src="/chateau/monogram_gj.jpg" alt="" />

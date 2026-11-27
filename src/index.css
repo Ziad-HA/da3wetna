@@ -4164,3 +4164,60 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   filter: hue-rotate(165deg) saturate(1.12) contrast(1.04)
     drop-shadow(0 3px 7px rgba(28, 75, 125, .20));
 }
+
+
+/* Royal Blue: soften the supplied blue floral artwork and place it in the additions */
+.chx-site.chx-royal-blue .chx-countdown-sec {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.chx-site.chx-royal-blue .chx-countdown-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  overflow: hidden;
+}
+.chx-site.chx-royal-blue .chx-royal-moon-art {
+  position: absolute;
+  width: min(82%, 560px);
+  height: 94%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  opacity: .34;
+  filter: saturate(.76) contrast(.88) brightness(1.04);
+}
+.chx-site.chx-royal-blue .chx-countdown-content {
+  position: relative;
+  z-index: 1;
+}
+.chx-site.chx-royal-blue .chx-floral-divider {
+  display: block;
+  width: min(92%, 620px);
+  margin: .1rem auto 1rem;
+  opacity: .78;
+}
+.chx-site.chx-royal-blue .chx-floral-divider .chx-divider-img {
+  display: block;
+  width: 100%;
+  max-height: 145px;
+  object-fit: contain;
+  filter: saturate(.78) contrast(.88) brightness(1.03);
+}
+@media (max-width: 480px) {
+  .chx-site.chx-royal-blue .chx-royal-moon-art {
+    width: 94%;
+    height: 88%;
+    opacity: .28;
+  }
+  .chx-site.chx-royal-blue .chx-floral-divider {
+    width: 96%;
+  }
+  .chx-site.chx-royal-blue .chx-floral-divider .chx-divider-img {
+    max-height: 112px;
+  }
+}
