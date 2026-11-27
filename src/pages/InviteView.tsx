@@ -110,7 +110,9 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const isStrip = template.layout === "strip"
   const isSite = template.layout === "site"
   const isGarden = draft.templateId === "garden-classic"
-  const additionsPalette = { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }
+  const additionsPalette = draft.templateId === "royal-blue"
+    ? { paper: "#F1F6FC", ink: "#173B60", gold: "#B99655", soft: "#526A85" }
+    : { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
