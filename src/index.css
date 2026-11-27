@@ -4545,3 +4545,72 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .royal-blue-opening .real-env-card-slot:has(.fern-card) { inset: auto; left: 50%; top: 50%; }
 .royal-blue-opening .real-env-card-slot.card-raised:has(.fern-card) { transform: translate(-50%, -52%) scale(1.04); }
 .export-sheet:has(> .royal-card) { background: #fff; }
+
+
+/* Shared closing sections inspired by the Qasr El Deir ending; palette follows each invitation. */
+.invite-additions-closing {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  padding: clamp(2rem, 7vw, 3.25rem) clamp(1.15rem, 5vw, 2rem);
+  border: 1px solid color-mix(in srgb, var(--add-gold) 42%, transparent);
+  border-radius: 24px;
+  color: var(--add-ink);
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--add-gold) 13%, transparent), transparent 65%),
+    linear-gradient(145deg, color-mix(in srgb, var(--add-paper) 97%, white), var(--add-paper));
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--add-ink) 7%, transparent);
+}
+.invite-additions-closing::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  z-index: -1;
+  border: 1px solid color-mix(in srgb, var(--add-gold) 28%, transparent);
+  border-radius: 16px;
+  pointer-events: none;
+}
+.invite-additions-closing h2 {
+  margin: .35rem 0 .55rem;
+  color: var(--add-ink);
+  font-family: var(--invite-font-ar, "Amiri"), serif;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.invite-additions-closing p {
+  margin: 0 auto;
+  max-width: 34rem;
+  color: var(--add-soft);
+  font-size: clamp(.9rem, 3vw, 1.05rem);
+  line-height: 2;
+}
+.invite-additions-floral {
+  color: var(--add-gold);
+  font-family: Georgia, serif;
+  font-size: clamp(1.2rem, 4vw, 1.65rem);
+  letter-spacing: .42rem;
+}
+.invite-additions-monogram {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin: 1.25rem auto 0;
+  border: 1px solid color-mix(in srgb, var(--add-gold) 55%, transparent);
+  border-radius: 50%;
+  color: var(--add-gold);
+  font-family: Georgia, serif;
+  font-size: 1.45rem;
+}
+.invite-additions-closing-kicker {
+  display: inline-block;
+  color: var(--add-gold);
+  font-size: .85rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.invite-additions-love { padding-top: clamp(1.8rem, 6vw, 2.7rem); }
+.invite-additions-love .invite-additions-floral { margin-top: 1.15rem; }
