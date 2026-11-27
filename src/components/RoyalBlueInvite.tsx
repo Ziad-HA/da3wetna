@@ -43,8 +43,7 @@ export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { d
 
   return (
     <article className="royal-invite" dir="rtl" lang="ar">
-      <div className="royal-flower-top" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
-      <div className="royal-invite-card">
+      <div className="fern-full">
         <Invitation draft={draft} />
       </div>
       <div className="royal-flower-divider" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>

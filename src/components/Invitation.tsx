@@ -1,6 +1,7 @@
 import { useId, type CSSProperties } from "react"
 import { getTemplate } from "../data"
 import { FernCard } from "./FernCard"
+import { RoyalCard } from "./RoyalCard"
 import { formatArabicDate, formatArabicTime } from "../lib/format"
 import type { FieldKey, InviteDraft, Ornament } from "../types"
 
@@ -36,6 +37,10 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
 
   if (template.id === "emerald-fern") {
     return <FernCard draft={draft} vars={vars} activeField={activeField} onSelect={onSelect} />
+  }
+
+  if (template.id === "royal-blue") {
+    return <RoyalCard draft={draft} vars={vars} activeField={activeField} onSelect={onSelect} />
   }
 
   if (template.id === "garden-classic") {
@@ -75,7 +80,7 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     )
   }
 
-  if (template.id === "royal-blue" || template.id === "burgundy-velvet") {
+  if (template.id === "burgundy-velvet") {
     const eventDate = draft.date ? new Date(`${draft.date}T00:00:00`) : null
     const dayName = eventDate && !isNaN(eventDate.getTime())
       ? new Intl.DateTimeFormat("ar-EG", { weekday: "long" }).format(eventDate)
