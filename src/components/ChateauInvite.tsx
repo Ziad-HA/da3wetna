@@ -81,13 +81,12 @@ type Props = { draft: InviteDraft; rsvp?: ReactNode; shareUrl?: string }
 
 export function ChateauInvite({ draft, rsvp }: Props) {
   const root = useRef<HTMLElement>(null)
-  const isRoyal = draft.templateId === "royal-blue"
   const style = {
-    "--chx-paper": isRoyal ? "#F8FAFC" : "#F5F2EA",
-    "--chx-ink": isRoyal ? "#10243D" : "#1E4030",
-    "--chx-green": isRoyal ? "#173653" : "#2D5A40",
-    "--chx-soft": isRoyal ? "#526A85" : "#5A7A60",
-    "--chx-gold": isRoyal ? "#B99655" : "#8A7542",
+    "--chx-paper": "#F5F2EA",
+    "--chx-ink": "#1E4030",
+    "--chx-green": "#2D5A40",
+    "--chx-soft": "#5A7A60",
+    "--chx-gold": "#8A7542",
   } as CSSProperties
 
   const date = new Date(`${draft.date}T00:00:00`)
@@ -113,10 +112,9 @@ export function ChateauInvite({ draft, rsvp }: Props) {
   }, [])
 
   return (
-    <article ref={root} className={`chx-site ${isRoyal ? "chx-royal-blue" : ""}`} style={style} dir="rtl" lang="ar">
-      <section className={`chx-hero-card ${isRoyal ? "chx-royal-hero" : ""}`}>
-        {isRoyal ? <Invitation draft={draft} /> : (
-          <div className="chx-hero-inner">
+    <article ref={root} className="chx-site" style={style} dir="rtl" lang="ar">
+      <section className="chx-hero-card">
+        <div className="chx-hero-inner">
             <img src="/chateau/hero_card_blank.jpg" alt="" className="chx-hero-bg" />
             <div className="chx-hero-content">
               <img src="/chateau/wax_seal_crop.jpg" alt="" className="chx-hero-monogram" />
@@ -127,17 +125,12 @@ export function ChateauInvite({ draft, rsvp }: Props) {
               </h1>
               <p className="chx-hero-hosts">{draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}</p>
             </div>
-          </div>
-        )}
+        </div>
       </section>
 
       <section className="chx-sec chx-reveal chx-countdown-sec">
         <div className="chx-countdown-bg">
-          {isRoyal ? (
-            <img src="/chateau/royal-blue-moon.png" alt="" className="chx-royal-moon-art" />
-          ) : (
-            <img src="/chateau/roses_top.jpg" alt="" className="chx-roses-bg" />
-          )}
+          <img src="/chateau/roses_top.jpg" alt="" className="chx-roses-bg" />
         </div>
         <div className="chx-countdown-content">
           <span className="chx-kicker">فرحتنا تكمل بوجودكم</span>
@@ -195,7 +188,7 @@ export function ChateauInvite({ draft, rsvp }: Props) {
 
       <section className="chx-sec chx-reveal chx-footer-sec">
         <div className="chx-floral-divider">
-          <img src={isRoyal ? "/chateau/royal-blue-floral.webp" : "/chateau/floral_divider.jpg"} alt="" className="chx-divider-img" />
+          <img src="/chateau/floral_divider.jpg" alt="" className="chx-divider-img" />
         </div>
         <div className="chx-footer-monogram">
           <img src="/chateau/monogram_gj.jpg" alt="" />
