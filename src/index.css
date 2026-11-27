@@ -3763,3 +3763,107 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .lavender-footer { font-size: clamp(0.8rem, 3.2vw, 1rem); }
   .vaux-lavender-hero { border-radius: 16px; }
 }
+
+
+/* Royal blue invitation page palette */
+.vaux-royal-blue {
+  --paper: #F8FAFC;
+  --ink: #10243D;
+  --gold: #B99655;
+  --soft: #526A85;
+  color: #10243D;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.96), transparent 58%),
+    linear-gradient(180deg, #EAF0F7 0%, #F7F9FC 42%, #E8EEF5 100%);
+  border-radius: 28px;
+  padding: clamp(.7rem, 2.8vw, 1.1rem);
+  overflow: hidden;
+}
+.vaux-royal-blue .vaux-sec {
+  color: #172D48;
+}
+.vaux-royal-blue .vaux-kicker,
+.vaux-royal-blue .vaux-subhead,
+.vaux-royal-blue .vaux-count-item span,
+.vaux-royal-blue .vaux-program-item time {
+  color: #9A7840;
+}
+.vaux-royal-blue .vaux-script-title,
+.vaux-royal-blue .vaux-count-item strong,
+.vaux-royal-blue .vaux-venue-name {
+  color: #10243D;
+}
+.vaux-royal-blue .vaux-body-text,
+.vaux-royal-blue .vaux-body-meta,
+.vaux-royal-blue .vaux-share-note {
+  color: #526A85;
+}
+.vaux-royal-blue .vaux-count-item {
+  min-height: 78px;
+  justify-content: center;
+  padding: .85rem .25rem;
+  border: 1px solid rgba(16,36,61,.1);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(230,237,246,.88));
+  box-shadow: 0 8px 22px rgba(16,36,61,.055);
+}
+.vaux-royal-blue .vaux-location-card,
+.vaux-royal-blue .vaux-share-status {
+  border: 1px solid rgba(16,36,61,.14);
+  background: rgba(255,255,255,.76);
+  box-shadow: 0 12px 30px rgba(16,36,61,.055);
+}
+.vaux-royal-blue .vaux-btn {
+  border-color: #173653;
+  background: #173653;
+  color: #F8FAFC;
+  border-radius: 999px;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+.vaux-royal-blue .vaux-btn:hover {
+  border-color: #B99655;
+  background: #B99655;
+  color: #10243D;
+}
+.vaux-royal-blue .vaux-program-item {
+  border-color: rgba(16,36,61,.14);
+  color: #243B57;
+}
+.vaux-royal-blue .vaux-share-grid button,
+.vaux-royal-blue .vaux-faq-item {
+  border: 1px solid rgba(16,36,61,.13);
+  background: rgba(255,255,255,.82);
+  color: #173653;
+  box-shadow: 0 8px 22px rgba(16,36,61,.045);
+}
+.vaux-royal-blue .vaux-share-grid button:hover {
+  background: #fff;
+}
+.vaux-royal-blue .vaux-share-status {
+  color: #173653;
+}
+.vaux-royal-blue .vaux-faq-item summary {
+  color: #173653;
+}
+.vaux-royal-blue .vaux-faq-item p {
+  color: #526A85;
+}
+.vaux-royal-blue .vaux-hero-card {
+  box-shadow: 0 20px 48px rgba(16,36,61,.13);
+}
+.vaux-royal-blue .vaux-story-sec,
+.vaux-royal-blue .vaux-gallery-sec,
+.vaux-royal-blue .vaux-menu-sec,
+.vaux-royal-blue .vaux-faq-sec {
+  border-top: 1px solid rgba(16,36,61,.075);
+}
+.vaux-royal-blue .vaux-rsvp-wrapper {
+  color: #173653;
+}
+.vaux-royal-blue .vaux-contact-sec {
+  color: #173653;
+}
+@media (max-width: 480px) {
+  .vaux-royal-blue { border-radius: 20px; padding: .55rem; }
+}
