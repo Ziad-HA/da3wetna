@@ -8,6 +8,7 @@ import { Invitation } from "../components/Invitation"
 import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { SiteInvite } from "../components/SiteInvite"
 import { ChateauInvite } from "../components/ChateauInvite"
+import { RoyalBlueInvite } from "../components/RoyalBlueInvite"
 import { RealisticEnvelopeOpening } from "../components/RealisticEnvelopeOpening"
 import { StripInvite } from "../components/StripInvite"
 import { draftFor, getTemplate } from "../data"
@@ -206,8 +207,10 @@ export function TemplatePreview() {
             {isGarden ? (
               <GardenInvite draft={draft} />
             ) : isSite ? (
-              (template.id === "chateau" || template.id === "royal-blue") ? (
+              template.id === "chateau" ? (
                 <ChateauInvite draft={draft} />
+              ) : template.id === "royal-blue" ? (
+                <RoyalBlueInvite draft={draft} />
               ) : (
                 <SiteInvite draft={draft} template={template} />
               )
