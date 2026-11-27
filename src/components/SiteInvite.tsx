@@ -68,6 +68,10 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
     const split = line.indexOf("|")
     return split < 0 ? { time: "", title: line.trim() } : { time: line.slice(0, split).trim(), title: line.slice(split + 1).trim() }
   }).filter((item) => item.title)
+  const faqs = draft.faq.split("\n").map((line) => {
+    const split = line.indexOf("|")
+    return split < 0 ? null : { question: line.slice(0, split).trim(), answer: line.slice(split + 1).trim() }
+  }).filter((item): item is { question: string; answer: string } => Boolean(item?.question && item.answer))
   const date = new Date(draft.date + "T00:00:00")
   const validDate = Boolean(draft.date) && !Number.isNaN(date.getTime())
   const [shareNotice, setShareNotice] = useState("")
@@ -154,6 +158,11 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         {validDate ? <><p className="vaux-subhead">{formatArabicDate(draft.date)}</p><Countdown draft={draft} /></> : <p className="vaux-body-text">{en ? "We are looking forward to celebrating with you." : "مستنيين اليوم اللي يجمعنا بيكم"}</p>}
       </section>
 
+      {draft.opening ? <section className="vaux-sec site-reveal vaux-opening-verse">
+        <span className="vaux-kicker">{en ? "A BLESSING FOR OUR DAY" : "بداية فرحتنا"}</span>
+        <p className="vaux-body-text">{draft.opening}</p>
+      </section> : null}
+
       {draft.story ? <section className="vaux-sec site-reveal vaux-story-sec">
         <div className="vaux-story-wrapper">
           <img src="/vaux/story_frame.jpg" alt="" className="vaux-story-bg" />
@@ -204,6 +213,17 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
             {item.time ? <time>{item.time}</time> : null}<span>{item.title}</span>
           </li>
         ))}</ol>
+      </section> : null}
+
+      {faqs.length ? <section className="vaux-sec site-reveal vaux-faq-sec">
+        <span className="vaux-kicker">{en ? "A FEW DETAILS" : "تفاصيل تهمكم"}</span>
+        <h2 className="vaux-script-title">{en ? "Frequently asked" : "أسئلة وإجابات"}</h2>
+        <div className="vaux-faq-list">
+          {faqs.map((item, index) => <details key={index} className="vaux-faq-item">
+            <summary>{item.question}</summary>
+            <p className="vaux-body-text">{item.answer}</p>
+          </details>)}
+        </div>
       </section> : null}
 
       {rsvp ? <section className="vaux-sec site-reveal vaux-rsvp-sec">
