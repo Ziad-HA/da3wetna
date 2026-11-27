@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from "react"
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react"
 import { formatArabicDate } from "../lib/format"
 import { Invitation } from "./Invitation"
 import { VenueMap } from "./VenueMap"
@@ -36,7 +36,7 @@ function RoyalCountdown({ draft }: { draft: InviteDraft }) {
   )
 }
 
-export function RoyalBlueInvite({ draft, preview = false }: { draft: InviteDraft; preview?: boolean }) {
+export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { draft: InviteDraft; preview?: boolean; endingAdditions?: ReactNode }) {
   const validDate = Boolean(draft.date) && !Number.isNaN(new Date(`${draft.date}T00:00:00`).getTime())
   const calendarUrl = validDate ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`فرح ${draft.groom} و${draft.bride}`)}&dates=${draft.date.replaceAll("-", "")}T${(draft.time || "18:00").replace(":", "")}00/${draft.date.replaceAll("-", "")}T${String(Number((draft.time || "18:00").slice(0, 2)) + 3).padStart(2, "0")}${(draft.time || "18:00").slice(3, 5)}00&details=${encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا")}&location=${encodeURIComponent([draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" - "))}` : ""
 
@@ -99,6 +99,20 @@ export function RoyalBlueInvite({ draft, preview = false }: { draft: InviteDraft
         <VenueMap draft={draft} />
       </section>
       <div className="royal-flower-bottom" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
+      {endingAdditions}
+      <div className="vaux-site vaux-royal-blue royal-closing-sections" dir="rtl" lang="ar">
+        <section className="vaux-sec site-reveal">
+          <span className="vaux-kicker">بكل حب</span>
+          <h2 className="vaux-script-title">مستنيين نشوفكم</h2>
+          <p className="vaux-body-text">{draft.dressCode || "يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا."}</p>
+        </section>
+        <section className="vaux-sec site-reveal vaux-contact-sec">
+          <div className="vaux-divider-wrapper"><img src="/vaux/flower_divider.jpg" alt="" className="vaux-flower-divider" /></div>
+          <h2 className="vaux-script-title">في انتظاركم</h2>
+          <p className="vaux-body-text">وجودكم وسطنا هو أجمل هدية لينا</p>
+          <div className="vaux-footer-monogram"><img src="/vaux/monogram_rose.png" alt="" /></div>
+        </section>
+      </div>
     </article>
   )
 }
