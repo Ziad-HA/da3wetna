@@ -4932,3 +4932,19 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   color: color-mix(in srgb, var(--flow-gold) 72%, var(--flow-ink)) !important;
 }
 
+
+/* كارت الدعوة الطويل: عرض الشاشة كله ومن غير فريم، حتى مع تنسيق الصفحة الجديد */
+.invite-floral-flow .fern-full,
+.emerald-fern-page .preview-content > .fern-full {
+  width: 460px;
+  justify-self: center;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+@media (max-width: 491px) {
+  .invite-floral-flow .fern-full,
+  .emerald-fern-page .preview-content > .fern-full { width: auto; justify-self: stretch; margin-inline: calc(50% - 50vw); }
+  .invite-floral-flow .royal-invite .fern-full { width: 100vw; margin-inline: calc(50% - 50vw); }
+}
