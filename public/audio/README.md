@@ -5,14 +5,14 @@
 - `Baraka Allahu Lakuma.mp3` — بارك الله لكما
 - `Masha Allah.mp3` — ما شاء الله
 - `Rabbi Yebarek.mp3` — ربي يبارك
-- `For The Rest Of My Life .wav` — For The Rest Of My Life
+- `for-the-rest-of-my-life.mp3` — For The Rest Of My Life
 
 المسارات المستخدمة في الموقع:
 
 - `/audio/Baraka%20Allahu%20Lakuma.mp3`
 - `/audio/Masha%20Allah.mp3`
 - `/audio/Rabbi%20Yebarek.mp3`
-- `/audio/For%20The%20Rest%20Of%20My%20Life%20.wav`
+- `/audio/for-the-rest-of-my-life.mp3`
 
 يشغّل الموقع المقطع من الثانية 75 إلى الثانية 165 (01:15–02:45)، أي دقيقة ونصف، سواء في المعاينة أو داخل الدعوة.
 

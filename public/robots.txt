@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard/
+Disallow: /checkout
+
+Sitemap: https://da3wetna-six.vercel.app/sitemap.xml

@@ -174,7 +174,7 @@ export function Editor() {
               <div className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#a64257] text-xs font-extrabold text-white">{step + 1}</span><p className="text-xs font-bold text-[#b83b50]">{steps[step].title}</p></div>
               <h2 className="mt-2 text-2xl font-extrabold text-[#4a2d33]">{step === 0 ? "أصحاب الفرحة" : step === 1 ? "ميعاد ومكان المناسبة" : "إضافات على ذوقك"}</h2>
             </div>
-            <div className="flex shrink-0 flex-col items-end gap-1"><span className="rounded-full bg-[#fff8f8] px-3 py-1.5 text-[11px] font-semibold text-[#9a8187]">بتتحفظ على جهازك تلقائيًا</span><a href="#live-preview" className="text-[10px] font-bold text-[#a64257] underline underline-offset-4 lg:hidden">شوف المعاينة ↓</a></div>
+            <div className="flex shrink-0 flex-col items-end gap-1"><span className="rounded-full bg-[#fff8f8] px-3 py-1.5 text-[11px] font-semibold text-[#9a8187]">بتتحفظ على جهازك تلقائيًا</span><a href="#live-preview" className="text-[11px] font-bold text-[#a64257] underline underline-offset-4 lg:hidden">شوف المعاينة ↓</a></div>
           </div>
 
           <div className="mt-5 rounded-2xl border border-[#f3e6e9] bg-[#fffdfd] p-4">
@@ -284,7 +284,7 @@ export function Editor() {
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#f0dce1] bg-white/95 p-3 pb-[max(env(safe-area-inset-bottom),12px)] shadow-[0_-8px_26px_rgba(74,45,51,.09)] backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-2">
           <button type="button" onClick={() => { setError(""); setStep((value) => Math.max(0, value - 1)); }} disabled={step === 0} className="min-h-11 shrink-0 rounded-full border border-[#efd5dc] px-4 text-xs font-bold text-[#a64257] disabled:opacity-35">رجوع</button>
-          <div className="min-w-0 flex-1 text-center"><p className="text-[10px] text-[#806b70]">الخطوة {step + 1} من 3</p><p className="truncate text-xs font-extrabold text-[#4a2d33]">{selectedPackage.name} · {money(selectedPackage.price)}</p></div>
+          <div className="min-w-0 flex-1 text-center"><p className="text-[11px] text-[#806b70]">الخطوة {step + 1} من 3</p><p className="truncate text-xs font-extrabold text-[#4a2d33]">{selectedPackage.name} · {money(selectedPackage.price)}</p></div>
           <button type="button" className="btn-gold min-h-11 shrink-0 px-4 text-xs" onClick={nextStep}>{step === 2 ? "مراجعة الطلب ←" : "التالي ←"}</button>
         </div>
       </div>

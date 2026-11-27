@@ -263,11 +263,11 @@ export function VenueField({ value, city, mapUrl, address, latitude, longitude, 
             <li key={`${feature.geometry?.coordinates?.join(",") || "place"}-${index}`} role="option" aria-selected="false">
               <button type="button" onClick={() => choosePlace(feature)} className="w-full rounded-xl px-3 py-3 text-right transition hover:bg-[#fff3f5]">
                 <span className="block text-sm font-bold text-[#4a2d33]">{featureName(feature)}</span>
-                <span className="mt-1 block text-[10px] text-[#9a8187]">{featureLabel(feature)}</span>
+                <span className="mt-1 block text-[11px] text-[#9a8187]">{featureLabel(feature)}</span>
               </button>
             </li>
           ))}
-          <li className="px-3 py-1 text-left text-[10px] text-[#90777d]" dir="ltr">© OpenStreetMap contributors · Search by Photon</li>
+          <li className="px-3 py-1 text-left text-[11px] text-[#90777d]" dir="ltr">© OpenStreetMap contributors · Search by Photon</li>
         </ul>
       ) : null}
       {error ? <p role="status" className="mt-2 text-xs text-[#b83b50]">{error}</p> : null}

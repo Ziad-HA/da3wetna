@@ -22,6 +22,12 @@ function url(value: unknown, max: number): string {
   }
 }
 
+/** أناشيد الموقع مساراتها نسبية (/audio/...) فمينفعش تعدي على url() العادية. */
+function musicSource(value: unknown): string {
+  const raw = text(value, 500)
+  return /^\/audio\/[A-Za-z0-9%_-]+\.mp3$/.test(raw) ? raw : url(raw, 500)
+}
+
 function multiline(value: unknown, max: number, lines: number): string {
   if (typeof value !== "string") return ""
   return value.replace(/\r/g, "").split("\n").map((l) => text(l, 80)).filter(Boolean).slice(0, lines).join("\n").slice(0, max)
@@ -59,7 +65,7 @@ export function sanitizeDraft(raw: unknown): InviteDraft | null {
     venueAddress: text(d.venueAddress, 240),
     venueLat: coordinate(d.venueLat, -90, 90),
     venueLng: coordinate(d.venueLng, -180, 180),
-    musicUrl: url(d.musicUrl, 500),
+    musicUrl: musicSource(d.musicUrl),
     photoOne: url(d.photoOne, 500),
     photoTwo: url(d.photoTwo, 500),
     program: multiline(d.program, 400, 8),

@@ -16,7 +16,7 @@ export function VenueMap({ draft }: { draft: InviteDraft }) {
         style={{ height: 220 }}
         allowFullScreen
       />
-      <p className="mt-2 text-center text-[10px] text-[#806b70]">© OpenStreetMap contributors</p>
+      <p className="mt-2 text-center text-[11px] text-[#806b70]">© OpenStreetMap contributors</p>
     </section>
   )
 }

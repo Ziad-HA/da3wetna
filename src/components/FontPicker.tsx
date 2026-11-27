@@ -24,7 +24,7 @@ export function FontPicker({ arabicFont, englishFont, onArabicChange, onEnglishC
       <div className="mt-4 grid gap-2 rounded-xl border border-[#f0dce1] bg-white p-4 text-center">
         <p className="text-xl font-bold text-[#633c47]" style={{ fontFamily: '"' + arabicFont + '", serif' }}>محمد و سلمى — ليلة العمر</p>
         <p className="text-lg text-[#a64257]" style={{ fontFamily: '"' + englishFont + '", serif' }}>Mohamed &amp; Salma</p>
-        <span className="text-[10px] text-[#9a8187]">معاينة الخط المختار</span>
+        <span className="text-[11px] text-[#9a8187]">معاينة الخط المختار</span>
       </div>
     </section>
   )

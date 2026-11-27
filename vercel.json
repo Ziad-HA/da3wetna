@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/audio/:name(For.*Life.*).wav", "destination": "/audio/for-the-rest-of-my-life.mp3", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/i/:code", "destination": "/api/invite-page?code=:code" },
     { "source": "/(.*)", "destination": "/index.html" }

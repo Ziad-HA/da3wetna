@@ -19,7 +19,7 @@ export function Home() {
         <div aria-hidden="true" className="pointer-events-none absolute -right-28 -bottom-36 h-[28rem] w-[28rem] rounded-full border border-[#d8aeb6]/25" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 pb-12 pt-10 sm:gap-12 sm:pb-20 sm:pt-16 md:grid-cols-[1.02fr_.98fr] md:gap-14 md:py-24">
           <div className="order-2 text-center md:order-1 md:text-right">
-            <p className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[.12em] text-[#a65a69] sm:text-xs">✦ صُنعت في مصر · لقصص الحب ✦</p>
+            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[.12em] text-[#a65a69] sm:text-xs">✦ صُنعت في مصر · لقصص الحب ✦</p>
             <h1 className="mx-auto mt-4 max-w-2xl font-display text-[2.65rem] leading-[1.28] text-[#422b32] sm:mt-5 sm:text-6xl md:mx-0 md:text-[4.2rem]">
               دعوات بجمال حلو
               <span className="block text-[#a94e62]">قد قصة حبكم.</span>
@@ -41,28 +41,28 @@ export function Home() {
             <div aria-hidden="true" className="absolute h-[270px] w-[270px] rounded-full bg-[radial-gradient(circle,#f1d9de_0%,rgba(241,217,222,.45)_55%,transparent_76%)] sm:h-[430px] sm:w-[430px]" />
             <div className="relative z-10 w-[min(220px,62vw)] rotate-[1deg] rounded-[2rem] border-[7px] border-[#30282a] bg-[#30282a] p-1.5 shadow-[0_35px_80px_rgba(74,45,51,.22)] sm:w-[min(290px,70vw)]">
               <div className="overflow-hidden rounded-[1.45rem] bg-[#fffaf7]">
-                <div className="flex items-center justify-between bg-white px-4 py-2 text-[9px] text-[#806b70]"><span>9:41</span><span>●●● ◖</span></div>
+                <div className="flex items-center justify-between bg-white px-4 py-2 text-[11px] text-[#806b70]"><span>9:41</span><span>●●● ◖</span></div>
                 <div className="relative p-3 sm:p-4">
                   <div className="absolute inset-3 rounded-[1.2rem] border border-[#d9bd91]/60" />
                   <div className="relative flex min-h-[255px] flex-col items-center justify-center bg-[radial-gradient(ellipse_at_50%_35%,#f9e8e9_0%,#fffaf6_70%)] px-3 py-6 text-center sm:min-h-[340px]">
-                    <span className="text-[9px] font-semibold tracking-[.18em] text-[#b17b6a]">إلى الغالي</span>
+                    <span className="text-[11px] font-semibold tracking-[.18em] text-[#b17b6a]">إلى الغالي</span>
                     <p className="mt-2 font-display text-xl text-[#6a3c49] sm:text-2xl">خالد</p>
-                    <p className="mt-4 text-[9px] text-[#94757b]">يسعدنا دعوتك للاحتفال بزفاف</p>
+                    <p className="mt-4 text-[11px] text-[#94757b]">يسعدنا دعوتك للاحتفال بزفاف</p>
                     <p className="mt-3 font-display text-3xl leading-tight text-[#87475a] sm:text-4xl">صالح <span className="text-[#bd9a68]">&</span> ندى</p>
                     <div className="my-4 h-px w-16 bg-[#d7b989]" />
-                    <p className="text-[9px] text-[#94757b]">الخميس · 15 أكتوبر 2026</p>
-                    <p className="mt-2 text-[10px] font-bold text-[#6a3c49]">قصر رويال ماكسيم</p>
-                    <p className="mt-1 text-[8px] text-[#94757b]">القاهرة الجديدة</p>
-                    <span className="mt-5 rounded-full bg-[#a94e62] px-5 py-2 text-[9px] font-bold text-white">أكّد حضورك</span>
+                    <p className="text-[11px] text-[#94757b]">الخميس · 15 أكتوبر 2026</p>
+                    <p className="mt-2 text-[11px] font-bold text-[#6a3c49]">قصر رويال ماكسيم</p>
+                    <p className="mt-1 text-[11px] text-[#94757b]">القاهرة الجديدة</p>
+                    <span className="mt-5 rounded-full bg-[#a94e62] px-5 py-2 text-[11px] font-bold text-white">أكّد حضورك</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="absolute -left-1 top-[17%] z-20 rounded-2xl border border-[#f0dce1] bg-white/95 px-3 py-2.5 shadow-[0_12px_35px_rgba(74,45,51,.09)] sm:-left-2 sm:px-4">
-              <p className="text-[9px] font-bold text-[#a94e62] sm:text-[10px]">ليلى فتحت الدعوة</p><p className="mt-1 text-[8px] text-[#9b8589]">من ثانيتين</p>
+              <p className="text-[11px] font-bold text-[#a94e62] sm:text-[11px]">ليلى فتحت الدعوة</p><p className="mt-1 text-[11px] text-[#9b8589]">من ثانيتين</p>
             </div>
             <div className="absolute -right-1 bottom-[15%] z-20 rounded-2xl border border-[#f0dce1] bg-white/95 px-3 py-2.5 shadow-[0_12px_35px_rgba(74,45,51,.09)] sm:-right-3 sm:px-4">
-              <p className="text-[8px] text-[#9b8589]">عدد المؤكدين</p><p className="mt-0.5 font-display text-2xl text-[#a94e62]">12 <span className="font-sans text-[9px] text-[#54816a]">+3 النهارده</span></p>
+              <p className="text-[11px] text-[#9b8589]">عدد المؤكدين</p><p className="mt-0.5 font-display text-2xl text-[#a94e62]">12 <span className="font-sans text-[11px] text-[#54816a]">+3 النهارده</span></p>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ export function Home() {
 
       <section id="how-it-works" className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">إزاي بتشتغل</p>
+          <p className="text-[11px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">إزاي بتشتغل</p>
           <h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">تلات خطوات بسيطة، من الفكرة لحد ليلة العمر.</h2>
         </div>
         <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 sm:mt-14 sm:grid-cols-3 sm:gap-6">
@@ -91,7 +91,7 @@ export function Home() {
       <section className="bg-[#faf3f1] py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div><p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">اختار اللي يشبهكم</p><h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">دعوات معمولة للحظاتكم.</h2></div>
+            <div><p className="text-[11px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">اختار اللي يشبهكم</p><h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">دعوات معمولة للحظاتكم.</h2></div>
             <Link to="/templates" className="text-xs font-bold text-[#a64257] sm:text-sm">شوف كل التصميمات ←</Link>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-12 sm:grid-cols-4 sm:gap-6">
@@ -101,8 +101,8 @@ export function Home() {
                   <div className="overflow-hidden rounded-xl"><InviteThumb draft={draftFor(template)} /></div>
                 </div>
                 <h3 className="mt-3 truncate text-xs font-extrabold text-[#493139] sm:text-sm">{template.name}</h3>
-                <p className="mt-1 line-clamp-2 text-[10px] leading-5 text-[#8b777b] sm:text-xs">{template.blurb}</p>
-                <span className="mt-2 inline-flex text-[10px] font-bold text-[#a64257] sm:text-xs">معاينة الدعوة ←</span>
+                <p className="mt-1 line-clamp-2 text-[11px] leading-5 text-[#8b777b] sm:text-xs">{template.blurb}</p>
+                <span className="mt-2 inline-flex text-[11px] font-bold text-[#a64257] sm:text-xs">معاينة الدعوة ←</span>
               </Link>
             ))}
           </div>
@@ -111,50 +111,50 @@ export function Home() {
 
       <section id="features" className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">المميزات</p>
+          <p className="text-[11px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">المميزات</p>
           <h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">مصنوعة بالطريقة اللي فرحكم يستاهلها.</h2>
         </div>
         <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-8">
           <article className="rounded-[1.7rem] bg-[#faf3f1] p-6 sm:p-8">
             <div className="mb-7 flex min-h-40 items-center justify-center rounded-2xl border border-[#eadcda] bg-white p-5">
               <div className="w-40 rounded-xl border border-[#e9d8d7] bg-[#fffaf7] p-4 text-center shadow-sm">
-                <p className="text-[9px] text-[#a67a7e]">أنت مدعو</p><p className="mt-2 font-display text-2xl text-[#87475a]">صالح & ندى</p><p className="mt-2 text-[9px] text-[#9a7c80]">إلى خالد</p><p className="mt-3 border-t border-[#eadcda] pt-3 text-[9px] text-[#9a7c80]">اضغط لفتح الدعوة</p>
+                <p className="text-[11px] text-[#a67a7e]">أنت مدعو</p><p className="mt-2 font-display text-2xl text-[#87475a]">صالح & ندى</p><p className="mt-2 text-[11px] text-[#9a7c80]">إلى خالد</p><p className="mt-3 border-t border-[#eadcda] pt-3 text-[11px] text-[#9a7c80]">اضغط لفتح الدعوة</p>
               </div>
             </div>
-            <p className="text-[10px] font-bold text-[#b36a78]">1 · دعوة لكل ضيف</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">متخصصة لكل ضيف.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">دعوة خاصة، لكل ضيف لوحده. رحّب بضيوفك بطريقة شخصية وخلي مشاركة الدعوة سهلة من أول رسالة.</p>
+            <p className="text-[11px] font-bold text-[#b36a78]">1 · دعوة لكل ضيف</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">متخصصة لكل ضيف.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">دعوة خاصة، لكل ضيف لوحده. رحّب بضيوفك بطريقة شخصية وخلي مشاركة الدعوة سهلة من أول رسالة.</p>
           </article>
           <article className="rounded-[1.7rem] bg-[#faf3f1] p-6 sm:p-8">
             <div className="mb-7 flex min-h-40 items-center justify-center rounded-2xl border border-[#eadcda] bg-white p-5">
               <div className="w-full max-w-xs rounded-xl border border-[#eee0df] bg-white p-4 shadow-sm">
-                <div className="flex items-center justify-between text-[9px] text-[#9a7c80]"><span>قائمة الضيوف</span><span>متابعة الردود</span></div>
-                <div className="mt-4 grid grid-cols-3 gap-2 text-center">{[["120","الإجمالي"],["68","حاضرين"],["43","انتظار"]].map(([v,l])=><div key={l} className="rounded-lg bg-[#faf3f1] p-2"><p className="font-display text-xl text-[#a94e62]">{v}</p><p className="text-[8px] text-[#9a7c80]">{l}</p></div>)}</div>
+                <div className="flex items-center justify-between text-[11px] text-[#9a7c80]"><span>قائمة الضيوف</span><span>متابعة الردود</span></div>
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">{[["120","الإجمالي"],["68","حاضرين"],["43","انتظار"]].map(([v,l])=><div key={l} className="rounded-lg bg-[#faf3f1] p-2"><p className="font-display text-xl text-[#a94e62]">{v}</p><p className="text-[11px] text-[#9a7c80]">{l}</p></div>)}</div>
                 <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[#f2e6e5]"><div className="h-full w-[57%] rounded-full bg-[#b66d7c]" /></div>
-                <p className="mt-2 text-[8px] text-[#9a7c80]">مثال توضيحي لشكل متابعة الردود</p>
+                <p className="mt-2 text-[11px] text-[#9a7c80]">مثال توضيحي لشكل متابعة الردود</p>
               </div>
             </div>
-            <p className="text-[10px] font-bold text-[#b36a78]">2 · متابعة الردود</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">تابع الردود لحظة بلحظة.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">تابع مين أكد حضوره ومين لسه مستني، واعرف عدد الضيوف اللي هيشاركوك فرحتك.</p>
+            <p className="text-[11px] font-bold text-[#b36a78]">2 · متابعة الردود</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">تابع الردود لحظة بلحظة.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">تابع مين أكد حضوره ومين لسه مستني، واعرف عدد الضيوف اللي هيشاركوك فرحتك.</p>
           </article>
           <article className="rounded-[1.7rem] bg-[#faf3f1] p-6 sm:p-8">
             <div className="mb-7 flex min-h-40 items-center justify-center rounded-2xl border border-[#eadcda] bg-white p-5">
               <div className="w-full max-w-xs rounded-xl border border-[#eee0df] bg-[#fffaf7] p-4 text-center">
-                <span className="text-2xl text-[#b36a78]">⌖</span><p className="mt-2 text-xs font-extrabold text-[#493139]">مكان الاحتفال</p><p className="mt-1 text-[9px] text-[#9a7c80]">العنوان والاتجاهات في دعوتك</p><span className="mt-3 inline-flex rounded-full border border-[#e5cfd0] px-4 py-2 text-[9px] font-bold text-[#a94e62]">افتح المكان على الخريطة</span>
+                <span className="text-2xl text-[#b36a78]">⌖</span><p className="mt-2 text-xs font-extrabold text-[#493139]">مكان الاحتفال</p><p className="mt-1 text-[11px] text-[#9a7c80]">العنوان والاتجاهات في دعوتك</p><span className="mt-3 inline-flex rounded-full border border-[#e5cfd0] px-4 py-2 text-[11px] font-bold text-[#a94e62]">افتح المكان على الخريطة</span>
               </div>
             </div>
-            <p className="text-[10px] font-bold text-[#b36a78]">3 · المكان والاتجاهات</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">مكان الفرح على بُعد ضغطة.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">ضيف مكان الاحتفال في الدعوة، وخلي الوصول ليه أسهل على كل ضيوفك.</p>
+            <p className="text-[11px] font-bold text-[#b36a78]">3 · المكان والاتجاهات</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">مكان الفرح على بُعد ضغطة.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">ضيف مكان الاحتفال في الدعوة، وخلي الوصول ليه أسهل على كل ضيوفك.</p>
           </article>
           <article className="rounded-[1.7rem] bg-[#faf3f1] p-6 sm:p-8">
             <div className="mb-7 flex min-h-40 items-center justify-center rounded-2xl border border-[#eadcda] bg-white p-5">
               <div className="w-full max-w-xs rounded-xl border border-[#eee0df] bg-[#fffaf7] p-4 text-center">
-                <span className="text-3xl text-[#b36a78]">♫</span><p className="mt-2 text-xs font-extrabold text-[#493139]">موسيقى خلفية</p><p className="mt-1 text-[9px] text-[#9a7c80]">اختار المقطع اللي يعبّر عنكم</p><div className="mx-auto mt-4 h-1 w-4/5 rounded-full bg-[#eadcda]"><div className="h-full w-1/3 rounded-full bg-[#b66d7c]" /></div><p className="mt-3 text-[9px] text-[#9a7c80]">تشغيل وإيقاف الموسيقى</p>
+                <span className="text-3xl text-[#b36a78]">♫</span><p className="mt-2 text-xs font-extrabold text-[#493139]">موسيقى خلفية</p><p className="mt-1 text-[11px] text-[#9a7c80]">اختار المقطع اللي يعبّر عنكم</p><div className="mx-auto mt-4 h-1 w-4/5 rounded-full bg-[#eadcda]"><div className="h-full w-1/3 rounded-full bg-[#b66d7c]" /></div><p className="mt-3 text-[11px] text-[#9a7c80]">تشغيل وإيقاف الموسيقى</p>
               </div>
             </div>
-            <p className="text-[10px] font-bold text-[#b36a78]">4 · موسيقى خلفية</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">خلي للمناسبة صوتها.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">اختار موسيقى تناسب أجواء فرحكم، وخلي ضيوفك يعيشوا تفاصيل الدعوة بطريقتكم.</p>
+            <p className="text-[11px] font-bold text-[#b36a78]">4 · موسيقى خلفية</p><h3 className="mt-2 text-lg font-extrabold text-[#493139]">خلي للمناسبة صوتها.</h3><p className="mt-2 text-xs leading-8 text-[#806b70] sm:text-sm">اختار موسيقى تناسب أجواء فرحكم، وخلي ضيوفك يعيشوا تفاصيل الدعوة بطريقتكم.</p>
           </article>
         </div>
       </section>
 
       <section className="mx-auto max-w-4xl px-4 py-16 sm:py-24">
-        <div className="text-center"><p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">محتاج تعرف أكتر؟</p><h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">أسئلة بتتكرر.</h2><p className="mt-3 text-xs leading-7 text-[#806b70] sm:text-sm">إجابات سريعة عن تصميم الدعوات والتعديل والدفع والمشاركة.</p></div>
+        <div className="text-center"><p className="text-[11px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">محتاج تعرف أكتر؟</p><h2 className="mt-3 font-display text-3xl text-[#422b32] sm:text-5xl">أسئلة بتتكرر.</h2><p className="mt-3 text-xs leading-7 text-[#806b70] sm:text-sm">إجابات سريعة عن تصميم الدعوات والتعديل والدفع والمشاركة.</p></div>
         <div className="mt-8 grid gap-3 sm:mt-10">
           {faqs.slice(0,6).map((item) => (
             <details key={item.q} className="group border-b border-[#eadcda] py-2">
@@ -168,7 +168,7 @@ export function Home() {
 
       <section className="mx-auto max-w-6xl px-4 pb-10 sm:pb-16">
         <div className="grid gap-5 overflow-hidden rounded-[1.8rem] border border-[#e9d4d5] bg-[linear-gradient(125deg,#fff7f5_0%,#fff 55%,#f8efeb_100%)] p-6 sm:rounded-[2.2rem] sm:p-10 md:grid-cols-[1fr_auto] md:items-center md:gap-10">
-          <div><p className="text-[10px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">DA3WETNA PARTNERS</p><h2 className="mt-3 font-display text-2xl text-[#422b32] sm:text-4xl">بتشتغل في مجال الأفراح؟ خلّينا نكبر سوا.</h2><p className="mt-3 max-w-2xl text-xs leading-8 text-[#806b70] sm:text-sm">لو أنت مصور، Wedding Planner، أو مسؤول في قاعة أفراح، رشّح الدعوات الرقمية لعملائك وخلي تفاصيل فرحتهم أسهل وأجمل.</p><div className="mt-4 flex flex-wrap gap-2 text-[10px] font-bold text-[#806b70] sm:text-xs"><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">للمصورين</span><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">لقاعات الأفراح</span><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">لمنظمي المناسبات</span></div></div>
+          <div><p className="text-[11px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">DA3WETNA PARTNERS</p><h2 className="mt-3 font-display text-2xl text-[#422b32] sm:text-4xl">بتشتغل في مجال الأفراح؟ خلّينا نكبر سوا.</h2><p className="mt-3 max-w-2xl text-xs leading-8 text-[#806b70] sm:text-sm">لو أنت مصور، Wedding Planner، أو مسؤول في قاعة أفراح، رشّح الدعوات الرقمية لعملائك وخلي تفاصيل فرحتهم أسهل وأجمل.</p><div className="mt-4 flex flex-wrap gap-2 text-[11px] font-bold text-[#806b70] sm:text-xs"><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">للمصورين</span><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">لقاعات الأفراح</span><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">لمنظمي المناسبات</span></div></div>
           <Link to="/partners" className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#a94e62] px-7 text-sm font-bold text-white transition hover:bg-[#913e52]">اعرف تفاصيل الشراكة ←</Link>
         </div>
       </section>

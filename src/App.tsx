@@ -1,24 +1,25 @@
-import { useEffect, useLayoutEffect } from "react"
+import { lazy, Suspense, useEffect, useLayoutEffect } from "react"
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom"
 import { SiteChrome } from "./components/SiteChrome"
-import { Checkout } from "./pages/Checkout"
-import { Done } from "./pages/Done"
-import { Editor } from "./pages/Editor"
-import { Gallery } from "./pages/Gallery"
 import { Home } from "./pages/Home"
-import { Packages } from "./pages/Packages"
-import { Partners } from "./pages/Partners"
-import { How } from "./pages/How"
-import { FAQ } from "./pages/FAQ"
-import { InviteView } from "./pages/InviteView"
-import { SeoContentPage } from "./pages/SeoContentPage"
-import { Privacy } from "./pages/Privacy"
-import { Account } from "./pages/Account"
-import { Auth } from "./pages/Auth"
-import { Dashboard } from "./pages/Dashboard"
-import { Admin } from "./pages/Admin"
-import { PayResult } from "./pages/PayResult"
-import { TemplatePreview } from "./pages/TemplatePreview"
+
+const Checkout = lazy(() => import("./pages/Checkout").then((m) => ({ default: m.Checkout })))
+const Done = lazy(() => import("./pages/Done").then((m) => ({ default: m.Done })))
+const Editor = lazy(() => import("./pages/Editor").then((m) => ({ default: m.Editor })))
+const Gallery = lazy(() => import("./pages/Gallery").then((m) => ({ default: m.Gallery })))
+const Packages = lazy(() => import("./pages/Packages").then((m) => ({ default: m.Packages })))
+const Partners = lazy(() => import("./pages/Partners").then((m) => ({ default: m.Partners })))
+const How = lazy(() => import("./pages/How").then((m) => ({ default: m.How })))
+const FAQ = lazy(() => import("./pages/FAQ").then((m) => ({ default: m.FAQ })))
+const InviteView = lazy(() => import("./pages/InviteView").then((m) => ({ default: m.InviteView })))
+const SeoContentPage = lazy(() => import("./pages/SeoContentPage").then((m) => ({ default: m.SeoContentPage })))
+const Privacy = lazy(() => import("./pages/Privacy").then((m) => ({ default: m.Privacy })))
+const Account = lazy(() => import("./pages/Account").then((m) => ({ default: m.Account })))
+const Auth = lazy(() => import("./pages/Auth").then((m) => ({ default: m.Auth })))
+const Dashboard = lazy(() => import("./pages/Dashboard").then((m) => ({ default: m.Dashboard })))
+const Admin = lazy(() => import("./pages/Admin").then((m) => ({ default: m.Admin })))
+const PayResult = lazy(() => import("./pages/PayResult").then((m) => ({ default: m.PayResult })))
+const TemplatePreview = lazy(() => import("./pages/TemplatePreview").then((m) => ({ default: m.TemplatePreview })))
 
 function ScrollToTop() {
   const { pathname, search } = useLocation()
@@ -60,10 +61,15 @@ function ScrollToTop() {
   return null
 }
 
+function PageLoading() {
+  return <div className="grid min-h-[60dvh] place-items-center text-sm font-bold text-[#a64257]" role="status">جاري التحميل…</div>
+}
+
 export function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <Suspense fallback={<PageLoading />}>
       <Routes>
         <Route element={<SiteChrome />}>
           <Route path="/" element={<Home />} />
@@ -92,6 +98,7 @@ export function App() {
         <Route path="/i/:code" element={<InviteView />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </Suspense>
     </BrowserRouter>
   )
 }

@@ -57,6 +57,7 @@ export default async function handler(req: Req, res: Res) {
     `<meta name="twitter:card" content="summary_large_image" />`,
   ].join("\n    ")
   html = html
+    .replace(/\s*<meta\s+(?:property="og:|name="twitter:)[^>]*>/g, "")
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`)
     .replace(/<meta\s+name="description"[\s\S]*?\/>/, `<meta name="description" content="${esc(desc)}" />`)
     .replace("</head>", `    ${tags}\n  </head>`)

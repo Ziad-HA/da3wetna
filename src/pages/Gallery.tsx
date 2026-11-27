@@ -38,7 +38,7 @@ export function Gallery() {
         <div className="pointer-events-none absolute -bottom-24 right-[42%] h-56 w-56 rounded-full bg-white/55 blur-3xl" />
         <div className="relative grid grid-cols-[minmax(0,1fr)_112px] items-center gap-2 sm:gap-6 md:grid-cols-[1.2fr_.8fr] md:gap-10">
           <div className="min-w-0 text-right md:text-right">
-            <p className="text-[10px] font-extrabold tracking-[.2em] text-[#a64257] sm:text-xs">DA3WETNA • INVITATION STUDIO</p>
+            <p className="text-[11px] font-extrabold tracking-[.2em] text-[#a64257] sm:text-xs">DA3WETNA • INVITATION STUDIO</p>
             <h1 className="mt-2 font-display text-[1.45rem] leading-[1.45] text-[#4a2d33] sm:text-5xl lg:text-6xl">كل فرحة وليها<br className="hidden md:block" /> تصميم يشبهها</h1>
             <p className="mt-2 max-w-xl text-[11px] leading-6 text-[#806b70] sm:text-base sm:leading-8 md:mx-0">
               اختار من مجموعة تصميماتنا، وشوف شكل دعوتك قبل ما تبدأ تضيف تفاصيل فرحتك.
@@ -58,7 +58,7 @@ export function Gallery() {
               <div className="invite-frame">{activeTemplates[0] ? <InviteThumb draft={draftFor(activeTemplates[0])} /> : null}</div>
             </div>
             <span className="absolute -bottom-2 -left-2 grid h-7 w-7 sm:-bottom-4 sm:-left-5 sm:h-12 sm:w-12 place-items-center rounded-full border-4 border-[#f8e9ec] bg-white text-2xl text-[#b83b50] shadow-md">♡</span>
-            <span className="absolute -right-2 top-2 hidden rounded-full border border-white bg-white/90 sm:block sm:-right-5 sm:top-5 px-3 py-2 text-[10px] font-bold text-[#a64257] shadow-sm">دعوتك تبدأ من هنا</span>
+            <span className="absolute -right-2 top-2 hidden rounded-full border border-white bg-white/90 sm:block sm:-right-5 sm:top-5 px-3 py-2 text-[11px] font-bold text-[#a64257] shadow-sm">دعوتك تبدأ من هنا</span>
           </div>
         </div>
       </section>
@@ -66,16 +66,16 @@ export function Gallery() {
       <section id="designs" className="scroll-mt-24 pt-8 sm:pt-12">
         <div className="flex items-center justify-between gap-2 sm:items-end sm:gap-4">
           <div>
-            <p className="text-[10px] font-extrabold tracking-[.18em] text-[#b36a78] sm:text-xs">THE COLLECTION</p>
+            <p className="text-[11px] font-extrabold tracking-[.18em] text-[#b36a78] sm:text-xs">THE COLLECTION</p>
             <h2 className="mt-1 font-display text-xl text-[#4a2d33] sm:text-3xl">اختار المناسبة</h2>
             <p className="mt-1 hidden text-xs text-[#90777d] sm:block sm:text-sm">فلتر التصميمات حسب نوع مناسبتك.</p>
           </div>
           <div className="flex shrink-0 items-center gap-2 rounded-xl border border-[#f0dce1] bg-white px-2.5 py-2 sm:gap-3 sm:rounded-2xl sm:px-3 sm:py-2.5 sm:min-w-[230px]">
             <div className="min-w-0">
-              <p className="hidden text-[10px] text-[#a18a8f] sm:block">باقتك الحالية</p>
-              <p className="max-w-[82px] truncate text-[10px] font-extrabold text-[#4a2d33] sm:max-w-none sm:text-xs">{packages.find((item) => item.id === selected)?.name}</p>
+              <p className="hidden text-[11px] text-[#a18a8f] sm:block">باقتك الحالية</p>
+              <p className="max-w-[82px] truncate text-[11px] font-extrabold text-[#4a2d33] sm:max-w-none sm:text-xs">{packages.find((item) => item.id === selected)?.name}</p>
             </div>
-            <Link to="/packages" className="shrink-0 rounded-lg bg-[#fff0f2] px-2.5 py-2 text-[10px] font-bold text-[#a64257] transition hover:bg-[#f8e1e6]">تغيير</Link>
+            <Link to="/packages" className="shrink-0 rounded-lg bg-[#fff0f2] px-2.5 py-2 text-[11px] font-bold text-[#a64257] transition hover:bg-[#f8e1e6]">تغيير</Link>
           </div>
         </div>
 
@@ -104,16 +104,16 @@ export function Gallery() {
               <div className="relative overflow-hidden rounded-[11px] bg-[#fff5f6] sm:rounded-[19px]">
                 <Link to={`/preview/${template.id}`} className="block" aria-label={`اتفرج على دعوة ${template.name}`}>
                 <div className="gallery-design-frame"><div className="invite-frame"><InviteThumb draft={draftFor(template)} /></div></div>
-                <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[9px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">اتفرج على الدعوة</span>
-                {template.isNew ? <span className="absolute right-2 top-2 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-extrabold text-[#a64257] shadow-sm sm:right-3 sm:top-3 sm:text-[10px]">جديد</span> : null}
+                <span className="absolute inset-x-2 bottom-2 rounded-full bg-white/90 px-2 py-2 text-center text-[11px] font-bold text-[#8b5260] shadow-sm backdrop-blur sm:inset-x-4 sm:bottom-4 sm:py-2.5 sm:text-xs sm:opacity-0 sm:transition group-hover:opacity-100">اتفرج على الدعوة</span>
+                {template.isNew ? <span className="absolute right-2 top-2 rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-extrabold text-[#a64257] shadow-sm sm:right-3 sm:top-3 sm:text-[11px]">جديد</span> : null}
                 </Link>
                 <button type="button" onClick={() => toggleFavorite(template.id)} aria-label={favorites.includes(template.id) ? "إزالة من المفضلة" : "إضافة للمفضلة"} aria-pressed={favorites.includes(template.id)} className={`absolute left-2 top-2 grid h-9 w-9 place-items-center rounded-full border border-white/80 text-xl shadow-md backdrop-blur transition active:scale-90 sm:left-3 sm:top-3 ${favorites.includes(template.id) ? "bg-[#a64257] text-white" : "bg-white/90 text-[#a64257]"}`}>{favorites.includes(template.id) ? "♥" : "♡"}</button>
               </div>
               <div className="px-0.5 pb-1 pt-2 sm:px-2 sm:pt-4">
                 <h3 className="truncate text-[11px] font-extrabold text-[#4a2d33] sm:text-base">{template.name}</h3>
-                <p className="mt-1 line-clamp-2 min-h-8 text-[9px] leading-[1.45] text-[#90777d] sm:min-h-10 sm:text-xs sm:leading-5">{template.blurb}</p>
-                <Link to={`/preview/${template.id}`} className="mt-2 flex min-h-10 items-center justify-center rounded-xl border border-[#f0dce1] bg-white px-1.5 text-[10px] font-extrabold text-[#806b70] transition hover:border-[#d9aab5] hover:text-[#a64257] active:scale-[.98] sm:mt-4 sm:min-h-11 sm:rounded-full sm:text-sm">اتفرج على الدعوة <span className="mr-1">↗</span></Link>
-                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="mt-2 flex min-h-10 items-center justify-center rounded-xl bg-[#fff0f2] px-1.5 text-[10px] font-extrabold text-[#a64257] transition hover:bg-[#a64257] hover:text-white active:scale-[.98] sm:rounded-full sm:text-sm">اختار التصميم <span className="mr-1">←</span></Link>
+                <p className="mt-1 line-clamp-2 min-h-8 text-[11px] leading-[1.45] text-[#90777d] sm:min-h-10 sm:text-xs sm:leading-5">{template.blurb}</p>
+                <Link to={`/preview/${template.id}`} className="mt-2 flex min-h-10 items-center justify-center rounded-xl border border-[#f0dce1] bg-white px-1.5 text-[11px] font-extrabold text-[#806b70] transition hover:border-[#d9aab5] hover:text-[#a64257] active:scale-[.98] sm:mt-4 sm:min-h-11 sm:rounded-full sm:text-sm">اتفرج على الدعوة <span className="mr-1">↗</span></Link>
+                <Link to={`/editor/${template.id}`} onClick={clearDraft} className="mt-2 flex min-h-10 items-center justify-center rounded-xl bg-[#fff0f2] px-1.5 text-[11px] font-extrabold text-[#a64257] transition hover:bg-[#a64257] hover:text-white active:scale-[.98] sm:rounded-full sm:text-sm">اختار التصميم <span className="mr-1">←</span></Link>
               </div>
             </article>
           ))}

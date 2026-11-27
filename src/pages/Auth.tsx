@@ -23,7 +23,7 @@ export function Auth() {
       <section className="mx-auto max-w-md overflow-hidden rounded-[30px] border border-[#f0dce1] bg-white shadow-[0_20px_70px_rgba(74,45,51,.09)]">
         <div className="bg-[linear-gradient(135deg,#fff0f3,#fffaf4)] px-6 py-8 text-center sm:px-9">
           <span className="text-4xl text-[#b83b50]">♡</span>
-          <p className="mt-2 text-[10px] font-extrabold tracking-[.22em] text-[#b36a78]">DA3WETNA ACCOUNT</p>
+          <p className="mt-2 text-[11px] font-extrabold tracking-[.22em] text-[#b36a78]">DA3WETNA ACCOUNT</p>
           <h1 className="mt-2 font-display text-3xl text-[#4a2d33]">أهلاً بيك في دعوتنا</h1>
           <p className="mt-2 text-sm leading-7 text-[#806b70]">اعمل حسابك عشان تتابع طلباتك وتحتفظ بدعواتك في مكان واحد.</p>
         </div>

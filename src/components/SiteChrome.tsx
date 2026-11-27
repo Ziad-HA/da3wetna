@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom"
 import { site } from "../config"
 import { LogoMark, WhatsAppIcon } from "./Icons"
@@ -22,7 +22,9 @@ export function SiteChrome() {
       {showAtmosphere ? <RomanticAtmosphere /> : null}
       <a className="skip" href="#main">تخطي إلى المحتوى</a>
       <Header />
-      <Outlet />
+      <Suspense fallback={<main className="min-h-[70dvh]" aria-busy="true" />}>
+        <Outlet />
+      </Suspense>
       <Footer />
       <HelpButton />
       <BottomNavigation />
@@ -135,26 +137,26 @@ function Footer() {
                 <span className="mt-1 font-latin text-[0.62rem] tracking-[0.3em] text-[#a45b69]">{site.nameEn}</span>
               </span>
             </Link>
-            <p className="mt-2 max-w-xs text-[10px] leading-5 text-[#806b70] sm:mt-4 sm:text-sm sm:leading-7">
+            <p className="mt-2 max-w-xs text-[11px] leading-5 text-[#806b70] sm:mt-4 sm:text-sm sm:leading-7">
               كل فرحة وليها دعوة حلوة. صمّم دعوتك أونلاين بسهولة وشارك لحظتك مع كل اللي بتحبهم.
             </p>
           </div>
 
-          <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-[10px] sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-sm">
+          <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-[11px] sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-sm">
             <p className="mb-1 flex items-center gap-1.5 font-bold text-[11px] text-[#4a2d33] sm:mb-1 sm:text-sm"><span className="h-1.5 w-1.5 rounded-full bg-[#c66d7d]" />روابط سريعة</p>
-            <Link className="text-[9px] leading-4 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/templates">كل الدعوات</Link>
-            <Link className="text-[9px] leading-4 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/how">طريقة الاستخدام</Link>
-            <Link className="text-[10px] leading-5 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/packages">الباقات</Link>
+            <Link className="text-[11px] leading-4 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/templates">كل الدعوات</Link>
+            <Link className="text-[11px] leading-4 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/how">طريقة الاستخدام</Link>
+            <Link className="text-[11px] leading-5 text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/packages">الباقات</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/faq">الأسئلة الشائعة</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/partners">شراكات دعوتنا</Link>
             <Link className="text-[#806b70] transition hover:translate-x-[-2px] hover:text-[#a64257]" to="/privacy">سياسة الخصوصية</Link>
           </div>
 
-          <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-[10px] sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-sm">
+          <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-[11px] sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-sm">
             <p className="mb-1 flex items-center gap-1.5 font-bold text-[11px] text-[#4a2d33] sm:mb-1 sm:text-sm"><span className="h-1.5 w-1.5 rounded-full bg-[#c66d7d]" />دعوات لكل مناسبة</p>
             <div className="grid grid-cols-2 gap-x-1.5 gap-y-1 sm:gap-x-4 sm:gap-y-3">
-              <Link className="text-[10px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
-              <Link className="text-[10px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/دعوة-فرح">دعوة فرح</Link>
+              <Link className="text-[11px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/دعوة-زفاف-الإلكترونية">دعوة زفاف إلكترونية</Link>
+              <Link className="text-[11px] leading-5 text-[#806b70] transition hover:text-[#a64257] sm:text-sm sm:leading-normal" to="/دعوة-فرح">دعوة فرح</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوة-خطوبة">دعوة خطوبة</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/دعوات-الكترونية">دعوات إلكترونية</Link>
               <Link className="text-[#806b70] transition hover:text-[#a64257]" to="/كروت-افراح">كروت أفراح</Link>
@@ -164,20 +166,20 @@ function Footer() {
 
           <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-sm sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0">
             <p className="mb-1 flex items-center gap-1.5 text-[11px] font-bold text-[#4a2d33] sm:mb-1 sm:text-sm"><span className="h-1.5 w-1.5 rounded-full bg-[#c66d7d]" />طرق الدفع</p>
-            <p className="text-[9px] leading-4 text-[#806b70] sm:text-sm">فودافون كاش</p>
-            <p className="text-[10px] text-[#806b70] sm:text-sm">إنستاباي</p>
-            <p className="text-[9px] leading-4 text-[#a18a8f] sm:text-sm">الدفع بالبطاقة قريبًا</p>
-            <p className="mt-0 text-[8px] leading-3.5 text-[#a18a8f] sm:mt-2 sm:text-xs sm:leading-6">تواصل معانا لو محتاج مساعدة في اختيار دعوتك.</p>
-            <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عندي استفسار عن دعوتنا")}`} target="_blank" rel="noreferrer" dir="ltr" className="mt-0.5 inline-flex min-h-7 w-fit items-center gap-1 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-2 py-1 text-[9px] font-semibold text-[#247747] transition hover:bg-[#e9f7ee] sm:gap-2 sm:px-3 sm:py-2 sm:text-sm">
+            <p className="text-[11px] leading-4 text-[#806b70] sm:text-sm">فودافون كاش</p>
+            <p className="text-[11px] text-[#806b70] sm:text-sm">إنستاباي</p>
+            <p className="text-[11px] leading-4 text-[#a18a8f] sm:text-sm">الدفع بالبطاقة قريبًا</p>
+            <p className="mt-0 text-[11px] leading-3.5 text-[#a18a8f] sm:mt-2 sm:text-xs sm:leading-6">تواصل معانا لو محتاج مساعدة في اختيار دعوتك.</p>
+            <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عندي استفسار عن دعوتنا")}`} target="_blank" rel="noreferrer" dir="ltr" className="mt-0.5 inline-flex min-h-7 w-fit items-center gap-1 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-2 py-1 text-[11px] font-semibold text-[#247747] transition hover:bg-[#e9f7ee] sm:gap-2 sm:px-3 sm:py-2 sm:text-sm">
               <WhatsAppIcon className="h-4 w-4" /> 01276390301
             </a>
-            <a href={"mailto:" + site.email} dir="ltr" className="mt-1 inline-flex min-h-7 w-fit items-center gap-1 rounded-full border border-[#f0dce1] bg-white px-2 py-1 text-[9px] font-semibold text-[#806b70] transition hover:border-[#d9aab5] hover:text-[#a64257] sm:gap-2 sm:px-3 sm:py-2 sm:text-sm">
+            <a href={"mailto:" + site.email} dir="ltr" className="mt-1 inline-flex min-h-7 w-fit items-center gap-1 rounded-full border border-[#f0dce1] bg-white px-2 py-1 text-[11px] font-semibold text-[#806b70] transition hover:border-[#d9aab5] hover:text-[#a64257] sm:gap-2 sm:px-3 sm:py-2 sm:text-sm">
               {site.email}
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-1.5 pt-3 text-center text-[10px] text-[#9a8187] sm:flex-row sm:gap-3 sm:pt-5 sm:text-xs sm:text-right">
+        <div className="flex flex-col items-center justify-between gap-1.5 pt-3 text-center text-[11px] text-[#9a8187] sm:flex-row sm:gap-3 sm:pt-5 sm:text-xs sm:text-right">
           <p>© {new Date().getFullYear()} دعوتنا — كل الحقوق محفوظة</p>
           <p>اتعمل بكل حب عشان لحظاتكم الحلوة <span className="text-[#b83b50]">♥</span></p>
         </div>
@@ -213,7 +215,7 @@ function BottomNavigation() {
   useEffect(() => setSupportOpen(false), [pathname])
   if (hidden) return null
 
-  const itemClass = "flex min-w-0 min-h-[52px] flex-1 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-bold leading-tight transition active:scale-95"
+  const itemClass = "flex min-w-0 min-h-[52px] flex-1 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[11px] font-bold leading-tight transition active:scale-95"
   const activeClass = "bg-[#fff0f2] text-[#a64257]"
   const idleClass = "text-[#90777d] hover:bg-[#fff8f8]"
 
