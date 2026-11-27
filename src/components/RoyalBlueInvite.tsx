@@ -96,7 +96,7 @@ export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { d
       <section className="royal-countdown-section">
         <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
         <p className="royal-count-eyebrow">موعد يجمعنا على الفرح</p>
-        <h2>الوقت المتبقي</h2>
+        <h2>باقي على فرحتنا</h2>
         {validDate ? (
           <>
             <p className="royal-count-date">{formatArabicDate(draft.date)}</p>
@@ -109,8 +109,8 @@ export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { d
       </section>
       <section className="royal-details-section">
         <span className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</span>
-        <p className="royal-count-eyebrow">كل التفاصيل في انتظاركم</p>
-        <h2>مكان وموعد فرحتنا</h2>
+        <p className="royal-count-eyebrow">مستنيينكم تشاركونا</p>
+        <h2>ميعادنا ومكاننا</h2>
         {validDate ? <p className="royal-count-date">{formatArabicDate(draft.date)} · {formatArabicTime(draft.time)}</p> : null}
         <div className="royal-detail-card"><span>⌖</span><strong>{draft.venue || "مكان المناسبة"}</strong>{draft.venueAddress ? <p>{draft.venueAddress}</p> : null}{draft.city ? <small>{draft.city}</small> : null}</div>
         {locationNotice ? <p className="royal-location-notice" role="status">{locationNotice}</p> : null}
