@@ -54,6 +54,20 @@ export function InviteAdditions({ draft, inviteId, shareUrl = "", preview = fals
 
   return (
     <div className="invite-additions" style={style} dir="rtl" lang="ar">
+      <section className="invite-additions-parents" aria-label="والدا العروسين">
+        <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" />
+        <p className="invite-additions-parents-intro">بكل الحب يتشرفان بدعوتكم</p>
+        <div className="invite-additions-parent">
+          <span>والد العريس الأستاذ</span>
+          <strong>{draft.groomFather || "—"}</strong>
+        </div>
+        <span className="invite-additions-parents-heart" aria-hidden="true">♡</span>
+        <div className="invite-additions-parent">
+          <span>والد العروسة الأستاذ</span>
+          <strong>{draft.brideFather || "—"}</strong>
+        </div>
+        <img src="/chateau/royal-blue-floral.webp" alt="" aria-hidden="true" />
+      </section>
       {showRsvp ? <section className="invite-additions-rsvp">
         <span className="invite-additions-ornament" aria-hidden="true">✦ ❦ ✦</span>
         <p className="invite-additions-kicker">تأكيد الحضور</p>
