@@ -187,6 +187,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
                 shareUrl={window.location.href}
               />
               <InviteAdditions draft={draft} shareUrl={window.location.href} palette={additionsPalette} showRsvp={false} />
+                <div className="w-full"><StoryActions draft={draft} code={code} language={language} /></div>
               </>
             ) : draft.templateId === "royal-blue" ? (
               <>
@@ -249,18 +250,20 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
         {photos.length ? <section className="invite-photo-moments w-full rounded-[26px] border border-white/70 bg-white/80 p-4 shadow-lg"><p className="mb-3 text-center font-bold text-[#4a2d33]">صور من حكايتنا ♡</p><div className="grid grid-cols-2 gap-2">{photos.map((photo, index) => <img key={photo} src={photo} alt={`صورة من المناسبة ${index + 1}`} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />)}</div></section> : null}
           </>
         )}
-        {!isSite ? <VenueMap draft={draft} /> : null}
-        {!isSite ? <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="btn-ghost w-full justify-center bg-white/80">📍 افتح الموقع على الخريطة</a> : null}
-        {inviteId && !isSite ? <RsvpForm inviteId={inviteId} /> : null}
-        {rsvpLink && !isSite ? <a href={rsvpLink} target="_blank" rel="noreferrer" className={`${inviteId ? "btn-ghost bg-white/80" : "btn-gold"} w-full justify-center`}>{inviteId ? "أو كلّمنا على واتساب" : "أكد حضورك على واتساب ♡"}</a> : null}
-        <div className="w-full"><StoryActions draft={draft} code={code} /></div>
-        <section className="w-full rounded-[26px] border border-white/70 bg-white/80 p-4 text-center shadow-lg">
-          <p className="font-bold text-[#4a2d33]">احتفظ بالدعوة وشاركها</p>
-          <p className="mt-1 text-xs text-[#806b70]">امسح رمز QR لفتح نفس الدعوة بسهولة.</p>
-          <img className="mx-auto mt-3 h-36 w-36 rounded-xl border border-[#f0dce1] bg-white p-2" loading="lazy" alt="رمز QR لفتح الدعوة" src={`https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=${encodeURIComponent(`${window.location.origin}/i/${code}`)}`} />
-          <p className="mt-2 break-all text-[10px] text-[#9a8187]">{`${window.location.origin}/i/${code}`}</p>
-        </section>
-        <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
+        {!isSite ? <>
+          <VenueMap draft={draft} />
+          <a href={mapLink(draft)} target="_blank" rel="noreferrer" className="btn-ghost w-full justify-center bg-white/80">📍 افتح الموقع على الخريطة</a>
+          {inviteId ? <RsvpForm inviteId={inviteId} /> : null}
+          {rsvpLink ? <a href={rsvpLink} target="_blank" rel="noreferrer" className={`${inviteId ? "btn-ghost bg-white/80" : "btn-gold"} w-full justify-center`}>{inviteId ? "أو كلّمنا على واتساب" : "أكد حضورك على واتساب ♡"}</a> : null}
+          <div className="w-full"><StoryActions draft={draft} code={code} /></div>
+          <section className="w-full rounded-[26px] border border-white/70 bg-white/80 p-4 text-center shadow-lg">
+            <p className="font-bold text-[#4a2d33]">احتفظ بالدعوة وشاركها</p>
+            <p className="mt-1 text-xs text-[#806b70]">امسح رمز QR لفتح نفس الدعوة بسهولة.</p>
+            <img className="mx-auto mt-3 h-36 w-36 rounded-xl border border-[#f0dce1] bg-white p-2" loading="lazy" alt="رمز QR لفتح الدعوة" src={`https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=${encodeURIComponent(`${window.location.origin}/i/${code}`)}`} />
+            <p className="mt-2 break-all text-[10px] text-[#9a8187]">{`${window.location.origin}/i/${code}`}</p>
+          </section>
+          <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
+        </> : null}
       </div>
       {!isSite && musicUrl ? <button type="button" onClick={toggleMusic} className="invite-music-toggle" aria-pressed={musicOn} aria-label={musicOn ? "إيقاف موسيقى الدعوة" : "تشغيل موسيقى الدعوة"}>{musicOn ? "♫" : "♪"}</button> : null}
     </main>
