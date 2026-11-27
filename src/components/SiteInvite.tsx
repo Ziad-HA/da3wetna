@@ -163,10 +163,10 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         <div className="royal-count-ornament royal-count-bottom" aria-hidden="true">❦</div>
       </section>
 
-      {draft.opening ? <section className="vaux-sec site-reveal vaux-opening-verse">
+      <section className="vaux-sec site-reveal vaux-opening-verse">
         <span className="vaux-kicker">{en ? "A BLESSING FOR OUR DAY" : "بداية فرحتنا"}</span>
-        <p className="vaux-body-text">{draft.opening}</p>
-      </section> : null}
+        <p className="vaux-body-text">{draft.opening || "ومن آياته أن خلق لكم من أنفسكم أزواجًا لتسكنوا إليها وجعل بينكم مودة ورحمة"}</p>
+      </section>
 
       {draft.story ? <section className="vaux-sec site-reveal vaux-story-sec">
         <div className="vaux-story-wrapper">
