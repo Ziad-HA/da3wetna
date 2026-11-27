@@ -169,7 +169,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
           />
         ) : isSite ? (
           <>
-            {draft.templateId === "chateau" ? (
+            {draft.templateId === "chateau" || draft.templateId === "royal-blue" ? (
               <ChateauInvite
                 draft={draft}
                 rsvp={inviteId ? <RsvpForm inviteId={inviteId} /> : null}
