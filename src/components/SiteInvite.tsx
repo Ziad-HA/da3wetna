@@ -153,7 +153,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         </section>
       )}
 
-      {(draft.templateId === "estate" || draft.templateId === "estate-classic") ? <InviteAdditions draft={draft} preview={preview} palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }} showRsvp={false} showShare={false} showClosing={false} /> : null}
+      {(draft.templateId === "estate" || draft.templateId === "estate-classic") ? <InviteAdditions draft={draft} preview={preview} palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }} showRsvp={false} showShare={false} /> : null}
 
       <section className="vaux-sec site-reveal royal-countdown-section">
         <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
