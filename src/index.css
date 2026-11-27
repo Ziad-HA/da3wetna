@@ -4505,13 +4505,21 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 }
 
 /* كارت قالب الزمردي والسرخس (صورة + نصوص العميل) */
-.invite.fern-card { aspect-ratio: 1240 / 1748; background: #f4f1e8; }
+.invite.fern-card { aspect-ratio: 1240 / 2687; background: #f4f1e8; }
 .invite.fern-card::before, .invite.fern-card::after { display: none; }
 .fern-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .fern-slot { position: absolute; z-index: 3; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; text-align: center; }
 .fern-card .fern-text { margin: 0; max-width: 100%; font-family: "Almarai", sans-serif; line-height: 1.55; color: #4a4a46; text-wrap: balance; }
 .fern-card .fern-title { color: #5c6b43; font-weight: 700; }
 .fern-card .fern-name { font-family: var(--invite-font-ar), "Amiri", serif; font-weight: 700; line-height: 1.25; color: #5c6b43; white-space: nowrap; }
-.export-sheet:has(> .fern-card) { display: flex; align-items: center; background: #f4f1e8; }
-.export-sheet .invite.fern-card { height: auto; }
+.export-sheet:has(> .fern-card) { display: flex; justify-content: center; background: #f4f1e8; }
+.export-sheet .invite.fern-card { width: 886px; height: 1920px; }
 .fern-card .edit-line.fern-text { width: auto; padding: 0; min-height: 0; }
+.fern-intro { gap: 1.4cqw; }
+/* الكارت ياخد عرض شاشة الموبايل كله (بيلغي الحواف الجانبية للصفحة) */
+.fern-full { width: 460px; justify-self: center; }
+@media (max-width: 491px) { .fern-full { width: auto; justify-self: stretch; margin-inline: -1rem; } }
+.invite-public-page:not(.pb-36):has(.fern-full) { padding-top: 0; }
+/* الكارت الطويل جوه الظرف: نصغره على قد ارتفاع الشاشة عشان ما يتقصش */
+.real-env-card-slot:has(.fern-card) { aspect-ratio: 1240 / 2687; width: min(66%, calc((94dvh - 24px) * .4615)); }
+.real-env-card-slot.card-raised:has(.fern-card) { transform: translate(-50%, -52%) scale(1.04); }

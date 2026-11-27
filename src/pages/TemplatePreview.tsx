@@ -297,16 +297,18 @@ export function TemplatePreview() {
               <StripInvite draft={draft} template={template} autoScroll />
             ) : (
               <>
-                <header className="invite-public-heading text-center">
-                  <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
-                  <h1 className="mt-2 font-display text-3xl">
-                    {draft.groom} <i>و</i> {draft.bride}
-                  </h1>
-                  <p className="mt-2 text-sm opacity-80">
-                    يسعدنا وجودكم ومشاركتنا أجمل لحظاتنا ♡
-                  </p>
-                </header>
-                <div className="invite-public-card w-full max-w-[390px] overflow-hidden rounded-[24px] shadow-2xl">
+                {draft.templateId === "emerald-fern" ? null : (
+                  <header className="invite-public-heading text-center">
+                    <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
+                    <h1 className="mt-2 font-display text-3xl">
+                      {draft.groom} <i>و</i> {draft.bride}
+                    </h1>
+                    <p className="mt-2 text-sm opacity-80">
+                      يسعدنا وجودكم ومشاركتنا أجمل لحظاتنا ♡
+                    </p>
+                  </header>
+                )}
+                <div className={draft.templateId === "emerald-fern" ? "fern-full" : "invite-public-card w-full max-w-[390px] overflow-hidden rounded-[24px] shadow-2xl"}>
                   <Invitation draft={draft} />
                 </div>
               </>
