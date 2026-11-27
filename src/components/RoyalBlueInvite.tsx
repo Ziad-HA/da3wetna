@@ -91,7 +91,7 @@ export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { d
       <section className="royal-details-section royal-opening-section">
         <span className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</span>
         <p className="royal-count-eyebrow">بداية فرحتنا</p>
-        <p className="royal-opening-text">{draft.opening || "ومن آياته أن خلق لكم من أنفسكم أزواجًا لتسكنوا إليها وجعل بينكم مودة ورحمة"}</p>
+        <p className="royal-opening-text" style={{ maxWidth: "680px", margin: 0, color: "#526A85", fontSize: "1rem", lineHeight: 1.9 }}>{draft.opening || "ومن آياته أن خلق لكم من أنفسكم أزواجًا لتسكنوا إليها وجعل بينكم مودة ورحمة"}</p>
       </section>
       <section className="royal-countdown-section">
         <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
