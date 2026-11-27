@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { formatArabicDate } from "../lib/format"
 import { Invitation } from "./Invitation"
 import { VenueMap } from "./VenueMap"
+import { mapLink } from "../lib/maps"
 import type { InviteDraft } from "../types"
 
 function RoyalCountdown({ draft }: { draft: InviteDraft }) {
@@ -38,12 +39,15 @@ function RoyalCountdown({ draft }: { draft: InviteDraft }) {
 export function RoyalBlueInvite({ draft }: { draft: InviteDraft }) {
   const validDate = Boolean(draft.date) && !Number.isNaN(new Date(`${draft.date}T00:00:00`).getTime())
   const calendarUrl = validDate ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`فرح ${draft.groom} و${draft.bride}`)}&dates=${draft.date.replaceAll("-", "")}T${(draft.time || "18:00").replace(":", "")}00/${draft.date.replaceAll("-", "")}T${String(Number((draft.time || "18:00").slice(0, 2)) + 3).padStart(2, "0")}${(draft.time || "18:00").slice(3, 5)}00&details=${encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا")}&location=${encodeURIComponent([draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" - "))}` : ""
+  const calendarUrl = validDate ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`فرح ${draft.groom} و${draft.bride}`)}&dates=${draft.date.replaceAll("-", "")}T${(draft.time || "18:00").replace(":", "")}00/${draft.date.replaceAll("-", "")}T${String(Number((draft.time || "18:00").slice(0, 2)) + 3).padStart(2, "0")}${(draft.time || "18:00").slice(3, 5)}00&details=${encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا")}&location=${encodeURIComponent([draft.venue, draft.venueAddress, draft.city].filter(Boolean).join(" - "))}` : ""
 
   return (
     <article className="royal-invite" dir="rtl" lang="ar">
+      <div className="royal-flower-top" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
       <div className="royal-invite-card">
         <Invitation draft={draft} />
       </div>
+      <div className="royal-flower-divider" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
       <section className="royal-countdown-section">
         <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
         <p className="royal-count-eyebrow">موعد يجمعنا على الفرح</p>
@@ -58,6 +62,16 @@ export function RoyalBlueInvite({ draft }: { draft: InviteDraft }) {
         )}
         <div className="royal-count-ornament royal-count-bottom" aria-hidden="true">❦</div>
       </section>
+      <section className="royal-details-section">
+        <span className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</span>
+        <p className="royal-count-eyebrow">كل التفاصيل في انتظاركم</p>
+        <h2>مكان وموعد فرحتنا</h2>
+        <div className="royal-detail-card"><span>⌖</span><strong>{draft.venue || "مكان المناسبة"}</strong>{draft.venueAddress ? <p>{draft.venueAddress}</p> : null}{draft.city ? <small>{draft.city}</small> : null}</div>
+        <a className="royal-map-link" href={mapLink(draft)} target="_blank" rel="noreferrer">⌖ افتح موقع المناسبة</a>
+        {validDate ? <a className="royal-calendar-link" href={calendarUrl} target="_blank" rel="noreferrer">＋ أضف الموعد إلى التقويم</a> : null}
+        <VenueMap draft={draft} />
+      </section>
+      <div className="royal-flower-bottom" aria-hidden="true"><img src="/chateau/royal-blue-floral.webp" alt="" /></div>
     </article>
   )
 }
