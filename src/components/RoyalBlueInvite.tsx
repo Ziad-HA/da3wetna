@@ -104,7 +104,7 @@ export function RoyalBlueInvite({ draft, preview = false, endingAdditions }: { d
         <section className="vaux-sec site-reveal">
           <span className="vaux-kicker">بكل حب</span>
           <h2 className="vaux-script-title">مستنيين نشوفكم</h2>
-          <p className="vaux-body-text">{draft.dressCode || "يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا."}</p>
+          <p className="vaux-body-text">يسعدنا حضوركم بأجمل إطلالة تليق بليلتنا.</p>
         </section>
         <section className="vaux-sec site-reveal vaux-contact-sec">
           <div className="vaux-divider-wrapper"><img src="/vaux/flower_divider.jpg" alt="" className="vaux-flower-divider" /></div>
