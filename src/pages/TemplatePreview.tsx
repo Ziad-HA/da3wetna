@@ -28,10 +28,8 @@ export function TemplatePreview() {
   const draft = useMemo(() => {
     if (!template) return null
     const previewDraft = draftFor(template)
-    if (template.id === "royal-blue") {
-      previewDraft.groomFather = "أحمد"
-      previewDraft.brideFather = "محمد"
-    }
+    previewDraft.groomFather = "أحمد"
+    previewDraft.brideFather = "محمد"
     return previewDraft
   }, [template])
 
@@ -250,6 +248,20 @@ export function TemplatePreview() {
                 </div>
               </>
             )}
+            <section
+              className="preview-parents-card"
+              style={{
+                "--preview-parents-paper": template.vars.paper,
+                "--preview-parents-ink": template.vars.ink,
+                "--preview-parents-gold": template.vars.gold,
+              } as CSSProperties}
+              dir="rtl"
+              aria-label="أسماء والدي العروسين"
+            >
+              <p>نجل الأستاذ <strong>{draft.groomFather}</strong></p>
+              <span aria-hidden="true">✦</span>
+              <p>وكريمة الأستاذ <strong>{draft.brideFather}</strong></p>
+            </section>
             <InviteAdditions
               draft={draft}
               preview
