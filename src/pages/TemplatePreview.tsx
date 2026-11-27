@@ -41,6 +41,21 @@ export function TemplatePreview() {
     }
   }, [template])
 
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio || !draft.musicUrl) return
+    audio.volume = 0.7
+    // Try autoplay on entering preview; if the browser blocks it, the visible
+    // player button remains available and the envelope click retries playback.
+    audio.play().then(() => {
+      setMusicPlaying(true)
+      setMusicError("")
+    }).catch(() => {
+      setMusicPlaying(false)
+      setMusicError("لو الأغنية ما اشتغلتش تلقائيًا، اضغط زر تشغيل الأغنية بالأعلى.")
+    })
+  }, [template?.id, draft.musicUrl])
+
   if (!template || !draft) {
     return <Navigate to="/templates" replace />
   }
