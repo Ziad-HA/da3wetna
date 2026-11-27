@@ -175,7 +175,6 @@ export const templates: Template[] = [
 // القوالب الموجودة في الموقع حاليًا فقط.
 const activeTemplateIds = new Set<TemplateId>([
   "estate",
-  "estate-rose",
   "chateau",
   "royal-blue",
   "emerald-fern",
