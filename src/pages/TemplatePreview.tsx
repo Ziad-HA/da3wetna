@@ -23,6 +23,8 @@ export function TemplatePreview() {
 
   const [introStep, setIntroStep] = useState(0)
   const [introSkipped, setIntroSkipped] = useState(false)
+  const [musicPlaying, setMusicPlaying] = useState(false)
+  const [musicError, setMusicError] = useState("")
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const draft = useMemo(() => {
@@ -39,25 +41,34 @@ export function TemplatePreview() {
     }
   }, [template])
 
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio || !draft.musicUrl) return
-    audio.volume = 0.7
-    audio.currentTime = 75
-    // Try autoplay on preview entry; browsers may require the envelope click first.
-    audio.play().catch(() => {})
-  }, [template?.id, draft.musicUrl])
-
   if (!template || !draft) {
     return <Navigate to="/templates" replace />
   }
 
   function startMusic() {
     const audio = audioRef.current
-    if (!audio) return
-    if (audio.currentTime < 75 || audio.currentTime >= 165) audio.currentTime = 75
+    if (!audio || !draft.musicUrl) return
+    setMusicError("")
     audio.volume = 0.7
-    audio.play().catch(() => {})
+    // Start immediately from the user's envelope click; seeking before metadata
+    // loads was causing some browsers to reject or silently stop playback.
+    if (audio.ended) audio.currentTime = 0
+    const playback = audio.play()
+    playback.then(() => setMusicPlaying(true)).catch(() => {
+      setMusicPlaying(false)
+      setMusicError("مش قادرين نشغّل النشيد. جرّب زر التشغيل مرة تانية.")
+    })
+  }
+
+  function toggleMusic() {
+    const audio = audioRef.current
+    if (!audio) return
+    if (audio.paused) {
+      startMusic()
+    } else {
+      audio.pause()
+      setMusicPlaying(false)
+    }
   }
 
   function openEnvelope() {
@@ -78,7 +89,7 @@ export function TemplatePreview() {
 
   return (
     <div className="preview-page-container relative min-h-dvh">
-      <audio ref={audioRef} src={draft.musicUrl || undefined} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= 165) { event.currentTarget.pause(); event.currentTarget.currentTime = 75 } }} />
+      <audio ref={audioRef} src={draft.musicUrl || undefined} preload="auto" onPlay={() => setMusicPlaying(true)} onPause={() => setMusicPlaying(false)} onEnded={() => setMusicPlaying(false)} onError={() => { setMusicPlaying(false); setMusicError("ملف النشيد مش متاح حاليًا. تقدر تختار نشيد تاني من التعديل.") }} />
       {/* Top Floating Bar */}
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/20 bg-black/40 px-3 py-2.5 backdrop-blur-md sm:px-6 sm:py-3">
         <div className="flex items-center gap-2 sm:gap-3">
@@ -96,6 +107,10 @@ export function TemplatePreview() {
         </div>
 
         <div className="flex items-center gap-2">
+          <button type="button" onClick={toggleMusic} className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-white/35 bg-white/15 px-3 py-1.5 text-[11px] font-bold text-white transition hover:bg-white/25" aria-label={musicPlaying ? "إيقاف الموسيقى" : "تشغيل الموسيقى"}>
+            <span aria-hidden="true">{musicPlaying ? "Ⅱ" : "♫"}</span>
+            <span>{musicPlaying ? "إيقاف الأغنية" : "تشغيل الأغنية"}</span>
+          </button>
           <span className="hidden rounded-full bg-amber-400/20 px-2.5 py-1 text-[11px] font-bold text-amber-200 sm:inline-block">
             أسماء تجريبية للعرض
           </span>
@@ -109,6 +124,8 @@ export function TemplatePreview() {
           </button>
         </div>
       </header>
+
+      {musicError ? <p role="status" className="fixed right-3 top-[58px] z-[70] max-w-[calc(100%-24px)] rounded-xl bg-black/75 px-3 py-2 text-xs font-bold text-white shadow-lg sm:right-6">{musicError}</p> : null}
 
       {/* Opening Envelope Screens */}
       {!introSkipped && introStep < 3 && (template.id === "royal-blue" || template.id === "emerald-fern" || template.id === "burgundy-velvet" || template.id === "magnolia-ivory") ? (
@@ -226,7 +243,7 @@ export function TemplatePreview() {
               template.id === "chateau" ? (
                 <ChateauInvite draft={draft} />
               ) : template.id === "royal-blue" ? (
-                <RoyalBlueInvite draft={draft} />
+                <RoyalBlueInvite draft={draft} preview />
               ) : (
                 <SiteInvite draft={draft} template={template} />
               )
