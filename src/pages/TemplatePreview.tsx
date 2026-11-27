@@ -217,6 +217,10 @@ export function TemplatePreview() {
               "--invite-shell": template.vars.shell,
               "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea",
               "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4",
+              "--flow-paper": template.vars.paper,
+              "--flow-ink": template.vars.ink,
+              "--flow-gold": template.vars.gold,
+              "--flow-shell": template.vars.shell,
             } as CSSProperties
           }
         >
@@ -258,7 +262,7 @@ export function TemplatePreview() {
       ) : (
         /* Full Invitation View once envelope is opened */
         <main
-          className={`invite-public-page min-h-dvh px-4 pb-36 pt-16 sm:pb-32 sm:pt-20${template.id === "emerald-fern" ? " emerald-fern-page" : ""}${
+          className={`invite-public-page invite-floral-flow min-h-dvh px-4 pb-36 pt-16 sm:pb-32 sm:pt-20${template.id === "emerald-fern" ? " emerald-fern-page" : ""}${
             isStrip ? " strip-page" : ""
           }${isSite ? " site-page" : ""}${template.id === "royal-blue" ? " royal-blue-page" : ""}`}
           style={
