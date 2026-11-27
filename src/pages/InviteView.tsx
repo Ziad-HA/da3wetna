@@ -239,6 +239,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
         <div className={draft.templateId === "emerald-fern" ? "fern-full" : "invite-public-card w-full overflow-hidden rounded-[28px] shadow-2xl"}>
           <Invitation draft={draft} />
         </div>
+        {draft.templateId === "emerald-fern" ? <SiteInvite draft={draft} template={template} sectionsOnly /> : null}
         <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} />
         <section className="invite-welcome-message w-full rounded-[26px] border border-white/70 bg-white/80 p-5 text-center shadow-lg">
           <span className="text-2xl text-[#b83b50]">❦</span>
