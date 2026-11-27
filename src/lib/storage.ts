@@ -36,7 +36,7 @@ export function readDraft(): InviteDraft | null {
       venueAddress: typeof data.venueAddress === "string" ? data.venueAddress : "",
       venueLat: typeof data.venueLat === "number" && Number.isFinite(data.venueLat) ? data.venueLat : null,
       venueLng: typeof data.venueLng === "number" && Number.isFinite(data.venueLng) ? data.venueLng : null,
-      musicUrl: typeof data.musicUrl === "string" ? data.musicUrl : "",
+      musicUrl: typeof data.musicUrl === "string" ? data.musicUrl : draftFor(getTemplate(data.templateId)!).musicUrl,
       photoOne: typeof data.photoOne === "string" ? data.photoOne : "",
       photoTwo: typeof data.photoTwo === "string" ? data.photoTwo : "",
       program: typeof data.program === "string" ? data.program : "",
