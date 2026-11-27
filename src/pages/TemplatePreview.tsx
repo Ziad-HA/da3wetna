@@ -282,7 +282,7 @@ export function TemplatePreview() {
               ) : template.id === "royal-blue" ? (
                 <RoyalBlueInvite draft={draft} preview />
               ) : (
-                <SiteInvite draft={draft} template={template} />
+                <SiteInvite draft={draft} template={template} preview={template.id === "estate" || template.id === "estate-classic"} />
               )
             ) : isStrip ? (
               <StripInvite draft={draft} template={template} autoScroll />
@@ -307,6 +307,7 @@ export function TemplatePreview() {
               preview
               shareUrl={window.location.href}
               palette={template.id === "royal-blue" ? { paper: "#F1F6FC", ink: "#173B60", gold: "#B99655", soft: "#526A85" } : { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }}
+              showParents={template.id !== "estate" && template.id !== "estate-classic"}
             />
           </div>
         </main>
