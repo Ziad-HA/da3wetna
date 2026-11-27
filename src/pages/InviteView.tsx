@@ -191,7 +191,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
             ) : draft.templateId === "royal-blue" ? (
               <>
                 <RoyalBlueInvite draft={draft} />
-                <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} />
+                <InviteAdditions draft={draft} inviteId={inviteId} shareUrl={window.location.href} palette={additionsPalette} showParents={false} />
               </>
             ) : (
               <SiteInvite
