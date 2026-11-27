@@ -4614,3 +4614,129 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 }
 .invite-additions-love { padding-top: clamp(1.8rem, 6vw, 2.7rem); }
 .invite-additions-love .invite-additions-floral { margin-top: 1.15rem; }
+
+/* Emerald fern — romantic forest palette, scoped to this invitation only */
+.emerald-fern-page {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(92, 133, 94, .28), transparent 31rem),
+    radial-gradient(ellipse at 88% 32%, rgba(181, 151, 88, .13), transparent 28rem),
+    linear-gradient(155deg, #0c2117 0%, #173b29 48%, #10291d 100%) !important;
+  color: #f5f0e4 !important;
+}
+.emerald-fern-page::before,
+.emerald-fern-page::after {
+  content: "❧";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  color: rgba(202, 184, 127, .22);
+  font-family: Georgia, serif;
+  font-size: clamp(8rem, 24vw, 18rem);
+  line-height: 1;
+  text-shadow: 0 12px 36px rgba(0,0,0,.16);
+}
+.emerald-fern-page::before { top: 4rem; left: -3.5rem; transform: rotate(-28deg); }
+.emerald-fern-page::after { top: 48%; right: -4rem; transform: rotate(150deg); }
+.emerald-fern-page .preview-content { position: relative; z-index: 1; gap: clamp(1.15rem, 4vw, 2rem); }
+.emerald-fern-page .preview-content > .fern-full {
+  width: min(100%, 440px);
+  overflow: hidden;
+  border: 1px solid rgba(202, 184, 127, .58);
+  border-radius: 22px;
+  background: #f8f5eb;
+  box-shadow: 0 22px 58px rgba(0,0,0,.38), 0 0 0 6px rgba(222, 207, 162, .07);
+}
+.emerald-fern-page .vaux-emerald-fern {
+  --paper: #f8f5eb;
+  --ink: #173b29;
+  --gold: #b89a5a;
+  --soft: #587361;
+  width: min(100%, 760px);
+  max-width: 760px;
+  padding: 1rem clamp(.6rem, 2vw, 1.25rem) 1.5rem;
+  border: 1px solid rgba(196, 174, 117, .55);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(218, 207, 164, .28), transparent 42%),
+    linear-gradient(180deg, #f7f4e9 0%, #eeeede 100%);
+  color: #173b29;
+  box-shadow: 0 22px 58px rgba(0,0,0,.32), inset 0 0 0 4px rgba(255,255,255,.52);
+}
+.emerald-fern-page .vaux-emerald-fern .vaux-sec {
+  position: relative;
+  margin: 1rem auto;
+  padding: clamp(1.5rem, 5vw, 2.5rem) clamp(.85rem, 4vw, 1.5rem);
+  overflow: hidden;
+  border: 1px solid rgba(167, 145, 88, .34);
+  border-radius: 19px;
+  background: linear-gradient(145deg, rgba(255,255,255,.86), rgba(231,235,218,.94));
+  box-shadow: 0 9px 24px rgba(28, 54, 37, .09), inset 0 0 0 3px rgba(255,255,255,.45);
+}
+.emerald-fern-page .vaux-emerald-fern .vaux-sec::after {
+  content: "❦";
+  display: block;
+  margin: .8rem auto -.55rem;
+  color: rgba(139, 119, 69, .62);
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  letter-spacing: .25rem;
+}
+.emerald-fern-page .vaux-emerald-fern .vaux-script-title,
+.emerald-fern-page .vaux-emerald-fern .vaux-count-item strong,
+.emerald-fern-page .vaux-emerald-fern .vaux-body-text,
+.emerald-fern-page .vaux-emerald-fern .vaux-time-display,
+.emerald-fern-page .vaux-emerald-fern .vaux-program-item,
+.emerald-fern-page .vaux-emerald-fern .vaux-place-btn,
+.emerald-fern-page .vaux-emerald-fern .vaux-venue-name { color: #173b29; }
+.emerald-fern-page .vaux-emerald-fern .vaux-kicker,
+.emerald-fern-page .vaux-emerald-fern .vaux-count-item span,
+.emerald-fern-page .vaux-emerald-fern .vaux-program-item time { color: #947a43; }
+.emerald-fern-page .vaux-emerald-fern .vaux-location-card {
+  border-color: rgba(148, 122, 67, .38);
+  background: rgba(255,255,255,.72);
+}
+.emerald-fern-page .vaux-emerald-fern .vaux-btn {
+  border-color: #315c40;
+  color: #214b32;
+  background: rgba(255,255,255,.58);
+  border-radius: 999px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.emerald-fern-page .vaux-emerald-fern .vaux-btn:hover {
+  background: #214b32;
+  color: #fffdf5;
+}
+.emerald-fern-page .vaux-emerald-fern .royal-calendar-link {
+  border-color: #214b32;
+  background: linear-gradient(135deg, #315c40, #173b29);
+  color: #fffdf5;
+  box-shadow: 0 8px 18px rgba(23,59,41,.2);
+}
+.emerald-fern-page .vaux-emerald-fern .vaux-share-grid button {
+  border-color: rgba(148, 122, 67, .38);
+  background: rgba(255,255,255,.82);
+  color: #214b32;
+}
+.emerald-fern-page .vaux-emerald-fern .vaux-share-grid b { color: #a2864d; }
+.emerald-fern-page .vaux-emerald-fern .royal-countdown-section {
+  border-color: rgba(171, 145, 83, .58);
+  background: radial-gradient(circle at 50% 0%, rgba(195, 177, 120, .22), transparent 55%), linear-gradient(150deg, #fffdf6, #e8eddf 65%, #f5f2e8);
+}
+.emerald-fern-page .vaux-emerald-fern .royal-countdown-section h2 { color: #173b29; }
+.emerald-fern-page .vaux-emerald-fern .royal-count-date { color: #927943; }
+.emerald-fern-page .invite-additions-rsvp,
+.emerald-fern-page .invite-additions-share {
+  box-shadow: 0 16px 38px rgba(0,0,0,.22), inset 0 0 0 3px rgba(255,255,255,.5);
+}
+.emerald-fern-page .invite-additions h2 { color: #173b29; }
+.emerald-fern-page .invite-additions-preview-form button { background: #214b32; }
+@media (max-width: 640px) {
+  .emerald-fern-page { padding-inline: .7rem !important; }
+  .emerald-fern-page .vaux-emerald-fern { padding: .55rem .45rem 1rem; border-radius: 19px; }
+  .emerald-fern-page .vaux-emerald-fern .vaux-sec { border-radius: 15px; }
+}
+
