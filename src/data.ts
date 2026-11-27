@@ -96,8 +96,8 @@ export const templates: Template[] = [
   },
   {
     id: "chateau",
-    name: "شاتو ده فاليري",
-    blurb: "دعوة زفاف رومانسية بظرف أبيض وختم أخضر وصفحة تفاصيل فرنسية أنيقة",
+    name: "قصر ڤاليري",
+    blurb: "دعوة زفاف راقية بظرف عاجي وختم أخضر وتفاصيل أنيقة",
     category: "فرح",
     isNew: true,
     layout: "site",
@@ -175,8 +175,6 @@ export const templates: Template[] = [
 // القوالب الموجودة في الموقع حاليًا فقط.
 const activeTemplateIds = new Set<TemplateId>([
   "estate",
-  "calla",
-  "envelope",
   "estate-rose",
   "chateau",
   "royal-blue",
