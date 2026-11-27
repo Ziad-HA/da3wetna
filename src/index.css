@@ -3705,3 +3705,89 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   font-weight: 600;
   color: #453648;
 }
+
+
+/* ===== Royal Gilded: purple envelope + royal-blue invitation ===== */
+.real-env-royal-purple .real-env-liner-img,
+.real-env-royal-purple .real-env-flap-img,
+.real-env-royal-purple .real-env-pocket-img {
+  filter: hue-rotate(54deg) saturate(1.18) brightness(.96);
+}
+.real-env-royal-purple .real-env-card-slot {
+  inset: 6% 7% -8%;
+}
+.real-env-royal-purple .real-env-card-inner {
+  border: 1px solid rgba(214, 181, 109, .8);
+  box-shadow: 0 14px 38px rgba(12, 8, 28, .38);
+}
+.real-env-royal-purple .real-env-seal-img {
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .42));
+}
+.vaux-royal {
+  color: #173B70;
+  --royal-blue: #173B70;
+  --royal-purple: #26143D;
+  --royal-gold: #D6B56D;
+}
+.vaux-royal .vaux-hero-inner {
+  background: #173B70;
+}
+.vaux-royal .vaux-hero-bg {
+  filter: saturate(.72) contrast(1.04);
+}
+.vaux-royal .vaux-hero-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(23, 59, 112, .16), rgba(23, 59, 112, .3));
+  mix-blend-mode: multiply;
+}
+.vaux-royal .vaux-hero-content {
+  z-index: 2;
+}
+.vaux-royal .vaux-hero-names,
+.vaux-royal .vaux-script-title,
+.vaux-royal .vaux-time-display,
+.vaux-royal .vaux-venue-name,
+.vaux-royal .vaux-body-text,
+.vaux-royal .vaux-program-item,
+.vaux-royal .vaux-faq-btn {
+  color: #173B70;
+}
+.vaux-royal .vaux-kicker,
+.vaux-royal .vaux-subhead,
+.vaux-royal .vaux-body-meta,
+.vaux-royal .vaux-program-item time,
+.vaux-royal .vaux-amp {
+  color: #A47B35;
+}
+.vaux-royal .vaux-location-card,
+.vaux-royal .vaux-count-item,
+.vaux-royal .vaux-letter-card {
+  background: rgba(255, 255, 255, .78);
+  border-color: rgba(23, 59, 112, .18);
+}
+.vaux-royal .vaux-btn {
+  color: #173B70;
+  border-color: #A47B35;
+}
+.vaux-royal .vaux-btn:hover {
+  background: #173B70;
+  color: #F7F3E9;
+}
+.vaux-royal .vaux-program-item {
+  border-color: rgba(23, 59, 112, .18);
+}
+.vaux-royal .vaux-count-item strong {
+  color: #173B70;
+}
+.vaux-royal .vaux-count-item span {
+  color: #A47B35;
+}
+.vaux-royal .vaux-invite-controls button {
+  border-color: rgba(214, 181, 109, .55);
+  color: #F7F3E9;
+  background: rgba(38, 20, 61, .82);
+}
