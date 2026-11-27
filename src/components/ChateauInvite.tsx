@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import { VenueMap } from "./VenueMap"
-import { Invitation } from "./Invitation"
 import type { InviteDraft } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
