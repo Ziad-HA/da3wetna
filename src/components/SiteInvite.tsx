@@ -3,6 +3,7 @@ import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import { VenueMap } from "./VenueMap"
 import { Invitation } from "./Invitation"
+import { InviteAdditions } from "./InviteAdditions"
 import type { InviteDraft, Template } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -54,9 +55,9 @@ function Countdown({ draft }: { draft: InviteDraft }) {
   ))}</div>
 }
 
-type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void; showRsvpSection?: boolean; showShareSection?: boolean }
+type Props = { draft: InviteDraft; template: Template; rsvp?: (language: "ar" | "en") => ReactNode; shareUrl?: string; musicOn?: boolean; hasMusic?: boolean; onToggleMusic?: () => void; language?: "ar" | "en"; onToggleLanguage?: () => void; showRsvpSection?: boolean; showShareSection?: boolean; preview?: boolean }
 
-export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage, showRsvpSection = true, showShareSection = true }: Props) {
+export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = false, hasMusic = false, onToggleMusic, language = "ar", onToggleLanguage, showRsvpSection = true, showShareSection = true, preview = false }: Props) {
   const root = useRef<HTMLElement>(null)
   const style = {
     "--paper": template.vars.paper,
@@ -151,6 +152,8 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
           </div>
         </section>
       )}
+
+      {(draft.templateId === "estate" || draft.templateId === "estate-classic") ? <InviteAdditions draft={draft} preview={preview} palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }} showRsvp={false} showShare={false} /> : null}
 
       <section className="vaux-sec site-reveal">
         <span className="vaux-kicker">{en ? "SAVE THE DATE" : "فرحتنا تكمل بوجودكم"}</span>
