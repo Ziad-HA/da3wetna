@@ -132,7 +132,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   }, [])
 
   return (
-    <article ref={root} className={`vaux-site ${draft.templateId === "royal-blue" ? "vaux-royal-blue" : ""} ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
+    <article ref={root} className={`vaux-site ${draft.templateId === "royal-blue" ? "vaux-royal-blue" : ""} ${draft.templateId === "estate" || draft.templateId === "estate-classic" ? "vaux-estate-royal" : ""} ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
       <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div>
       {draft.templateId === "royal-blue" ? (
         <section className="vaux-hero-card vaux-lavender-hero" aria-label={inviteTitle}>
@@ -155,10 +155,12 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
 
       {(draft.templateId === "estate" || draft.templateId === "estate-classic") ? <InviteAdditions draft={draft} preview={preview} palette={{ paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }} showRsvp={false} showShare={false} /> : null}
 
-      <section className="vaux-sec site-reveal">
+      <section className="vaux-sec site-reveal royal-countdown-section">
+        <div className="royal-count-ornament" aria-hidden="true">✦ ❦ ✦</div>
         <span className="vaux-kicker">{en ? "SAVE THE DATE" : "فرحتنا تكمل بوجودكم"}</span>
         <h2 className="vaux-script-title">{en ? "Countdown to our day" : "باقي على فرحتنا"}</h2>
-        {validDate ? <><p className="vaux-subhead">{formatArabicDate(draft.date)}</p><Countdown draft={draft} /></> : <p className="vaux-body-text">{en ? "We are looking forward to celebrating with you." : "مستنيين اليوم اللي يجمعنا بيكم"}</p>}
+        {validDate ? <><p className="royal-count-date">{formatArabicDate(draft.date)}</p><Countdown draft={draft} /></> : <p className="royal-count-empty">{en ? "We are looking forward to celebrating with you." : "مستنيين اليوم اللي يجمعنا بيكم"}</p>}
+        <div className="royal-count-ornament royal-count-bottom" aria-hidden="true">❦</div>
       </section>
 
       {draft.opening ? <section className="vaux-sec site-reveal vaux-opening-verse">
@@ -185,7 +187,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         </div>
       </section> : null}
 
-      <section className="vaux-sec site-reveal vaux-reception-sec">
+      <section className="vaux-sec site-reveal vaux-reception-sec royal-details-section">
         <div className="vaux-reception-copy">
           <span className="vaux-kicker">{en ? "WEDDING DETAILS" : "مستنيينكم تشاركونا"}</span>
           <h2 className="vaux-script-title">{en ? "When & where" : "ميعادنا ومكاننا"}</h2>
@@ -203,7 +205,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
               <button type="button" onClick={() => copyText(locationUrl, en ? "Location link copied." : "تم نسخ رابط اللوكيشن.")} className="vaux-btn">{en ? "Copy location link" : "نسخ رابط اللوكيشن"}</button>
             </div>
           </div>
-          {validDate ? <div className="vaux-btn-row"><button type="button" onClick={() => downloadIcs(draft)} className="vaux-btn">{en ? "Add to calendar" : "أضف الموعد للتقويم"}</button></div> : null}
+          {validDate ? <div className="vaux-btn-row"><button type="button" onClick={() => downloadIcs(draft)} className="royal-calendar-link">{en ? "Add to calendar" : "＋ أضف الموعد إلى التقويم"}</button></div> : null}
           <VenueMap draft={draft} />
         </div>
       </section>
