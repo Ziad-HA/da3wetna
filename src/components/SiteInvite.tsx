@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
 import { VenueMap } from "./VenueMap"
+import { Invitation } from "./Invitation"
 import type { InviteDraft, Template } from "../types"
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -128,18 +129,24 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
   return (
     <article ref={root} className={`vaux-site ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
       <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div>
-      <section className="vaux-hero-card">
-        <div className="vaux-hero-inner">
-          <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
-          <div className="vaux-hero-content">
-            <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
-            <h1 className="vaux-hero-names">
-              <span>{draft.groom}</span><span className="vaux-amp">و</span><span>{draft.bride}</span>
-            </h1>
-            <p className="vaux-hero-hosts">{draft.hosts || (en ? "Together with our families" : "يتشرف الأهل بدعوتكم لحضور حفل الزفاف")}</p>
+      {draft.templateId === "royal-blue" ? (
+        <section className="vaux-hero-card vaux-lavender-hero" aria-label={inviteTitle}>
+          <Invitation draft={draft} />
+        </section>
+      ) : (
+        <section className="vaux-hero-card">
+          <div className="vaux-hero-inner">
+            <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
+            <div className="vaux-hero-content">
+              <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
+              <h1 className="vaux-hero-names">
+                <span>{draft.groom}</span><span className="vaux-amp">و</span><span>{draft.bride}</span>
+              </h1>
+              <p className="vaux-hero-hosts">{draft.hosts || (en ? "Together with our families" : "يتشرف الأهل بدعوتكم لحضور حفل الزفاف")}</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="vaux-sec site-reveal">
         <span className="vaux-kicker">{en ? "SAVE THE DATE" : "فرحتنا تكمل بوجودكم"}</span>
