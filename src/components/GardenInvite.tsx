@@ -7,7 +7,6 @@ type Props = { draft: InviteDraft; rsvp?: ReactNode; shareUrl?: string }
 
 export function GardenInvite({ draft, rsvp, shareUrl = "" }: Props) {
   const [now, setNow] = useState(Date.now())
-  const [notice, setNotice] = useState("")
   useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(timer) }, [])
   const target = new Date(`${draft.date}T${draft.time || "18:00"}:00`).getTime()
   const remaining = Math.max(0, target - now)
@@ -17,11 +16,6 @@ export function GardenInvite({ draft, rsvp, shareUrl = "" }: Props) {
   const seconds = Math.floor((remaining % 60000) / 1000)
   const date = useMemo(() => formatArabicDate(draft.date), [draft.date])
   const location = mapLink(draft)
-  const copy = async (value: string, message: string) => { try { await navigator.clipboard.writeText(value); setNotice(message) } catch { setNotice("انسخ الرابط من المتصفح لمشاركته.") } }
-  const share = async () => {
-    if (navigator.share) { try { await navigator.share({ title: `دعوة ${draft.groom} و${draft.bride}`, url: shareUrl || window.location.href }); return } catch {} }
-    await copy(shareUrl || window.location.href, "تم نسخ رابط الدعوة.")
-  }
   return <article className="garden-invite" dir="rtl" lang="ar">
     <section className="garden-hero">
       <GardenBotanical className="garden-botanical garden-botanical-top" />
@@ -59,8 +53,6 @@ export function GardenInvite({ draft, rsvp, shareUrl = "" }: Props) {
     <section className="garden-section garden-footer">
       <span className="garden-flower-mark">❦</span><h2>{draft.groom} <i>و</i> {draft.bride}</h2>
       <p>وجودكم أجمل هدية لينا</p>
-      <button type="button" className="garden-solid-btn" onClick={share}>شاركوا الدعوة</button>
-      {notice ? <small role="status">{notice}</small> : null}
       <p className="garden-credit">بكل حب · دعوتنا</p>
     </section>
   </article>
