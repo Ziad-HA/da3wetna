@@ -65,7 +65,10 @@ export function initDraft(id: string | undefined): InviteDraft {
   const template = getTemplate(id) ?? getTemplate("estate")!
   const saved = readDraft()
   if (saved && saved.templateId === template.id) return saved
-  return draftFor(template)
+  const fresh = draftFor(template)
+  // قالب الزمردي بيفتح فاضي عشان العميل يكتب بياناته (الأسماء التجريبية في المعاينة بس).
+  if (template.id === "emerald-fern") return { ...fresh, groom: "", bride: "", date: "", time: "", venue: "", city: "" }
+  return fresh
 }
 
 export function readSelectedPackage(): PackageId {

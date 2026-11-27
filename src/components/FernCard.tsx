@@ -4,7 +4,6 @@ import type { FieldKey, InviteDraft } from "../types"
 
 type Props = {
   draft: InviteDraft
-  side: "front" | "back"
   vars: CSSProperties
   activeField?: FieldKey | null
   onSelect?: (field: FieldKey) => void
@@ -22,8 +21,7 @@ const at = (y: number, x = 620, w = 700): CSSProperties => ({
   width: `${(w / 1240) * 100}%`,
 })
 
-export function FernCard({ draft, side, vars, activeField, onSelect }: Props) {
-  const front = side === "front"
+export function FernCard({ draft, vars, activeField, onSelect }: Props) {
   const text = (field: FieldKey, value: string, size: number, maxChars: number, className = ""): ReactNode =>
     onSelect ? (
       <button type="button" className={`edit-line fern-text ${className} ${activeField === field ? "is-active" : ""}`} style={fit(value, size, maxChars)} onClick={() => onSelect(field)}>
@@ -37,39 +35,29 @@ export function FernCard({ draft, side, vars, activeField, onSelect }: Props) {
   const bride = draft.bride || "اسم العروسة"
   const occasion = !draft.occasion || draft.occasion === "فرح" ? "زفاف" : draft.occasion
   const date = formatArabicDate(draft.date)
-  const time = `الساعة ${formatArabicTime(draft.time)}`
+  const time = draft.time ? `الساعة ${formatArabicTime(draft.time)}` : "الوقت"
   const venue = [draft.venue || "مكان المناسبة", draft.city].filter(Boolean).join("، ")
 
   return (
     <article className="invite fern-card" style={vars} dir="rtl">
-      <img src={`/cards/fern_${side}.jpg`} alt="" className="fern-bg" />
+      <img src="/cards/fern_front.jpg" alt="" className="fern-bg" />
 
-      {front ? <div className="fern-slot" style={at(218)}>{text("occasion", `دعوة ${occasion}`, 48, 20, "fern-title")}</div> : null}
+      <div className="fern-slot" style={at(218)}>{text("occasion", `دعوة ${occasion}`, 48, 20, "fern-title")}</div>
 
-      <div className="fern-slot" style={at(front ? 395 : 490, 620, front ? 680 : 640)}>
-        {front ? <p className="fern-text" style={fit("", 34, 1)}>بسم الله الرحمن الرحيم</p> : null}
+      <div className="fern-slot" style={at(395, 620, 680)}>
+        <p className="fern-text" style={fit("", 34, 1)}>بسم الله الرحمن الرحيم</p>
         {draft.hosts ? text("hosts", draft.hosts, 34, 90) : null}
         {draft.message ? text("message", draft.message, 34, 90) : null}
-        {!front && draft.opening ? text("opening", draft.opening, 28, 110) : null}
       </div>
 
       {/* الـ & مرسومة في الصورة: العريس على يمينها والعروسة على شمالها */}
-      <div className="fern-slot" style={front ? at(578, 835, 330) : at(262, 875, 350)}>{text("groom", groom, front ? 112 : 78, 7, "fern-name")}</div>
-      <div className="fern-slot" style={front ? at(578, 390, 330) : at(262, 365, 350)}>{text("bride", bride, front ? 112 : 78, 7, "fern-name")}</div>
+      <div className="fern-slot" style={at(578, 835, 330)}>{text("groom", groom, 100, 6, "fern-name")}</div>
+      <div className="fern-slot" style={at(578, 390, 330)}>{text("bride", bride, 100, 6, "fern-name")}</div>
 
-      {front ? (
-        <>
-          <div className="fern-slot" style={at(748, 620, 480)}>{text("date", date, 34, 28)}</div>
-          <div className="fern-slot" style={at(819, 620, 480)}>{text("time", time, 34, 28)}</div>
-          <div className="fern-slot" style={at(889, 620, 480)}>{text("venue", venue, 34, 28)}</div>
-          <div className="fern-slot" style={at(970)}><p className="fern-text fern-title" style={fit("", 34, 1)}>حضوركم يتمم فرحتنا</p></div>
-        </>
-      ) : (
-        <>
-          <div className="fern-slot" style={at(715)}>{text("date", `${date} · ${time}`, 34, 42)}</div>
-          <div className="fern-slot" style={at(766)}>{text("venue", venue, 34, 38)}</div>
-        </>
-      )}
+      <div className="fern-slot" style={at(748, 620, 480)}>{text("date", date, 34, 28)}</div>
+      <div className="fern-slot" style={at(819, 620, 480)}>{text("time", time, 34, 28)}</div>
+      <div className="fern-slot" style={at(889, 620, 480)}>{text("venue", venue, 34, 28)}</div>
+      <div className="fern-slot" style={at(970)}><p className="fern-text fern-title" style={fit("", 34, 1)}>حضوركم يتمم فرحتنا</p></div>
     </article>
   )
 }

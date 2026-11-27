@@ -8,8 +8,6 @@ type Props = {
   draft: InviteDraft
   activeField?: FieldKey | null
   onSelect?: (field: FieldKey) => void
-  /** الوش التاني من الكارت (لقالب الزمردي بس) */
-  side?: "front" | "back"
 }
 
 const stars = [
@@ -23,7 +21,7 @@ const pearlArc = Array.from({ length: 15 }, (_, i) => [34 + i * 21.7, 34 + 30 * 
 const mirrorCorners = ["", "translate(360 0) scale(-1 1)", "translate(0 640) scale(1 -1)", "translate(360 640) scale(-1 -1)"]
 const sprigLeaves = Array.from({ length: 9 }, (_, i) => [110 + i * 52, i % 2 === 0 ? 1 : -1] as const)
 
-export function Invitation({ draft, activeField, onSelect, side = "front" }: Props) {
+export function Invitation({ draft, activeField, onSelect }: Props) {
   const template = getTemplate(draft.templateId) ?? getTemplate("estate")!
   const maskId = useId().replace(/:/g, "")
   const vars = {
@@ -37,7 +35,7 @@ export function Invitation({ draft, activeField, onSelect, side = "front" }: Pro
   } as CSSProperties
 
   if (template.id === "emerald-fern") {
-    return <FernCard draft={draft} side={side} vars={vars} activeField={activeField} onSelect={onSelect} />
+    return <FernCard draft={draft} vars={vars} activeField={activeField} onSelect={onSelect} />
   }
 
   if (template.id === "garden-classic") {
