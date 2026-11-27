@@ -123,7 +123,7 @@ export const templates: Template[] = [
     bride: "ليلى",
     venue: "فندق الفورسيزونز",
     time: "21:00",
-    vars: { paper: "#F9F8F5", ink: "#0F2035", gold: "#C5A059", soft: "#415A77", shell: "#0B1623" },
+    vars: { paper: "#EAF2FA", ink: "#0F2035", gold: "#C5A059", soft: "#415A77", shell: "#0B1623" },
     envelope: { body: ["#16283D", "#0A131F"], flap: ["#1C334D", "#0F2033"], liner: "#0F2035", linerPattern: "plain", seal: "#F2EDE4", sealKind: "flower", flapShape: "deep", zoom: true },
   },
   {
