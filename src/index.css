@@ -4767,7 +4767,7 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   width: clamp(145px, 28vw, 310px);
   height: clamp(210px, 40vw, 430px);
   pointer-events: none;
-  background-image: url("https://commons.wikimedia.org/wiki/Special:FilePath/Rose_Flower_%28PSF%29.png");
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/df/Rose_Flower_%28PSF%29.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -4894,5 +4894,41 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   .invite-floral-flow::after { right: -4.5rem; }
   .invite-floral-flow .vaux-sec,
   .invite-floral-flow .chx-sec { padding-block: 1.8rem !important; }
+}
+
+/* Final shared overrides for every active envelope family */
+.invite-floral-flow .vaux-site .vaux-sec,
+.invite-floral-flow .chx-site .chx-sec {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.invite-floral-flow .royal-details-section,
+.invite-floral-flow .royal-opening-section,
+.invite-floral-flow .royal-photo-section,
+.invite-floral-flow .royal-countdown-section,
+.invite-floral-flow .royal-detail-card {
+  background: transparent !important;
+  border-color: color-mix(in srgb, var(--flow-gold) 25%, transparent) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.invite-floral-flow .royal-details-section,
+.invite-floral-flow .royal-opening-section,
+.invite-floral-flow .royal-photo-section,
+.invite-floral-flow .royal-countdown-section {
+  padding-block: clamp(2rem, 6vw, 3.25rem) !important;
+}
+.invite-floral-flow .royal-flower-divider,
+.invite-floral-flow .royal-flower-bottom {
+  opacity: .72;
+  filter: saturate(.72);
+}
+.invite-floral-flow .royal-detail-card {
+  border-top: 1px solid color-mix(in srgb, var(--flow-gold) 24%, transparent) !important;
+}
+.invite-floral-flow .vaux-emerald-fern .vaux-sec::after {
+  color: color-mix(in srgb, var(--flow-gold) 72%, var(--flow-ink)) !important;
 }
 
