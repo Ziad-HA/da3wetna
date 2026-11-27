@@ -38,15 +38,15 @@ export function RoyalCard({ draft, vars, activeField, onSelect }: Props) {
     <article className="invite fern-card royal-card" style={vars} dir="rtl">
       <img src="/cards/royal_tall.jpg" alt="" className="fern-bg" />
 
-      <div className="fern-slot" style={at(300, 363, 440)}>
+      <div className="fern-slot" style={at(540, 363, 440)}>
         {draft.hosts ? text("hosts", draft.hosts, 28, 80) : null}
       </div>
 
       {/* الـ & مرسومة في الصورة: العريس على يمينها والعروسة على شمالها */}
-      <div className="fern-slot" style={at(420, 504, 200)}>{text("groom", draft.groom || "اسم العريس", 58, 6, "fern-name")}</div>
-      <div className="fern-slot" style={at(420, 222, 200)}>{text("bride", draft.bride || "اسم العروسة", 58, 6, "fern-name")}</div>
+      <div className="fern-slot" style={at(685, 512, 220)}>{text("groom", draft.groom || "اسم العريس", 72, 5, "fern-name")}</div>
+      <div className="fern-slot" style={at(685, 214, 220)}>{text("bride", draft.bride || "اسم العروسة", 72, 5, "fern-name")}</div>
 
-      {draft.opening ? <div className="fern-slot" style={at(605, 363, 400)}>{text("opening", draft.opening, 27, 90)}</div> : null}
+      {draft.opening ? <div className="fern-slot" style={at(375, 363, 400)}>{text("opening", draft.opening, 27, 90)}</div> : null}
 
       <div className="fern-slot" style={at(886, 523, 175)}><p className="fern-text" style={fit(day, 26, 10)}>{day}</p></div>
       <div className="fern-slot" style={at(886, 380, 105)}>{text("date", shortDate, 24, 9)}</div>
