@@ -7,6 +7,7 @@ import { getTemplate } from "../data"
 import { isLight } from "../lib/color"
 import { mapLink } from "../lib/maps"
 import { EstateOpening } from "../components/EstateOpening"
+import { RealisticEnvelopeOpening } from "../components/RealisticEnvelopeOpening"
 import { GardenInvite } from "../components/GardenInvite"
 import { SiteInvite } from "../components/SiteInvite"
 import { ChateauInvite } from "../components/ChateauInvite"
@@ -109,6 +110,27 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
   if (!introSkipped && introStep < 3) {
+    if (
+      draft.templateId === "royal-blue" ||
+      draft.templateId === "emerald-fern" ||
+      draft.templateId === "burgundy-velvet" ||
+      draft.templateId === "magnolia-ivory"
+    ) {
+      return (
+        <>
+          {audio}
+          <RealisticEnvelopeOpening
+            themeId={draft.templateId}
+            draft={draft}
+            template={template}
+            onOpen={openEnvelope}
+            onComplete={() => setIntroStep(3)}
+            onSkip={() => { startMusic(); setIntroSkipped(true); setIntroStep(3) }}
+          />
+        </>
+      )
+    }
+
     // قصر الدير يحتفظ بفتحته الأصلية دون أي تغيير.
     const isQasrElDeir = draft.templateId === "estate" || draft.templateId === "estate-classic"
     const colorway = isQasrElDeir

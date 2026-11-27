@@ -21,10 +21,19 @@ function CardCountdown({ draft }: { draft: InviteDraft }) {
     [Math.floor((left % 3600000) / 60000), "د"],
     [Math.floor((left % 60000) / 1000), "ث"],
   ] as const
-  return <div className="invite-thumb-countdown" dir="rtl" aria-label="الوقت المتبقي للمناسبة">
-    <span>باقي على الفرحة</span>
-    <div>{units.map(([value, label]) => <strong key={label}>{value}<small>{label}</small></strong>)}</div>
-  </div>
+  return (
+    <div className="invite-thumb-countdown" dir="rtl" aria-label="الوقت المتبقي للمناسبة">
+      <span>باقي على الفرحة</span>
+      <div>
+        {units.map(([value, label]) => (
+          <strong key={label}>
+            {value}
+            <small>{label}</small>
+          </strong>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 export function InviteThumb({ draft }: { draft: InviteDraft }) {
@@ -40,6 +49,25 @@ export function InviteThumb({ draft }: { draft: InviteDraft }) {
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
+
+  if (
+    draft.templateId === "royal-blue" ||
+    draft.templateId === "emerald-fern" ||
+    draft.templateId === "burgundy-velvet" ||
+    draft.templateId === "magnolia-ivory"
+  ) {
+    return (
+      <div ref={box} className="invite-thumb">
+        <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", borderRadius: 8 }}>
+          <img
+            src={`/envelopes/${draft.templateId}/envelope_closed.jpg`}
+            alt=""
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        </div>
+      </div>
+    )
+  }
 
   if (draft.templateId === "estate") {
     return (

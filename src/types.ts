@@ -6,6 +6,10 @@ export const templateIds = [
   "estate-rose",
   "chateau",
   "garden-classic",
+  "royal-blue",
+  "emerald-fern",
+  "burgundy-velvet",
+  "magnolia-ivory",
 ] as const
 
 export type TemplateId = (typeof templateIds)[number]

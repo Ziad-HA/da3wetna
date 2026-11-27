@@ -8,6 +8,7 @@ import { Invitation } from "../components/Invitation"
 import { OpeningEnvelope } from "../components/OpeningEnvelope"
 import { SiteInvite } from "../components/SiteInvite"
 import { ChateauInvite } from "../components/ChateauInvite"
+import { RealisticEnvelopeOpening } from "../components/RealisticEnvelopeOpening"
 import { StripInvite } from "../components/StripInvite"
 import { draftFor, getTemplate } from "../data"
 import { isLight } from "../lib/color"
@@ -93,7 +94,20 @@ export function TemplatePreview() {
       </header>
 
       {/* Opening Envelope Screens */}
-      {!introSkipped && introStep < 3 && isGarden ? (
+      {!introSkipped && introStep < 3 && (template.id === "royal-blue" || template.id === "emerald-fern" || template.id === "burgundy-velvet" || template.id === "magnolia-ivory") ? (
+        <RealisticEnvelopeOpening
+          themeId={template.id}
+          draft={draft}
+          template={template}
+          onOpen={openEnvelope}
+          onComplete={() => setIntroStep(3)}
+          onSkip={() => {
+            startMusic()
+            setIntroSkipped(true)
+            setIntroStep(3)
+          }}
+        />
+      ) : !introSkipped && introStep < 3 && isGarden ? (
         <GardenOpening draft={draft} onOpen={() => setIntroStep(3)} />
       ) : !introSkipped && introStep < 3 && template.envelope.zoom ? (
         template.id === "chateau" ? (

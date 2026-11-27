@@ -3313,3 +3313,214 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
 .invite-public-page.site-page .chx-hero-card {
   width: min(100%, 520px);
 }
+
+
+/* ===== Realistic 3D Opening Envelopes (الأظرف التفاعلية ثلاثية الأبعاد) ===== */
+.real-env-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Cairo", "Tajawal", sans-serif;
+}
+
+.real-env-stage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 96dvh;
+  max-height: 840px;
+  aspect-ratio: 576 / 1024;
+  perspective: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.real-env-envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.45));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.real-env-envelope.is-rising {
+  transform: translateY(12%);
+}
+
+.real-env-back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.real-env-liner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.real-env-card-slot {
+  position: absolute;
+  inset: 5% 7% 5% 7%;
+  z-index: 2;
+  transition: transform 1s cubic-bezier(0.18, 0.9, 0.3, 1), box-shadow 0.8s ease;
+  transform: translateY(0);
+}
+.real-env-card-slot.card-raised {
+  transform: translateY(-50%) scale(1.05);
+  z-index: 6;
+}
+.real-env-card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+.real-env-pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.real-env-pocket-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.real-env-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  z-index: 4;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.real-env-flap.flap-open {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.real-env-flap-front,
+.real-env-flap-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.real-env-flap-front {
+  z-index: 2;
+}
+.real-env-flap-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.real-env-flap-back {
+  transform: rotateX(180deg);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: #111;
+}
+.real-env-flap-back-img {
+  width: 100%;
+  height: 200%;
+  object-fit: cover;
+  display: block;
+}
+
+.real-env-seal-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.real-env-seal-wrapper.seal-broken {
+  transform: translate(-50%, -50%) scale(1.35);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.real-env-seal-btn {
+  position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.real-env-seal-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+}
+
+.real-env-seal-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 230, 180, 0.75);
+  animation: vaux-pulse 2s infinite ease-out;
+  pointer-events: none;
+}
+
+.real-env-seal-label {
+  position: absolute;
+  bottom: -38px;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fffef8;
+  background: rgba(15, 20, 25, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.real-env-skip-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.real-env-skip-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
