@@ -4,7 +4,7 @@ import type { InviteDraft } from "../types"
 
 type Props = {
   draft: InviteDraft
-  inviteId?: string
+  inviteId?: string | null
   shareUrl?: string
   preview?: boolean
   palette?: { paper?: string; ink?: string; gold?: string; soft?: string }
