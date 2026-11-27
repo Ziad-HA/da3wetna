@@ -113,6 +113,7 @@ export const templates: Template[] = [
   {
     id: "royal-blue",
     name: "الظرف الملكي المذهب",
+    layout: "site",
     blurb: "ظرف كحلي ملكي بنقوش ذهبية وختم شمع أبيض",
     category: "فرح",
     isNew: true,
