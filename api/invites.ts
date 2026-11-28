@@ -24,6 +24,7 @@ async function read(req: Req, res: Res) {
   if (!invite) return send(res, 404, { error: "not_found" })
   const orders = await db<OrderRow[]>(`orders?id=${eq(invite.order_id)}&select=status`)
   if (orders[0]?.status !== "paid") return send(res, 200, { status: "pending" })
+  if (!orders[0].expires_at || Date.parse(orders[0].expires_at) <= Date.now()) return send(res, 200, { status: "expired" })
   res.setHeader("Cache-Control", "public, s-maxage=30, stale-while-revalidate=300")
   return res.status(200).json({ status: "ready", inviteId: invite.id, draft: invite.draft })
 }
@@ -39,6 +40,7 @@ async function add(req: Req, res: Res) {
   const order = orders[0]
   if (!order) return send(res, 404, { error: "not_found" })
   if (order.status !== "paid") return send(res, 402, { error: "not_paid" })
+  if (!order.expires_at || Date.parse(order.expires_at) <= Date.now()) return send(res, 410, { error: "expired" })
   const existing = await db<InviteRow[]>(`invites?order_id=${eq(order.id)}&select=id`)
   if (existing.length >= order.quantity) return send(res, 409, { error: "package_full" })
   const id = inviteId()
