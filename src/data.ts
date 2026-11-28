@@ -235,7 +235,7 @@ export function isTemplateId(id: string): id is TemplateId {
   return templates.some((item) => item.id === id)
 }
 
-export const occasions = ["فرح", "خطوبة", "كتب كتاب", "حنة", "عقد قران"] as const
+export const occasions = ["فرح", "خطوبة"] as const
 
 export const faqs = [
   {
