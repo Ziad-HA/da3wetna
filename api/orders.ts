@@ -1,9 +1,8 @@
-import { getPackage } from "../src/config.js"
+import { getPackage, isWalletMethodAvailable } from "../src/config.js"
 import { sanitizeDraft } from "../src/lib/sanitize.js"
 import { db, dbReady, eq, type InviteRow, type OrderRow, type RsvpRow } from "./_lib/db.js"
 import { body, clientIp, limited, param, send, type Req, type Res } from "./_lib/http.js"
 import { inviteId, orderId, ownerToken } from "./_lib/ids.js"
-import { paymobReady } from "./_lib/paymob.js"
 
 const PACKAGES = ["single", "basic", "plus", "premium"]
 
@@ -26,8 +25,8 @@ async function create(req: Req, res: Res) {
   const method = String(b.method ?? "")
   if (!draft) return send(res, 400, { error: "bad_draft" })
   if (!PACKAGES.includes(String(b.packageId))) return send(res, 400, { error: "bad_package" })
-  if (!["vodafone", "instapay", "paymob"].includes(method)) return send(res, 400, { error: "bad_method" })
-  if (method === "paymob" && !paymobReady()) return send(res, 400, { error: "paymob_unavailable" })
+  if (method !== "vodafone" && method !== "instapay") return send(res, 400, { error: "bad_method" })
+  if (!isWalletMethodAvailable(method)) return send(res, 400, { error: "payment_method_unavailable" })
   const refNo = String(b.refNo ?? "").replace(/[^\dA-Za-z-]/g, "").slice(0, 30)
   if (method !== "paymob" && refNo.length < 4) return send(res, 400, { error: "bad_ref" })
 
@@ -66,7 +65,7 @@ async function dashboard(req: Req, res: Res) {
     rsvps = await db<RsvpRow[]>(`rsvps?invite_id=in.(${invites.map((i) => i.id).join(",")})&select=*&order=created_at.desc&limit=1000`)
   }
   return send(res, 200, {
-    order: { id: order.id, packageId: order.package_id, quantity: order.quantity, amount: order.amount, status: order.status, method: order.method, createdAt: order.created_at },
+    order: { id: order.id, packageId: order.package_id, quantity: order.quantity, amount: order.amount, status: order.status === "paid" && (!order.expires_at || Date.parse(order.expires_at) <= Date.now()) ? "expired" : order.status, method: order.method, createdAt: order.created_at, expiresAt: order.expires_at },
     remaining: Math.max(0, order.quantity - invites.length),
     invites: invites.map((invite) => {
       const mine = rsvps.filter((r) => r.invite_id === invite.id)
