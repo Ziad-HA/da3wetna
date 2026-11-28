@@ -195,12 +195,13 @@ body {
 .magnolia-couple-names {
   position: absolute;
   top: 60.2%;
-  left: 5%;
-  width: 90%;
+  left: 22.5%;
+  width: 55%;
+  transform: translateY(-50%);
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 20%;
+  gap: 10%;
   color: #7D6F63;
   font-family: var(--invite-font-ar, "Amiri"), serif;
   font-size: clamp(18px, 6.2cqi, 32px);
