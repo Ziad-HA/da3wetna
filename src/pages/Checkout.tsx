@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
-import { IconWallet } from "../components/Icons"
+import { IconBank, IconWallet } from "../components/Icons"
 import { getPackage, isWalletMethodAvailable, site, walletsArePlaceholders } from "../config"
 import { getTemplate } from "../data"
 import { encodeDraft } from "../lib/codec"
