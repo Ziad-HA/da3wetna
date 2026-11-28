@@ -18,14 +18,14 @@ export const packages = [
     price: 250,
     oldPrice: 400,
     discount: "خصم 38%",
-    description: "لمناسبة واحدة — دعوة واحدة بالمحرر الكامل، تفضل معاك مدى الحياة.",
+    description: "لمناسبة واحدة — دعوة واحدة بالمحرر الكامل، صالحة لمدة 30 يومًا من التفعيل.",
     features: [
       "أكتر من 10 خطوط عربي وإنجليزي",
       "تغيير أي صورة في الدعوة",
       "موسيقى من اختيارك",
       "إخفاء أي قسم مش عايزه",
     ],
-    benefits: ["معاك مدى الحياة", "تعديل 30 يوم من التفعيل"],
+    benefits: ["صلاحية الدعوة 30 يومًا من التفعيل", "التعديل متاح خلال مدة الصلاحية"],
     paymentNote: "تحويل يدوي — بنفعّلها أول ما نشوف إيصال",
     label: "",
   },
@@ -38,5 +38,11 @@ export function getPackage(id: string | null | undefined) {
   return packages.find((item) => item.id === id) ?? packages[0]
 }
 
+export function isWalletMethodAvailable(method: "vodafone" | "instapay") {
+  return method === "vodafone"
+    ? /^01[0-9]{9}$/.test(site.vodafoneCash) && site.vodafoneCash !== "01000000000"
+    : site.instapay.includes("@") && site.instapay !== "da3wetna@instapay"
+}
+
 export const walletsArePlaceholders =
-  site.vodafoneCash === "01000000000" || site.instapay === "da3wetna@instapay"
+  !isWalletMethodAvailable("vodafone") && !isWalletMethodAvailable("instapay")
