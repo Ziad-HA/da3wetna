@@ -37,7 +37,20 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
 
   if (template.id === "magnolia-ivory") {
     const previewDate = draft.date || "2027-10-02"
-    const previewTime = draft.time || "18:30"
+    const parsedDate = new Date(`${previewDate}T00:00:00`)
+    const validDate = !Number.isNaN(parsedDate.getTime())
+    const weekday = validDate
+      ? new Intl.DateTimeFormat("ar-EG", { weekday: "long" }).format(parsedDate)
+      : "السبت"
+    const dayNumber = validDate
+      ? new Intl.DateTimeFormat("ar-EG", { day: "numeric" }).format(parsedDate)
+      : "٢"
+    const monthName = validDate
+      ? new Intl.DateTimeFormat("ar-EG", { month: "long" }).format(parsedDate)
+      : "أكتوبر"
+    const yearNumber = validDate
+      ? new Intl.DateTimeFormat("ar-EG", { year: "numeric" }).format(parsedDate)
+      : "٢٠٢٧"
     return (
       <article className="invite magnolia-card-art" style={vars}>
         <div className="magnolia-artboard">
@@ -48,10 +61,19 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
               <span>{draft.groom || "محمد"}</span>
             </div>
             <p className="magnolia-card-occasion">{draft.occasion || "حفل زفاف"}</p>
-            <p className="magnolia-card-date">{formatArabicDate(previewDate)}</p>
-            <p className="magnolia-card-time">{formatArabicTime(previewTime)}</p>
-            <p className="magnolia-card-venue">{draft.venue || "قصر محمد علي"}</p>
-            <p className="magnolia-card-city">{draft.city || "القاهرة"}</p>
+            <div className="magnolia-card-info-row" dir="rtl">
+              <div className="magnolia-card-info-col magnolia-card-day">
+                <span>{weekday}</span>
+                <strong>{dayNumber}</strong>
+              </div>
+              <div className="magnolia-card-info-col magnolia-card-location">
+                <strong>{draft.venue || "قصر محمد علي"}</strong>
+                <span>{yearNumber}</span>
+              </div>
+              <div className="magnolia-card-info-col magnolia-card-month">
+                <strong>{monthName}</strong>
+              </div>
+            </div>
             <p className="magnolia-card-message">{draft.message || "بحضوركم تكتمل فرحتنا"}</p>
           </div>
         </div>
