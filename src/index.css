@@ -169,6 +169,22 @@ body {
 .invite[data-frame="poster"] .invite-div span { height: 0.35cqi; background: var(--ink); }
 .invite[data-frame="poster"] .invite-div i { border-color: var(--ink); }
 
+/* Magnolia Ivory: use the supplied finished card artwork without changing its envelope or lower sections. */
+.invite.magnolia-card-art {
+  display: block;
+  background: transparent;
+}
+.invite.magnolia-card-art::before,
+.invite.magnolia-card-art::after {
+  display: none;
+}
+.magnolia-card-art > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .ornament, .grain { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .ornament { z-index: 1; color: var(--gold); }
 .grain {
