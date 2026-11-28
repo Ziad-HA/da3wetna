@@ -11,7 +11,7 @@ export type DashboardInvite = {
   rsvps: Rsvp[]
 }
 export type Dashboard = {
-  order: { id: string; packageId: string; quantity: number; amount: number; status: "pending" | "paid" | "rejected"; method: string; createdAt: string }
+  order: { id: string; packageId: string; quantity: number; amount: number; status: "pending" | "paid" | "rejected" | "expired"; method: string; createdAt: string; expiresAt: string | null }
   remaining: number
   invites: DashboardInvite[]
 }
@@ -53,7 +53,7 @@ export const addInvite = (token: string, draft: InviteDraft) =>
   call<{ inviteId: string; remaining: number; error?: string }>("/api/invites", { method: "POST", json: { token, draft } })
 
 export const fetchInvite = (id: string) =>
-  call<{ status: "ready" | "pending"; inviteId?: string; draft?: InviteDraft }>(`/api/invites?id=${encodeURIComponent(id)}`)
+  call<{ status: "ready" | "pending" | "expired"; inviteId?: string; draft?: InviteDraft }>(`/api/invites?id=${encodeURIComponent(id)}`)
 
 export const submitRsvp = (payload: { inviteId: string; name: string; phone: string; attending: boolean; guests: number; note: string }) =>
   call<{ ok?: boolean; error?: string }>("/api/rsvp", { method: "POST", json: payload })
