@@ -112,7 +112,9 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   const isGarden = draft.templateId === "garden-classic"
   const additionsPalette = draft.templateId === "royal-blue"
     ? { paper: "#F1F6FC", ink: "#173B60", gold: "#B99655", soft: "#526A85" }
-    : { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }
+    : draft.templateId === "magnolia-ivory"
+      ? { paper: "#FFFDF9", ink: "#59483D", gold: "#B99A68", soft: "#8B7668" }
+      : { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }
 
   const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
@@ -166,7 +168,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
   return (
     <>
     {audio}
-    <main className={`invite-public-page invite-floral-flow min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}${draft.templateId === "royal-blue" ? " royal-blue-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? (draft.templateId === "chateau" ? "#F5F2EA" : draft.templateId === "royal-blue" ? "#EAF0F7" : "#EFE7D1") : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? (draft.templateId === "chateau" ? "#1E4030" : "#5E1C2A") : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--flow-paper": template.vars.paper, "--flow-ink": template.vars.ink, "--flow-gold": template.vars.gold, "--flow-shell": template.vars.shell, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
+    <main className={`invite-public-page invite-floral-flow min-h-dvh px-4 py-8${isStrip ? " strip-page" : ""}${isSite ? " site-page" : ""}${draft.templateId === "royal-blue" ? " royal-blue-page" : ""}`} style={{ background: isStrip ? "#4b4e30" : isSite ? (draft.templateId === "chateau" ? "#F5F2EA" : draft.templateId === "royal-blue" ? "#EAF0F7" : draft.templateId === "magnolia-ivory" ? "#F7F1E8" : "#EFE7D1") : template.vars.shell, color: isStrip ? "#f4efe2" : isSite ? (draft.templateId === "chateau" ? "#1E4030" : draft.templateId === "magnolia-ivory" ? "#59483D" : "#5E1C2A") : isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--invite-font-ar": `"${draft.arabicFont || "Amiri"}"`, "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`, "--flow-paper": template.vars.paper, "--flow-ink": template.vars.ink, "--flow-gold": template.vars.gold, "--flow-shell": template.vars.shell, "--opening-ink": isLight(template.vars.shell) ? template.vars.ink : "#fff6ea", "--opening-accent": isLight(template.vars.shell) ? template.vars.gold : "#f2d9a4" } as CSSProperties}>
       <div className={`mx-auto grid w-full ${isSite ? (draft.templateId === "royal-blue" ? "max-w-5xl" : "max-w-6xl") : "max-w-md"} justify-items-center gap-5`}>
         {isGarden ? (
           <>
