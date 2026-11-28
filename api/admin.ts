@@ -24,7 +24,13 @@ export default async function handler(req: Req, res: Res) {
       const id = String(b.orderId ?? "")
       const action = String(b.action ?? "")
       if (!["approve", "reject"].includes(action) || !id) return send(res, 400, { error: "bad_request" })
-      const patch = action === "approve" ? { status: "paid", paid_at: new Date().toISOString() } : { status: "rejected" }
+      const current = await db<OrderRow[]>(`orders?id=${eq(id)}&select=id,status`)
+      if (!current.length) return send(res, 404, { error: "not_found" })
+      if (current[0].status !== "pending") return send(res, 409, { error: "order_not_pending" })
+      const now = new Date()
+      const patch = action === "approve"
+        ? { status: "paid", paid_at: now.toISOString(), expires_at: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString() }
+        : { status: "rejected" }
       const rows = await db<OrderRow[]>(`orders?id=${eq(id)}`, { method: "PATCH", body: patch })
       return rows.length ? send(res, 200, { ok: true, status: rows[0].status }) : send(res, 404, { error: "not_found" })
     }
