@@ -7,6 +7,7 @@ export type InviteState =
   | { status: "loading" }
   | { status: "missing" }
   | { status: "pending" }
+  | { status: "expired" }
   | { status: "ready"; draft: InviteDraft; inviteId: string | null }
 
 /** بيجيب الدعوة من اللينك: الدعوات القديمة جوّه اللينك نفسه، والجديدة كود قصير من قاعدة البيانات. */
@@ -27,6 +28,7 @@ export function useInvite(code: string): InviteState {
       if (cancelled) return
       if (r.ok && r.data.status === "ready" && r.data.draft) setState({ status: "ready", draft: r.data.draft, inviteId: r.data.inviteId ?? code })
       else if (r.ok && r.data.status === "pending") setState({ status: "pending" })
+      else if (r.ok && r.data.status === "expired") setState({ status: "expired" })
       else setState({ status: "missing" })
     })
     return () => { cancelled = true }
