@@ -167,7 +167,6 @@ function Footer() {
           <div className="grid content-start gap-1.5 rounded-2xl border border-[#f2e2e5] bg-white/65 p-3 text-sm sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0">
             <p className="mb-1 flex items-center gap-1.5 text-[11px] font-bold text-[#4a2d33] sm:mb-1 sm:text-sm"><span className="h-1.5 w-1.5 rounded-full bg-[#c66d7d]" />طرق الدفع</p>
             <p className="text-[11px] leading-4 text-[#806b70] sm:text-sm">فودافون كاش</p>
-            <p className="text-[11px] text-[#806b70] sm:text-sm">إنستاباي</p>
             <p className="text-[11px] leading-4 text-[#a18a8f] sm:text-sm">الدفع بالبطاقة قريبًا</p>
             <p className="mt-0 text-[11px] leading-3.5 text-[#a18a8f] sm:mt-2 sm:text-xs sm:leading-6">تواصل معانا لو محتاج مساعدة في اختيار دعوتك.</p>
             <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("السلام عليكم، عندي استفسار عن دعوتنا")}`} target="_blank" rel="noreferrer" dir="ltr" className="mt-0.5 inline-flex min-h-7 w-fit items-center gap-1 rounded-full border border-[#d8eadf] bg-[#f2faf5] px-2 py-1 text-[11px] font-semibold text-[#247747] transition hover:bg-[#e9f7ee] sm:gap-2 sm:px-3 sm:py-2 sm:text-sm">
