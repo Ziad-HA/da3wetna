@@ -43,7 +43,6 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
         <div className="magnolia-artboard">
           <img src="/cards/magnolia-ivory.png" alt="بطاقة دعوة Magnolia Ivory" />
           <div className="magnolia-card-copy" dir="rtl">
-            <p className="magnolia-card-hosts">{draft.hosts || "بكل الحب والسرور نتشرف بدعوتكم لحضور حفل زفاف"}</p>
             <div className="magnolia-couple-names" dir="ltr">
               <span>{draft.bride || "سلمى"}</span>
               <span>{draft.groom || "محمد"}</span>
