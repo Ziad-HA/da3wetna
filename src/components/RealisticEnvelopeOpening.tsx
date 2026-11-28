@@ -28,8 +28,8 @@ const themeData: Record<Props["themeId"], { name: string; bg: string; sealTop: s
     sealTop: "48.6%",
   },
   "magnolia-ivory": {
-    name: "عاجي ومجنوليا بارزة",
-    bg: "#f3ede3",
+    name: "Magnolia Ivory",
+    bg: "#F7F1E8",
     sealTop: "49%",
   },
 }
