@@ -86,7 +86,7 @@ export function RealisticEnvelopeOpening({
           <div className={`real-env-light-beam ${isFlapOpen ? "is-active" : ""}`} aria-hidden="true" />
 
           {/* 2. Invitation Card inside the pocket */}
-          <div className={`real-env-card-slot ${isCardRising ? "card-raised" : ""}`}>
+          <div className={`real-env-card-slot ${themeId === "emerald-fern" ? "fern-card-visible" : ""} ${isCardRising ? "card-raised" : ""}`}>
             <div className="real-env-card-inner">
               <Invitation draft={draft} />
             </div>
