@@ -12,8 +12,8 @@ async function metaFor(code: string): Promise<Meta | null> {
       const invites = await db<InviteRow[]>(`invites?id=${eq(code)}&select=*`)
       const invite = invites[0]
       if (!invite) return null
-      const orders = await db<OrderRow[]>(`orders?id=${eq(invite.order_id)}&select=status`)
-      if (orders[0]?.status !== "paid") return null
+      const orders = await db<OrderRow[]>(`orders?id=${eq(invite.order_id)}&select=status,expires_at`)
+      if (orders[0]?.status !== "paid" || !orders[0].expires_at || Date.parse(orders[0].expires_at) <= Date.now()) return null
       return invite.draft as Meta
     }
     // الدعوات القديمة: البيانات جوّه اللينك نفسه (base64url JSON)
