@@ -26,7 +26,7 @@ export function Packages() {
           {packages.map((item) => {
             const featured = item.id === "plus"
             const extras = item.id === "single" ? ["أكتر من 10 خطوط عربي وإنجليزي", "تغيير أي صورة في الدعوة", "موسيقى من اختيارك", "إخفاء أي قسم مش عايزه"] : []
-            const benefits = item.id === "single" ? ["معاك مدى الحياة", "تعديل 30 يوم من التفعيل"] : ["كل دعوة مستقلة بتفاصيلها", "روابط منفصلة لكل دعوة"]
+            const benefits = item.id === "single" ? ["صلاحية الدعوة 30 يومًا من التفعيل", "تقدر تعدّل بحرية قبل إرسال طلب التفعيل"] : ["كل دعوة مستقلة بتفاصيلها", "صلاحية الباقة 30 يومًا من التفعيل"]
             return (
               <article key={item.id} className={"da3-package-card relative flex flex-col overflow-hidden rounded-2xl border bg-white p-3 shadow-[0_5px_18px_rgba(91,48,60,0.045)] sm:rounded-[26px] sm:p-5 " + (featured ? "border-[#d9a3ae] ring-1 ring-[#f4e2e6] sm:shadow-[0_10px_28px_rgba(166,66,87,0.08)]" : "border-[#f0dce1]")}>
                 <div className="flex items-center justify-between gap-2">
