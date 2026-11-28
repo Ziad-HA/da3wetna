@@ -22,7 +22,7 @@ async function read(req: Req, res: Res) {
   const invites = await db<InviteRow[]>(`invites?id=${eq(id)}&select=*`)
   const invite = invites[0]
   if (!invite) return send(res, 404, { error: "not_found" })
-  const orders = await db<OrderRow[]>(`orders?id=${eq(invite.order_id)}&select=status`)
+  const orders = await db<OrderRow[]>(`orders?id=${eq(invite.order_id)}&select=status,expires_at`)
   if (orders[0]?.status !== "paid") return send(res, 200, { status: "pending" })
   if (!orders[0].expires_at || Date.parse(orders[0].expires_at) <= Date.now()) return send(res, 200, { status: "expired" })
   res.setHeader("Cache-Control", "public, s-maxage=30, stale-while-revalidate=300")
