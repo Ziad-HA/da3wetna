@@ -28,7 +28,7 @@ async function create(req: Req, res: Res) {
   if (method !== "vodafone" && method !== "instapay") return send(res, 400, { error: "bad_method" })
   if (!isWalletMethodAvailable(method)) return send(res, 400, { error: "payment_method_unavailable" })
   const refNo = String(b.refNo ?? "").replace(/[^\dA-Za-z-]/g, "").slice(0, 30)
-  if (method !== "paymob" && refNo.length < 4) return send(res, 400, { error: "bad_ref" })
+  if (refNo.length < 4) return send(res, 400, { error: "bad_ref" })
 
   const pkg = getPackage(String(b.packageId))
   const token = ownerToken()
