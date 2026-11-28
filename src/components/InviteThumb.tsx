@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import type { InviteDraft } from "../types"
+import { EstateCard } from "./EstateCard"
 import { Invitation } from "./Invitation"
 
 const BASE_W = 360
@@ -50,7 +51,7 @@ export function InviteThumb({ draft }: { draft: InviteDraft }) {
     return () => observer.disconnect()
   }, [])
 
-  if (draft.templateId === "royal-blue") {
+  if (draft.templateId === "royal-blue" || draft.templateId === "emerald-fern") {
     return (
       <div ref={box} className="invite-thumb">
         <div className="invite-thumb-inner" style={{ width: BASE_W, height: BASE_H, transform: `scale(${scale})` }}>
@@ -61,7 +62,6 @@ export function InviteThumb({ draft }: { draft: InviteDraft }) {
   }
 
   if (
-    draft.templateId === "emerald-fern" ||
     draft.templateId === "burgundy-velvet" ||
     draft.templateId === "magnolia-ivory"
   ) {
@@ -79,15 +79,13 @@ export function InviteThumb({ draft }: { draft: InviteDraft }) {
   }
 
   if (draft.templateId === "estate") {
-    // نص الكارت متحدد بنسب من الصورة، فبنكتبه بمقاسات تتبع عرض الصورة المصغرة
+    // نفس كارت الدعوة اللي جوه
     return (
       <div ref={box} className="invite-thumb">
-        <div className="estate-thumb" dir="rtl" lang="ar">
-          <img src="/vaux/hero_card_blank.jpg" alt="" />
-          <div className="estate-thumb-names">
-            <span>{draft.groom}</span>
-            <small>و</small>
-            <span>{draft.bride}</span>
+        {/* بنرسمه بمقاس الموبايل وبعدين نصغّره، فيطلع نسخة طبق الأصل */}
+        <div className="invite-thumb-inner" style={{ width: BASE_W, height: BASE_H, transform: `scale(${scale})` }}>
+          <div className="vaux-site vaux-estate-royal estate-thumb" dir="rtl" lang="ar">
+            <EstateCard draft={draft} />
           </div>
         </div>
       </div>

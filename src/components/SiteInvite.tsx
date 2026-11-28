@@ -1,3 +1,4 @@
+import { EstateCard } from "./EstateCard"
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react"
 import { formatArabicDate } from "../lib/format"
 import { mapLink } from "../lib/maps"
@@ -140,16 +141,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
         </section>
       ) : (
         <section className="vaux-hero-card">
-          <div className="vaux-hero-inner">
-            <img src="/vaux/hero_card_blank.jpg" alt="" className="vaux-hero-bg" />
-            <div className="vaux-hero-content">
-              <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
-              <h1 className="vaux-hero-names">
-                <span>{draft.groom}</span><span className="vaux-amp">و</span><span>{draft.bride}</span>
-              </h1>
-              <p className="vaux-hero-hosts">{draft.hosts || (en ? "Together with our families" : "يتشرف الأهل بدعوتكم لحضور حفل الزفاف")}</p>
-            </div>
-          </div>
+          <EstateCard draft={draft} en={en} />
         </section>
       )) : null}
 
