@@ -264,7 +264,7 @@ export function TemplatePreview() {
         <main
           className={`invite-public-page invite-floral-flow min-h-dvh px-4 pb-36 pt-16 sm:pb-32 sm:pt-20${template.id === "emerald-fern" ? " emerald-fern-page" : ""}${
             isStrip ? " strip-page" : ""
-          }${isSite ? " site-page" : ""}${template.id === "royal-blue" ? " royal-blue-page" : ""}`}
+          }${isSite ? " site-page" : ""}${template.id === "royal-blue" ? " royal-blue-page" : ""}${template.id === "magnolia-ivory" ? " magnolia-ivory-page" : ""}`}
           style={
             {
               background: template.id === "emerald-fern" ? "#10291D" : isStrip ? "#4b4e30" : isSite ? (template.id === "chateau" ? "#F5F2EA" : template.id === "royal-blue" ? "#EAF0F7" : "#FAF6EE") : template.vars.shell,
@@ -315,7 +315,7 @@ export function TemplatePreview() {
                     </p>
                   </header>
                 )}
-                <div className={draft.templateId === "emerald-fern" ? "fern-full" : "invite-public-card w-full max-w-[390px] overflow-hidden rounded-[24px] shadow-2xl"}>
+                <div className={draft.templateId === "emerald-fern" ? "fern-full" : draft.templateId === "magnolia-ivory" ? "magnolia-full" : "invite-public-card w-full max-w-[390px] overflow-hidden rounded-[24px] shadow-2xl"}>
                   <Invitation draft={draft} />
                 </div>
                 {draft.templateId === "emerald-fern" ? <SiteInvite draft={draft} template={template} preview sectionsOnly /> : null}

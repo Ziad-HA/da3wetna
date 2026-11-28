@@ -1,6 +1,7 @@
 import { useId, type CSSProperties } from "react"
 import { getTemplate } from "../data"
 import { FernCard } from "./FernCard"
+import { MagnoliaCard } from "./MagnoliaCard"
 import { RoyalCard } from "./RoyalCard"
 import { formatArabicDate, formatArabicTime } from "../lib/format"
 import type { FieldKey, InviteDraft, Ornament } from "../types"
@@ -36,49 +37,7 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
   } as CSSProperties
 
   if (template.id === "magnolia-ivory") {
-    const previewDate = draft.date || "2027-10-02"
-    const parsedDate = new Date(`${previewDate}T00:00:00`)
-    const validDate = !Number.isNaN(parsedDate.getTime())
-    const weekday = validDate
-      ? new Intl.DateTimeFormat("ar-EG", { weekday: "long" }).format(parsedDate)
-      : "السبت"
-    const dayNumber = validDate
-      ? new Intl.DateTimeFormat("ar-EG", { day: "numeric" }).format(parsedDate)
-      : "٢"
-    const monthName = validDate
-      ? new Intl.DateTimeFormat("ar-EG", { month: "long" }).format(parsedDate)
-      : "أكتوبر"
-    const yearNumber = validDate
-      ? new Intl.DateTimeFormat("ar-EG", { year: "numeric" }).format(parsedDate)
-      : "٢٠٢٧"
-    return (
-      <article className="invite magnolia-card-art" style={vars}>
-        <div className="magnolia-artboard">
-          <img src="/cards/magnolia-ivory.png" alt="بطاقة دعوة Magnolia Ivory" />
-          <div className="magnolia-card-copy" dir="rtl">
-            <div className="magnolia-couple-names" dir="ltr">
-              <span>{draft.bride || "سلمى"}</span>
-              <span>{draft.groom || "محمد"}</span>
-            </div>
-            <p className="magnolia-card-occasion">{draft.occasion || "حفل زفاف"}</p>
-            <div className="magnolia-card-info-row" dir="rtl">
-              <div className="magnolia-card-info-col magnolia-card-day">
-                <span>{weekday}</span>
-                <strong>{dayNumber}</strong>
-              </div>
-              <div className="magnolia-card-info-col magnolia-card-location">
-                <strong>{draft.venue || "قصر محمد علي"}</strong>
-                <span>{yearNumber}</span>
-              </div>
-              <div className="magnolia-card-info-col magnolia-card-month">
-                <strong>{monthName}</strong>
-              </div>
-            </div>
-            <p className="magnolia-card-message">{draft.message || "بحضوركم تكتمل فرحتنا"}</p>
-          </div>
-        </div>
-      </article>
-    )
+    return <MagnoliaCard draft={draft} vars={vars} activeField={activeField} onSelect={onSelect} />
   }
 
   if (template.id === "emerald-fern") {
