@@ -24,8 +24,9 @@ export default async function handler(req: Req, res: Res) {
     const invites = await db<InviteRow[]>(`invites?id=${eq(id)}&select=id,order_id`)
     const invite = invites[0]
     if (!invite) return send(res, 404, { error: "not_found" })
-    const orders = await db<OrderRow[]>(`orders?id=${eq(invite.order_id)}&select=status`)
+    const orders = await db<OrderRow[]>(`orders?id=${eq(invite.order_id)}&select=status,expires_at`)
     if (orders[0]?.status !== "paid") return send(res, 403, { error: "inactive" })
+    if (!orders[0].expires_at || Date.parse(orders[0].expires_at) <= Date.now()) return send(res, 410, { error: "expired" })
     const count = await db<Pick<RsvpRow, "id">[]>(`rsvps?invite_id=${eq(id)}&select=id&limit=1000`)
     if (count.length >= 1000) return send(res, 409, { error: "full" })
 
