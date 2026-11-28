@@ -135,7 +135,7 @@ export function SiteInvite({ draft, template, rsvp, shareUrl = "", musicOn = fal
     <article ref={root} className={`vaux-site ${draft.templateId === "emerald-fern" ? "vaux-emerald-fern" : ""} ${draft.templateId === "royal-blue" ? "vaux-royal-blue" : ""} ${draft.templateId === "estate" || draft.templateId === "estate-classic" ? "vaux-estate-royal" : ""} ${draft.templateId === "magnolia-ivory" ? "vaux-magnolia-ivory" : ""} ${en ? "vaux-en" : ""}`} style={style} dir={en ? "ltr" : "rtl"} lang={language}>
       {!sectionsOnly ? <div className="vaux-invite-controls" dir="ltr"><button type="button" onClick={onToggleLanguage}>{en ? "عربي" : "EN"}</button><button type="button" onClick={onToggleMusic} disabled={!hasMusic} aria-pressed={musicOn}>{musicOn ? (en ? "♫ Music on" : "♫ الموسيقى تعمل") : (en ? "♪ Music off" : "♪ إيقاف الموسيقى")}</button></div> : null}
       {!sectionsOnly ? (draft.templateId === "royal-blue" || draft.templateId === "magnolia-ivory" ? (
-        <section className="vaux-hero-card vaux-lavender-hero" aria-label={inviteTitle}>
+        <section className={`vaux-hero-card ${draft.templateId === "royal-blue" ? "vaux-lavender-hero" : ""}`} aria-label={inviteTitle}>
           <Invitation draft={draft} />
         </section>
       ) : (
