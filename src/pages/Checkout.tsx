@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { Invitation } from "../components/Invitation"
 import { IconBank, IconWallet } from "../components/Icons"
-import { getPackage, site, walletsArePlaceholders } from "../config"
+import { getPackage, isWalletMethodAvailable, site, walletsArePlaceholders } from "../config"
 import { getTemplate } from "../data"
 import { encodeDraft } from "../lib/codec"
 import { addInvite, createOrder, fetchDashboard, getHealth, startPayment, type Health } from "../lib/api"
@@ -11,7 +11,6 @@ import { clearDraft, consumePackageInvite, draftReady, makeOrderId, readActivePa
 import type { PayMethod } from "../types"
 
 const methods: { id: PayMethod; title: string; text: string; icon: typeof IconWallet }[] = [
-  { id: "paymob", title: "كارت / محفظة (دفع فوري)", text: "فيزا أو ميزة أو محفظة — التفعيل تلقائي", icon: IconBank },
   { id: "vodafone", title: "فودافون كاش", text: "حوّل المبلغ واكتب رقم العملية", icon: IconWallet },
   { id: "instapay", title: "إنستاباي", text: "تحويل فوري من تطبيق البنك", icon: IconBank },
 ]
@@ -39,7 +38,7 @@ export function Checkout() {
   useEffect(() => { document.title = "تأكيد الطلب — دعوتنا" }, [])
   useEffect(() => {
     let live = true
-    getHealth().then((h) => { if (!live) return; setHealth(h); if (h.paymob) setMethod("paymob") })
+    getHealth().then((h) => { if (!live) return; setHealth(h) })
     return () => { live = false }
   }, [])
   // أمر مدفوع من لوحة الزبون: نكمل بنفس الباقة بدون دفع تاني.
@@ -55,7 +54,7 @@ export function Checkout() {
 
   const cont = continuing || Boolean(paidToken)
   const dbOn = Boolean(health?.db)
-  const methodsShown = methods.filter((m) => m.id === "paymob" ? Boolean(health?.db && health.paymob) : Boolean(health?.db && !walletsArePlaceholders))
+  const methodsShown = methods.filter((m) => isWalletMethodAvailable(m.id as "vodafone" | "instapay"))
 
   async function pay() {
     if (!draft) return
@@ -71,27 +70,21 @@ export function Checkout() {
       return
     }
     if (dbOn) {
-      if (method !== "paymob" && walletsArePlaceholders) { setError("بيانات التحويل لسه تجريبية. استخدم الدفع بالكارت أو تواصل معانا."); return }
-      if (method !== "paymob" && refNo.trim().length < 4) { setError("اكتب رقم عملية التحويل، وأقله ٤ أرقام."); return }
+      if (!isWalletMethodAvailable(method as "vodafone" | "instapay")) { setError("وسيلة التحويل دي غير متاحة حاليًا."); return }
+      if (refNo.trim().length < 4) { setError("اكتب رقم عملية التحويل، وأقله ٤ أرقام."); return }
       setBusy(true)
-      const r = await createOrder({ draft, packageId: bundle.id, method, refNo: method === "paymob" ? "" : refNo.trim() })
+      const r = await createOrder({ draft, packageId: bundle.id, method, refNo: refNo.trim() })
       if (!r.ok || !r.data.ownerToken) { setBusy(false); setError(r.status === 429 ? "محاولات كتير، جرّب بعد شوية." : "مقدرناش نسجل الطلب، جرّب تاني."); return }
       writeOwnerToken(r.data.ownerToken)
       setPlacedId(r.data.orderId)
-      if (method === "paymob") {
-        const p = await startPayment(r.data.ownerToken)
-        if (p.ok && p.data.url) { window.location.href = p.data.url; return }
-        setBusy(false)
-        setError("بوابة الدفع مش متاحة دلوقتي. الطلب اتسجل — تقدر تكمل من لوحة طلبك.")
-        setPlacedToken(r.data.ownerToken)
-        return
-      }
       setBusy(false)
       setPlacedToken(r.data.ownerToken)
       setSubmitted(true)
       return
     }
-    // --- المسار القديم (من غير قاعدة بيانات) ---
+    // الطلبات الجديدة لازم تتسجل في قاعدة البيانات؛ ما نعرضش نجاحًا وهميًا لو الخدمة واقفة.
+    if (!continuing) { setError("تسجيل الطلبات مش متاح مؤقتًا. حاول تاني بعد شوية أو تواصل معانا."); return }
+    // --- المسار القديم للباقة المحلية الموجودة مسبقًا ---
     if (!continuing && walletsArePlaceholders) {
       setError("بيانات التحويل لسه تجريبية. تواصل مع خدمة العملاء أو انتظر تحديث بيانات الدفع قبل التحويل.")
       return
@@ -192,7 +185,7 @@ export function Checkout() {
                 ))}
               </div>
 
-                {method === "paymob" && dbOn ? <p className="mt-5 rounded-2xl bg-[#f2faf5] p-4 text-sm leading-7 text-[#527566]">هتتحوّل لصفحة دفع آمنة. بعد الدفع الدعوة بتتفعّل تلقائيًا وتفتح لوحة طلبك.</p> : walletsArePlaceholders ? <p className="mt-5 rounded-2xl bg-[#fffafa] p-4 text-sm leading-7 text-[#806b70]">وسائل التحويل اليدوي غير مفعّلة حاليًا حتى يتم تأكيد بياناتها. جرّب لاحقًا أو تواصل معانا.</p> : <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
+                {!dbOn ? <p className="mt-5 rounded-2xl bg-[#fff9ed] p-4 text-sm leading-7 text-[#795a2d]">تسجيل الطلبات غير متاح مؤقتًا. مش هيتخصم منك أي مبلغ لحد ما الخدمة ترجع.</p> : walletsArePlaceholders ? <p className="mt-5 rounded-2xl bg-[#fffafa] p-4 text-sm leading-7 text-[#806b70]">وسائل التحويل اليدوي غير مفعّلة حاليًا حتى يتم تأكيد بياناتها. جرّب لاحقًا أو تواصل معانا.</p> : <div className="mt-5 rounded-2xl bg-[#fffafa] p-4 ring-1 ring-[#f0dce1]">
                   <p className="text-sm text-[#806b70]">حوّل {money(bundle.price)} إلى {destination}</p>
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xl font-bold text-[#4a2d33]" dir="ltr">{destination}</p><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(destination); setCopied(true); window.setTimeout(() => setCopied(false), 1800); } catch { setError("مش قادرين ننسخ الرقم تلقائيًا؛ اضغط مطولًا على الرقم وانسخه."); } }} className="min-h-9 rounded-full border border-[#e8c8cf] bg-white px-3 text-xs font-bold text-[#a64257]">{copied ? "تم النسخ ✓" : "نسخ الرقم"}</button></div>
                   <p className="mt-4 text-xs text-[#806b70]">رقم الطلب — اكتبه في ملاحظة التحويل</p>
@@ -202,8 +195,8 @@ export function Checkout() {
                     <input value={refNo} inputMode="numeric" maxLength={30} onChange={(event) => setRefNo(event.target.value)} placeholder="مثال: 4821" />
                   </label>
                 </div>}
-              {walletsArePlaceholders && method !== "paymob" ? <p className="mt-4 text-xs leading-6 text-[#9a6a45]">بيانات المحافظ الحالية تجريبية. حدّثها من src/config.ts قبل استقبال الطلبات.</p> : null}
-              {!walletsArePlaceholders && method !== "paymob" ? <div className="mt-4 rounded-2xl border border-[#f0dce1] bg-[#fffafa] p-4"><p className="text-xs font-extrabold text-[#4a2d33]">بعد التحويل اعمل 3 خطوات بسيطة:</p><ol className="mt-2 grid gap-2 text-xs leading-6 text-[#806b70]"><li>١. اكتب رقم عملية التحويل هنا.</li><li>٢. اضغط إرسال طلب التفعيل.</li><li>٣. ابعت صورة الإيصال على واتساب، واكتب رقم الطلب في الرسالة.</li></ol></div> : null}
+              {walletsArePlaceholders ? <p className="mt-4 text-xs leading-6 text-[#9a6a45]">بيانات المحافظ الحالية تجريبية. حدّثها من src/config.ts قبل استقبال الطلبات.</p> : null}
+              {!walletsArePlaceholders && dbOn ? <div className="mt-4 rounded-2xl border border-[#f0dce1] bg-[#fffafa] p-4"><p className="text-xs font-extrabold text-[#4a2d33]">بعد التحويل اعمل 3 خطوات بسيطة:</p><ol className="mt-2 grid gap-2 text-xs leading-6 text-[#806b70]"><li>١. اكتب رقم عملية التحويل هنا.</li><li>٢. اضغط إرسال طلب التفعيل.</li><li>٣. ابعت صورة الإيصال على واتساب، واكتب رقم الطلب في الرسالة.</li></ol></div> : null}
               {!walletsArePlaceholders && method !== "paymob" ? <p className="mt-2 text-xs leading-6 text-[#9a6a45]">إرسال الطلب لا يعني تأكيد الدفع. التفعيل بيتم بعد مراجعة الإيصال يدويًا.</p> : null}
             </>
           )}
@@ -211,8 +204,8 @@ export function Checkout() {
           {error ? <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-800" role="alert">{error}</p> : null}
           {!submitted || cont ? <div className="fixed inset-x-0 bottom-0 z-30 mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#f3e6e9] bg-white/95 px-4 py-3 pb-[max(env(safe-area-inset-bottom),12px)] pt-3 backdrop-blur sm:static sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-5">
             <div><p className="text-xs text-[#806b70]">{cont ? "المطلوب الآن" : "إجمالي الباقة"}</p><p className="text-xl font-bold text-[#4a2d33]">{cont ? "بدون دفع إضافي" : money(bundle.price)}</p></div>
-            <button type="button" className="btn-gold min-w-44" onClick={pay} disabled={busy || (!cont && walletsArePlaceholders && !(dbOn && method === "paymob"))}>
-              {busy ? "بنجهّز الدعوة..." : cont ? "أضف الدعوة للباقة" : method === "paymob" && dbOn ? "ادفع الآن" : walletsArePlaceholders ? "الدفع غير متاح حاليًا" : "إرسال طلب التفعيل"}
+            <button type="button" className="btn-gold min-w-44" onClick={pay} disabled={busy || (!cont && (!dbOn || !isWalletMethodAvailable(method as "vodafone" | "instapay")))}>
+              {busy ? "بنجهّز الدعوة..." : cont ? "أضف الدعوة للباقة" : !dbOn ? "الطلبات غير متاحة مؤقتًا" : walletsArePlaceholders ? "الدفع غير متاح حاليًا" : "إرسال طلب التفعيل"}
             </button>
           </div> : null}
         </section>
