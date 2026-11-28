@@ -1,0 +1,97 @@
+/* هيرو الصفحة الرئيسية: أجواء رومانسية نبيتي ودهبي */
+.hero-romance {
+  background:
+    radial-gradient(ellipse at 22% 45%, rgba(236,160,165,.28), transparent 45%),
+    radial-gradient(ellipse at 80% 0%, rgba(214,170,96,.16), transparent 40%),
+    linear-gradient(155deg, #4a0d20 0%, #6e1c34 50%, #3a0a18 100%) !important;
+}
+.hero-romance h1 { font-family: "Aref Ruqaa", "Amiri", serif !important; color: #fff3ea !important; line-height: 1.5 !important; letter-spacing: 0 !important; }
+.hero-romance h1 span { color: #eec98c !important; }
+.hero-romance > div:last-child > div:first-child p { color: #f3d9d6 !important; }
+.hero-romance > div:last-child > div:first-child > p:first-child { color: #eec98c !important; }
+.hero-romance > div:last-child > div:first-child a { border-color: rgba(238,201,140,.65) !important; background: transparent !important; color: #fff3ea !important; box-shadow: none !important; }
+.hero-romance > div:last-child > div:first-child a:first-child { border: 0 !important; background: linear-gradient(135deg, #f3d9a6, #c99a55) !important; color: #4a0d20 !important; box-shadow: 0 14px 34px rgba(0,0,0,.3) !important; }
+.hero-romance > div:last-child > div:first-child span { color: #f0d3cf; }
+.hero-romance h1 span { color: #eec98c; }
+.hero-card-screen { position: relative; aspect-ratio: 1135 / 2028; overflow: hidden; border-radius: 1.45rem; }
+.hero-card-screen > .invite { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; box-shadow: none; }
+.hero-romance-decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.hero-rose { position: absolute; width: clamp(150px, 26vw, 330px); opacity: .9; }
+.hero-rose-top { top: -3.5rem; left: -4rem; transform: scaleX(-1) rotate(18deg); }
+.hero-rose-bottom { bottom: -3rem; left: -4rem; transform: rotate(185deg); }
+.hero-petal { position: absolute; top: -20px; width: 11px; height: 15px; border-radius: 80% 0 80% 0; background: linear-gradient(135deg, #f6c4c2, #d9788a); opacity: .65; animation: hero-petal-fall linear infinite; }
+@keyframes hero-petal-fall { to { transform: translate3d(50px, 1500px, 0) rotate(420deg); } }
+@media (prefers-reduced-motion: reduce) { .hero-petal { display: none; } }
+.hero-romance > div:last-child > div:first-child a span { color: inherit !important; }
+.hero-romance .hero-card-screen .mag-name { color: #7a1f38 !important; }
+.hero-romance .hero-card-screen .mag-title { color: #8a3b4e !important; }
+.hero-romance .hero-card-screen .mag-text { color: #6e2b3c !important; line-height: 1.5 !important; }
+.hero-romance .hero-card-screen .mag-name { line-height: 1.6 !important; color: #7a1f38 !important; }
+.hero-romance > div:last-child > div:last-child > div:first-child { opacity: .35; }
+
+/* ===== الثيم الرومانسي (نبيتي ودهبي) لكل صفحات الموقع، من غير صفحات الدعوات نفسها ===== */
+body:has(.site-romance) { background: #fbe9e7; }
+.site-romance main#main { background: radial-gradient(ellipse at 10% 20%, rgba(236,170,175,.28), transparent 30rem), linear-gradient(180deg, #fdf1ee, #f9e2e1) !important; }
+.site-romance h1, .site-romance h2 { font-family: "Aref Ruqaa", "Amiri", serif !important; letter-spacing: 0 !important; line-height: 1.6 !important; }
+.site-romance main#main h1, .site-romance main#main h2 { color: #6e1c34; }
+
+/* الهيدر */
+.site-romance .da3-site-header { background: rgba(74,13,32,.96) !important; border-color: rgba(238,201,140,.35) !important; }
+.site-romance .da3-site-header > div a, .site-romance .da3-site-header > div a span { color: #fbe7df !important; }
+.site-romance .da3-site-header > div a:first-child > span:first-child { background: rgba(255,240,235,.1) !important; color: #eec98c !important; box-shadow: 0 0 0 1px rgba(238,201,140,.4) !important; }
+.site-romance .da3-site-header > div nav a:hover, .site-romance .da3-site-header > div nav a[aria-current="page"] { color: #eec98c !important; background: transparent !important; }
+.site-romance .da3-site-header > div button { background: rgba(255,240,235,.1) !important; color: #eec98c !important; border-color: rgba(238,201,140,.4) !important; }
+
+/* عناوين الصفحات */
+.site-romance main#main:not(.da3-home):not(.gallery-page) > section:first-child:not(.mx-auto),
+.site-romance .gallery-page > section:first-child {
+  background: radial-gradient(ellipse at 85% 0%, rgba(236,160,165,.3), transparent 55%), linear-gradient(150deg, #4a0d20, #6e1c34 55%, #3a0a18) !important;
+  border-color: rgba(238,201,140,.4) !important;
+}
+.site-romance main#main:not(.da3-home):not(.gallery-page) > section:first-child:not(.mx-auto) :is(h1, h2, h1 span, p, strong),
+.site-romance .gallery-page > section:first-child :is(h1, h2, p, p span) { color: #fff0e8 !important; }
+.site-romance main#main:not(.da3-home):not(.gallery-page) > section:first-child:not(.mx-auto) :is(h1 span, p:first-of-type) { color: #eec98c !important; }
+.site-romance main#main:not(.da3-home) > section:first-child:not(.mx-auto) a { border: 1px solid rgba(238,201,140,.65) !important; background: transparent !important; color: #fff0e8 !important; }
+.site-romance main#main:not(.da3-home) > section:first-child:not(.mx-auto) a:first-of-type { background: linear-gradient(135deg, #f3d9a6, #c99a55) !important; color: #4a0d20 !important; }
+
+/* الأزرار الأساسية */
+.site-romance main#main:not(.da3-home) :is(a, button):is([class^="bg-[#a"], [class*=" bg-[#a"]) { background-color: #7a1f38 !important; }
+
+/* الفوتر */
+.site-romance footer { background: linear-gradient(180deg, #55112a, #340914) !important; border-color: rgba(238,201,140,.4) !important; }
+.site-romance footer :is(p, a, span) { color: #f1d6d2 !important; }
+.site-romance footer .font-display, .site-romance footer p.font-bold { color: #eec98c !important; }
+.site-romance footer .rounded-2xl { background: rgba(255,240,235,.05) !important; border-color: rgba(238,201,140,.22) !important; }
+.site-romance footer a.rounded-full, .site-romance footer a > span:first-child { background: rgba(255,240,235,.08) !important; border-color: rgba(238,201,140,.35) !important; }
+.site-romance footer .border-b, .site-romance footer .grid { border-color: rgba(238,201,140,.22); }
+.site-romance footer .blur-3xl { display: none; }
+.site-romance .da3-packages-hero p:first-of-type { background: rgba(255,240,235,.1) !important; border-color: rgba(238,201,140,.5) !important; }
+/* شريط التنقل السفلي في الموبايل */
+.site-romance > nav { background: rgba(74,13,32,.97) !important; border-color: rgba(238,201,140,.35) !important; }
+.site-romance > nav :is(a, button), .site-romance > nav :is(a, button) * { color: #e9c9c8 !important; }
+.site-romance > nav a[aria-current="page"] { background: rgba(238,201,140,.16) !important; }
+.site-romance > nav a[aria-current="page"], .site-romance > nav a[aria-current="page"] * { color: #f6d9a0 !important; }
+.site-romance > nav span[class*="bg-"] { background: transparent !important; }
+.site-romance .da3-site-header > div a[href^="https://wa.me"], .site-romance .da3-site-header > div a[href^="https://wa.me"] * { color: #1f6b45 !important; }
+.site-romance .gallery-page > section:first-child div[class*="bg-white/65"] { background: rgba(255,240,235,.1) !important; border-color: rgba(238,201,140,.4) !important; }
+.site-romance .gallery-page > section:first-child div[class*="bg-white/65"] * { color: #fff0e8 !important; }
+.site-romance .gallery-page > section:first-child div[class*="bg-white/65"], .site-romance .gallery-page > section:first-child div[class*="bg-white/65"] > span { color: #fff0e8 !important; opacity: 1 !important; }
+
+/* ضبط صفحات الحساب والمحرر والدفع واللوحة */
+.site-romance main#main:is(.max-w-lg, .px-4) > :is(section, div).max-w-md { border-color: rgba(168,120,50,.45) !important; box-shadow: 0 24px 60px rgba(110,28,52,.14) !important; }
+.site-romance main#main > section.max-w-md > div:first-child,
+.site-romance main#main > div.max-w-md > span:first-child { background: linear-gradient(150deg, #4a0d20, #6e1c34 60%, #3a0a18) !important; }
+.site-romance main#main > section.max-w-md > div:first-child * { color: #fff0e8 !important; }
+.site-romance main#main > div.max-w-md > span:first-child { display: grid; place-items: center; width: 4rem; height: 4rem; margin-inline: auto; border-radius: 999px; color: #eec98c !important; border: 1px solid rgba(238,201,140,.6); }
+.site-romance main#main > div.mb-7.items-end { padding: 1.5rem 1.25rem; border-radius: 1.5rem; border: 1px solid rgba(238,201,140,.4); background: radial-gradient(ellipse at 85% 0%, rgba(236,160,165,.3), transparent 55%), linear-gradient(150deg, #4a0d20, #6e1c34 55%, #3a0a18); }
+.site-romance main#main > div.mb-7.items-end > div:first-child :is(a, p, h1, span) { color: #fff0e8 !important; }
+.site-romance main#main > header :is(h1, p) { color: #6e1c34; }
+.site-romance main#main.max-w-lg { margin-block: 2.5rem; width: calc(100% - 2rem); border-radius: 1.75rem; border: 1px solid rgba(168,120,50,.45); background: rgba(255,248,246,.9) !important; box-shadow: 0 24px 60px rgba(110,28,52,.14); }
+/* مسافة بين الاسم العربي والإنجليزي في النافبار */
+.site-romance .da3-site-header a:first-child > span:last-child { row-gap: .45rem; }
+
+/* الصورة المصغرة لقصر الدير: الأسامي في المساحة الفاضية فوق التاريخ */
+.estate-thumb { position: relative; width: 100%; height: 100%; overflow: hidden; container-type: inline-size; }
+.estate-thumb img { width: 100%; height: 100%; object-fit: fill; }
+.estate-thumb-names { position: absolute; inset: 15% 18% auto; height: 31%; display: flex; flex-direction: column; align-items: center; justify-content: center; font: 700 11cqw/1.35 "Aref Ruqaa", "Amiri", serif; color: #6e1c34; }
+.estate-thumb-names small { font-size: 6cqw; }

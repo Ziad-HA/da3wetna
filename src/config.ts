@@ -1,7 +1,7 @@
-/** بيانات التواصل ووسائل الدفع الخاصة بدعوتنا. */
+/** بيانات التواصل ووسائل الدفع الخاصة بدعوتي. */
 export const site = {
-  name: "دعوتنا",
-  nameEn: "DA3WETNA",
+  name: "دعوتي",
+  nameEn: "DA3WETY",
   whatsapp: "201276390301",
   email: "zh.nobii@gmail.com",
   vodafoneCash: "01098616961",

@@ -40,7 +40,7 @@ export function TemplatePreview() {
 
   useEffect(() => {
     if (template) {
-      document.title = `معاينة ${template.name} — دعوتنا`
+      document.title = `معاينة ${template.name} — دعوتي`
     }
   }, [template])
 
@@ -129,7 +129,7 @@ export function TemplatePreview() {
 
   return (
     <div className="preview-page-container relative min-h-dvh">
-      <audio ref={audioRef} src={draft.musicUrl || undefined} preload="auto" onPlay={() => setMusicPlaying(true)} onPause={() => setMusicPlaying(false)} onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= 165) { event.currentTarget.pause(); setMusicPlaying(false) } }} onEnded={() => setMusicPlaying(false)} onError={() => { setMusicPlaying(false); setMusicError("ملف النشيد مش متاح حاليًا. تقدر تختار نشيد تاني من التعديل.") }} />
+      <audio ref={audioRef} src={draft.musicUrl || undefined} preload="metadata" onPlay={() => setMusicPlaying(true)} onPause={() => setMusicPlaying(false)} onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= 165) { event.currentTarget.pause(); setMusicPlaying(false) } }} onEnded={() => setMusicPlaying(false)} onError={() => { setMusicPlaying(false); setMusicError("ملف النشيد مش متاح حاليًا. تقدر تختار نشيد تاني من التعديل.") }} />
       {/* Top Floating Bar */}
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/20 bg-black/40 px-3 py-2.5 backdrop-blur-md sm:px-6 sm:py-3">
         <div className="flex items-center gap-2 sm:gap-3">

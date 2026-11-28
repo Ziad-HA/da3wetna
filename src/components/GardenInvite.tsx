@@ -53,7 +53,7 @@ export function GardenInvite({ draft, rsvp }: Props) {
     <section className="garden-section garden-footer">
       <span className="garden-flower-mark">❦</span><h2>{draft.groom} <i>و</i> {draft.bride}</h2>
       <p>وجودكم أجمل هدية لينا</p>
-      <p className="garden-credit">بكل حب · دعوتنا</p>
+      <p className="garden-credit">بكل حب · دعوتي</p>
     </section>
   </article>
 }

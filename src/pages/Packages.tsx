@@ -8,12 +8,12 @@ export function Packages() {
   const requestedReturn = searchParams.get("return")
   const returnTo = requestedReturn?.startsWith("/") && !requestedReturn.startsWith("//") ? requestedReturn : "/templates"
 
-  useEffect(() => { document.title = "الباقات — دعوتنا" }, [])
+  useEffect(() => { document.title = "الباقات — دعوتي" }, [])
 
   return (
     <main id="main" className="da3-packages min-h-[70vh] bg-[#fffafb]">
       <section className="da3-packages-hero border-b border-[#f0dce1] bg-[radial-gradient(ellipse_at_top,white_0%,#fff5f6_70%)] px-4 py-8 text-center sm:py-14 md:py-20">
-        <p className="inline-flex rounded-full border border-[#f0dce1] bg-white px-3 py-1 text-[11px] font-bold text-[#b83b50] sm:text-sm">باقات دعوتنا</p>
+        <p className="inline-flex rounded-full border border-[#f0dce1] bg-white px-3 py-1 text-[11px] font-bold text-[#b83b50] sm:text-sm">باقات دعوتي</p>
         <h1 className="mt-2.5 font-display text-[27px] leading-tight text-[#4a2d33] sm:mt-3 sm:text-4xl md:text-6xl">اختار الباقة المناسبة لفرحتك</h1>
         <p className="mx-auto mt-2 max-w-xl text-xs leading-6 text-[#806b70] sm:mt-4 sm:text-base sm:leading-8">كل اللي تحتاجه عشان تبعت دعوتك بشكل مميز وسهل.</p>
       </section>

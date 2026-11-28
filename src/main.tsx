@@ -2,6 +2,7 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { App } from "./App"
 import "./index.css"
+import "./romance.css"
 
 // بعد أي نشر جديد، صفحة مفتوحة من قبله ممكن تطلب ملف قديم — نعمل تحديث مرة واحدة.
 window.addEventListener("vite:preloadError", (event) => {

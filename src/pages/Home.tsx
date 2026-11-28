@@ -1,24 +1,28 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
+import { Invitation } from "../components/Invitation"
 import { InviteThumb } from "../components/InviteThumb"
-import { activeTemplates, faqs } from "../data"
-import { draftFor } from "../data"
+import { activeTemplates, draftFor, faqs, getTemplate } from "../data"
 import { readLast } from "../lib/storage"
 
 export function Home() {
   const last = readLast()
+  const heroDraft = { ...draftFor(getTemplate("magnolia-ivory")!), groom: "صالح", bride: "ندى", venue: "قصر رويال ماكسيم", date: "2026-12-17" }
 
   useEffect(() => {
-    document.title = "دعوتنا — da3wetna"
+    document.title = "دعوتي — da3wety"
   }, [])
 
   return (
     <main id="main" className="da3-home overflow-hidden bg-[#fffdfa] text-[#38252b]">
-      <section className="relative isolate overflow-hidden bg-[radial-gradient(ellipse_at_8%_12%,#f7e6e9_0%,transparent_36%),radial-gradient(ellipse_at_92%_75%,#f5eee5_0%,transparent_34%),linear-gradient(135deg,#fffaf8_0%,#fff7f6_52%,#fffdfa_100%)]">
-        <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-10 h-80 w-80 rounded-full border border-[#d8aeb6]/30" />
-        <div aria-hidden="true" className="pointer-events-none absolute -right-28 -bottom-36 h-[28rem] w-[28rem] rounded-full border border-[#d8aeb6]/25" />
+      <section className="hero-romance relative isolate overflow-hidden bg-[radial-gradient(ellipse_at_8%_12%,#f7e6e9_0%,transparent_36%),radial-gradient(ellipse_at_92%_75%,#f5eee5_0%,transparent_34%),linear-gradient(135deg,#fffaf8_0%,#fff7f6_52%,#fffdfa_100%)]">
+        <div aria-hidden="true" className="hero-romance-decor">
+          <img src="/cards/magnolia-rose.png" alt="" className="hero-rose hero-rose-top" />
+          <img src="/cards/magnolia-rose.png" alt="" className="hero-rose hero-rose-bottom" />
+          {Array.from({ length: 10 }, (_, i) => <span key={i} className="hero-petal" style={{ left: `${(i * 97 + 7) % 100}%`, animationDelay: `${-i * 1.7}s`, animationDuration: `${11 + (i % 4) * 2}s` }} />)}
+        </div>
         <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 pb-12 pt-10 sm:gap-12 sm:pb-20 sm:pt-16 md:grid-cols-[1.02fr_.98fr] md:gap-14 md:py-24">
-          <div className="order-2 text-center md:order-1 md:text-right">
+          <div className="order-1 text-center md:text-right">
             <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[.12em] text-[#a65a69] sm:text-xs">✦ صُنعت في مصر · لقصص الحب ✦</p>
             <h1 className="mx-auto mt-4 max-w-2xl font-display text-[2.65rem] leading-[1.28] text-[#422b32] sm:mt-5 sm:text-6xl md:mx-0 md:text-[4.2rem]">
               دعوات بجمال حلو
@@ -37,24 +41,12 @@ export function Home() {
             </div>
           </div>
 
-          <div className="relative order-1 mx-auto flex min-h-[340px] w-full max-w-[430px] items-center justify-center sm:min-h-[500px] md:order-2 md:min-h-[570px]">
+          <div className="relative order-2 mx-auto flex min-h-[340px] w-full max-w-[430px] items-center justify-center sm:min-h-[500px] md:order-2 md:min-h-[570px]">
             <div aria-hidden="true" className="absolute h-[270px] w-[270px] rounded-full bg-[radial-gradient(circle,#f1d9de_0%,rgba(241,217,222,.45)_55%,transparent_76%)] sm:h-[430px] sm:w-[430px]" />
             <div className="relative z-10 w-[min(220px,62vw)] rotate-[1deg] rounded-[2rem] border-[7px] border-[#30282a] bg-[#30282a] p-1.5 shadow-[0_35px_80px_rgba(74,45,51,.22)] sm:w-[min(290px,70vw)]">
               <div className="overflow-hidden rounded-[1.45rem] bg-[#fffaf7]">
-                <div className="flex items-center justify-between bg-white px-4 py-2 text-[11px] text-[#806b70]"><span>9:41</span><span>●●● ◖</span></div>
-                <div className="relative p-3 sm:p-4">
-                  <div className="absolute inset-3 rounded-[1.2rem] border border-[#d9bd91]/60" />
-                  <div className="relative flex min-h-[255px] flex-col items-center justify-center bg-[radial-gradient(ellipse_at_50%_35%,#f9e8e9_0%,#fffaf6_70%)] px-3 py-6 text-center sm:min-h-[340px]">
-                    <span className="text-[11px] font-semibold tracking-[.18em] text-[#b17b6a]">إلى الغالي</span>
-                    <p className="mt-2 font-display text-xl text-[#6a3c49] sm:text-2xl">خالد</p>
-                    <p className="mt-4 text-[11px] text-[#94757b]">يسعدنا دعوتك للاحتفال بزفاف</p>
-                    <p className="mt-3 font-display text-3xl leading-tight text-[#87475a] sm:text-4xl">صالح <span className="text-[#bd9a68]">&</span> ندى</p>
-                    <div className="my-4 h-px w-16 bg-[#d7b989]" />
-                    <p className="text-[11px] text-[#94757b]">الخميس · 15 أكتوبر 2026</p>
-                    <p className="mt-2 text-[11px] font-bold text-[#6a3c49]">قصر رويال ماكسيم</p>
-                    <p className="mt-1 text-[11px] text-[#94757b]">القاهرة الجديدة</p>
-                    <span className="mt-5 rounded-full bg-[#a94e62] px-5 py-2 text-[11px] font-bold text-white">أكّد حضورك</span>
-                  </div>
+                <div className="hero-card-screen">
+                  <Invitation draft={heroDraft} />
                 </div>
               </div>
             </div>
@@ -168,7 +160,7 @@ export function Home() {
 
       <section className="mx-auto max-w-6xl px-4 pb-10 sm:pb-16">
         <div className="grid gap-5 overflow-hidden rounded-[1.8rem] border border-[#e9d4d5] bg-[linear-gradient(125deg,#fff7f5_0%,#fff 55%,#f8efeb_100%)] p-6 sm:rounded-[2.2rem] sm:p-10 md:grid-cols-[1fr_auto] md:items-center md:gap-10">
-          <div><p className="text-[11px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">DA3WETNA PARTNERS</p><h2 className="mt-3 font-display text-2xl text-[#422b32] sm:text-4xl">بتشتغل في مجال الأفراح؟ خلّينا نكبر سوا.</h2><p className="mt-3 max-w-2xl text-xs leading-8 text-[#806b70] sm:text-sm">لو أنت مصور، Wedding Planner، أو مسؤول في قاعة أفراح، رشّح الدعوات الرقمية لعملائك وخلي تفاصيل فرحتهم أسهل وأجمل.</p><div className="mt-4 flex flex-wrap gap-2 text-[11px] font-bold text-[#806b70] sm:text-xs"><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">للمصورين</span><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">لقاعات الأفراح</span><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">لمنظمي المناسبات</span></div></div>
+          <div><p className="text-[11px] font-bold tracking-[.16em] text-[#b36a78] sm:text-xs">DA3WETY PARTNERS</p><h2 className="mt-3 font-display text-2xl text-[#422b32] sm:text-4xl">بتشتغل في مجال الأفراح؟ خلّينا نكبر سوا.</h2><p className="mt-3 max-w-2xl text-xs leading-8 text-[#806b70] sm:text-sm">لو أنت مصور، Wedding Planner، أو مسؤول في قاعة أفراح، رشّح الدعوات الرقمية لعملائك وخلي تفاصيل فرحتهم أسهل وأجمل.</p><div className="mt-4 flex flex-wrap gap-2 text-[11px] font-bold text-[#806b70] sm:text-xs"><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">للمصورين</span><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">لقاعات الأفراح</span><span className="rounded-full border border-[#eadcda] bg-white px-3 py-2">لمنظمي المناسبات</span></div></div>
           <Link to="/partners" className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#a94e62] px-7 text-sm font-bold text-white transition hover:bg-[#913e52]">اعرف تفاصيل الشراكة ←</Link>
         </div>
       </section>

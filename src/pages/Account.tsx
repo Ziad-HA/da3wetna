@@ -14,7 +14,7 @@ export function Account() {
   const saved = readOwnerToken()
   const [value, setValue] = useState("")
   const [error, setError] = useState("")
-  useEffect(() => { document.title = "طلبي — دعوتنا" }, [])
+  useEffect(() => { document.title = "طلبي — دعوتي" }, [])
 
   function open(event: React.FormEvent) {
     event.preventDefault()

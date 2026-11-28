@@ -2,19 +2,19 @@ import { useEffect } from "react"
 
 export function Privacy() {
   useEffect(() => {
-    document.title = "سياسة الخصوصية | دعوتنا"
+    document.title = "سياسة الخصوصية | دعوتي"
     let meta = document.querySelector('meta[name="description"]')
     if (!meta) {
       meta = document.createElement("meta")
       meta.setAttribute("name", "description")
       document.head.appendChild(meta)
     }
-    meta.setAttribute("content", "تعرف على سياسة الخصوصية في دعوتنا وكيفية التعامل مع البيانات التي تدخلها أثناء استخدام الموقع.")
+    meta.setAttribute("content", "تعرف على سياسة الخصوصية في دعوتي وكيفية التعامل مع البيانات التي تدخلها أثناء استخدام الموقع.")
   }, [])
   return (
     <main id="main" className="min-h-[70vh] bg-[#fffdfc]">
       <section className="bg-[#fff5f6] px-4 py-16 text-center">
-        <p className="text-sm font-bold text-[#b83b50]">دعوتنا</p>
+        <p className="text-sm font-bold text-[#b83b50]">دعوتي</p>
         <h1 className="mt-3 font-display text-4xl text-[#4a2d33] md:text-6xl">سياسة الخصوصية</h1>
         <p className="mx-auto mt-4 max-w-2xl leading-8 text-[#806b70]">بنحترم خصوصيتك، وهدف الصفحة دي توضيح طريقة التعامل مع المعلومات أثناء استخدام الموقع.</p>
       </section>

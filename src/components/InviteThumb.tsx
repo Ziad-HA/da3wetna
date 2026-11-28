@@ -79,24 +79,17 @@ export function InviteThumb({ draft }: { draft: InviteDraft }) {
   }
 
   if (draft.templateId === "estate") {
+    // نص الكارت متحدد بنسب من الصورة، فبنكتبه بمقاسات تتبع عرض الصورة المصغرة
     return (
       <div ref={box} className="invite-thumb">
-        <article className="vaux-site" dir="rtl" lang="ar">
-          <section className="vaux-hero-card">
-            <div className="vaux-hero-inner">
-              <img src="/vaux/hero_card_full.jpg" alt="" className="vaux-hero-bg" />
-              <div className="vaux-hero-content">
-                <img src="/vaux/monogram_rose.png" alt="" className="vaux-hero-monogram" />
-                <h1 className="vaux-hero-names">
-                  <span>{draft.groom}</span>
-                  <span className="vaux-amp">و</span>
-                  <span>{draft.bride}</span>
-                </h1>
-                <p className="vaux-hero-hosts">{draft.hosts || "يتشرف الأهل بدعوتكم لحضور حفل الزفاف"}</p>
-              </div>
-            </div>
-          </section>
-        </article>
+        <div className="estate-thumb" dir="rtl" lang="ar">
+          <img src="/vaux/hero_card_blank.jpg" alt="" />
+          <div className="estate-thumb-names">
+            <span>{draft.groom}</span>
+            <small>و</small>
+            <span>{draft.bride}</span>
+          </div>
+        </div>
       </div>
     )
   }

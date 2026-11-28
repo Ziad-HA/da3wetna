@@ -30,7 +30,7 @@ export function Dashboard() {
     return null
   }, [token])
 
-  useEffect(() => { document.title = "لوحة طلبي — دعوتنا"; writeOwnerToken(token) }, [token])
+  useEffect(() => { document.title = "لوحة طلبي — دعوتي"; writeOwnerToken(token) }, [token])
   useEffect(() => {
     let stop = false
     let tries = 0
@@ -78,7 +78,7 @@ export function Dashboard() {
           <>
             <h2 className="font-bold text-[#795a2d]">{order.method === "paymob" ? "بنتأكد من الدفع…" : "مستنيين مراجعة التحويل"}</h2>
             <p className="mt-1 text-sm leading-7 text-[#806b70]">{order.method === "paymob" ? "الصفحة بتتحدّث لوحدها أول ما الدفع يتأكد." : "ابعت إيصال التحويل ورقم الطلب على واتساب وهنفعّل الدعوة بعد المراجعة."}</p>
-            <a className="mt-3 inline-flex min-h-11 items-center rounded-full bg-[#a64257] px-5 text-sm font-bold text-white" target="_blank" rel="noreferrer" href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("طلب دعوتنا " + order.id)}`}>كلّمنا على واتساب</a>
+            <a className="mt-3 inline-flex min-h-11 items-center rounded-full bg-[#a64257] px-5 text-sm font-bold text-white" target="_blank" rel="noreferrer" href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("طلب دعوتي " + order.id)}`}>كلّمنا على واتساب</a>
           </>
         ) : null}
         {order.status === "rejected" ? <><h2 className="font-bold text-red-800">الطلب اترفض</h2><p className="mt-1 text-sm text-red-800">تواصل معانا على واتساب ونحلها.</p></> : null}

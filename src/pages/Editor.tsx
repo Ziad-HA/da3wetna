@@ -51,7 +51,7 @@ export function Editor() {
 
   useEffect(() => setDraft(initDraft(id)), [id])
   useEffect(() => {
-    document.title = template ? `تعديل ${template.name} — دعوتنا` : "تعديل الدعوة"
+    document.title = template ? `تعديل ${template.name} — دعوتي` : "تعديل الدعوة"
   }, [template])
 
   if (!template) return <Navigate to="/templates" replace />

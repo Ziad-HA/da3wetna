@@ -49,7 +49,7 @@ export function InviteView() {
       <main className="grid min-h-dvh place-items-center bg-cream px-4 text-center">
         <div>
           <h1 className="font-display text-4xl">الدعوة دي مش متاحة</h1>
-          <Link to="/" className="btn-gold mt-6 inline-flex">اعمل دعوة من دعوتنا</Link>
+          <Link to="/" className="btn-gold mt-6 inline-flex">اعمل دعوة من دعوتي</Link>
         </div>
       </main>
     )
@@ -126,7 +126,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
       ? { paper: "#FFFDF9", ink: "#59483D", gold: "#B99A68", soft: "#8B7668" }
       : { paper: template.vars.paper, ink: template.vars.ink, gold: template.vars.gold, soft: template.vars.soft }
 
-  const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="auto" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
+  const audio = musicUrl ? <audio ref={audioRef} src={musicUrl} preload="metadata" onTimeUpdate={(event) => { if (event.currentTarget.currentTime >= MUSIC_END_SECONDS) { event.currentTarget.pause(); event.currentTarget.currentTime = MUSIC_START_SECONDS; setMusicOn(false) } }} onEnded={() => setMusicOn(false)} /> : null
 
   if (!introSkipped && introStep < 3) {
     if (
@@ -270,7 +270,7 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
             <img className="mx-auto mt-3 h-36 w-36 rounded-xl border border-[#f0dce1] bg-white p-2" loading="lazy" alt="رمز QR لفتح الدعوة" src={`https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=${encodeURIComponent(`${window.location.origin}/i/${code}`)}`} />
             <p className="mt-2 break-all text-[10px] text-[#9a8187]">{`${window.location.origin}/i/${code}`}</p>
           </section>
-          <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتنا</Link>
+          <Link to="/" className="text-sm font-bold underline-offset-4 hover:underline">دعوة من دعوتي</Link>
         </> : null}
       </div>
       <InviteClosingSections palette={additionsPalette} />

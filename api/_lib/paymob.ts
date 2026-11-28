@@ -40,7 +40,7 @@ export async function createPaymentUrl(orderId: string, amountEgp: number): Prom
     currency: "EGP",
     integration_id: Number(process.env.PAYMOB_INTEGRATION_ID),
     billing_data: {
-      apartment: "NA", email: "customer@da3wetna.com", floor: "NA", first_name: "Da3wetna", street: "NA", building: "NA",
+      apartment: "NA", email: "customer@da3wetna.com", floor: "NA", first_name: "Da3wety", street: "NA", building: "NA",
       phone_number: "+201000000000", shipping_method: "NA", postal_code: "NA", city: "NA", country: "EG", last_name: "Customer", state: "NA",
     },
   })

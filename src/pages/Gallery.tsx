@@ -28,7 +28,7 @@ export function Gallery() {
   }
 
   useEffect(() => {
-    document.title = "تصميمات الدعوات — دعوتنا"
+    document.title = "تصميمات الدعوات — دعوتي"
   }, [])
 
   return (
@@ -38,7 +38,7 @@ export function Gallery() {
         <div className="pointer-events-none absolute -bottom-24 right-[42%] h-56 w-56 rounded-full bg-white/55 blur-3xl" />
         <div className="relative grid grid-cols-[minmax(0,1fr)_112px] items-center gap-2 sm:gap-6 md:grid-cols-[1.2fr_.8fr] md:gap-10">
           <div className="min-w-0 text-right md:text-right">
-            <p className="text-[11px] font-extrabold tracking-[.2em] text-[#a64257] sm:text-xs">DA3WETNA • INVITATION STUDIO</p>
+            <p className="text-[11px] font-extrabold tracking-[.2em] text-[#a64257] sm:text-xs">DA3WETY • INVITATION STUDIO</p>
             <h1 className="mt-2 font-display text-[1.45rem] leading-[1.45] text-[#4a2d33] sm:text-5xl lg:text-6xl">كل فرحة وليها<br className="hidden md:block" /> تصميم يشبهها</h1>
             <p className="mt-2 max-w-xl text-[11px] leading-6 text-[#806b70] sm:text-base sm:leading-8 md:mx-0">
               اختار من مجموعة تصميماتنا، وشوف شكل دعوتك قبل ما تبدأ تضيف تفاصيل فرحتك.

@@ -29,7 +29,7 @@ const themeData: Record<Props["themeId"], { name: string; bg: string; sealTop: s
   },
   "magnolia-ivory": {
     name: "Magnolia Ivory",
-    bg: "#F7F1E8",
+    bg: "#3a0a18",
     sealTop: "49%",
   },
 }
@@ -67,7 +67,7 @@ export function RealisticEnvelopeOpening({
 
   return (
     <main
-      className={`real-env-screen ${themeId === "royal-blue" ? "royal-blue-opening" : ""}`}
+      className={`real-env-screen opening-${themeId} ${themeId === "royal-blue" ? "royal-blue-opening" : ""}`}
       style={{ backgroundColor: config.bg }}
       aria-label="شاشة فتح الظرف التفاعلي"
     >
@@ -86,7 +86,7 @@ export function RealisticEnvelopeOpening({
           <div className={`real-env-light-beam ${isFlapOpen ? "is-active" : ""}`} aria-hidden="true" />
 
           {/* 2. Invitation Card inside the pocket */}
-          <div className={`real-env-card-slot ${themeId === "emerald-fern" ? "fern-card-visible" : ""} ${isCardRising ? "card-raised" : ""}`}>
+          <div className={`real-env-card-slot ${isCardRising ? "card-raised" : ""}`}>
             <div className="real-env-card-inner">
               <Invitation draft={draft} />
             </div>
@@ -96,13 +96,13 @@ export function RealisticEnvelopeOpening({
 
           {/* 3. Front Pocket (covers the bottom part of the card) */}
           <div className="real-env-pocket">
-            <img src={`${assetBase}/pocket.png`} alt="" className="real-env-pocket-img" />
+            <img src={`${assetBase}/pocket.webp`} alt="" className="real-env-pocket-img" />
           </div>
 
           {/* 4. Top Flap that rotates open in 3D */}
           <div className={`real-env-flap ${isFlapOpen ? "flap-open" : ""}`}>
             <div className="real-env-flap-front">
-              <img src={`${assetBase}/flap.png`} alt="" className="real-env-flap-img" />
+              <img src={`${assetBase}/flap.webp`} alt="" className="real-env-flap-img" />
             </div>
             <div className="real-env-flap-back">
               <img src={`${assetBase}/liner.jpg`} alt="" className="real-env-flap-back-img" />
@@ -120,7 +120,7 @@ export function RealisticEnvelopeOpening({
               onClick={handleStart}
               aria-label="اضغط لفتح الظرف"
             >
-              <img src={`${assetBase}/seal.png`} alt="ختم الشمع" className="real-env-seal-img" />
+              <img src={`${assetBase}/seal.webp`} alt="ختم الشمع" className="real-env-seal-img" />
               {phase === "closed" && (
                 <>
                   <span className="real-env-seal-glow" />

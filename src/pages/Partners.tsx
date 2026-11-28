@@ -12,18 +12,18 @@ const partnerTypes = [
 const steps = [
   ["تواصل معانا", "ابعتلنا نوع شغلك وطريقة تعاونك المقترحة."],
   ["نتفق على التفاصيل", "نحدد طريقة الترشيح وآلية تتبع العملاء والمكافآت قبل بدء التعاون."],
-  ["ابدأ الترشيح", "شارك نماذج دعوتنا مع العملاء المهتمين، وإحنا نساعدهم في اختيار الدعوة المناسبة."],
+  ["ابدأ الترشيح", "شارك نماذج دعوتي مع العملاء المهتمين، وإحنا نساعدهم في اختيار الدعوة المناسبة."],
 ]
 
 export function Partners() {
-  useEffect(() => { document.title = "شراكات دعوتنا — للمصورين وقاعات الأفراح" }, [])
-  const message = "السلام عليكم، أنا مهتم أكون شريك مع دعوتنا. مجال شغلي: "
+  useEffect(() => { document.title = "شراكات دعوتي — للمصورين وقاعات الأفراح" }, [])
+  const message = "السلام عليكم، أنا مهتم أكون شريك مع دعوتي. مجال شغلي: "
   return (
     <main id="main" className="min-h-screen">
       <section className="relative isolate overflow-hidden border-b border-[#f0dce1] bg-[radial-gradient(ellipse_at_12%_8%,#f8e5e9_0%,transparent_42%),radial-gradient(ellipse_at_88%_80%,#f5eadb_0%,transparent_38%),linear-gradient(135deg,#fffaf9_0%,#fff4f5_55%,#fffdfa_100%)] px-4 py-14 text-center sm:py-20">
-        <span className="inline-flex rounded-full border border-[#ead2d6] bg-white/80 px-4 py-2 text-xs font-bold text-[#a64257]">DA3WETNA PARTNERS</span>
+        <span className="inline-flex rounded-full border border-[#ead2d6] bg-white/80 px-4 py-2 text-xs font-bold text-[#a64257]">DA3WETY PARTNERS</span>
         <h1 className="mx-auto mt-5 max-w-4xl font-display text-3xl leading-[1.5] text-[#4a2d33] sm:text-5xl md:text-6xl">خلّي كل فرحة تبدأ<br/><span className="text-[#b64b60]">بدعوة تليق بيها</span></h1>
-        <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-[#806b70] sm:text-base">بنفتح باب التعاون مع المصورين وقاعات الأفراح ومنظمي المناسبات. رشّح دعوتنا لعملائك، وقدّم لهم تجربة دعوة رقمية سهلة ومميزة.</p>
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-[#806b70] sm:text-base">بنفتح باب التعاون مع المصورين وقاعات الأفراح ومنظمي المناسبات. رشّح دعوتي لعملائك، وقدّم لهم تجربة دعوة رقمية سهلة ومميزة.</p>
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`} target="_blank" rel="noreferrer" className="btn-gold min-h-12 justify-center px-7">ابدأ شراكة معانا ←</a>
           <Link to="/templates" className="btn-ghost min-h-12 justify-center px-7">شوف نماذج الدعوات</Link>

@@ -68,7 +68,7 @@ const pages = [
 export function SeoContentPage({ pageKey }: { pageKey: string }) {
   const page = pages.find((item) => item.path === pageKey) ?? pages[0]
   useEffect(() => {
-    document.title = page.title + " | دعوتنا"
+    document.title = page.title + " | دعوتي"
     let meta = document.querySelector('meta[name="description"]')
     if (!meta) {
       meta = document.createElement("meta")
@@ -89,7 +89,7 @@ export function SeoContentPage({ pageKey }: { pageKey: string }) {
   return (
     <main id="main" className="bg-[#fffdfc]">
       <section className="border-b border-[#f0dce1] bg-[#fff5f6] px-4 py-16 text-center md:py-20">
-        <p className="text-sm font-bold text-[#b83b50]">دعوتنا · دعوات رقمية</p>
+        <p className="text-sm font-bold text-[#b83b50]">دعوتي · دعوات رقمية</p>
         <h1 className="mx-auto mt-3 max-w-4xl font-display text-4xl leading-tight text-[#4a2d33] md:text-6xl">{page.heading}</h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#806b70]">{page.intro}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3"><Link to="/templates" className="btn-gold">اختار تصميمك</Link><Link to="/packages" className="btn-ghost">شوف الباقات</Link></div>

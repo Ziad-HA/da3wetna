@@ -10,7 +10,7 @@ const steps = [
 ]
 
 export function How() {
-  useEffect(() => { document.title = "طريقة الاستخدام — دعوتنا" }, [])
+  useEffect(() => { document.title = "طريقة الاستخدام — دعوتي" }, [])
   return (
     <main id="main" className="min-h-[70vh]">
       <section className="border-b border-[#f0dce1] bg-[radial-gradient(ellipse_at_top_right,rgba(242,211,220,0.5),transparent_45%),linear-gradient(135deg,#fff5f6_0%,#fffaf7_60%,#fff_100%)] px-4 py-14 text-center md:py-20">
