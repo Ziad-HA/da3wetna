@@ -23,6 +23,14 @@ export function Done() {
   if (state.status === "loading") {
     return <main id="main" className="mx-auto max-w-lg px-4 py-20 text-center"><p role="status" className="font-display text-2xl text-[#a64257]">بنجهّز دعوتك…</p></main>
   }
+  if (state.status === "expired") {
+    return (
+      <main id="main" className="mx-auto max-w-lg px-4 py-20 text-center">
+        <h1 className="font-display text-4xl text-[#4a2d33]">انتهت صلاحية الدعوة</h1>
+        <p className="mt-3 leading-8 text-[#806b70]">صلاحية الدعوة 30 يومًا من التفعيل. تواصل مع صاحب الدعوة لو محتاج نسخة محدثة.</p>
+      </main>
+    )
+  }
   if (state.status === "pending") {
     return (
       <main id="main" className="mx-auto max-w-lg px-4 py-20 text-center">
