@@ -72,7 +72,8 @@ export function Dashboard() {
       </header>
 
       <section className={`mt-6 rounded-[24px] border p-5 ${paid ? "border-[#cce4d8] bg-[#f2faf5]" : order.status === "rejected" ? "border-red-200 bg-red-50" : "border-[#e8c9a4] bg-[#fff9ed]"}`} aria-live="polite">
-        {paid ? <><h2 className="font-bold text-[#176447]">الطلب متفعّل ✓</h2><p className="mt-1 text-sm text-[#527566]">دعواتك شغالة وتقدر تبعتها للضيوف.</p></> : null}
+        {paid ? <><h2 className="font-bold text-[#176447]">الطلب متفعّل ✓</h2><p className="mt-1 text-sm text-[#527566]">دعواتك شغالة وتقدر تبعتها للضيوف.</p>{order.expiresAt ? <p className="mt-2 text-xs text-[#527566]">صالحة لحد {new Date(order.expiresAt).toLocaleDateString("ar-EG")}</p> : null}</> : null}
+        {order.status === "expired" ? <><h2 className="font-bold text-[#795a2d]">انتهت صلاحية الباقة</h2><p className="mt-1 text-sm text-[#806b70]">انتهت مدة الـ30 يوم من التفعيل. تواصل معانا لو محتاج تجدد.</p></> : null}
         {order.status === "pending" ? (
           <>
             <h2 className="font-bold text-[#795a2d]">{order.method === "paymob" ? "بنتأكد من الدفع…" : "مستنيين مراجعة التحويل"}</h2>
