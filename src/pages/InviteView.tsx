@@ -34,6 +34,16 @@ export function InviteView() {
       </main>
     )
   }
+  if (state.status === "expired") {
+    return (
+      <main className="grid min-h-dvh place-items-center bg-cream px-4 text-center">
+        <div className="max-w-sm">
+          <h1 className="font-display text-3xl">انتهت صلاحية الدعوة</h1>
+          <p className="mt-3 leading-8 text-[#806b70]">صلاحية الدعوة 30 يومًا من التفعيل. تواصل مع صاحب الدعوة لو محتاج تفاصيل محدثة.</p>
+        </div>
+      </main>
+    )
+  }
   if (state.status === "missing") {
     return (
       <main className="grid min-h-dvh place-items-center bg-cream px-4 text-center">
