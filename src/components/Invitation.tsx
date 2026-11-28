@@ -36,13 +36,24 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
   } as CSSProperties
 
   if (template.id === "magnolia-ivory") {
+    const previewDate = draft.date || "2027-10-02"
+    const previewTime = draft.time || "18:30"
     return (
       <article className="invite magnolia-card-art" style={vars}>
         <div className="magnolia-artboard">
           <img src="/cards/magnolia-ivory.png" alt="بطاقة دعوة Magnolia Ivory" />
-          <div className="magnolia-couple-names" dir="ltr">
-            <span>{draft.bride || "سلمى"}</span>
-            <span>{draft.groom || "محمد"}</span>
+          <div className="magnolia-card-copy" dir="rtl">
+            <p className="magnolia-card-hosts">{draft.hosts || "بكل الحب والسرور نتشرف بدعوتكم لحضور حفل زفاف"}</p>
+            <div className="magnolia-couple-names" dir="ltr">
+              <span>{draft.bride || "سلمى"}</span>
+              <span>{draft.groom || "محمد"}</span>
+            </div>
+            <p className="magnolia-card-occasion">{draft.occasion || "حفل زفاف"}</p>
+            <p className="magnolia-card-date">{formatArabicDate(previewDate)}</p>
+            <p className="magnolia-card-time">{formatArabicTime(previewTime)}</p>
+            <p className="magnolia-card-venue">{draft.venue || "قصر محمد علي"}</p>
+            <p className="magnolia-card-city">{draft.city || "القاهرة"}</p>
+            <p className="magnolia-card-message">{draft.message || "بحضوركم تكتمل فرحتنا"}</p>
           </div>
         </div>
       </article>
