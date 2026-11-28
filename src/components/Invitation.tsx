@@ -35,6 +35,14 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
     "--invite-font-en": `"${draft.englishFont || "Cormorant Garamond"}"`,
   } as CSSProperties
 
+  if (template.id === "magnolia-ivory") {
+    return (
+      <article className="invite magnolia-card-art" style={vars}>
+        <img src="/cards/magnolia-ivory.png" alt="بطاقة دعوة Magnolia Ivory" />
+      </article>
+    )
+  }
+
   if (template.id === "emerald-fern") {
     return <FernCard draft={draft} vars={vars} activeField={activeField} onSelect={onSelect} />
   }
