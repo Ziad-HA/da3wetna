@@ -3414,6 +3414,27 @@ input, select, textarea { font-size: max(16px, 1em); } /* يمنع زوم iOS ع
   transform: translateY(-56%) scale(1.08);
   z-index: 6;
 }
+/* Emerald & fern: show the invitation card outside the envelope from the start. */
+.real-env-card-slot.fern-card-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+  z-index: 8;
+  transform: translateY(-76%) scale(.88);
+  transform-origin: center bottom;
+  transition:
+    transform 1.1s cubic-bezier(0.16, 0.88, 0.25, 1),
+    opacity .35s ease;
+}
+.real-env-card-slot.fern-card-visible.card-raised {
+  transform: translateY(-88%) scale(.96);
+  z-index: 9;
+}
+.real-env-card-slot.fern-card-visible .real-env-card-inner {
+  border: 3px solid #d6bd82;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .48), 0 0 0 5px rgba(214, 189, 130, .16);
+}
+
 .real-env-card-inner {
   width: 100%;
   height: 100%;
