@@ -246,14 +246,14 @@ body {
 
 .magnolia-card-info-row {
   position: absolute;
-  top: 71%;
-  left: 9%;
-  width: 82%;
-  min-height: 11%;
+  top: 70.5%;
+  left: 7%;
+  width: 86%;
+  min-height: 13%;
   display: grid;
-  grid-template-columns: 1fr 1.35fr 1fr;
+  grid-template-columns: 1fr 1.4fr 1fr;
   align-items: center;
-  color: #7D6F63;
+  color: #725f52;
 }
 
 .magnolia-card-info-col {
@@ -262,37 +262,45 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: .12em;
-  line-height: 1.35;
+  gap: .18em;
+  line-height: 1.3;
 }
 
 .magnolia-card-info-col strong {
-  font-size: clamp(11px, 2.7cqi, 17px);
+  font-size: clamp(14px, 3.4cqi, 22px);
   font-weight: 700;
 }
 
 .magnolia-card-info-col span {
-  font-size: clamp(9px, 2.15cqi, 14px);
+  font-size: clamp(12px, 2.9cqi, 19px);
+}
+
+.magnolia-card-day span {
+  font-size: clamp(13px, 3.1cqi, 20px);
+  font-weight: 600;
 }
 
 .magnolia-card-day strong {
-  font-size: clamp(15px, 3.6cqi, 23px);
+  font-size: clamp(22px, 5.2cqi, 34px);
   color: #A18458;
+  line-height: 1.05;
 }
 
 .magnolia-card-location strong {
   max-width: 100%;
-  font-size: clamp(10px, 2.45cqi, 16px);
+  font-size: clamp(13px, 3.1cqi, 20px);
   white-space: nowrap;
 }
 
 .magnolia-card-location span {
   color: #A18458;
-  font-size: clamp(10px, 2.4cqi, 15px);
+  font-size: clamp(15px, 3.5cqi, 23px);
+  font-weight: 700;
 }
 
 .magnolia-card-month strong {
   color: #A18458;
+  font-size: clamp(17px, 4.1cqi, 27px);
 }
 
 .magnolia-card-message {
