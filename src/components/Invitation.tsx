@@ -38,7 +38,13 @@ export function Invitation({ draft, activeField, onSelect }: Props) {
   if (template.id === "magnolia-ivory") {
     return (
       <article className="invite magnolia-card-art" style={vars}>
-        <img src="/cards/magnolia-ivory.png" alt="بطاقة دعوة Magnolia Ivory" />
+        <div className="magnolia-artboard">
+          <img src="/cards/magnolia-ivory.png" alt="بطاقة دعوة Magnolia Ivory" />
+          <div className="magnolia-couple-names" dir="ltr">
+            <span>{draft.bride || "سلمى"}</span>
+            <span>{draft.groom || "محمد"}</span>
+          </div>
+        </div>
       </article>
     )
   }
