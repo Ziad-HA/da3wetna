@@ -231,13 +231,6 @@ function InviteBody({ draft, inviteId, code }: { draft: InviteDraft; inviteId: s
           </>
         ) : (
           <>
-        {draft.templateId === "emerald-fern" ? null : (
-          <header className="invite-public-heading text-center">
-            <span className="invite-public-kicker">دعوة من القلب · بكل الحب</span>
-            <h1 className="mt-2 font-display text-3xl">{draft.groom} <i>و</i> {draft.bride}</h1>
-            <p className="mt-2 text-sm opacity-80">يسعدنا وجودكم ومشاركتنا أجمل لحظاتنا ♡</p>
-          </header>
-        )}
         <div className={draft.templateId === "emerald-fern" ? "fern-full" : "invite-public-card w-full overflow-hidden rounded-[28px] shadow-2xl"}>
           <Invitation draft={draft} />
         </div>
